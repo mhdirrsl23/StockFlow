@@ -2,11 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\PersonalAccessToken as SanctumPersonalAccessToken;
 
-class Personal_access_token extends Model
+class PersonalAccessToken extends SanctumPersonalAccessToken
 {
     protected $table = 'personal_access_tokens';
-    protected $timestamps = true;
-    protected $fillable =['id',' tokenable_type','tokenable_id','name','token','abilities','last_used_at','expires_at','created_at','updated_at'];
+
+    protected $fillable = [
+        'name',
+        'token',
+        'abilities',
+        'expires_at',
+        'last_used_at',
+    ];
 }
