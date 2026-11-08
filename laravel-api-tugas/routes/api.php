@@ -1,3 +1,5 @@
+<?php
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\BatchStokController;
@@ -54,3 +56,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/users/staf', [UserController::class, 'store']);
     Route::patch('/users/staf/{id}/toggle-aktif', [UserController::class, 'toggleAktif']);
 });
+?>

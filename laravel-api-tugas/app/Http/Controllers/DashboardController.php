@@ -2,46 +2,50 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pengaturan;
-use App\Models\RiwayatAktivitas;
+use App\Models\Barang;
+use App\Models\BatchStok;
 use Illuminate\Http\Request;
 
-class PengaturanController extends Controller
+class DashboardController extends Controller
 {
-    // Ambil Seluruh Pengaturan (FR-25)
-    public function index()
+    public function summary()
     {
-        $pengaturan = Pengaturan::all()->pluck('nilai', 'kunci');
+        // 1. Total Jenis Barang
+        $totalBarang = Barang::count();
 
-        return response()->json(['status' => 'success', 'data' => $pengaturan], 200);
-    }
+        // 2. Hitung Barang Stok Minim (Aman dari error SQL stok_total)
+        $stokMinim = Barang::all()->filter(function ($barang) {
+            $totalStok = 0;
 
-    // Ubah Nilai Pengaturan (Khusus Pemilik)
-    public function update(Request $request)
-    {
-        $request->validate([
-            'ambang_peringatan_hari' => 'required|numeric|min:1|max:365',
-        ]);
+            // Jika ada relasi batchStok/batch_stok, hitung dari total jumlah_sisa
+            if (method_exists($barang, 'batchStok') && $barang->batchStok) {
+                $totalStok = $barang->batchStok->sum('jumlah_sisa');
+            } elseif (isset($barang->stok_total)) {
+                $totalStok = $barang->stok_total;
+            }
 
-        $pengaturan = Pengaturan::updateOrCreate(
-            ['kunci' => 'ambang_peringatan_hari'],
-            ['nilai' => $request->ambang_peringatan_hari]
-        );
+            return $totalStok <= ($barang->stok_minimum ?? 0);
+        })->count();
 
-        // Audit Log
-        RiwayatAktivitas::create([
-            'user_id'    => auth()->id(),
-            'aksi'       => 'ubah_pengaturan',
-            'entitas'    => 'pengaturan',
-            'entitas_id' => null,
-            'keterangan' => "Mengubah ambang peringatan kedaluwarsa menjadi {$request->ambang_peringatan_hari} hari",
-            'waktu'      => now(),
-        ]);
+        // 3. Total Batch Mendekati Kedaluwarsa (<= 30 hari lagi)
+        $batchMendekatiKedaluwarsa = BatchStok::where('jumlah_sisa', '>', 0)
+            ->whereDate('tanggal_kedaluwarsa', '<=', now()->addDays(30))
+            ->whereDate('tanggal_kedaluwarsa', '>=', now())
+            ->count();
+
+        // 4. Total Batch Sudah Kedaluwarsa
+        $batchKedaluwarsa = BatchStok::where('jumlah_sisa', '>', 0)
+            ->whereDate('tanggal_kedaluwarsa', '<', now())
+            ->count();
 
         return response()->json([
-            'status'  => 'success',
-            'message' => 'Pengaturan berhasil diperbarui',
-            'data'    => $pengaturan
+            'status' => 'success',
+            'data' => [
+                'total_barang' => $totalBarang,
+                'stok_minim' => $stokMinim,
+                'batch_mendekati_kedaluwarsa' => $batchMendekatiKedaluwarsa,
+                'batch_kedaluwarsa' => $batchKedaluwarsa,
+            ]
         ], 200);
     }
 }
