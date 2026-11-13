@@ -687,8 +687,4 @@
         </LinearLayout>
     </ScrollView>
 
-    <include
-        layout="@layout/view_tabbar_owner_laporan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 </LinearLayout>

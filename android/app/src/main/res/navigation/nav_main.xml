@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/nav_beranda_owner">
+
+    <action
+        android:id="@+id/action_global_notifikasi"
+        app:destination="@id/notifikasiFragment" />
+
+    <action
+        android:id="@+id/action_global_akses_ditolak"
+        app:destination="@id/aksesDitolakFragment" />
+
+    <action
+        android:id="@+id/action_global_tidak_ditemukan"
+        app:destination="@id/tidakDitemukanFragment" />
+
+    <fragment
+        android:id="@+id/nav_beranda_owner"
+        android:name="com.example.stockflow.BerandaOwnerFragment"
+        android:label="Beranda"
+        tools:layout="@layout/fragment_beranda_owner">
+        <action
+            android:id="@+id/action_berandaOwner_to_perluDitangani"
+            app:destination="@id/perluDitanganiFragment" />
+        <action
+            android:id="@+id/action_berandaOwner_to_formBatch"
+            app:destination="@id/formBatchFragment" />
+        <action
+            android:id="@+id/action_berandaOwner_to_formStokKeluar"
+            app:destination="@id/formStokKeluarFragment" />
+        <action
+            android:id="@+id/action_berandaOwner_to_formBarang"
+            app:destination="@id/formBarangFragment" />
+        <action
+            android:id="@+id/action_berandaOwner_to_detailBatch"
+            app:destination="@id/detailBatchFragment" />
+        <action
+            android:id="@+id/action_berandaOwner_to_detailBarang"
+            app:destination="@id/detailBarangFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_beranda_staff"
+        android:name="com.example.stockflow.BerandaStaffFragment"
+        android:label="Beranda"
+        tools:layout="@layout/fragment_beranda_staff">
+        <action
+            android:id="@+id/action_berandaStaff_to_perluDitangani"
+            app:destination="@id/perluDitanganiFragment" />
+        <action
+            android:id="@+id/action_berandaStaff_to_formBatch"
+            app:destination="@id/formBatchFragment" />
+        <action
+            android:id="@+id/action_berandaStaff_to_formStokKeluar"
+            app:destination="@id/formStokKeluarFragment" />
+        <action
+            android:id="@+id/action_berandaStaff_to_formBarang"
+            app:destination="@id/formBarangFragment" />
+        <action
+            android:id="@+id/action_berandaStaff_to_detailBatch"
+            app:destination="@id/detailBatchFragment" />
+        <action
+            android:id="@+id/action_berandaStaff_to_detailBarang"
+            app:destination="@id/detailBarangFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_barang_owner"
+        android:name="com.example.stockflow.BarangFragment"
+        android:label="Barang"
+        tools:layout="@layout/fragment_barang">
+        <action
+            android:id="@+id/action_barang_to_formBarang"
+            app:destination="@id/formBarangFragment" />
+        <action
+            android:id="@+id/action_barang_to_formBatch"
+            app:destination="@id/formBatchFragment" />
+        <action
+            android:id="@+id/action_barang_to_detailBarang"
+            app:destination="@id/detailBarangFragment" />
+        <action
+            android:id="@+id/action_barang_to_detailBatch"
+            app:destination="@id/detailBatchFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_barang_staff"
+        android:name="com.example.stockflow.BarangStaffFragment"
+        android:label="Barang"
+        tools:layout="@layout/fragment_barang_staff">
+        <action
+            android:id="@+id/action_barangStaff_to_formBarang"
+            app:destination="@id/formBarangFragment" />
+        <action
+            android:id="@+id/action_barangStaff_to_formBatch"
+            app:destination="@id/formBatchFragment" />
+        <action
+            android:id="@+id/action_barangStaff_to_detailBarang"
+            app:destination="@id/detailBarangFragment" />
+        <action
+            android:id="@+id/action_barangStaff_to_detailBatch"
+            app:destination="@id/detailBatchFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_laporan"
+        android:name="com.example.stockflow.LaporanFragment"
+        android:label="Laporan"
+        tools:layout="@layout/fragment_laporan" />
+
+    <fragment
+        android:id="@+id/nav_riwayat"
+        android:name="com.example.stockflow.RiwayatFragment"
+        android:label="Riwayat"
+        tools:layout="@layout/fragment_riwayat" />
+
+    <fragment
+        android:id="@+id/nav_profil"
+        android:name="com.example.stockflow.ProfilFragment"
+        android:label="Profil"
+        tools:layout="@layout/fragment_profil">
+        <action
+            android:id="@+id/action_profil_to_pengguna"
+            app:destination="@id/penggunaFragment" />
+        <action
+            android:id="@+id/action_profil_to_pengaturan"
+            app:destination="@id/pengaturanFragment" />
+        <action
+            android:id="@+id/action_profil_to_dataSkema"
+            app:destination="@id/dataSkemaFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailBarangFragment"
+        android:name="com.example.stockflow.DetailBarangFragment"
+        android:label="Detail Barang"
+        tools:layout="@layout/fragment_detail_barang">
+        <argument
+            android:name="barangId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_detailBarang_to_detailBatch"
+            app:destination="@id/detailBatchFragment" />
+        <action
+            android:id="@+id/action_detailBarang_to_formStokKeluar"
+            app:destination="@id/formStokKeluarFragment" />
+        <action
+            android:id="@+id/action_detailBarang_to_formBatch"
+            app:destination="@id/formBatchFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailBatchFragment"
+        android:name="com.example.stockflow.DetailBatchFragment"
+        android:label="Detail Batch"
+        tools:layout="@layout/fragment_detail_batch">
+        <argument
+            android:name="batchId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_detailBatch_to_detailBarang"
+            app:destination="@id/detailBarangFragment" />
+        <action
+            android:id="@+id/action_detailBatch_to_formPenyesuaian"
+            app:destination="@id/formPenyesuaianFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/perluDitanganiFragment"
+        android:name="com.example.stockflow.PerluDitanganiFragment"
+        android:label="Perlu Ditangani"
+        tools:layout="@layout/fragment_perlu_ditangani">
+        <action
+            android:id="@+id/action_perluDitangani_to_detailBarang"
+            app:destination="@id/detailBarangFragment" />
+        <action
+            android:id="@+id/action_perluDitangani_to_detailBatch"
+            app:destination="@id/detailBatchFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/notifikasiFragment"
+        android:name="com.example.stockflow.NotifikasiFragment"
+        android:label="Notifikasi"
+        tools:layout="@layout/fragment_notifikasi">
+        <action
+            android:id="@+id/action_notifikasi_to_detailBatch"
+            app:destination="@id/detailBatchFragment" />
+        <action
+            android:id="@+id/action_notifikasi_to_detailBarang"
+            app:destination="@id/detailBarangFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/penggunaFragment"
+        android:name="com.example.stockflow.PenggunaFragment"
+        android:label="Akun Pengguna"
+        tools:layout="@layout/fragment_pengguna">
+        <action
+            android:id="@+id/action_pengguna_to_formAkun"
+            app:destination="@id/formAkunFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/pengaturanFragment"
+        android:name="com.example.stockflow.PengaturanFragment"
+        android:label="Pengaturan"
+        tools:layout="@layout/fragment_pengaturan" />
+
+    <fragment
+        android:id="@+id/dataSkemaFragment"
+        android:name="com.example.stockflow.DataSkemaFragment"
+        android:label="Data &amp; Skema"
+        tools:layout="@layout/fragment_data_skema" />
+
+    <fragment
+        android:id="@+id/aksesDitolakFragment"
+        android:name="com.example.stockflow.AksesDitolakFragment"
+        android:label="Akses Ditolak"
+        tools:layout="@layout/fragment_akses_ditolak" />
+
+    <fragment
+        android:id="@+id/tidakDitemukanFragment"
+        android:name="com.example.stockflow.TidakDitemukanFragment"
+        android:label="Tidak Ditemukan"
+        tools:layout="@layout/fragment_tidak_ditemukan" />
+
+    <fragment
+        android:id="@+id/formBarangFragment"
+        android:name="com.example.stockflow.FormBarangFragment"
+        android:label="Tambah Barang"
+        tools:layout="@layout/form_barang" />
+
+    <fragment
+        android:id="@+id/formBatchFragment"
+        android:name="com.example.stockflow.FormBatchFragment"
+        android:label="Tambah Batch"
+        tools:layout="@layout/form_batch">
+        <argument
+            android:name="barangId"
+            android:defaultValue="-1"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/formStokKeluarFragment"
+        android:name="com.example.stockflow.FormStokKeluarFragment"
+        android:label="Stok Keluar"
+        tools:layout="@layout/form_stok_keluar">
+        <argument
+            android:name="barangId"
+            android:defaultValue="-1"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/formPenyesuaianFragment"
+        android:name="com.example.stockflow.FormPenyesuaianFragment"
+        android:label="Penyesuaian Stok"
+        tools:layout="@layout/form_penyesuaian">
+        <argument
+            android:name="batchId"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/formAkunFragment"
+        android:name="com.example.stockflow.FormAkunFragment"
+        android:label="Tambah Akun"
+        tools:layout="@layout/form_akun" />
+
+</navigation>

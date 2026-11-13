@@ -1392,9 +1392,4 @@
                 android:textSize="9sp" />
         </LinearLayout>
     </ScrollView>
-
-    <include
-        layout="@layout/view_tabbar_staff_beranda"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 </LinearLayout>

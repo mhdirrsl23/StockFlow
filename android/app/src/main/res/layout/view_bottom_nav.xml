@@ -1,11 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Partial: bottom nav 4 tab.
-  Pemilik = Beranda, Barang, Laporan, Profil
-  Staf    = Beranda, Barang, Riwayat, Profil
-  Judul item dipilih runtime sesuai peran; menu dasar: @menu/bottom_nav.
-  Tanpa kolom twwarna agar mengikuti colorPrimary tema (emerald).
--->
 <com.google.android.material.bottomnavigation.BottomNavigationView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"

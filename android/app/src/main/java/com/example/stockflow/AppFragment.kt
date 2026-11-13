@@ -1,0 +1,25 @@
+package com.example.stockflow
+
+import androidx.fragment.app.Fragment
+
+class BerandaOwnerFragment : Fragment(R.layout.fragment_beranda_owner)
+class BerandaStaffFragment : Fragment(R.layout.fragment_beranda_staff)
+class BarangFragment : Fragment(R.layout.fragment_barang)
+class BarangStaffFragment : Fragment(R.layout.fragment_barang_staff)
+class LaporanFragment : Fragment(R.layout.fragment_laporan)
+class RiwayatFragment : Fragment(R.layout.fragment_riwayat)
+class ProfilFragment : Fragment(R.layout.fragment_profil)
+class DetailBarangFragment : Fragment(R.layout.fragment_detail_barang)
+class DetailBatchFragment : Fragment(R.layout.fragment_detail_batch)
+class PerluDitanganiFragment : Fragment(R.layout.fragment_perlu_ditangani)
+class NotifikasiFragment : Fragment(R.layout.fragment_notifikasi)
+class PenggunaFragment : Fragment(R.layout.fragment_pengguna)
+class PengaturanFragment : Fragment(R.layout.fragment_pengaturan)
+class DataSkemaFragment : Fragment(R.layout.fragment_data_skema)
+class AksesDitolakFragment : Fragment(R.layout.fragment_akses_ditolak)
+class TidakDitemukanFragment : Fragment(R.layout.fragment_tidak_ditemukan)
+class FormBarangFragment : Fragment(R.layout.form_barang)
+class FormBatchFragment : Fragment(R.layout.form_batch)
+class FormStokKeluarFragment : Fragment(R.layout.form_stok_keluar)
+class FormPenyesuaianFragment : Fragment(R.layout.form_penyesuaian)
+class FormAkunFragment : Fragment(R.layout.form_akun)
