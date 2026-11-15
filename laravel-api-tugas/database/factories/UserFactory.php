@@ -25,21 +25,19 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
+            'nama' => fake()->name(),
+            'username' => Str::lower(fake()->unique()->userName()),
             'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'peran' => 'staf',
+            'aktif' => true,
         ];
     }
 
     /**
-     * Indicate that the model's email address should be unverified.
+     * Peran pemilik toko (FR-05).
      */
-    public function unverified(): static
+    public function pemilik(): static
     {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
+        return $this->state(fn () => ['peran' => 'pemilik']);
     }
 }

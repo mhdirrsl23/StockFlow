@@ -7,10 +7,44 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * users — FR-02, FR-04, FR-05; NFR-01.
+     * Login username + password (bcrypt), dua peran, akun staf
+     * dibuat/dinonaktifkan oleh pemilik. Tidak ada registrasi mandiri.
      */
     public function up(): void
     {
+        Schema::dropIfExists('sessions');
+        Schema::dropIfExists('password_reset_tokens');
+
+        Schema::dropIfExists('users');
+
+        Schema::create('users', function (Blueprint $table) {
+            $table->comment('Akun Pemilik dan Staf gudang (Bagian 2 PRD)');
+            $table->id();
+            $table->string('nama', 100);
+            $table->string('username', 50)->unique('uq_users_username');
+            $table->string('password')->comment('Hash bcrypt, tidak pernah plaintext');
+            $table->enum('peran', ['pemilik', 'staf'])->default('staf');
+            // 0 = nonaktif: login ditolak, token dicabut (FR-05)
+            $table->boolean('aktif')->default(true);
+            $table->rememberToken();
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('users');
+
+        Schema::create('sessions', function (Blueprint $table) {
+            $table->string('id')->primary();
+            $table->foreignId('user_id')->nullable()->index();
+            $table->string('ip_address', 45)->nullable();
+            $table->string('user_agent')->nullable();
+            $table->longText('payload');
+            $table->integer('last_activity')->index();
+        });
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -26,24 +60,5 @@ return new class extends Migration
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });
-
-        Schema::create('sessions', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->foreignId('user_id')->nullable()->index();
-            $table->string('ip_address', 45)->nullable();
-            $table->text('user_agent')->nullable();
-            $table->longText('payload');
-            $table->integer('last_activity')->index();
-        });
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
-        Schema::dropIfExists('sessions');
     }
 };
