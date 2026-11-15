@@ -1,0 +1,4 @@
+#Wed Nov 04 00:32:22 WIB 2026
+base.0=/home/irsal/StockFlow/app/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

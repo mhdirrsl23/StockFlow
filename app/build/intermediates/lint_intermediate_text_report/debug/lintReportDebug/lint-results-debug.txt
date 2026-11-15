@@ -1,0 +1,2211 @@
+/home/irsal/StockFlow/app/src/main/res/font/plus_jakarta_sans.xml:3: Warning: Attribute fontStyle is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+    <font android:fontStyle="normal" android:fontWeight="400" android:font="@font/plus_jakarta_sans_regular" />
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/font/plus_jakarta_sans.xml:3: Warning: Attribute fontWeight is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+    <font android:fontStyle="normal" android:fontWeight="400" android:font="@font/plus_jakarta_sans_regular" />
+                                     ~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/font/plus_jakarta_sans.xml:3: Warning: Attribute font is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+    <font android:fontStyle="normal" android:fontWeight="400" android:font="@font/plus_jakarta_sans_regular" />
+                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/font/plus_jakarta_sans.xml:4: Warning: Attribute fontStyle is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+    <font android:fontStyle="normal" android:fontWeight="500" android:font="@font/plus_jakarta_sans_medium" />
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/font/plus_jakarta_sans.xml:4: Warning: Attribute fontWeight is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+    <font android:fontStyle="normal" android:fontWeight="500" android:font="@font/plus_jakarta_sans_medium" />
+                                     ~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/font/plus_jakarta_sans.xml:4: Warning: Attribute font is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+    <font android:fontStyle="normal" android:fontWeight="500" android:font="@font/plus_jakarta_sans_medium" />
+                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/font/plus_jakarta_sans.xml:5: Warning: Attribute fontStyle is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+    <font android:fontStyle="normal" android:fontWeight="600" android:font="@font/plus_jakarta_sans_semibold" />
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/font/plus_jakarta_sans.xml:5: Warning: Attribute fontWeight is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+    <font android:fontStyle="normal" android:fontWeight="600" android:font="@font/plus_jakarta_sans_semibold" />
+                                     ~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/font/plus_jakarta_sans.xml:5: Warning: Attribute font is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+    <font android:fontStyle="normal" android:fontWeight="600" android:font="@font/plus_jakarta_sans_semibold" />
+                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/font/plus_jakarta_sans.xml:6: Warning: Attribute fontStyle is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+    <font android:fontStyle="normal" android:fontWeight="700" android:font="@font/plus_jakarta_sans_bold" />
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/font/plus_jakarta_sans.xml:6: Warning: Attribute fontWeight is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+    <font android:fontStyle="normal" android:fontWeight="700" android:font="@font/plus_jakarta_sans_bold" />
+                                     ~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/font/plus_jakarta_sans.xml:6: Warning: Attribute font is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+    <font android:fontStyle="normal" android:fontWeight="700" android:font="@font/plus_jakarta_sans_bold" />
+                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/font/plus_jakarta_sans.xml:7: Warning: Attribute fontStyle is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+    <font android:fontStyle="normal" android:fontWeight="800" android:font="@font/plus_jakarta_sans_extrabold" />
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/font/plus_jakarta_sans.xml:7: Warning: Attribute fontWeight is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+    <font android:fontStyle="normal" android:fontWeight="800" android:font="@font/plus_jakarta_sans_extrabold" />
+                                     ~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/font/plus_jakarta_sans.xml:7: Warning: Attribute font is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+    <font android:fontStyle="normal" android:fontWeight="800" android:font="@font/plus_jakarta_sans_extrabold" />
+                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UnusedAttribute":
+   This check finds attributes set in XML files that were introduced in a
+   version newer than the oldest version targeted by your application (with
+   the minSdkVersion attribute).
+
+   This is not an error; the application will simply ignore the attribute.
+   However, if the attribute is important to the appearance or functionality
+   of your application, you should consider finding an alternative way to
+   achieve the same result with only available attributes, and then you can
+   optionally create a copy of the layout in a layout-vNN folder which will be
+   used on API NN or higher where you can take advantage of the newer
+   attribute.
+
+   Note: This check does not only apply to attributes. For example, some tags
+   can be unused too, such as the new <tag> element in layouts introduced in
+   API 21.
+
+/home/irsal/StockFlow/gradle/wrapper/gradle-wrapper.properties:5: Warning: A newer version of Gradle than 9.6.0 is available: 9.8.2 [AndroidGradlePluginVersion]
+distributionUrl=https\://services.gradle.org/distributions/gradle-9.6.0-bin.zip
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "AndroidGradlePluginVersion":
+   This detector looks for usage of the Android Gradle Plugin where the
+   version you are using is not the current stable release. Using older
+   versions is fine, and there are cases where you deliberately want to stick
+   with an older version. However, you may simply not be aware that a more
+   recent version is available, and that is what this lint check helps find.
+
+/home/irsal/StockFlow/app/src/main/java/com/example/stockflow/MainActivity.kt:48: Warning: Use of this function is discouraged because resource reflection makes it harder to perform build optimizations and compile-time verification of code. It is much more efficient to retrieve resources by identifier (e.g. R.foo.bar) than by name (e.g. getIdentifier("bar", "foo", null)). [DiscouragedApi]
+            val resId = resources.getIdentifier(screenId, "layout", packageName)
+                                  ~~~~~~~~~~~~~
+
+   Explanation for issues of type "DiscouragedApi":
+   Discouraged APIs are allowed and are not deprecated, but they may be unfit
+   for common use (e.g. due to slow performance or subtle behavior).
+
+/home/irsal/StockFlow/app/src/main/res/layout/activity_login.xml:193: Warning: Use app:drawableStartCompat instead of android:drawableStart [UseCompatTextViewDrawableXml from androidx.appcompat]
+                android:drawableStart="@drawable/ic_login"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UseCompatTextViewDrawableXml":
+   TextView uses android: compound drawable attributes instead of app: ones
+
+   Vendor: Android Open Source Project
+   Identifier: androidx.appcompat
+   Feedback: https://issuetracker.google.com/issues/new?component=460343
+
+/home/irsal/StockFlow/app/src/main/res/layout/activity_login.xml:383: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+        <LinearLayout
+         ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_akun.xml:241: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_akun.xml:358: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_akun.xml:444: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_barang.xml:188: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_barang.xml:287: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_barang.xml:428: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_barang.xml:515: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_batch.xml:174: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_batch.xml:374: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_batch.xml:513: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_batch.xml:608: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_batch.xml:661: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_penyesuaian.xml:295: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_stok_keluar.xml:419: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_stok_keluar.xml:472: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang.xml:951: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:1594: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_staff.xml:951: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_detail_batch.xml:467: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_laporan.xml:643: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_laporan.xml:665: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_notifikasi.xml:696: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_pengaturan.xml:484: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_pengaturan.xml:646: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_pengguna.xml:342: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_perlu_ditangani.xml:383: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
+            <LinearLayout
+             ~~~~~~~~~~~~
+
+   Explanation for issues of type "UseCompoundDrawables":
+   A LinearLayout which contains an ImageView and a TextView can be more
+   efficiently handled as a compound drawable (a single TextView, using the
+   drawableTop, drawableLeft, drawableRight and/or drawableBottom attributes
+   to draw one or more images adjacent to the text).
+
+   If the two widgets are offset from each other with margins, this can be
+   replaced with a drawablePadding attribute.
+
+   There's a lint quickfix to perform this conversion in the Eclipse plugin.
+
+/home/irsal/StockFlow/app/src/main/res/layout/form_barang.xml:357: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang.xml:93: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:93: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:432: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:602: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:772: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:942: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:1112: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:1282: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:1452: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_staff.xml:93: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:207: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                    <LinearLayout
+                     ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:463: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:469: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:509: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:550: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:556: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:596: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:655: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:828: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:895: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:962: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:1029: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:207: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                    <LinearLayout
+                     ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:463: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:469: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:509: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:550: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:556: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:596: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:655: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:828: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:895: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:962: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:1029: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_data_skema.xml:64: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_data_skema.xml:101: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_detail_barang.xml:435: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                    <LinearLayout
+                     ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_detail_barang.xml:495: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_detail_batch.xml:91: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_detail_batch.xml:241: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_detail_batch.xml:338: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_laporan.xml:16: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+    <LinearLayout
+     ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_laporan.xml:159: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_notifikasi.xml:66: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_notifikasi.xml:171: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_notifikasi.xml:297: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_notifikasi.xml:423: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_notifikasi.xml:549: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_pengaturan.xml:152: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_pengaturan.xml:306: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_pengaturan.xml:358: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_pengguna.xml:64: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_perlu_ditangani.xml:84: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_perlu_ditangani.xml:258: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_profil.xml:16: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+    <LinearLayout
+     ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_profil.xml:120: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+            <LinearLayout
+             ~~~~~~~~~~~~
+
+   Explanation for issues of type "DisableBaselineAlignment":
+   When a LinearLayout is used to distribute the space proportionally between
+   nested layouts, the baseline alignment property should be turned off to
+   make the layout computation faster.
+
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:495: Warning: Nested weights are bad for performance [NestedWeights]
+                        android:layout_weight="1"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:535: Warning: Nested weights are bad for performance [NestedWeights]
+                        android:layout_weight="1"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:582: Warning: Nested weights are bad for performance [NestedWeights]
+                        android:layout_weight="1"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:622: Warning: Nested weights are bad for performance [NestedWeights]
+                        android:layout_weight="1"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:495: Warning: Nested weights are bad for performance [NestedWeights]
+                        android:layout_weight="1"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:535: Warning: Nested weights are bad for performance [NestedWeights]
+                        android:layout_weight="1"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:582: Warning: Nested weights are bad for performance [NestedWeights]
+                        android:layout_weight="1"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:622: Warning: Nested weights are bad for performance [NestedWeights]
+                        android:layout_weight="1"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "NestedWeights":
+   Layout weights require a widget to be measured twice. When a LinearLayout
+   with non-zero weights is nested inside another LinearLayout with non-zero
+   weights, then the number of measurements increase exponentially.
+
+/home/irsal/StockFlow/app/src/main/res/layout/form_akun.xml:11: Warning: Possible overdraw: Root element paints background @color/sf_bg with a theme that also paints a background (inferred theme is @style/Theme.StockFlow) [Overdraw]
+    android:background="@color/sf_bg"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_barang.xml:11: Warning: Possible overdraw: Root element paints background @color/sf_bg with a theme that also paints a background (inferred theme is @style/Theme.StockFlow) [Overdraw]
+    android:background="@color/sf_bg"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_batch.xml:11: Warning: Possible overdraw: Root element paints background @color/sf_bg with a theme that also paints a background (inferred theme is @style/Theme.StockFlow) [Overdraw]
+    android:background="@color/sf_bg"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_penyesuaian.xml:11: Warning: Possible overdraw: Root element paints background @color/sf_bg with a theme that also paints a background (inferred theme is @style/Theme.StockFlow) [Overdraw]
+    android:background="@color/sf_bg"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_stok_keluar.xml:11: Warning: Possible overdraw: Root element paints background @color/sf_bg with a theme that also paints a background (inferred theme is @style/Theme.StockFlow) [Overdraw]
+    android:background="@color/sf_bg"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_akses_ditolak.xml:10: Warning: Possible overdraw: Root element paints background @color/sf_bg with a theme that also paints a background (inferred theme is @style/Theme.StockFlow) [Overdraw]
+    android:background="@color/sf_bg"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang.xml:12: Warning: Possible overdraw: Root element paints background @color/sf_bg with a theme that also paints a background (inferred theme is @style/Theme.StockFlow) [Overdraw]
+    android:background="@color/sf_bg"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:12: Warning: Possible overdraw: Root element paints background @color/sf_bg with a theme that also paints a background (inferred theme is @style/Theme.StockFlow) [Overdraw]
+    android:background="@color/sf_bg"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_staff.xml:12: Warning: Possible overdraw: Root element paints background @color/sf_bg with a theme that also paints a background (inferred theme is @style/Theme.StockFlow) [Overdraw]
+    android:background="@color/sf_bg"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:11: Warning: Possible overdraw: Root element paints background @color/sf_bg with a theme that also paints a background (inferred theme is @style/Theme.StockFlow) [Overdraw]
+    android:background="@color/sf_bg"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:11: Warning: Possible overdraw: Root element paints background @color/sf_bg with a theme that also paints a background (inferred theme is @style/Theme.StockFlow) [Overdraw]
+    android:background="@color/sf_bg"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_data_skema.xml:10: Warning: Possible overdraw: Root element paints background @color/sf_bg with a theme that also paints a background (inferred theme is @style/Theme.StockFlow) [Overdraw]
+    android:background="@color/sf_bg"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_detail_barang.xml:11: Warning: Possible overdraw: Root element paints background @color/sf_bg with a theme that also paints a background (inferred theme is @style/Theme.StockFlow) [Overdraw]
+    android:background="@color/sf_bg"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_detail_batch.xml:11: Warning: Possible overdraw: Root element paints background @color/sf_bg with a theme that also paints a background (inferred theme is @style/Theme.StockFlow) [Overdraw]
+    android:background="@color/sf_bg"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_laporan.xml:11: Warning: Possible overdraw: Root element paints background @color/sf_bg with a theme that also paints a background (inferred theme is @style/Theme.StockFlow) [Overdraw]
+    android:background="@color/sf_bg"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_notifikasi.xml:12: Warning: Possible overdraw: Root element paints background @color/sf_bg with a theme that also paints a background (inferred theme is @style/Theme.StockFlow) [Overdraw]
+    android:background="@color/sf_bg"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_pengaturan.xml:11: Warning: Possible overdraw: Root element paints background @color/sf_bg with a theme that also paints a background (inferred theme is @style/Theme.StockFlow) [Overdraw]
+    android:background="@color/sf_bg"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_pengguna.xml:11: Warning: Possible overdraw: Root element paints background @color/sf_bg with a theme that also paints a background (inferred theme is @style/Theme.StockFlow) [Overdraw]
+    android:background="@color/sf_bg"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_perlu_ditangani.xml:13: Warning: Possible overdraw: Root element paints background @color/sf_bg with a theme that also paints a background (inferred theme is @style/Theme.StockFlow) [Overdraw]
+    android:background="@color/sf_bg"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_profil.xml:11: Warning: Possible overdraw: Root element paints background @color/sf_bg with a theme that also paints a background (inferred theme is @style/Theme.StockFlow) [Overdraw]
+    android:background="@color/sf_bg"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_riwayat.xml:11: Warning: Possible overdraw: Root element paints background @color/sf_bg with a theme that also paints a background (inferred theme is @style/Theme.StockFlow) [Overdraw]
+    android:background="@color/sf_bg"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_tidak_ditemukan.xml:10: Warning: Possible overdraw: Root element paints background @color/sf_bg with a theme that also paints a background (inferred theme is @style/Theme.StockFlow) [Overdraw]
+    android:background="@color/sf_bg"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/view_bottom_nav.xml:16: Warning: Possible overdraw: Root element paints background @color/sf_card with a theme that also paints a background (inferred theme is @style/Theme.StockFlow) [Overdraw]
+    android:background="@color/sf_card"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "Overdraw":
+   If you set a background drawable on a root view, then you should use a
+   custom theme where the theme background is null. Otherwise, the theme
+   background will be painted first, only to have your custom background
+   completely cover it; this is called "overdraw".
+
+   NOTE: This detector relies on figuring out which layouts are associated
+   with which activities based on scanning the Java code, and it's currently
+   doing that using an inexact pattern matching algorithm. Therefore, it can
+   incorrectly conclude which activity the layout is associated with and then
+   wrongly complain that a background-theme is hidden.
+
+   If you want your custom background on multiple pages, then you should
+   consider making a custom theme with your custom background and just using
+   that theme instead of a root element background.
+
+   Of course it's possible that your custom drawable is translucent and you
+   want it to be mixed with the background. However, you will get better
+   performance if you pre-mix the background with your drawable and use that
+   resulting image or color as a custom theme background instead.
+
+/home/irsal/StockFlow/app/src/main/res/layout/activity_login.xml:3: Warning: The resource R.layout.activity_login appears to be unused [UnusedResources]
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/activity_main.xml:2: Warning: The resource R.layout.activity_main appears to be unused [UnusedResources]
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_actionbar.xml:2: Warning: The resource R.drawable.bg_actionbar appears to be unused [UnusedResources]
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_alert_danger.xml:2: Warning: The resource R.drawable.bg_alert_danger appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_alert_info.xml:2: Warning: The resource R.drawable.bg_alert_info appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_alert_safe.xml:2: Warning: The resource R.drawable.bg_alert_safe appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_alert_warn.xml:2: Warning: The resource R.drawable.bg_alert_warn appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_attach.xml:2: Warning: The resource R.drawable.bg_attach appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_attach_add.xml:2: Warning: The resource R.drawable.bg_attach_add appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_auth.xml:2: Warning: The resource R.drawable.bg_auth appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_auth_avatar.xml:2: Warning: The resource R.drawable.bg_auth_avatar appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_auth_brand_mark.xml:2: Warning: The resource R.drawable.bg_auth_brand_mark appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_auth_card.xml:2: Warning: The resource R.drawable.bg_auth_card appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_auth_demo.xml:2: Warning: The resource R.drawable.bg_auth_demo appears to be unused [UnusedResources]
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_auth_input.xml:2: Warning: The resource R.drawable.bg_auth_input appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_auth_note.xml:2: Warning: The resource R.drawable.bg_auth_note appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_auth_pill.xml:2: Warning: The resource R.drawable.bg_auth_pill appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_avatar.xml:2: Warning: The resource R.drawable.bg_avatar appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_avatar_lg.xml:2: Warning: The resource R.drawable.bg_avatar_lg appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_avatar_lg_staff.xml:2: Warning: The resource R.drawable.bg_avatar_lg_staff appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_avatar_staff.xml:2: Warning: The resource R.drawable.bg_avatar_staff appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_badge.xml:2: Warning: The resource R.drawable.bg_badge appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_batch_code.xml:2: Warning: The resource R.drawable.bg_batch_code appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_brand_mark.xml:2: Warning: The resource R.drawable.bg_brand_mark appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_btn_danger.xml:2: Warning: The resource R.drawable.bg_btn_danger appears to be unused [UnusedResources]
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_btn_danger_soft.xml:2: Warning: The resource R.drawable.bg_btn_danger_soft appears to be unused [UnusedResources]
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_btn_dark.xml:2: Warning: The resource R.drawable.bg_btn_dark appears to be unused [UnusedResources]
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_btn_ghost.xml:2: Warning: The resource R.drawable.bg_btn_ghost appears to be unused [UnusedResources]
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_btn_primary.xml:2: Warning: The resource R.drawable.bg_btn_primary appears to be unused [UnusedResources]
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_btn_soft.xml:2: Warning: The resource R.drawable.bg_btn_soft appears to be unused [UnusedResources]
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_card.xml:2: Warning: The resource R.drawable.bg_card appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_card_12.xml:2: Warning: The resource R.drawable.bg_card_12 appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_card_14.xml:2: Warning: The resource R.drawable.bg_card_14 appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_card_16.xml:2: Warning: The resource R.drawable.bg_card_16 appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_card_danger_tint.xml:2: Warning: The resource R.drawable.bg_card_danger_tint appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_card_tint.xml:2: Warning: The resource R.drawable.bg_card_tint appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_card_unread.xml:2: Warning: The resource R.drawable.bg_card_unread appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_chip.xml:2: Warning: The resource R.drawable.bg_chip appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_chip_active.xml:2: Warning: The resource R.drawable.bg_chip_active appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_date_chip.xml:2: Warning: The resource R.drawable.bg_date_chip appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_empty.xml:2: Warning: The resource R.drawable.bg_empty appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_form_alloc.xml:2: Warning: The resource R.drawable.bg_form_alloc appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_hero_orbit.xml:2: Warning: The resource R.drawable.bg_hero_orbit appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_hero_orbit_staff.xml:2: Warning: The resource R.drawable.bg_hero_orbit_staff appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_hero_owner.xml:2: Warning: The resource R.drawable.bg_hero_owner appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_hero_staff.xml:2: Warning: The resource R.drawable.bg_hero_staff appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_ic_danger.xml:2: Warning: The resource R.drawable.bg_ic_danger appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_ic_info.xml:2: Warning: The resource R.drawable.bg_ic_info appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_ic_mint.xml:2: Warning: The resource R.drawable.bg_ic_mint appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_ic_muted.xml:2: Warning: The resource R.drawable.bg_ic_muted appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_ic_safe.xml:2: Warning: The resource R.drawable.bg_ic_safe appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_ic_violet.xml:2: Warning: The resource R.drawable.bg_ic_violet appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_ic_warn.xml:2: Warning: The resource R.drawable.bg_ic_warn appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_iconbtn_boxed.xml:2: Warning: The resource R.drawable.bg_iconbtn_boxed appears to be unused [UnusedResources]
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_input.xml:2: Warning: The resource R.drawable.bg_input appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_input_error.xml:2: Warning: The resource R.drawable.bg_input_error appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_notice_danger.xml:2: Warning: The resource R.drawable.bg_notice_danger appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_notice_warn.xml:2: Warning: The resource R.drawable.bg_notice_warn appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_pill_brand.xml:2: Warning: The resource R.drawable.bg_pill_brand appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_pill_danger.xml:2: Warning: The resource R.drawable.bg_pill_danger appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_pill_info.xml:2: Warning: The resource R.drawable.bg_pill_info appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_pill_muted.xml:2: Warning: The resource R.drawable.bg_pill_muted appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_pill_outline.xml:2: Warning: The resource R.drawable.bg_pill_outline appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_pill_safe.xml:2: Warning: The resource R.drawable.bg_pill_safe appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_pill_violet.xml:2: Warning: The resource R.drawable.bg_pill_violet appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_pill_warn.xml:2: Warning: The resource R.drawable.bg_pill_warn appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_product_default.xml:2: Warning: The resource R.drawable.bg_product_default appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_product_drink.xml:2: Warning: The resource R.drawable.bg_product_drink appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_product_food.xml:2: Warning: The resource R.drawable.bg_product_food appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_product_home.xml:2: Warning: The resource R.drawable.bg_product_home appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_product_med.xml:2: Warning: The resource R.drawable.bg_product_med appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_product_other.xml:2: Warning: The resource R.drawable.bg_product_other appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_radio_card.xml:2: Warning: The resource R.drawable.bg_radio_card appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_radio_card_on.xml:2: Warning: The resource R.drawable.bg_radio_card_on appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_ripple_row.xml:2: Warning: The resource R.drawable.bg_ripple_row appears to be unused [UnusedResources]
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_schema_count.xml:2: Warning: The resource R.drawable.bg_schema_count appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_schema_ic.xml:2: Warning: The resource R.drawable.bg_schema_ic appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_search.xml:2: Warning: The resource R.drawable.bg_search appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_segment_active.xml:2: Warning: The resource R.drawable.bg_segment_active appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_segmented.xml:2: Warning: The resource R.drawable.bg_segmented appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_sheet.xml:2: Warning: The resource R.drawable.bg_sheet appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_sheet_grab.xml:2: Warning: The resource R.drawable.bg_sheet_grab appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_status_preview.xml:2: Warning: The resource R.drawable.bg_status_preview appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_tab_active.xml:2: Warning: The resource R.drawable.bg_tab_active appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_tabbar.xml:2: Warning: The resource R.drawable.bg_tabbar appears to be unused [UnusedResources]
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_toast.xml:2: Warning: The resource R.drawable.bg_toast appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_topbar_sub.xml:2: Warning: The resource R.drawable.bg_topbar_sub appears to be unused [UnusedResources]
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/bg_unread_accent.xml:3: Warning: The resource R.drawable.bg_unread_accent appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/menu/bottom_nav.xml:6: Warning: The resource R.menu.bottom_nav appears to be unused [UnusedResources]
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+^
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:17: Warning: The resource R.color.sf_bg_2 appears to be unused [UnusedResources]
+    <color name="sf_bg_2">#E8EFE9</color>
+           ~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:20: Warning: The resource R.color.sf_mint_2 appears to be unused [UnusedResources]
+    <color name="sf_mint_2">#EEF8F1</color>
+           ~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:23: Warning: The resource R.color.sf_ink appears to be unused [UnusedResources]
+    <color name="sf_ink">#0C2018</color>
+           ~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:24: Warning: The resource R.color.sf_text appears to be unused [UnusedResources]
+    <color name="sf_text">#2C4037</color>
+           ~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:25: Warning: The resource R.color.sf_muted appears to be unused [UnusedResources]
+    <color name="sf_muted">#74867D</color>
+           ~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:26: Warning: The resource R.color.sf_muted_2 appears to be unused [UnusedResources]
+    <color name="sf_muted_2">#94A49C</color>
+           ~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:27: Warning: The resource R.color.sf_on_card_muted appears to be unused [UnusedResources]
+    <color name="sf_on_card_muted">#9AA8A0</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:30: Warning: The resource R.color.sf_line appears to be unused [UnusedResources]
+    <color name="sf_line">#E4EBE5</color>
+           ~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:31: Warning: The resource R.color.sf_line_strong appears to be unused [UnusedResources]
+    <color name="sf_line_strong">#D5E0D8</color>
+           ~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:34: Warning: The resource R.color.sf_safe appears to be unused [UnusedResources]
+    <color name="sf_safe">#167552</color>
+           ~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:35: Warning: The resource R.color.sf_safe_bg appears to be unused [UnusedResources]
+    <color name="sf_safe_bg">#E9F6EF</color>
+           ~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:36: Warning: The resource R.color.sf_safe_line appears to be unused [UnusedResources]
+    <color name="sf_safe_line">#CFEADC</color>
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:37: Warning: The resource R.color.sf_warn appears to be unused [UnusedResources]
+    <color name="sf_warn">#98610F</color>
+           ~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:38: Warning: The resource R.color.sf_warn_bg appears to be unused [UnusedResources]
+    <color name="sf_warn_bg">#FCF3E3</color>
+           ~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:39: Warning: The resource R.color.sf_warn_line appears to be unused [UnusedResources]
+    <color name="sf_warn_line">#F0DFBE</color>
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:41: Warning: The resource R.color.sf_danger_bg appears to be unused [UnusedResources]
+    <color name="sf_danger_bg">#FCECEB</color>
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:42: Warning: The resource R.color.sf_danger_line appears to be unused [UnusedResources]
+    <color name="sf_danger_line">#F3D3D0</color>
+           ~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:43: Warning: The resource R.color.sf_info appears to be unused [UnusedResources]
+    <color name="sf_info">#2C6389</color>
+           ~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:44: Warning: The resource R.color.sf_info_bg appears to be unused [UnusedResources]
+    <color name="sf_info_bg">#EBF4FA</color>
+           ~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:45: Warning: The resource R.color.sf_info_line appears to be unused [UnusedResources]
+    <color name="sf_info_line">#D4E6F1</color>
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:46: Warning: The resource R.color.sf_violet appears to be unused [UnusedResources]
+    <color name="sf_violet">#6B5A9E</color>
+           ~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:47: Warning: The resource R.color.sf_violet_bg appears to be unused [UnusedResources]
+    <color name="sf_violet_bg">#F0EDF8</color>
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:50: Warning: The resource R.color.sf_ghost_text appears to be unused [UnusedResources]
+    <color name="sf_ghost_text">#345247</color>
+           ~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:51: Warning: The resource R.color.sf_brand_dark appears to be unused [UnusedResources]
+    <color name="sf_brand_dark">#084B36</color>
+           ~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:52: Warning: The resource R.color.sf_icon_gray appears to be unused [UnusedResources]
+    <color name="sf_icon_gray">#526A5E</color>
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:53: Warning: The resource R.color.sf_tab_off appears to be unused [UnusedResources]
+    <color name="sf_tab_off">#93A29A</color>
+           ~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:54: Warning: The resource R.color.sf_chip_text appears to be unused [UnusedResources]
+    <color name="sf_chip_text">#647A6F</color>
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:55: Warning: The resource R.color.sf_track appears to be unused [UnusedResources]
+    <color name="sf_track">#EDF2EE</color>
+           ~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:56: Warning: The resource R.color.sf_input_bg appears to be unused [UnusedResources]
+    <color name="sf_input_bg">#FCFDFC</color>
+           ~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:57: Warning: The resource R.color.sf_seg_bg appears to be unused [UnusedResources]
+    <color name="sf_seg_bg">#E9EFE9</color>
+           ~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:58: Warning: The resource R.color.sf_chev appears to be unused [UnusedResources]
+    <color name="sf_chev">#A4B2AA</color>
+           ~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:59: Warning: The resource R.color.sf_label appears to be unused [UnusedResources]
+    <color name="sf_label">#334F43</color>
+           ~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:60: Warning: The resource R.color.sf_danger_ink appears to be unused [UnusedResources]
+    <color name="sf_danger_ink">#8C332D</color>
+           ~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:61: Warning: The resource R.color.sf_warn_ink appears to be unused [UnusedResources]
+    <color name="sf_warn_ink">#7D5210</color>
+           ~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:62: Warning: The resource R.color.sf_info_ink appears to be unused [UnusedResources]
+    <color name="sf_info_ink">#2B5F80</color>
+           ~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:63: Warning: The resource R.color.sf_muted_bg appears to be unused [UnusedResources]
+    <color name="sf_muted_bg">#F0F3F1</color>
+           ~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:64: Warning: The resource R.color.sf_hero_label appears to be unused [UnusedResources]
+    <color name="sf_hero_label">#B8DDCB</color>
+           ~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:65: Warning: The resource R.color.sf_hero_eyebrow appears to be unused [UnusedResources]
+    <color name="sf_hero_eyebrow">#9FE3C2</color>
+           ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:68: Warning: The resource R.color.sf_auth_top appears to be unused [UnusedResources]
+    <color name="sf_auth_top">#073F2C</color>
+           ~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:69: Warning: The resource R.color.sf_auth_mid appears to be unused [UnusedResources]
+    <color name="sf_auth_mid">#052B1E</color>
+           ~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:70: Warning: The resource R.color.sf_auth_bottom appears to be unused [UnusedResources]
+    <color name="sf_auth_bottom">#031B13</color>
+           ~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:71: Warning: The resource R.color.sf_auth_text appears to be unused [UnusedResources]
+    <color name="sf_auth_text">#F5FFFA</color>
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:72: Warning: The resource R.color.sf_auth_label appears to be unused [UnusedResources]
+    <color name="sf_auth_label">#C2E3D2</color>
+           ~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:73: Warning: The resource R.color.sf_auth_lede appears to be unused [UnusedResources]
+    <color name="sf_auth_lede">#A8CCBB</color>
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:74: Warning: The resource R.color.sf_auth_hint appears to be unused [UnusedResources]
+    <color name="sf_auth_hint">#7EA793</color>
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:75: Warning: The resource R.color.sf_auth_eyebrow appears to be unused [UnusedResources]
+    <color name="sf_auth_eyebrow">#77C8A4</color>
+           ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:76: Warning: The resource R.color.sf_auth_icon appears to be unused [UnusedResources]
+    <color name="sf_auth_icon">#8DB8A5</color>
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:77: Warning: The resource R.color.sf_auth_foot appears to be unused [UnusedResources]
+    <color name="sf_auth_foot">#7FA890</color>
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:78: Warning: The resource R.color.sf_auth_foot_strong appears to be unused [UnusedResources]
+    <color name="sf_auth_foot_strong">#9BC4B0</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:79: Warning: The resource R.color.sf_auth_mark appears to be unused [UnusedResources]
+    <color name="sf_auth_mark">#BDF4D8</color>
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:80: Warning: The resource R.color.sf_auth_input_stroke appears to be unused [UnusedResources]
+    <color name="sf_auth_input_stroke">#33BEECD5</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/colors.xml:81: Warning: The resource R.color.sf_auth_input appears to be unused [UnusedResources]
+    <color name="sf_auth_input">#14FFFFFF</color>
+           ~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/dimens.xml:9: Warning: The resource R.dimen.sf_space_xs appears to be unused [UnusedResources]
+    <dimen name="sf_space_xs">4dp</dimen>
+           ~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/dimens.xml:10: Warning: The resource R.dimen.sf_space_sm appears to be unused [UnusedResources]
+    <dimen name="sf_space_sm">8dp</dimen>
+           ~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/dimens.xml:11: Warning: The resource R.dimen.sf_space_md appears to be unused [UnusedResources]
+    <dimen name="sf_space_md">12dp</dimen>
+           ~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/dimens.xml:12: Warning: The resource R.dimen.sf_space_lg appears to be unused [UnusedResources]
+    <dimen name="sf_space_lg">16dp</dimen>
+           ~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/dimens.xml:13: Warning: The resource R.dimen.sf_space_xl appears to be unused [UnusedResources]
+    <dimen name="sf_space_xl">20dp</dimen>
+           ~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/dimens.xml:14: Warning: The resource R.dimen.sf_screen_pad appears to be unused [UnusedResources]
+    <dimen name="sf_screen_pad">18dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/dimens.xml:17: Warning: The resource R.dimen.sf_radius_card appears to be unused [UnusedResources]
+    <dimen name="sf_radius_card">18dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/dimens.xml:18: Warning: The resource R.dimen.sf_radius_sm appears to be unused [UnusedResources]
+    <dimen name="sf_radius_sm">12dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/dimens.xml:19: Warning: The resource R.dimen.sf_radius_pill appears to be unused [UnusedResources]
+    <dimen name="sf_radius_pill">999dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/dimens.xml:22: Warning: The resource R.dimen.sf_topbar_h appears to be unused [UnusedResources]
+    <dimen name="sf_topbar_h">56dp</dimen>
+           ~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/dimens.xml:23: Warning: The resource R.dimen.sf_icon_btn appears to be unused [UnusedResources]
+    <dimen name="sf_icon_btn">36dp</dimen>
+           ~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/dimens.xml:24: Warning: The resource R.dimen.sf_icon_circle appears to be unused [UnusedResources]
+    <dimen name="sf_icon_circle">36dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/dimens.xml:25: Warning: The resource R.dimen.sf_icon_circle_lg appears to be unused [UnusedResources]
+    <dimen name="sf_icon_circle_lg">52dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/dimens.xml:26: Warning: The resource R.dimen.sf_bar_h appears to be unused [UnusedResources]
+    <dimen name="sf_bar_h">8dp</dimen>
+           ~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/dimens.xml:27: Warning: The resource R.dimen.sf_btn_h appears to be unused [UnusedResources]
+    <dimen name="sf_btn_h">44dp</dimen>
+           ~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/dimens.xml:28: Warning: The resource R.dimen.sf_nav_h appears to be unused [UnusedResources]
+    <dimen name="sf_nav_h">64dp</dimen>
+           ~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/dimens.xml:31: Warning: The resource R.dimen.sf_text_hero appears to be unused [UnusedResources]
+    <dimen name="sf_text_hero">30sp</dimen>
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/dimens.xml:32: Warning: The resource R.dimen.sf_text_count appears to be unused [UnusedResources]
+    <dimen name="sf_text_count">26sp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/dimens.xml:33: Warning: The resource R.dimen.sf_text_title appears to be unused [UnusedResources]
+    <dimen name="sf_text_title">18sp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/dimens.xml:34: Warning: The resource R.dimen.sf_text_body appears to be unused [UnusedResources]
+    <dimen name="sf_text_body">14sp</dimen>
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/dimens.xml:35: Warning: The resource R.dimen.sf_text_sub appears to be unused [UnusedResources]
+    <dimen name="sf_text_sub">12sp</dimen>
+           ~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/dimens.xml:36: Warning: The resource R.dimen.sf_text_cap appears to be unused [UnusedResources]
+    <dimen name="sf_text_cap">11sp</dimen>
+           ~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/dimens.xml:37: Warning: The resource R.dimen.sf_text_eyebrow appears to be unused [UnusedResources]
+    <dimen name="sf_text_eyebrow">10sp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/dimens.xml:38: Warning: The resource R.dimen.sf_text_mono appears to be unused [UnusedResources]
+    <dimen name="sf_text_mono">12sp</dimen>
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/drawable/dot_brand.xml:2: Warning: The resource R.drawable.dot_brand appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/dot_danger.xml:2: Warning: The resource R.drawable.dot_danger appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/dot_muted.xml:2: Warning: The resource R.drawable.dot_muted appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/dot_safe.xml:2: Warning: The resource R.drawable.dot_safe appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/dot_warn.xml:2: Warning: The resource R.drawable.dot_warn appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+^
+/home/irsal/StockFlow/app/src/main/res/layout/form_akun.xml:6: Warning: The resource R.layout.form_akun appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/form_barang.xml:6: Warning: The resource R.layout.form_barang appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/form_batch.xml:6: Warning: The resource R.layout.form_batch appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/form_penyesuaian.xml:6: Warning: The resource R.layout.form_penyesuaian appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/form_stok_keluar.xml:6: Warning: The resource R.layout.form_stok_keluar appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_akses_ditolak.xml:5: Warning: The resource R.layout.fragment_akses_ditolak appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang.xml:7: Warning: The resource R.layout.fragment_barang appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:7: Warning: The resource R.layout.fragment_barang_batch appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_staff.xml:7: Warning: The resource R.layout.fragment_barang_staff appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:6: Warning: The resource R.layout.fragment_beranda_owner appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:6: Warning: The resource R.layout.fragment_beranda_staff appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_data_skema.xml:5: Warning: The resource R.layout.fragment_data_skema appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_detail_barang.xml:6: Warning: The resource R.layout.fragment_detail_barang appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_detail_batch.xml:6: Warning: The resource R.layout.fragment_detail_batch appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_laporan.xml:6: Warning: The resource R.layout.fragment_laporan appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_notifikasi.xml:7: Warning: The resource R.layout.fragment_notifikasi appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_pengaturan.xml:6: Warning: The resource R.layout.fragment_pengaturan appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_pengguna.xml:6: Warning: The resource R.layout.fragment_pengguna appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_perlu_ditangani.xml:8: Warning: The resource R.layout.fragment_perlu_ditangani appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_profil.xml:6: Warning: The resource R.layout.fragment_profil appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_riwayat.xml:6: Warning: The resource R.layout.fragment_riwayat appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_tidak_ditemukan.xml:5: Warning: The resource R.layout.fragment_tidak_ditemukan appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic12_alert_circle.xml:2: Warning: The resource R.drawable.ic12_alert_circle appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic12_alert_triangle.xml:2: Warning: The resource R.drawable.ic12_alert_triangle appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic12_archive.xml:2: Warning: The resource R.drawable.ic12_archive appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic12_arrow_down_left.xml:2: Warning: The resource R.drawable.ic12_arrow_down_left appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic12_arrow_up_right.xml:2: Warning: The resource R.drawable.ic12_arrow_up_right appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic12_box.xml:2: Warning: The resource R.drawable.ic12_box appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic12_calendar.xml:2: Warning: The resource R.drawable.ic12_calendar appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic12_calendar_clock.xml:2: Warning: The resource R.drawable.ic12_calendar_clock appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic12_check.xml:2: Warning: The resource R.drawable.ic12_check appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic12_check_circle.xml:2: Warning: The resource R.drawable.ic12_check_circle appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic12_chevron_right.xml:2: Warning: The resource R.drawable.ic12_chevron_right appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic12_clipboard_check.xml:2: Warning: The resource R.drawable.ic12_clipboard_check appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic12_clock.xml:2: Warning: The resource R.drawable.ic12_clock appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic12_database.xml:2: Warning: The resource R.drawable.ic12_database appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic12_download.xml:2: Warning: The resource R.drawable.ic12_download appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic12_info.xml:2: Warning: The resource R.drawable.ic12_info appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic12_lock.xml:2: Warning: The resource R.drawable.ic12_lock appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic12_package_x.xml:2: Warning: The resource R.drawable.ic12_package_x appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic12_plus.xml:2: Warning: The resource R.drawable.ic12_plus appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic12_save.xml:2: Warning: The resource R.drawable.ic12_save appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic12_shield_check.xml:2: Warning: The resource R.drawable.ic12_shield_check appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic12_swap_horiz.xml:2: Warning: The resource R.drawable.ic12_swap_horiz appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic12_x.xml:2: Warning: The resource R.drawable.ic12_x appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_activity.xml:2: Warning: The resource R.drawable.ic_activity appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_alert_circle.xml:2: Warning: The resource R.drawable.ic_alert_circle appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_alert_triangle.xml:2: Warning: The resource R.drawable.ic_alert_triangle appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_archive.xml:2: Warning: The resource R.drawable.ic_archive appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_arrow_down.xml:2: Warning: The resource R.drawable.ic_arrow_down appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_arrow_down_left.xml:2: Warning: The resource R.drawable.ic_arrow_down_left appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_arrow_left.xml:2: Warning: The resource R.drawable.ic_arrow_left appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_arrow_right.xml:2: Warning: The resource R.drawable.ic_arrow_right appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_arrow_up_right.xml:2: Warning: The resource R.drawable.ic_arrow_up_right appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_bell.xml:2: Warning: The resource R.drawable.ic_bell appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_box.xml:2: Warning: The resource R.drawable.ic_box appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_boxes.xml:2: Warning: The resource R.drawable.ic_boxes appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_calendar.xml:2: Warning: The resource R.drawable.ic_calendar appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_calendar_clock.xml:2: Warning: The resource R.drawable.ic_calendar_clock appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_chart.xml:2: Warning: The resource R.drawable.ic_chart appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_check.xml:2: Warning: The resource R.drawable.ic_check appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_check_circle.xml:2: Warning: The resource R.drawable.ic_check_circle appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_chevron_right.xml:2: Warning: The resource R.drawable.ic_chevron_right appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_clipboard_check.xml:2: Warning: The resource R.drawable.ic_clipboard_check appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_clock.xml:2: Warning: The resource R.drawable.ic_clock appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_cookie.xml:2: Warning: The resource R.drawable.ic_cookie appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_cup.xml:2: Warning: The resource R.drawable.ic_cup appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_database.xml:2: Warning: The resource R.drawable.ic_database appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_download.xml:2: Warning: The resource R.drawable.ic_download appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_droplet.xml:2: Warning: The resource R.drawable.ic_droplet appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_edit.xml:2: Warning: The resource R.drawable.ic_edit appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_external.xml:2: Warning: The resource R.drawable.ic_external appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_eye.xml:2: Warning: The resource R.drawable.ic_eye appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_eye_off.xml:2: Warning: The resource R.drawable.ic_eye_off appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_file.xml:2: Warning: The resource R.drawable.ic_file appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_filter.xml:2: Warning: The resource R.drawable.ic_filter appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_grid.xml:2: Warning: The resource R.drawable.ic_grid appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_history.xml:2: Warning: The resource R.drawable.ic_history appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_home.xml:2: Warning: The resource R.drawable.ic_home appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_image.xml:2: Warning: The resource R.drawable.ic_image appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_info.xml:2: Warning: The resource R.drawable.ic_info appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_key.xml:2: Warning: The resource R.drawable.ic_key appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_layers.xml:2: Warning: The resource R.drawable.ic_layers appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_leaf.xml:2: Warning: The resource R.drawable.ic_leaf appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_list.xml:2: Warning: The resource R.drawable.ic_list appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_lock.xml:2: Warning: The resource R.drawable.ic_lock appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_login.xml:2: Warning: The resource R.drawable.ic_login appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_logout.xml:2: Warning: The resource R.drawable.ic_logout appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_minus.xml:2: Warning: The resource R.drawable.ic_minus appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_more_v.xml:2: Warning: The resource R.drawable.ic_more_v appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_package.xml:2: Warning: The resource R.drawable.ic_package appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_package_x.xml:2: Warning: The resource R.drawable.ic_package_x appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_pill.xml:2: Warning: The resource R.drawable.ic_pill appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_plus.xml:2: Warning: The resource R.drawable.ic_plus appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_refresh.xml:2: Warning: The resource R.drawable.ic_refresh appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_rotate.xml:2: Warning: The resource R.drawable.ic_rotate appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_save.xml:2: Warning: The resource R.drawable.ic_save appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_search.xml:2: Warning: The resource R.drawable.ic_search appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_send.xml:2: Warning: The resource R.drawable.ic_send appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_settings.xml:2: Warning: The resource R.drawable.ic_settings appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_shield_check.xml:2: Warning: The resource R.drawable.ic_shield_check appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_sparkles.xml:2: Warning: The resource R.drawable.ic_sparkles appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_store.xml:2: Warning: The resource R.drawable.ic_store appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_swap_horiz.xml:2: Warning: The resource R.drawable.ic_swap_horiz appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_tag.xml:2: Warning: The resource R.drawable.ic_tag appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_target.xml:2: Warning: The resource R.drawable.ic_target appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_trash.xml:2: Warning: The resource R.drawable.ic_trash appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_upload.xml:2: Warning: The resource R.drawable.ic_upload appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_user.xml:2: Warning: The resource R.drawable.ic_user appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_user_check.xml:2: Warning: The resource R.drawable.ic_user_check appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_user_plus.xml:2: Warning: The resource R.drawable.ic_user_plus appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_users.xml:2: Warning: The resource R.drawable.ic_users appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_warehouse.xml:2: Warning: The resource R.drawable.ic_warehouse appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/ic_x.xml:2: Warning: The resource R.drawable.ic_x appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/progress_danger.xml:2: Warning: The resource R.drawable.progress_danger appears to be unused [UnusedResources]
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/progress_muted.xml:2: Warning: The resource R.drawable.progress_muted appears to be unused [UnusedResources]
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/progress_safe.xml:2: Warning: The resource R.drawable.progress_safe appears to be unused [UnusedResources]
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+^
+/home/irsal/StockFlow/app/src/main/res/drawable/progress_warn.xml:2: Warning: The resource R.drawable.progress_warn appears to be unused [UnusedResources]
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+^
+/home/irsal/StockFlow/app/src/main/res/values/strings.xml:3: Warning: The resource R.string.sf_batch_fefo_info appears to be unused [UnusedResources]
+    <string name="sf_batch_fefo_info">Urutan <b>FEFO.</b> Batch dengan tanggal kedaluwarsa terdekat ditampilkan lebih dulu, kecuali batch yang sudah ditangani.</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:10: Warning: The resource R.style.SF_Text appears to be unused [UnusedResources]
+    <style name="SF.Text" parent="">
+           ~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:18: Warning: The resource R.style.SF_Text_Eyebrow appears to be unused [UnusedResources]
+    <style name="SF.Text.Eyebrow">
+           ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:26: Warning: The resource R.style.SF_Text_Heading appears to be unused [UnusedResources]
+    <style name="SF.Text.Heading">
+           ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:33: Warning: The resource R.style.SF_Text_Title appears to be unused [UnusedResources]
+    <style name="SF.Text.Title">
+           ~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:40: Warning: The resource R.style.SF_Text_Section appears to be unused [UnusedResources]
+    <style name="SF.Text.Section">
+           ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:47: Warning: The resource R.style.SF_Text_RowTitle appears to be unused [UnusedResources]
+    <style name="SF.Text.RowTitle">
+           ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:53: Warning: The resource R.style.SF_Text_RowSub appears to be unused [UnusedResources]
+    <style name="SF.Text.RowSub">
+           ~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:59: Warning: The resource R.style.SF_Text_Muted appears to be unused [UnusedResources]
+    <style name="SF.Text.Muted">
+           ~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:65: Warning: The resource R.style.SF_Text_Caption appears to be unused [UnusedResources]
+    <style name="SF.Text.Caption">
+           ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:70: Warning: The resource R.style.SF_Text_Strong appears to be unused [UnusedResources]
+    <style name="SF.Text.Strong">
+           ~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:76: Warning: The resource R.style.SF_Text_Value appears to be unused [UnusedResources]
+    <style name="SF.Text.Value">
+           ~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:83: Warning: The resource R.style.SF_Text_Link appears to be unused [UnusedResources]
+    <style name="SF.Text.Link">
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:91: Warning: The resource R.style.SF_Text_Mono appears to be unused [UnusedResources]
+    <style name="SF.Text.Mono">
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:97: Warning: The resource R.style.SF_Text_Label appears to be unused [UnusedResources]
+    <style name="SF.Text.Label">
+           ~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:103: Warning: The resource R.style.SF_Text_BatchCode appears to be unused [UnusedResources]
+    <style name="SF.Text.BatchCode">
+           ~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:116: Warning: The resource R.style.SF_Pill appears to be unused [UnusedResources]
+    <style name="SF.Pill" parent="">
+           ~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:130: Warning: The resource R.style.SF_Pill_Safe appears to be unused [UnusedResources]
+    <style name="SF.Pill.Safe">
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:135: Warning: The resource R.style.SF_Pill_Warn appears to be unused [UnusedResources]
+    <style name="SF.Pill.Warn">
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:140: Warning: The resource R.style.SF_Pill_Danger appears to be unused [UnusedResources]
+    <style name="SF.Pill.Danger">
+           ~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:145: Warning: The resource R.style.SF_Pill_Muted appears to be unused [UnusedResources]
+    <style name="SF.Pill.Muted">
+           ~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:150: Warning: The resource R.style.SF_Pill_Info appears to be unused [UnusedResources]
+    <style name="SF.Pill.Info">
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:155: Warning: The resource R.style.SF_Pill_Violet appears to be unused [UnusedResources]
+    <style name="SF.Pill.Violet">
+           ~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:160: Warning: The resource R.style.SF_Pill_Brand appears to be unused [UnusedResources]
+    <style name="SF.Pill.Brand">
+           ~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:165: Warning: The resource R.style.SF_Pill_Outline appears to be unused [UnusedResources]
+    <style name="SF.Pill.Outline">
+           ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:172: Warning: The resource R.style.SF_Btn appears to be unused [UnusedResources]
+    <style name="SF.Btn" parent="">
+           ~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:186: Warning: The resource R.style.SF_Btn_Primary appears to be unused [UnusedResources]
+    <style name="SF.Btn.Primary">
+           ~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:191: Warning: The resource R.style.SF_Btn_Dark appears to be unused [UnusedResources]
+    <style name="SF.Btn.Dark">
+           ~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:196: Warning: The resource R.style.SF_Btn_Ghost appears to be unused [UnusedResources]
+    <style name="SF.Btn.Ghost">
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:201: Warning: The resource R.style.SF_Btn_Soft appears to be unused [UnusedResources]
+    <style name="SF.Btn.Soft">
+           ~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:206: Warning: The resource R.style.SF_Btn_Danger appears to be unused [UnusedResources]
+    <style name="SF.Btn.Danger">
+           ~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:211: Warning: The resource R.style.SF_Btn_DangerSoft appears to be unused [UnusedResources]
+    <style name="SF.Btn.DangerSoft">
+           ~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:216: Warning: The resource R.style.SF_Btn_Sm appears to be unused [UnusedResources]
+    <style name="SF.Btn.Sm">
+           ~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:224: Warning: The resource R.style.SF_IconBtn appears to be unused [UnusedResources]
+    <style name="SF.IconBtn" parent="">
+           ~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:232: Warning: The resource R.style.SF_IconBtn_Boxed appears to be unused [UnusedResources]
+    <style name="SF.IconBtn.Boxed">
+           ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:237: Warning: The resource R.style.SF_Card appears to be unused [UnusedResources]
+    <style name="SF.Card" parent="">
+           ~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:244: Warning: The resource R.style.SF_Card_Tint appears to be unused [UnusedResources]
+    <style name="SF.Card.Tint">
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:248: Warning: The resource R.style.SF_Divider appears to be unused [UnusedResources]
+    <style name="SF.Divider" parent="">
+           ~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:255: Warning: The resource R.style.SF_Chip appears to be unused [UnusedResources]
+    <style name="SF.Chip" parent="">
+           ~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:271: Warning: The resource R.style.SF_Chip_Active appears to be unused [UnusedResources]
+    <style name="SF.Chip.Active">
+           ~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:277: Warning: The resource R.style.SF_Input appears to be unused [UnusedResources]
+    <style name="SF.Input" parent="">
+           ~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:291: Warning: The resource R.style.SF_Progress appears to be unused [UnusedResources]
+    <style name="SF.Progress" parent="Widget.AppCompat.ProgressBar.Horizontal">
+           ~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:297: Warning: The resource R.style.SF_Progress_Warn appears to be unused [UnusedResources]
+    <style name="SF.Progress.Warn">
+           ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:300: Warning: The resource R.style.SF_Progress_Danger appears to be unused [UnusedResources]
+    <style name="SF.Progress.Danger">
+           ~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:303: Warning: The resource R.style.SF_Progress_Muted appears to be unused [UnusedResources]
+    <style name="SF.Progress.Muted">
+           ~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:308: Warning: The resource R.style.SF_Tab appears to be unused [UnusedResources]
+    <style name="SF.Tab" parent="">
+           ~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:317: Warning: The resource R.style.SF_Tab_Label appears to be unused [UnusedResources]
+    <style name="SF.Tab.Label">
+           ~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:326: Warning: The resource R.style.SF_Tab_Label_Active appears to be unused [UnusedResources]
+    <style name="SF.Tab.Label.Active">
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/styles.xml:330: Warning: The resource R.style.SF_Row appears to be unused [UnusedResources]
+    <style name="SF.Row" parent="">
+           ~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values-night/themes.xml:3: Warning: The resource R.style.Base_Theme_StockFlow appears to be unused [UnusedResources]
+    <style name="Base.Theme.StockFlow" parent="Theme.Material3.DayNight.NoActionBar">
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/themes.xml:24: Warning: The resource R.style.StockFlow_Card appears to be unused [UnusedResources]
+    <style name="StockFlow.Card" parent="">
+           ~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/values/themes.xml:36: Warning: The resource R.style.StockFlow_Pill appears to be unused [UnusedResources]
+    <style name="StockFlow.Pill" parent="">
+           ~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/view_bottom_nav.xml:9: Warning: The resource R.layout.view_bottom_nav appears to be unused [UnusedResources]
+<com.google.android.material.bottomnavigation.BottomNavigationView
+^
+/home/irsal/StockFlow/app/src/main/res/layout/view_tabbar_owner_barang.xml:3: Warning: The resource R.layout.view_tabbar_owner_barang appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/view_tabbar_owner_beranda.xml:3: Warning: The resource R.layout.view_tabbar_owner_beranda appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/view_tabbar_owner_laporan.xml:3: Warning: The resource R.layout.view_tabbar_owner_laporan appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/view_tabbar_owner_profil.xml:3: Warning: The resource R.layout.view_tabbar_owner_profil appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/view_tabbar_staff_barang.xml:3: Warning: The resource R.layout.view_tabbar_staff_barang appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/view_tabbar_staff_beranda.xml:3: Warning: The resource R.layout.view_tabbar_staff_beranda appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/view_tabbar_staff_profil.xml:3: Warning: The resource R.layout.view_tabbar_staff_profil appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/home/irsal/StockFlow/app/src/main/res/layout/view_tabbar_staff_riwayat.xml:3: Warning: The resource R.layout.view_tabbar_staff_riwayat appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+
+   Explanation for issues of type "UnusedResources":
+   Unused resources make applications larger and slow down builds.
+
+
+   The unused resource check can ignore tests. If you want to include
+   resources that are only referenced from tests, consider packaging them in a
+   test source set instead.
+
+   You can include test sources in the unused resource check by setting the
+   system property lint.unused-resources.include-tests=true, and to exclude
+   them (usually for performance reasons), use
+   lint.unused-resources.exclude-tests=true.
+
+   Available options:
+
+   **skip-libraries** (default is true):
+   Whether the unused resource check should skip reporting unused resources in libraries.
+
+   Many libraries will declare resources that are part of the library surface; other modules depending on the library will also reference the resources. To avoid reporting all these resources as unused (in the context of a library), the unused resource check normally skips reporting unused resources in libraries. Instead, run the unused resource check on the consuming app module (along with `checkDependencies=true`).
+
+   However, there are cases where you want to check that all the resources declared in a library are used; in that case, you can disable the skip option.
+
+   To configure this option, use a `lint.xml` file with an <option> like this:
+
+   ```xml
+   <lint>
+       <issue id="UnusedResources">
+           <option name="skip-libraries" value="true" />
+       </issue>
+   </lint>
+   ```
+
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_akses_ditolak.xml:64: Warning: This LinearLayout layout or its LinearLayout parent is unnecessary; transfer the background attribute to the other view [UselessParent]
+            <LinearLayout
+             ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_data_skema.xml:1272: Warning: This LinearLayout layout or its LinearLayout parent is unnecessary [UselessParent]
+                    <LinearLayout
+                     ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_profil.xml:27: Warning: This LinearLayout layout or its LinearLayout parent is unnecessary [UselessParent]
+        <LinearLayout
+         ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_tidak_ditemukan.xml:64: Warning: This LinearLayout layout or its LinearLayout parent is unnecessary; transfer the background attribute to the other view [UselessParent]
+            <LinearLayout
+             ~~~~~~~~~~~~
+
+   Explanation for issues of type "UselessParent":
+   A layout with children that has no siblings, is not a scrollview or a root
+   layout, and does not have a background, can be removed and have its
+   children moved directly into the parent for a flatter and more efficient
+   layout hierarchy.
+
+/home/irsal/StockFlow/app/src/main/res/layout/form_batch.xml:648: Warning: form_batch.xml has more than 80 views, bad for performance [TooManyViews]
+                <TextView
+                 ~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang.xml:616: Warning: fragment_barang.xml has more than 80 views, bad for performance [TooManyViews]
+                        <TextView
+                         ~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:649: Warning: fragment_barang_batch.xml has more than 80 views, bad for performance [TooManyViews]
+                    <LinearLayout
+                     ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_staff.xml:616: Warning: fragment_barang_staff.xml has more than 80 views, bad for performance [TooManyViews]
+                        <TextView
+                         ~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:589: Warning: fragment_beranda_owner.xml has more than 80 views, bad for performance [TooManyViews]
+                        <TextView
+                         ~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:589: Warning: fragment_beranda_staff.xml has more than 80 views, bad for performance [TooManyViews]
+                        <TextView
+                         ~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_data_skema.xml:552: Warning: fragment_data_skema.xml has more than 80 views, bad for performance [TooManyViews]
+                            <ImageView
+                             ~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_detail_barang.xml:545: Warning: fragment_detail_barang.xml has more than 80 views, bad for performance [TooManyViews]
+                        <TextView
+                         ~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_detail_batch.xml:551: Warning: fragment_detail_batch.xml has more than 80 views, bad for performance [TooManyViews]
+                    <TextView
+                     ~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_laporan.xml:548: Warning: fragment_laporan.xml has more than 80 views, bad for performance [TooManyViews]
+                            <TextView
+                             ~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_notifikasi.xml:609: Warning: fragment_notifikasi.xml has more than 80 views, bad for performance [TooManyViews]
+                        <LinearLayout
+                         ~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_pengaturan.xml:534: Warning: fragment_pengaturan.xml has more than 80 views, bad for performance [TooManyViews]
+                    <TextView
+                     ~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_profil.xml:537: Warning: fragment_profil.xml has more than 80 views, bad for performance [TooManyViews]
+                    <TextView
+                     ~~~~~~~~
+
+   Explanation for issues of type "TooManyViews":
+   Using too many views in a single layout is bad for performance. Consider
+   using compound drawables or other tricks for reducing the number of views
+   in this layout.
+
+   The maximum view count defaults to 80 but can be configured with the
+   environment variable ANDROID_LINT_MAX_VIEW_COUNT.
+
+/home/irsal/StockFlow/app/src/main/res/layout/activity_login.xml:63: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                    android:textSize="9sp" />
+                    ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/activity_login.xml:73: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+            android:textSize="10sp" />
+            ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/activity_login.xml:218: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                    android:textSize="9sp" />
+                    ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/activity_login.xml:249: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                    android:textSize="10sp" />
+                    ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/activity_login.xml:270: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/activity_login.xml:278: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                    android:textSize="9sp" />
+                    ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/activity_login.xml:310: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                    android:textSize="10sp" />
+                    ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/activity_login.xml:331: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/activity_login.xml:339: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                    android:textSize="9sp" />
+                    ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/activity_login.xml:401: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                android:textSize="10sp" />
+                ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_akun.xml:115: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_akun.xml:177: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_akun.xml:302: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_akun.xml:463: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                    android:textSize="10sp" />
+                    ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_barang.xml:115: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_barang.xml:150: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_barang.xml:348: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_barang.xml:534: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                    android:textSize="10sp" />
+                    ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_batch.xml:115: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_batch.xml:235: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_batch.xml:270: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_batch.xml:435: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_batch.xml:574: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_batch.xml:680: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                    android:textSize="10sp" />
+                    ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_penyesuaian.xml:171: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_penyesuaian.xml:314: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                    android:textSize="10sp" />
+                    ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_stok_keluar.xml:115: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_stok_keluar.xml:262: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_stok_keluar.xml:311: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_stok_keluar.xml:368: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                            android:textSize="10sp"
+                            ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_stok_keluar.xml:399: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                            android:textSize="10sp"
+                            ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_stok_keluar.xml:491: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                    android:textSize="10sp" />
+                    ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang.xml:72: Warning: Avoid using sizes smaller than 11sp: 8sp [SmallSp]
+                android:textSize="8sp" />
+                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang.xml:133: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                        android:textSize="9sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang.xml:169: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                        android:textSize="9sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang.xml:411: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang.xml:421: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                                android:textSize="10sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang.xml:451: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang.xml:522: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang.xml:532: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                                android:textSize="10sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang.xml:562: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang.xml:633: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang.xml:643: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                                android:textSize="10sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang.xml:673: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang.xml:744: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang.xml:754: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                                android:textSize="10sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang.xml:784: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang.xml:855: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang.xml:865: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                                android:textSize="10sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang.xml:895: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:72: Warning: Avoid using sizes smaller than 11sp: 8sp [SmallSp]
+                android:textSize="8sp" />
+                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:132: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                        android:textSize="9sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:169: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                        android:textSize="9sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:452: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:475: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:492: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:518: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:527: Warning: Avoid using sizes smaller than 11sp: 8sp [SmallSp]
+                            android:textSize="8sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:622: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:645: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:662: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:688: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:697: Warning: Avoid using sizes smaller than 11sp: 8sp [SmallSp]
+                            android:textSize="8sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:792: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:815: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:832: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:858: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:867: Warning: Avoid using sizes smaller than 11sp: 8sp [SmallSp]
+                            android:textSize="8sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:962: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:985: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:1002: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:1028: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:1037: Warning: Avoid using sizes smaller than 11sp: 8sp [SmallSp]
+                            android:textSize="8sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:1132: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:1155: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:1172: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:1198: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:1207: Warning: Avoid using sizes smaller than 11sp: 8sp [SmallSp]
+                            android:textSize="8sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:1302: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:1325: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:1342: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:1368: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:1377: Warning: Avoid using sizes smaller than 11sp: 8sp [SmallSp]
+                            android:textSize="8sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:1472: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:1495: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:1512: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:1538: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:1547: Warning: Avoid using sizes smaller than 11sp: 8sp [SmallSp]
+                            android:textSize="8sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_staff.xml:72: Warning: Avoid using sizes smaller than 11sp: 8sp [SmallSp]
+                android:textSize="8sp" />
+                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_staff.xml:133: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                        android:textSize="9sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_staff.xml:169: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                        android:textSize="9sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_staff.xml:411: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_staff.xml:421: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                                android:textSize="10sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_staff.xml:451: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_staff.xml:522: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_staff.xml:532: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                                android:textSize="10sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_staff.xml:562: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_staff.xml:633: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_staff.xml:643: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                                android:textSize="10sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_staff.xml:673: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_staff.xml:744: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_staff.xml:754: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                                android:textSize="10sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_staff.xml:784: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_staff.xml:855: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_staff.xml:865: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                                android:textSize="10sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_staff.xml:895: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:61: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                android:textSize="9sp" />
+                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:83: Warning: Avoid using sizes smaller than 11sp: 8sp [SmallSp]
+                android:textSize="8sp" />
+                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:150: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                    android:textSize="10sp" />
+                    ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:198: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:204: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                            android:textSize="10sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:296: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                                android:textSize="10sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:323: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                                android:textSize="10sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:350: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                                android:textSize="10sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:689: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:720: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:751: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:782: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:1392: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                android:textSize="9sp" />
+                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:61: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                android:textSize="9sp" />
+                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:83: Warning: Avoid using sizes smaller than 11sp: 8sp [SmallSp]
+                android:textSize="8sp" />
+                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:150: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                    android:textSize="10sp" />
+                    ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:198: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:204: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                            android:textSize="10sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:296: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                                android:textSize="10sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:323: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                                android:textSize="10sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:350: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                                android:textSize="10sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:689: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:720: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:751: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:782: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                        android:textSize="10sp" />
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:1392: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                android:textSize="9sp" />
+                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_detail_barang.xml:107: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                            android:textSize="10sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_laporan.xml:65: Warning: Avoid using sizes smaller than 11sp: 8sp [SmallSp]
+                android:textSize="8sp" />
+                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_notifikasi.xml:254: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_notifikasi.xml:265: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                                android:textSize="10sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_notifikasi.xml:380: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_notifikasi.xml:391: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                                android:textSize="10sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_notifikasi.xml:506: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_notifikasi.xml:517: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                                android:textSize="10sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_notifikasi.xml:626: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_notifikasi.xml:637: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                                android:textSize="10sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_pengaturan.xml:61: Warning: Avoid using sizes smaller than 11sp: 8sp [SmallSp]
+                android:textSize="8sp" />
+                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_pengaturan.xml:642: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                    android:textSize="10sp" />
+                    ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_pengguna.xml:222: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                            android:textSize="10sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_perlu_ditangani.xml:63: Warning: Avoid using sizes smaller than 11sp: 8sp [SmallSp]
+                android:textSize="8sp" />
+                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_perlu_ditangani.xml:134: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                            android:textSize="10sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_perlu_ditangani.xml:240: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                                android:textSize="10sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_perlu_ditangani.xml:276: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_perlu_ditangani.xml:298: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                                android:textSize="9sp" />
+                                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_perlu_ditangani.xml:314: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_perlu_ditangani.xml:338: Warning: Avoid using sizes smaller than 11sp: 9sp [SmallSp]
+                            android:textSize="9sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_profil.xml:505: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                    android:textSize="10sp" />
+                    ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_riwayat.xml:65: Warning: Avoid using sizes smaller than 11sp: 8sp [SmallSp]
+                android:textSize="8sp" />
+                ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_riwayat.xml:227: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                    android:textSize="10sp" />
+                    ~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "SmallSp":
+   Avoid using sizes smaller than 11sp.
+
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang.xml:189: Warning: Missing autofillHints attribute [Autofill]
+                <EditText
+                 ~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_batch.xml:189: Warning: Missing autofillHints attribute [Autofill]
+                <EditText
+                 ~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_barang_staff.xml:189: Warning: Missing autofillHints attribute [Autofill]
+                <EditText
+                 ~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_pengaturan.xml:182: Warning: Missing autofillHints attribute [Autofill]
+                        <EditText
+                         ~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_pengaturan.xml:336: Warning: Missing autofillHints attribute [Autofill]
+                        <EditText
+                         ~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_pengaturan.xml:388: Warning: Missing autofillHints attribute [Autofill]
+                        <EditText
+                         ~~~~~~~~
+
+   Explanation for issues of type "Autofill":
+   Specify an autofillHints attribute when targeting SDK version 26 or higher
+   or explicitly specify that the view is not important for autofill. Your app
+   can help an autofill service classify the data correctly by providing the
+   meaning of each view that could be autofillable, such as views representing
+   usernames, passwords, credit card fields, email addresses, etc.
+
+   The hints can have any value, but it is recommended to use predefined
+   values like 'username' for a username or 'creditCardNumber' for a credit
+   card number. For a list of all predefined autofill hint constants, see the
+   AUTOFILL_HINT_ constants in the View reference at
+   https://developer.android.com/reference/android/view/View.html.
+
+   You can mark a view unimportant for autofill by specifying an
+   importantForAutofill attribute on that view or a parent view. See
+   https://developer.android.com/reference/android/view/View.html#setImportant
+   ForAutofill(int).
+
+   https://developer.android.com/guide/topics/text/autofill.html
+
+/home/irsal/StockFlow/app/src/main/java/com/example/stockflow/MainActivity.kt:61: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            text = "Pilih halaman (mode QA)"
+                    ~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "SetTextI18n":
+   When calling TextView#setText
+   * Never call Number#toString() to format numbers; it will not handle
+   fraction separators and locale-specific digits properly. Consider using
+   String#format with proper format specifications (%d or %f) instead.
+   * Do not pass a string literal (e.g. "Hello") to display text. Hardcoded
+   text can not be properly translated to other languages. Consider using
+   Android resource strings instead.
+   * Do not build messages by concatenating text chunks. Such messages can not
+   be properly translated.
+
+   https://developer.android.com/guide/topics/resources/localization.html
+
+/home/irsal/StockFlow/app/src/main/res/menu/bottom_nav.xml:10: Warning: Hardcoded string "Beranda", should use @string resource [HardcodedText]
+        android:title="Beranda" />
+        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/menu/bottom_nav.xml:14: Warning: Hardcoded string "Barang", should use @string resource [HardcodedText]
+        android:title="Barang" />
+        ~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/menu/bottom_nav.xml:18: Warning: Hardcoded string "Laporan", should use @string resource [HardcodedText]
+        android:title="Laporan" />
+        ~~~~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/menu/bottom_nav.xml:22: Warning: Hardcoded string "Profil", should use @string resource [HardcodedText]
+        android:title="Profil" />
+        ~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "HardcodedText":
+   Hardcoding text attributes directly in layout files is bad for several
+   reasons:
+
+   * When creating configuration variations (for example for landscape or
+   portrait) you have to repeat the actual text (and keep it up to date when
+   making changes)
+
+   * The application cannot be translated to other languages by just adding
+   new translations for existing string resources.
+
+   There are quickfixes to automatically extract this hardcoded string into a
+   resource lookup.
+
+/home/irsal/StockFlow/app/src/main/res/layout/form_akun.xml:188: Warning: When you define paddingStart you should probably also define paddingEnd for right-to-left symmetry [RtlSymmetry]
+                    android:paddingStart="11dp">
+                    ~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_barang.xml:161: Warning: When you define paddingStart you should probably also define paddingEnd for right-to-left symmetry [RtlSymmetry]
+                    android:paddingStart="11dp">
+                    ~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/form_batch.xml:281: Warning: When you define paddingStart you should probably also define paddingEnd for right-to-left symmetry [RtlSymmetry]
+                    android:paddingStart="11dp">
+                    ~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:309: Warning: When you define paddingStart you should probably also define paddingEnd for right-to-left symmetry [RtlSymmetry]
+                            android:paddingStart="12dp">
+                            ~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_owner.xml:336: Warning: When you define paddingStart you should probably also define paddingEnd for right-to-left symmetry [RtlSymmetry]
+                            android:paddingStart="12dp">
+                            ~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:309: Warning: When you define paddingStart you should probably also define paddingEnd for right-to-left symmetry [RtlSymmetry]
+                            android:paddingStart="12dp">
+                            ~~~~~~~~~~~~~~~~~~~~
+/home/irsal/StockFlow/app/src/main/res/layout/fragment_beranda_staff.xml:336: Warning: When you define paddingStart you should probably also define paddingEnd for right-to-left symmetry [RtlSymmetry]
+                            android:paddingStart="12dp">
+                            ~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "RtlSymmetry":
+   If you specify padding or margin on the left side of a layout, you should
+   probably also specify padding on the right side (and vice versa) for
+   right-to-left layout symmetry.
+
+0 errors, 672 warnings

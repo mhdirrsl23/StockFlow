@@ -1,0 +1,974 @@
+[
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_avatar_lg_staff.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_avatar_lg_staff.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_login.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_login.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_fragment_detail_barang.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/fragment_detail_barang.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_archive.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_archive.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_btn_dark.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_btn_dark.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_cookie.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_cookie.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_product_default.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_product_default.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_layers.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_layers.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_trash.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_trash.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_ic_muted.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_ic_muted.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_check_circle.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_check_circle.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_attach_add.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_attach_add.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_actionbar.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_actionbar.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_lock.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_lock.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic12_arrow_up_right.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic12_arrow_up_right.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_notice_danger.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_notice_danger.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic12_alert_circle.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic12_alert_circle.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_ic_violet.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_ic_violet.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_badge.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_badge.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic12_alert_triangle.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic12_alert_triangle.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_calendar_clock.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_calendar_clock.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_dot_brand.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/dot_brand.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_view_tabbar_owner_barang.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/view_tabbar_owner_barang.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic12_clock.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic12_clock.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_product_med.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_product_med.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_send.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_send.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_avatar.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_avatar.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_ic_warn.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_ic_warn.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_auth_pill.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_auth_pill.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_fragment_profil.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/fragment_profil.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_btn_danger_soft.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_btn_danger_soft.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic12_arrow_down_left.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic12_arrow_down_left.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_view_tabbar_staff_profil.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/view_tabbar_staff_profil.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_arrow_down.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_arrow_down.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_dot_muted.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/dot_muted.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic12_box.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic12_box.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/font_plus_jakarta_sans_bold.ttf.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/font/plus_jakarta_sans_bold.ttf"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_card.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_card.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_brand_mark.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_brand_mark.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_form_akun.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/form_akun.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_iconbtn_boxed.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_iconbtn_boxed.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic12_chevron_right.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic12_chevron_right.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_ic_safe.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_ic_safe.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_auth_demo.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_auth_demo.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_btn_danger.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_btn_danger.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic12_info.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic12_info.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_plus.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_plus.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_view_tabbar_staff_riwayat.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/view_tabbar_staff_riwayat.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_activity_main.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_date_chip.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_date_chip.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_droplet.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_droplet.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_store.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_store.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_dot_danger.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/dot_danger.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_clipboard_check.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_clipboard_check.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_pill.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_pill.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/font_plus_jakarta_sans_semibold.ttf.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/font/plus_jakarta_sans_semibold.ttf"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_activity.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_activity.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_btn_primary.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_btn_primary.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_boxes.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_boxes.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_status_preview.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_status_preview.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_user.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_user.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic12_calendar_clock.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic12_calendar_clock.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_toast.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_toast.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_fragment_pengaturan.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/fragment_pengaturan.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_history.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_history.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_alert_info.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_alert_info.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_chip.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_chip.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_card_tint.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_card_tint.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_hero_orbit.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_hero_orbit.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_hero_staff.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_hero_staff.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_product_drink.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_product_drink.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_chip_active.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_chip_active.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_auth.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_auth.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/xml_backup_rules.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_eye_off.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_eye_off.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic12_package_x.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic12_package_x.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_leaf.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_leaf.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic12_x.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic12_x.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_external.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_external.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_fragment_barang.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/fragment_barang.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_form_batch.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/form_batch.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic12_archive.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic12_archive.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_upload.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_upload.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_filter.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_filter.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_product_home.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_product_home.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_calendar.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_calendar.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_arrow_up_right.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_arrow_up_right.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_sparkles.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_sparkles.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_tag.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_tag.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_arrow_right.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_arrow_right.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_download.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_download.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_fragment_detail_batch.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/fragment_detail_batch.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_fragment_tidak_ditemukan.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/fragment_tidak_ditemukan.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_chevron_right.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_chevron_right.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_pill_info.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_pill_info.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_shield_check.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_shield_check.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_dot_warn.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/dot_warn.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_list.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_list.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/xml_data_extraction_rules.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_target.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_target.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_search.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_search.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_card_12.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_card_12.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic12_download.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic12_download.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_ic_danger.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_ic_danger.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic12_calendar.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic12_calendar.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_launcher_background.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/font_plus_jakarta_sans.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/font/plus_jakarta_sans.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_package_x.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_package_x.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_edit.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_edit.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_progress_safe.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/progress_safe.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_fragment_barang_staff.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/fragment_barang_staff.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_auth_input.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_auth_input.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_users.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_users.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_alert_danger.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_alert_danger.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic12_clipboard_check.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic12_clipboard_check.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_sheet_grab.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_sheet_grab.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_hero_orbit_staff.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_hero_orbit_staff.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_user_check.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_user_check.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic12_shield_check.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic12_shield_check.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_ic_mint.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_ic_mint.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/font_plus_jakarta_sans_medium.ttf.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/font/plus_jakarta_sans_medium.ttf"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_empty.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_empty.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_notice_warn.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_notice_warn.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_radio_card_on.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_radio_card_on.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_x.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_x.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_fragment_riwayat.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/fragment_riwayat.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_fragment_data_skema.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/fragment_data_skema.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_view_bottom_nav.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/view_bottom_nav.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic12_check_circle.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic12_check_circle.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic12_lock.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic12_lock.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_progress_warn.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/progress_warn.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/font_plus_jakarta_sans_regular.ttf.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/font/plus_jakarta_sans_regular.ttf"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_warehouse.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_warehouse.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/font_plus_jakarta_sans_extrabold.ttf.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/font/plus_jakarta_sans_extrabold.ttf"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_ic_info.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_ic_info.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_info.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_info.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_dot_safe.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/dot_safe.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_pill_warn.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_pill_warn.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_arrow_left.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_arrow_left.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic12_check.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic12_check.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_radio_card.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_radio_card.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_more_v.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_more_v.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_pill_outline.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_pill_outline.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic12_plus.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic12_plus.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_product_other.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_product_other.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_schema_count.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_schema_count.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_minus.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_minus.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_avatar_lg.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_avatar_lg.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_card_14.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_card_14.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_arrow_down_left.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_arrow_down_left.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_avatar_staff.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_avatar_staff.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_auth_brand_mark.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_auth_brand_mark.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_hero_owner.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_hero_owner.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_auth_note.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_auth_note.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_auth_avatar.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_auth_avatar.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_package.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_package.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_pill_brand.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_pill_brand.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic12_swap_horiz.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic12_swap_horiz.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_settings.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_settings.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_database.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_database.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_fragment_barang_batch.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/fragment_barang_batch.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_user_plus.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_user_plus.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_ripple_row.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_ripple_row.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_segmented.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_segmented.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_fragment_perlu_ditangani.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/fragment_perlu_ditangani.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_pill_violet.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_pill_violet.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_btn_soft.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_btn_soft.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_alert_circle.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_alert_circle.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_alert_safe.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_alert_safe.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_form_alloc.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_form_alloc.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_tabbar.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_tabbar.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_swap_horiz.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_swap_horiz.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_fragment_beranda_owner.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/fragment_beranda_owner.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_file.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_file.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_box.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_box.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_bell.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_bell.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_fragment_pengguna.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/fragment_pengguna.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_key.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_key.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_card_16.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_card_16.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_check.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_check.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic12_database.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic12_database.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_view_tabbar_owner_beranda.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/view_tabbar_owner_beranda.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/menu_bottom_nav.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/menu/bottom_nav.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_clock.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_clock.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_progress_muted.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/progress_muted.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_alert_warn.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_alert_warn.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_view_tabbar_staff_beranda.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/view_tabbar_staff_beranda.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_attach.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_attach.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_sheet.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_sheet.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_segment_active.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_segment_active.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_view_tabbar_staff_barang.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/view_tabbar_staff_barang.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_chart.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_chart.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_home.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_home.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_fragment_laporan.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/fragment_laporan.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_btn_ghost.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_btn_ghost.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_activity_login.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/activity_login.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_cup.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_cup.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_batch_code.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_batch_code.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_product_food.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_product_food.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_fragment_beranda_staff.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/fragment_beranda_staff.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_input.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_input.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_pill_muted.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_pill_muted.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_form_stok_keluar.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/form_stok_keluar.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_grid.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_grid.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_form_penyesuaian.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/form_penyesuaian.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_card_unread.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_card_unread.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_logout.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_logout.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_search.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_search.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_pill_danger.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_pill_danger.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic12_save.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic12_save.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_form_barang.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/form_barang.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_card_danger_tint.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_card_danger_tint.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_view_tabbar_owner_laporan.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/view_tabbar_owner_laporan.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_schema_ic.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_schema_ic.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_view_tabbar_owner_profil.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/view_tabbar_owner_profil.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_pill_safe.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_pill_safe.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_save.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_save.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_unread_accent.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_unread_accent.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_auth_card.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_auth_card.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_input_error.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_input_error.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_rotate.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_rotate.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_alert_triangle.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_alert_triangle.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_fragment_akses_ditolak.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/fragment_akses_ditolak.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_tab_active.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_tab_active.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_refresh.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_refresh.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_bg_topbar_sub.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/bg_topbar_sub.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/layout_fragment_notifikasi.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/layout/fragment_notifikasi.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_eye.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_eye.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_progress_danger.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/progress_danger.xml"
+    },
+    {
+        "merged": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-release-40:/drawable_ic_image.xml.flat",
+        "source": "/home/irsal/.gradle/daemon/9.6.0/com.example.stockflow.app-main-41:/drawable/ic_image.xml"
+    }
+]

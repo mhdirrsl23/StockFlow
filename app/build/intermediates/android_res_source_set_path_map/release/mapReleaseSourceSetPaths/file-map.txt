@@ -1,0 +1,9 @@
+com.example.stockflow.app-pngs-0 /home/irsal/StockFlow/app/build/generated/res/pngs/release
+com.example.stockflow.app-updated_navigation_xml-1 /home/irsal/StockFlow/app/build/generated/updated_navigation_xml/release
+com.example.stockflow.app-packageReleaseResources-2 /home/irsal/StockFlow/app/build/intermediates/incremental/release/packageReleaseResources/merged.dir
+com.example.stockflow.app-packageReleaseResources-3 /home/irsal/StockFlow/app/build/intermediates/incremental/release/packageReleaseResources/stripped.dir
+com.example.stockflow.app-merged-not-compiled-resources-4 /home/irsal/StockFlow/app/build/intermediates/merged-not-compiled-resources/release
+com.example.stockflow.app-release-5 /home/irsal/StockFlow/app/build/intermediates/merged_res/release/mergeReleaseResources
+com.example.stockflow.app-main-6 /home/irsal/StockFlow/app/src/main/res
+com.example.stockflow.app-release-7 /home/irsal/StockFlow/app/src/release/res
+gradleHome-0 /home/irsal/.gradle
