@@ -177,9 +177,9 @@ class BatchAdapter(
     override fun onBindViewHolder(holder: VH, position: Int) {
         val item = items[position]
         val ctx = holder.itemView.context
-        val expDate = item.tanggal_kedaluwarsa.take(10)
+        val expDate = (item.tanggal_kedaluwarsa ?: "").take(10)
 
-        holder.tvNomor.text = if (item.barang?.nama != null) "${item.nomor_batch} · ${item.barang.nama}" else item.nomor_batch
+        holder.tvNomor.text = if (item.nama_barang != null) "${item.nomor_batch} · ${item.nama_barang}" else item.nomor_batch
         holder.tvInfo.text = "Sisa ${item.jumlah_sisa} / ${item.jumlah_awal} · exp $expDate"
 
         when (item.status) {
@@ -270,44 +270,21 @@ class BatchCardAdapter(
     override fun onBindViewHolder(holder: VH, position: Int) {
         val item = items[position]
         val ctx = holder.itemView.context
-        val expDate = item.tanggal_kedaluwarsa.take(10)
+        val expDate = (item.tanggal_kedaluwarsa ?: "").take(10)
 
-        holder.tvNamaBarang.text = item.barang?.nama ?: "Barang #${item.barang_id}"
+        holder.tvNamaBarang.text = item.nama_barang ?: "Barang #${item.barang_id}"
         holder.tvNomorBatch.text = item.nomor_batch
         holder.tvSisaAwal.text = "${item.jumlah_sisa} / ${item.jumlah_awal}"
-        holder.tvSatuan.text = item.barang?.satuan ?: "pcs"
+        holder.tvSatuan.text = "pcs"
         holder.tvKedaluwarsa.text = expDate
 
         val progress = if (item.jumlah_awal > 0) ((item.jumlah_sisa * 100) / item.jumlah_awal).coerceIn(0, 100) else 0
         holder.pbBatch.progress = progress
 
-        when (item.barang?.kategori) {
-            "Makanan" -> {
-                holder.bgIcon.setBackgroundResource(R.drawable.bg_product_food)
-                holder.ivIcon.setImageResource(R.drawable.ic_cookie)
-                holder.ivIcon.setColorFilter(0xFF9A6515.toInt())
-            }
-            "Minuman" -> {
-                holder.bgIcon.setBackgroundResource(R.drawable.bg_product_drink)
-                holder.ivIcon.setImageResource(R.drawable.ic_cup)
-                holder.ivIcon.setColorFilter(0xFF2C6B93.toInt())
-            }
-            "Obat" -> {
-                holder.bgIcon.setBackgroundResource(R.drawable.bg_product_med)
-                holder.ivIcon.setImageResource(R.drawable.ic_pill)
-                holder.ivIcon.setColorFilter(0xFF9D4D59.toInt())
-            }
-            "Kebutuhan Rumah" -> {
-                holder.bgIcon.setBackgroundResource(R.drawable.bg_product_home)
-                holder.ivIcon.setImageResource(R.drawable.ic_droplet)
-                holder.ivIcon.setColorFilter(0xFF397A55.toInt())
-            }
-            else -> {
-                holder.bgIcon.setBackgroundResource(R.drawable.bg_product_other)
-                holder.ivIcon.setImageResource(R.drawable.ic_package)
-                holder.ivIcon.setColorFilter(0xFF66756C.toInt())
-            }
-        }
+        // Kontrak baru: item batch tidak membawa data barang (kategori) — gunakan ikon generik.
+        holder.bgIcon.setBackgroundResource(R.drawable.bg_product_other)
+        holder.ivIcon.setImageResource(R.drawable.ic_package)
+        holder.ivIcon.setColorFilter(0xFF66756C.toInt())
 
         val days = runCatching {
             val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
@@ -385,11 +362,11 @@ class NotifikasiAdapter(items: List<NotifikasiItem>, onClick: (NotifikasiItem) -
         "Mendekati Kedaluwarsa" -> R.color.sf_warn
         else -> R.color.sf_info
     }
-    RowModel(it.jenis, it.pesan, it.tanggal, color)
+    RowModel(it.jenis, it.pesan ?: "-", it.tanggal ?: "-", color)
 }, onClick)
 
 class UserAdapter(items: List<UserItem>, onClick: (UserItem) -> Unit) : SimpleCardAdapter<UserItem>(items, {
-    val aktif = it.aktif == 1
+    val aktif = it.aktif
     RowModel(
         it.nama,
         "@${it.username} · Peran: ${it.peran}",

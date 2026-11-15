@@ -62,12 +62,12 @@ open class BaseBerandaFragment(layoutId: Int, private val fallbackNama: String) 
 
         runApi { api ->
             val d = api.getDashboard().body()?.data ?: return@runApi
-            view.opt<TextView>("tv_total_barang")?.text = d.total_barang.toString()
-            view.opt<TextView>("tv_total_stok")?.text = d.total_stok.toString()
-            view.opt<TextView>("tv_stok_menipis")?.text = d.stok_menipis.toString()
-            view.opt<TextView>("tv_mendekati_kedaluwarsa")?.text = d.mendekati_kedaluwarsa.toString()
-            view.opt<TextView>("tv_kedaluwarsa")?.text = d.kedaluwarsa.toString()
-            view.opt<TextView>("tv_perlu_ditangani")?.text = d.perlu_ditangani.toString()
+            view.opt<TextView>("tv_total_barang")?.text = d.ringkasan.total_barang_aktif.toString()
+            view.opt<TextView>("tv_total_stok")?.text = d.ringkasan.total_batch_aktif.toString()
+            view.opt<TextView>("tv_stok_menipis")?.text = d.ringkasan.stok_menipis.toString()
+            view.opt<TextView>("tv_mendekati_kedaluwarsa")?.text = d.ringkasan.batch_mendekati_kedaluwarsa.toString()
+            view.opt<TextView>("tv_kedaluwarsa")?.text = d.ringkasan.batch_kedaluwarsa.toString()
+            view.opt<TextView>("tv_perlu_ditangani")?.text = d.ringkasan.batch_kedaluwarsa.toString()
         }
     }
 }
@@ -117,8 +117,8 @@ open class BaseBarangFragment(layoutId: Int) : Fragment(layoutId) {
 
     private fun loadBarang() = runApi { api ->
         val res = api.getBarang(search, kategori)
-        if (res.isSuccessful && res.body()?.status == true) {
-            adapter.updateData(res.body()?.data ?: emptyList())
+        if (res.isSuccessful && res.body()?.success == true) {
+            adapter.updateData(res.body()?.data?.items ?: emptyList())
         }
     }
 }
@@ -151,8 +151,8 @@ class LaporanFragment : Fragment(R.layout.fragment_laporan) {
 
         runApi { api ->
             val res = api.getMutasiStok()
-            if (res.isSuccessful && res.body()?.status == true) {
-                allMutasi = res.body()?.data ?: emptyList()
+            if (res.isSuccessful && res.body()?.success == true) {
+                allMutasi = res.body()?.data?.items ?: emptyList()
                 adapter.updateData(allMutasi)
             }
         }
@@ -167,7 +167,7 @@ class RiwayatFragment : Fragment(R.layout.fragment_riwayat) {
         view.bindList("rv_riwayat", adapter)
         runApi { api ->
             val res = api.getRiwayatAktivitas()
-            if (res.isSuccessful && res.body()?.status == true) adapter.updateData(res.body()?.data ?: emptyList())
+            if (res.isSuccessful && res.body()?.success == true) adapter.updateData(res.body()?.data?.items ?: emptyList())
         }
     }
 }
@@ -225,7 +225,7 @@ class DetailBarangFragment : Fragment(R.layout.fragment_detail_barang) {
                 .setPositiveButton("Hapus") { _, _ ->
                     runApi { api ->
                         val res = api.deleteBarang(barangId)
-                        if (res.isSuccessful && res.body()?.status == true) {
+                        if (res.isSuccessful && res.body()?.success == true) {
                             Toast.makeText(requireContext(), "Barang dihapus", Toast.LENGTH_SHORT).show()
                             findNavController().navigateUp()
                         } else {
@@ -248,8 +248,8 @@ class DetailBarangFragment : Fragment(R.layout.fragment_detail_barang) {
                     view.opt<TextView>("tv_stok_minimum")?.text = "${b.stok_minimum} ${b.satuan}"
                 }
                 val batchRes = api.getBatchStok(barangId = barangId)
-                if (batchRes.isSuccessful && batchRes.body()?.status == true) {
-                    batchAdapter.updateData((batchRes.body()?.data ?: emptyList()).sortedBy { it.tanggal_kedaluwarsa })
+                if (batchRes.isSuccessful && batchRes.body()?.success == true) {
+                    batchAdapter.updateData((batchRes.body()?.data?.items ?: emptyList()).sortedBy { it.tanggal_kedaluwarsa.orEmpty() })
                 }
             }
         }
@@ -267,7 +267,7 @@ class DetailBatchFragment : Fragment(R.layout.fragment_detail_batch) {
 
         view.opt<View>("btn_penyesuaian")?.setOnClickListener {
             val b = currentBatch ?: return@setOnClickListener
-            go("formPenyesuaianFragment", bundleOf("batchId" to b.id, "jumlahSisa" to b.jumlah_sisa))
+            go("formPenyesuaianFragment", bundleOf("batchId" to b.id, "jumlahSisa" to b.jumlah_sisa, "barangId" to b.barang_id))
         }
 
         view.opt<View>("btn_tangani_batch")?.setOnClickListener {
@@ -277,8 +277,10 @@ class DetailBatchFragment : Fragment(R.layout.fragment_detail_batch) {
                 .setTitle("Tindakan Kedaluwarsa")
                 .setItems(opsi) { _, i ->
                     runApi { api ->
-                        val res = api.tanganiBatch(batchId, PenangananRequest(opsi[i], "Ditangani melalui aplikasi (${opsi[i]})"))
-                        if (res.isSuccessful && res.body()?.status == true) {
+                        val res = api.tanganiKedaluwarsa(
+                            PenangananRequest(batchId, opsi[i], null, "Ditangani melalui aplikasi (${opsi[i]})"),
+                        )
+                        if (res.isSuccessful && res.body()?.success == true) {
                             Toast.makeText(requireContext(), "Batch berhasil ditangani", Toast.LENGTH_SHORT).show()
                             muatDetail(batchId, view)
                         } else {
@@ -296,7 +298,7 @@ class DetailBatchFragment : Fragment(R.layout.fragment_detail_batch) {
         val b = api.getDetailBatch(batchId).body()?.data ?: return@runApi
         currentBatch = b
         view.opt<TextView>("tv_nomor_batch")?.text = b.nomor_batch
-        view.opt<TextView>("tv_nama_barang")?.text = b.barang?.nama ?: "Barang #${b.barang_id}"
+        view.opt<TextView>("tv_nama_barang")?.text = b.nama_barang ?: "Barang #${b.barang_id}"
         view.opt<TextView>("tv_jumlah_sisa")?.text = "${b.jumlah_sisa} / ${b.jumlah_awal}"
         view.opt<TextView>("tv_tanggal_kedaluwarsa")?.text = b.tanggal_kedaluwarsa
         view.opt<TextView>("tv_status_batch")?.text = b.status
@@ -312,7 +314,7 @@ class PerluDitanganiFragment : Fragment(R.layout.fragment_perlu_ditangani) {
         view.bindList("rv_perlu_ditangani", adapter)
         runApi { api ->
             val res = api.getBatchStok(status = "Kedaluwarsa")
-            if (res.isSuccessful && res.body()?.status == true) adapter.updateData(res.body()?.data ?: emptyList())
+            if (res.isSuccessful && res.body()?.success == true) adapter.updateData(res.body()?.data?.items ?: emptyList())
         }
     }
 }
@@ -331,7 +333,7 @@ class NotifikasiFragment : Fragment(R.layout.fragment_notifikasi) {
         view.bindList("rv_notifikasi", adapter)
         runApi { api ->
             val res = api.getNotifikasi()
-            if (res.isSuccessful && res.body()?.status == true) adapter.updateData(res.body()?.data ?: emptyList())
+            if (res.isSuccessful && res.body()?.success == true) adapter.updateData(res.body()?.data?.items ?: emptyList())
         }
     }
 }
@@ -346,16 +348,18 @@ class PenggunaFragment : Fragment(R.layout.fragment_pengguna) {
         view.opt<View>("btn_tambah_akun")?.setOnClickListener { go("formAkunFragment") }
 
         adapter = UserAdapter(emptyList()) { user ->
-            val aktifBaru = if (user.aktif == 1) 0 else 1
+            val aktifBaru = !user.aktif
             AlertDialog.Builder(requireContext())
                 .setTitle("Ubah Status Akun")
-                .setMessage("Yakin ingin me-${if (aktifBaru == 1) "aktifkan" else "nonaktifkan"} akun ${user.nama}?")
+                .setMessage("Yakin ingin me-${if (aktifBaru) "aktifkan" else "nonaktifkan"} akun ${user.nama}?")
                 .setPositiveButton("Ya") { _, _ ->
                     runApi { api ->
-                        val res = api.updateUser(user.id, UserRequest(user.nama, user.username, null, user.peran, aktifBaru))
-                        if (res.isSuccessful && res.body()?.status == true) {
+                        val res = api.ubahAkunAktif(user.id, AktifRequest(aktifBaru))
+                        if (res.isSuccessful && res.body()?.success == true) {
                             Toast.makeText(requireContext(), "Status akun diperbarui", Toast.LENGTH_SHORT).show()
                             muatUsers()
+                        } else {
+                            Toast.makeText(requireContext(), res.body()?.message ?: "Gagal mengubah status", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -368,7 +372,7 @@ class PenggunaFragment : Fragment(R.layout.fragment_pengguna) {
 
     private fun muatUsers() = runApi { api ->
         val res = api.getUsers()
-        if (res.isSuccessful && res.body()?.status == true) adapter.updateData(res.body()?.data ?: emptyList())
+        if (res.isSuccessful && res.body()?.success == true) adapter.updateData(res.body()?.data?.items ?: emptyList())
     }
 }
 
@@ -386,13 +390,14 @@ class PengaturanFragment : Fragment(R.layout.fragment_pengaturan) {
 
         view.opt<View>("btn_simpan_pengaturan")?.setOnClickListener {
             val nilai = etAmbang?.text?.toString()?.trim().orEmpty()
-            if (nilai.isEmpty()) {
-                Toast.makeText(requireContext(), "Ambang hari wajib diisi", Toast.LENGTH_SHORT).show()
+            val angka = nilai.toIntOrNull()
+            if (angka == null) {
+                Toast.makeText(requireContext(), "Ambang hari wajib berupa angka", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             runApi { api ->
-                val res = api.updatePengaturan(mapOf("ambang_peringatan_hari" to nilai))
-                if (res.isSuccessful && res.body()?.status == true) {
+                val res = api.updatePengaturan(mapOf("ambang_peringatan_hari" to angka))
+                if (res.isSuccessful && res.body()?.success == true) {
                     Toast.makeText(requireContext(), "Pengaturan disimpan", Toast.LENGTH_SHORT).show()
                     findNavController().navigateUp()
                 }

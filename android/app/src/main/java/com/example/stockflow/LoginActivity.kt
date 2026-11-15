@@ -56,9 +56,10 @@ class LoginActivity : AppCompatActivity() {
             try {
                 val res = RetrofitClient.getInstance(this@LoginActivity).login(LoginRequest(username, password))
                 val body = res.body()
-                if (res.isSuccessful && body?.status == true && body.token != null && body.user != null) {
-                    val u = body.user
-                    session.saveSession(body.token, u.id, u.nama, u.username, u.peran)
+                val sesi = body?.data
+                if (res.isSuccessful && body?.success == true && sesi?.token != null && sesi.user != null) {
+                    val u = sesi.user
+                    session.saveSession(sesi.token, u.id, u.nama, u.username, u.peran)
                     openMain(u.peran)
                 } else {
                     Toast.makeText(this@LoginActivity, body?.message ?: "Username atau kata sandi salah", Toast.LENGTH_SHORT).show()
