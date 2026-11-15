@@ -14,7 +14,7 @@ class UserController extends Controller
     {
         $staf = User::where('peran', 'staf')->get();
 
-        return response()->json(['status' => 'success', 'data' => $staf], 200);
+        return response()->json(['status' => true, 'data' => $staf], 200);
     }
 
     // Tambah Akun Staf Baru (FR-04)
@@ -45,7 +45,7 @@ class UserController extends Controller
         ]);
 
         return response()->json([
-            'status'  => 'success',
+            'status' => true,
             'message' => 'Akun staf berhasil dibuat',
             'data'    => $staf
         ], 201);
@@ -80,7 +80,7 @@ class UserController extends Controller
         ]);
 
         return response()->json([
-            'status'  => 'success',
+            'status' => true,
             'message' => "Akun staf berhasil {$statusTeks}",
             'data'    => $staf
         ], 200);

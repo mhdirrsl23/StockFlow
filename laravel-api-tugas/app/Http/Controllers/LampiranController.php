@@ -29,7 +29,7 @@ class LampiranController extends Controller
         ]);
 
         return response()->json([
-            'status'  => 'success',
+            'status' => true,
             'message' => 'Foto bukti berhasil diunggah',
             'data'    => [
                 'id'       => $lampiran->id,

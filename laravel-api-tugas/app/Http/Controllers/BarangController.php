@@ -14,7 +14,7 @@ class BarangController extends Controller
         $barang = Barang::with(['batchStok'])->get();
 
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'data'   => $barang
         ], 200);
     }
@@ -36,7 +36,7 @@ class BarangController extends Controller
         $barang = Barang::create($validated);
 
         return response()->json([
-            'status'  => 'success',
+            'status' => true,
             'message' => 'Barang berhasil ditambahkan',
             'data'    => $barang
         ], 201);
@@ -55,7 +55,7 @@ class BarangController extends Controller
         }
 
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'data'   => $barang
         ], 200);
     }
@@ -80,7 +80,7 @@ class BarangController extends Controller
         $barang->delete();
 
         return response()->json([
-            'status'  => 'success',
+            'status' => true,
             'message' => 'Barang berhasil dihapus'
         ], 200);
     }

@@ -39,7 +39,7 @@ class DashboardController extends Controller
             ->count();
 
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'data' => [
                 'total_barang' => $totalBarang,
                 'stok_minim' => $stokMinim,

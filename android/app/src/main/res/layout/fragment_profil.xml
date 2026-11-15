@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Profil pemilik — draft.html profilePage() (Budi Santoso @pemilik). Tab aktif: Profil.
-  Angka: aktivitas saya = 4 (riwayat user_id 1), batch saya = 4 (MGN-2411A/B, PRC-2410A/B), akun = 2.
--->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,7 +8,6 @@
     android:orientation="vertical"
     tools:ignore="HardcodedText,ContentDescription,UseCompatTextViewDrawableXml">
 
-    <!-- Topbar tab utama (tanpa aksi) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,7 +55,6 @@
             android:paddingEnd="18dp"
             android:paddingBottom="26dp">
 
-            <!-- Profile hero -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -88,11 +82,13 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_profil_nama"
                         style="@style/SF.Text.Title"
                         android:text="Budi Santoso"
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/tv_profil_username"
                         style="@style/SF.Text.RowSub"
                         android:layout_marginTop="3dp"
                         android:text="\@pemilik · akun aktif" />
@@ -104,6 +100,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tv_profil_peran"
                             style="@style/SF.Pill.Brand"
                             android:text="Pemilik" />
 
@@ -116,7 +113,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Statistik -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -192,7 +188,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Kelola -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -217,8 +212,8 @@
                 android:background="@drawable/bg_card_16"
                 android:orientation="vertical">
 
-                <!-- Akun pengguna -->
                 <LinearLayout
+                    android:id="@+id/menu_pengguna"
                     style="@style/SF.Row"
                     android:clickable="true"
                     android:focusable="true"
@@ -264,8 +259,8 @@
 
                 <View style="@style/SF.Divider" />
 
-                <!-- Pengaturan -->
                 <LinearLayout
+                    android:id="@+id/menu_pengaturan"
                     style="@style/SF.Row"
                     android:clickable="true"
                     android:focusable="true"
@@ -311,7 +306,6 @@
 
                 <View style="@style/SF.Divider" />
 
-                <!-- Notifikasi -->
                 <LinearLayout
                     style="@style/SF.Row"
                     android:clickable="true"
@@ -363,8 +357,8 @@
 
                 <View style="@style/SF.Divider" />
 
-                <!-- Data & skema -->
                 <LinearLayout
+                    android:id="@+id/menu_data_skema"
                     style="@style/SF.Row"
                     android:clickable="true"
                     android:focusable="true"
@@ -409,7 +403,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Akun -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -435,6 +428,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/btn_logout"
                     style="@style/SF.Row"
                     android:clickable="true"
                     android:focusable="true"
@@ -479,7 +473,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Owner note -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -505,7 +498,6 @@
                     android:textSize="10sp" />
             </LinearLayout>
 
-            <!-- Footer brand -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

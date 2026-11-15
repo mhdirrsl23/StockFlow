@@ -13,7 +13,7 @@ class PengaturanController extends Controller
     {
         $pengaturan = Pengaturan::all()->pluck('nilai', 'kunci');
 
-        return response()->json(['status' => 'success', 'data' => $pengaturan], 200);
+        return response()->json(['status' => true, 'data' => $pengaturan], 200);
     }
 
     // Ubah Nilai Pengaturan (Khusus Pemilik)
@@ -39,7 +39,7 @@ class PengaturanController extends Controller
         ]);
 
         return response()->json([
-            'status'  => 'success',
+            'status' => true,
             'message' => 'Pengaturan berhasil diperbarui',
             'data'    => $pengaturan
         ], 200);

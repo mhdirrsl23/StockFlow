@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    // Login User (Pemilik / Staf)
     public function login(Request $request)
     {
         $request->validate([
@@ -19,26 +18,22 @@ class AuthController extends Controller
 
         $user = User::where('username', $request->username)->first();
 
-        // Cek keberadaan user dan password
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
-                'status'  => 'error',
+                'status'  => false,
                 'message' => 'Username atau password salah'
             ], 401);
         }
 
-        // Cek status keaktifan akun (FR-05)
         if (!$user->aktif) {
             return response()->json([
-                'status'  => 'error',
+                'status'  => false,
                 'message' => 'Akun Anda dinonaktifkan. Silakan hubungi pemilik.'
             ], 403);
         }
 
-        // Buat token Sanctum
         $token = $user->createToken('android_token')->plainTextToken;
 
-        // Catat audit log
         RiwayatAktivitas::create([
             'user_id'    => $user->id,
             'aksi'       => 'login',
@@ -49,7 +44,7 @@ class AuthController extends Controller
         ]);
 
         return response()->json([
-            'status'  => 'success',
+            'status'  => true,
             'message' => 'Login berhasil',
             'token'   => $token,
             'user'    => [
@@ -61,12 +56,10 @@ class AuthController extends Controller
         ], 200);
     }
 
-    // Logout & Revoke Token
     public function logout(Request $request)
     {
         $user = $request->user();
 
-        // Catat audit log sebelum revoke token
         RiwayatAktivitas::create([
             'user_id'    => $user->id,
             'aksi'       => 'logout',
@@ -76,20 +69,18 @@ class AuthController extends Controller
             'waktu'      => now(),
         ]);
 
-        // Hapus token aktif saat ini
         $request->user()->currentAccessToken()->delete();
 
         return response()->json([
-            'status'  => 'success',
+            'status'  => true,
             'message' => 'Logout berhasil'
         ], 200);
     }
 
-    // Profil User Aktif
     public function me(Request $request)
     {
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'user'   => $request->user()
         ], 200);
     }

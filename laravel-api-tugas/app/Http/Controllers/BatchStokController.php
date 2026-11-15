@@ -51,7 +51,7 @@ class BatchStokController extends Controller
             DB::commit();
 
             return response()->json([
-                'status'  => 'success',
+                'status' => true,
                 'message' => 'Batch stok berhasil ditambahkan',
                 'data'    => $batch
             ], 201);
@@ -70,7 +70,7 @@ class BatchStokController extends Controller
             ->orderBy('tanggal_kedaluwarsa', 'asc')
             ->get();
 
-        return response()->json(['status' => 'success', 'data' => $batch], 200);
+        return response()->json(['status' => true, 'data' => $batch], 200);
     }
 
     // Eksekusi Penanganan Barang Kedaluwarsa
@@ -122,7 +122,7 @@ class BatchStokController extends Controller
             DB::commit();
 
             return response()->json([
-                'status'  => 'success',
+                'status' => true,
                 'message' => 'Penanganan kedaluwarsa berhasil dicatat',
                 'data'    => $batch
             ], 200);

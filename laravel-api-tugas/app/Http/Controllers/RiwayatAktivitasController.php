@@ -21,6 +21,6 @@ class RiwayatAktivitasController extends Controller
 
         $riwayat = $query->limit(100)->get();
 
-        return response()->json(['status' => 'success', 'data' => $riwayat], 200);
+        return response()->json(['status' => true, 'data' => $riwayat], 200);
     }
 }

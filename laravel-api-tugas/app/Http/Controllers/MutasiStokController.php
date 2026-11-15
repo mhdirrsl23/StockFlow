@@ -75,7 +75,7 @@ class MutasiStokController extends Controller
             DB::commit();
 
             return response()->json([
-                'status'  => 'success',
+                'status' => true,
                 'message' => 'Pengeluaran stok FEFO berhasil diproses'
             ], 200);
 

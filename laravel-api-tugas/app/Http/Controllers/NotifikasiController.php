@@ -14,7 +14,7 @@ class NotifikasiController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return response()->json(['status' => 'success', 'data' => $notifikasi], 200);
+        return response()->json(['status' => true, 'data' => $notifikasi], 200);
     }
 
     // Tandai Notifikasi Sudah Ditampilkan di Ponsel
@@ -26,6 +26,6 @@ class NotifikasiController extends Controller
             $notif->update(['ditampilkan_pada' => now()]);
         }
 
-        return response()->json(['status' => 'success'], 200);
+        return response()->json(['status' => true], 200);
     }
 }
