@@ -11,12 +11,11 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Symfony\Component\HttpFoundation\Response;
 
 final class LaporanController extends Controller
 {
-    public function __construct(private readonly LaporanExportService $laporan)
-    {
-    }
+    public function __construct(private readonly LaporanExportService $laporan) {}
 
     /**
      * FR-16: laporan stok saat ini (BR-08: khusus pemilik di route).
@@ -85,7 +84,7 @@ final class LaporanController extends Controller
      */
     private function unduhXlsx(array $laporan): Response
     {
-        $spreadsheet = new Spreadsheet();
+        $spreadsheet = new Spreadsheet;
         $worksheet = $spreadsheet->getActiveSheet();
 
         $worksheet->fromArray($laporan['header'], null, 'A1');
