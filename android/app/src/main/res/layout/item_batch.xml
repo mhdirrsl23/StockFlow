@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText,ContentDescription,UseCompatTextViewDrawableXml">
+
+    <LinearLayout
+        style="@style/SF.Row"
+        android:background="?attr/selectableItemBackground">
+
+        <FrameLayout
+            android:id="@+id/bg_icon_batch"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@drawable/bg_ic_mint">
+
+            <ImageView
+                android:id="@+id/iv_icon_batch"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_layers"
+                app:tint="@color/sf_brand" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_nomor_batch"
+                style="@style/SF.Text.Mono"
+                android:fontFamily="monospace"
+                android:text="SUN-2412A"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_info_batch"
+                style="@style/SF.Text.RowSub"
+                android:layout_marginTop="3dp"
+                android:text="Sisa 5 / 24 pcs · exp 29 Des 2026" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="end"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_status_batch"
+                style="@style/SF.Pill.Safe"
+                android:drawableStart="@drawable/ic12_check_circle"
+                android:text="Aman" />
+
+            <TextView
+                android:id="@+id/tv_sisa_hari"
+                style="@style/SF.Text.Caption"
+                android:layout_marginTop="3dp"
+                android:text="60 hr lagi" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_chevron_right"
+            app:tint="@color/sf_chev" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider_batch"
+        style="@style/SF.Divider" />
+
+</LinearLayout>

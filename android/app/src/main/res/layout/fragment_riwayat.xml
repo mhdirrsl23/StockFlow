@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Riwayat staf — draft.html activityPage() (login sebagai Rina Wulandari, AB-06 / FR-31).
-  Data contoh = seed riwayat_aktivitas milik user_id 2 (30 Okt 2026). Tab aktif: Riwayat.
--->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -45,6 +41,7 @@
 
         <!-- Notifikasi + badge -->
         <FrameLayout
+            android:id="@+id/btn_notifikasi_riwayat"
             android:layout_width="36dp"
             android:layout_height="36dp">
 
@@ -53,6 +50,7 @@
                 android:src="@drawable/ic_bell" />
 
             <TextView
+                android:id="@+id/tv_badge_notif_riwayat"
                 style="@style/SF.Text"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
@@ -167,15 +165,18 @@
                     android:paddingBottom="3dp">
 
                     <TextView
+                        android:id="@+id/chip_riwayat_semua"
                         style="@style/SF.Chip.Active"
                         android:text="Semua" />
 
                     <TextView
+                        android:id="@+id/chip_riwayat_login"
                         style="@style/SF.Chip"
                         android:layout_marginStart="7dp"
                         android:text="Login" />
 
                     <TextView
+                        android:id="@+id/chip_riwayat_tambah"
                         style="@style/SF.Chip"
                         android:layout_marginStart="7dp"
                         android:text="Tambah data" />
@@ -201,209 +202,58 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="3 entri" />
+                    android:text="Entri riwayat" />
 
                 <TextView
                     style="@style/SF.Text.Caption"
                     android:text="Immutable · tidak bisa diubah" />
             </LinearLayout>
 
-            <!-- Grup tanggal: Hari ini -->
+            <!-- RecyclerView untuk Daftar Riwayat -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_riwayat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:nestedScrollingEnabled="false"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_barang" />
+
+            <!-- State kosong jika riwayat kosong -->
             <LinearLayout
+                android:id="@+id/empty_state_riwayat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingHorizontal="2dp"
-                android:paddingVertical="3dp">
-
-                <TextView
-                    style="@style/SF.Text"
-                    android:fontFamily="@font/plus_jakarta_sans_extrabold"
-                    android:letterSpacing="0.08"
-                    android:text="HARI INI"
-                    android:textColor="@color/sf_muted_2"
-                    android:textSize="10sp" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="1"
-                    android:background="@color/sf_line" />
-            </LinearLayout>
-
-            <!-- 10.12 Pengeluaran stok -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:background="@drawable/bg_card_12"
-                android:orientation="horizontal"
-                android:padding="10dp">
+                android:background="@drawable/bg_empty"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:visibility="gone">
 
                 <FrameLayout
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/bg_ic_danger">
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/bg_ic_muted">
 
                     <ImageView
-                        android:layout_width="14dp"
-                        android:layout_height="14dp"
+                        android:layout_width="19dp"
+                        android:layout_height="19dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_arrow_up_right"
-                        app:tint="@color/sf_danger" />
+                        android:src="@drawable/ic_shield_check"
+                        app:tint="@color/sf_muted" />
                 </FrameLayout>
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="9dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/SF.Text.Strong"
-                        android:lineSpacingMultiplier="1.1"
-                        android:text="Keluar 19 pcs Sunlight (FEFO)" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/SF.Text.BatchCode"
-                            android:text="batch #7" />
-
-                        <TextView
-                            style="@style/SF.Text.Caption"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:layout_weight="1"
-                            android:text="Rina Wulandari · Pengeluaran stok" />
-                    </LinearLayout>
-                </LinearLayout>
+                <TextView
+                    style="@style/SF.Text.Strong"
+                    android:layout_marginTop="9dp"
+                    android:text="Tidak ada riwayat aktivitas" />
 
                 <TextView
                     style="@style/SF.Text.Caption"
-                    android:layout_marginStart="9dp"
-                    android:paddingTop="1dp"
-                    android:text="10.12"
-                    android:textColor="@color/sf_muted_2" />
-            </LinearLayout>
-
-            <!-- 07.48 Tambah batch -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:background="@drawable/bg_card_12"
-                android:orientation="horizontal"
-                android:padding="10dp">
-
-                <FrameLayout
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/bg_ic_safe">
-
-                    <ImageView
-                        android:layout_width="14dp"
-                        android:layout_height="14dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_plus"
-                        app:tint="@color/sf_safe" />
-                </FrameLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="9dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/SF.Text.Strong"
-                        android:lineSpacingMultiplier="1.1"
-                        android:text="Tambah batch SUN-2412A" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/SF.Text.BatchCode"
-                            android:text="batch #7" />
-
-                        <TextView
-                            style="@style/SF.Text.Caption"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:layout_weight="1"
-                            android:text="Rina Wulandari · Tambah data" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <TextView
-                    style="@style/SF.Text.Caption"
-                    android:layout_marginStart="9dp"
-                    android:paddingTop="1dp"
-                    android:text="07.48"
-                    android:textColor="@color/sf_muted_2" />
-            </LinearLayout>
-
-            <!-- 07.12 Login -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:background="@drawable/bg_card_12"
-                android:orientation="horizontal"
-                android:padding="10dp">
-
-                <FrameLayout
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/bg_ic_info">
-
-                    <ImageView
-                        android:layout_width="14dp"
-                        android:layout_height="14dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_login"
-                        app:tint="@color/sf_info" />
-                </FrameLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="9dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/SF.Text.Strong"
-                        android:lineSpacingMultiplier="1.1"
-                        android:text="Login staf gudang" />
-
-                    <TextView
-                        style="@style/SF.Text.Caption"
-                        android:layout_marginTop="3dp"
-                        android:text="Rina Wulandari · Login" />
-                </LinearLayout>
-
-                <TextView
-                    style="@style/SF.Text.Caption"
-                    android:layout_marginStart="9dp"
-                    android:paddingTop="1dp"
-                    android:text="07.12"
-                    android:textColor="@color/sf_muted_2" />
+                    android:layout_marginTop="3dp"
+                    android:gravity="center"
+                    android:text="Aktivitas akun Anda akan tercatat di sini." />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Halaman perlu ditangani — draft.html perluPage().
-  View v_perlu_ditangani: batch Kedaluwarsa & belum Ditangani.
-  Data contoh = seed: MLK-2411B, Ultra Milk, sisa 30 pcs, lewat 1 hari.
-  Tanpa tab bar (sub-halaman).
--->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -28,6 +22,7 @@
         android:paddingBottom="10dp">
 
         <ImageView
+            android:id="@+id/btn_back_perlu_ditangani"
             style="@style/SF.IconBtn.Boxed"
             android:src="@drawable/ic_arrow_left" />
 
@@ -43,6 +38,7 @@
             android:textSize="18sp" />
 
         <FrameLayout
+            android:id="@+id/btn_notifikasi_ditangani"
             android:layout_width="36dp"
             android:layout_height="36dp">
 
@@ -51,6 +47,7 @@
                 android:src="@drawable/ic_bell" />
 
             <TextView
+                android:id="@+id/tv_badge_notif_ditangani"
                 style="@style/SF.Text"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
@@ -167,7 +164,7 @@
                     <TextView
                         style="@style/SF.Text"
                         android:fontFamily="@font/plus_jakarta_sans_bold"
-                        android:text="1 batch menunggu penanganan."
+                        android:text="Batch menunggu penanganan."
                         android:textColor="@color/sf_danger_ink"
                         android:textSize="11sp" />
 
@@ -181,202 +178,51 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Kartu batch -->
-            <LinearLayout
+            <!-- RecyclerView untuk Daftar Batch Perlu Ditangani -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_perlu_ditangani"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/bg_card_14"
+                android:nestedScrollingEnabled="false"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_batch_card" />
+
+            <!-- State kosong jika tidak ada yang perlu ditangani -->
+            <LinearLayout
+                android:id="@+id/empty_state_perlu_ditangani"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_empty"
+                android:gravity="center"
                 android:orientation="vertical"
-                android:padding="12dp">
+                android:padding="20dp"
+                android:visibility="gone">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                <FrameLayout
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/bg_ic_safe">
 
-                    <FrameLayout
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:background="@drawable/bg_product_drink">
+                    <ImageView
+                        android:layout_width="19dp"
+                        android:layout_height="19dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic12_check_circle"
+                        app:tint="@color/sf_safe" />
+                </FrameLayout>
 
-                        <ImageView
-                            android:layout_width="17dp"
-                            android:layout_height="17dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_cup"
-                            app:tint="#2C6B93" />
-                    </FrameLayout>
+                <TextView
+                    style="@style/SF.Text.Strong"
+                    android:layout_marginTop="9dp"
+                    android:text="Aman, tidak ada batch kedaluwarsa" />
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="9dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/SF.Text.RowTitle"
-                            android:ellipsize="end"
-                            android:singleLine="true"
-                            android:text="Ultra Milk Full Cream 250ml" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/SF.Text.BatchCode"
-                                android:text="MLK-2411B" />
-
-                            <TextView
-                                style="@style/SF.Text.RowSub"
-                                android:layout_marginStart="4dp"
-                                android:text="· SKU-MNM-001"
-                                android:textSize="10sp" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <TextView
-                        style="@style/SF.Pill.Danger"
-                        android:layout_marginStart="8dp"
-                        android:drawableStart="@drawable/ic12_alert_triangle"
-                        android:text="Kedaluwarsa" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/sf_line" />
-
-                <!-- Metrik batch -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/SF.Text"
-                            android:fontFamily="@font/plus_jakarta_sans_extrabold"
-                            android:letterSpacing="0.06"
-                            android:text="SISA"
-                            android:textColor="@color/sf_muted_2"
-                            android:textSize="9sp" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:gravity="bottom"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/SF.Text"
-                                android:fontFamily="@font/plus_jakarta_sans_bold"
-                                android:text="30"
-                                android:textColor="@color/sf_ink"
-                                android:textSize="11sp" />
-
-                            <TextView
-                                style="@style/SF.Text"
-                                android:layout_marginStart="2dp"
-                                android:paddingBottom="1dp"
-                                android:text="pcs"
-                                android:textColor="@color/sf_muted"
-                                android:textSize="9sp" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/SF.Text"
-                            android:fontFamily="@font/plus_jakarta_sans_extrabold"
-                            android:letterSpacing="0.06"
-                            android:text="KEDALUWARSA"
-                            android:textColor="@color/sf_muted_2"
-                            android:textSize="9sp" />
-
-                        <TextView
-                            style="@style/SF.Text"
-                            android:layout_marginTop="2dp"
-                            android:fontFamily="@font/plus_jakarta_sans_bold"
-                            android:text="29 Okt 2026"
-                            android:textColor="@color/sf_ink"
-                            android:textSize="11sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/SF.Text"
-                            android:fontFamily="@font/plus_jakarta_sans_extrabold"
-                            android:letterSpacing="0.06"
-                            android:text="LEWAT"
-                            android:textColor="@color/sf_muted_2"
-                            android:textSize="9sp" />
-
-                        <TextView
-                            style="@style/SF.Text"
-                            android:layout_marginTop="2dp"
-                            android:fontFamily="@font/plus_jakarta_sans_bold"
-                            android:text="1 hari"
-                            android:textColor="@color/sf_danger"
-                            android:textSize="11sp" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <!-- Aksi batch -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/SF.Btn.Ghost"
-                        android:layout_width="0dp"
-                        android:layout_height="36dp"
-                        android:layout_weight="1"
-                        android:drawableStart="@drawable/ic12_box"
-                        android:gravity="center"
-                        android:paddingHorizontal="12dp"
-                        android:text="Barang"
-                        android:textSize="11sp" />
-
-                    <TextView
-                        style="@style/SF.Btn.Danger"
-                        android:layout_width="0dp"
-                        android:layout_height="36dp"
-                        android:layout_marginStart="6dp"
-                        android:layout_weight="1"
-                        android:drawableStart="@drawable/ic12_package_x"
-                        android:gravity="center"
-                        android:paddingHorizontal="12dp"
-                        android:text="Tangani batch"
-                        android:textSize="11sp" />
-                </LinearLayout>
+                <TextView
+                    style="@style/SF.Text.Caption"
+                    android:layout_marginTop="3dp"
+                    android:gravity="center"
+                    android:text="Semua stok batch dalam kondisi aman atau sudah ditangani." />
             </LinearLayout>
 
             <!-- Catatan sumber -->

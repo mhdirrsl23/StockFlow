@@ -78,7 +78,7 @@
             android:layout_width="300dp"
             android:layout_marginTop="10dp"
             android:lineSpacingMultiplier="1.25"
-            android:text="Kelola barang, batch, mutasi, dan penanganan kedaluwarsa — sesuai skema stockflow_database.sql."
+            android:text="Kelola barang"
             android:textColor="@color/sf_auth_lede"
             android:textSize="12sp" />
 

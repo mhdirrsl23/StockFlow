@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Laporan pemilik — draft.html reportsPage() + reportTabs() + reportStock().
-  Data contoh = seed stockflow_database.sql (30 Okt 2026). Tab aktif: Laporan, sub-tab Stok.
--->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -40,11 +36,12 @@
                 style="@style/SF.Text.Caption"
                 android:layout_marginTop="3dp"
                 android:singleLine="true"
-                android:text="Stok, mutasi &amp; audit" />
+                android:text="Stok, mutasi $amp; audit" />
         </LinearLayout>
 
         <!-- Notifikasi + badge -->
         <FrameLayout
+            android:id="@+id/btn_notifikasi_laporan"
             android:layout_width="36dp"
             android:layout_height="36dp">
 
@@ -53,6 +50,7 @@
                 android:src="@drawable/ic_bell" />
 
             <TextView
+                android:id="@+id/tv_badge_notif_laporan"
                 style="@style/SF.Text"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
@@ -91,6 +89,7 @@
                 android:padding="3dp">
 
                 <TextView
+                    android:id="@+id/tab_laporan_stok"
                     style="@style/SF.Text"
                     android:layout_width="wrap_content"
                     android:layout_height="32dp"
@@ -107,6 +106,7 @@
                     android:textSize="11sp" />
 
                 <TextView
+                    android:id="@+id/tab_laporan_mutasi"
                     style="@style/SF.Text"
                     android:layout_width="wrap_content"
                     android:layout_height="32dp"
@@ -123,6 +123,7 @@
                     android:textSize="11sp" />
 
                 <TextView
+                    android:id="@+id/tab_laporan_kedaluwarsa"
                     style="@style/SF.Text"
                     android:layout_width="wrap_content"
                     android:layout_height="32dp"
@@ -139,6 +140,7 @@
                     android:textSize="11sp" />
 
                 <TextView
+                    android:id="@+id/tab_laporan_aktivitas"
                     style="@style/SF.Text"
                     android:layout_width="wrap_content"
                     android:layout_height="32dp"
@@ -171,9 +173,10 @@
                     android:padding="10dp">
 
                     <TextView
+                        android:id="@+id/tv_stat_barang_aktif"
                         style="@style/SF.Text.Title"
                         android:letterSpacing="-0.04"
-                        android:text="5" />
+                        android:text="0" />
 
                     <TextView
                         style="@style/SF.Text.Caption"
@@ -192,9 +195,10 @@
                     android:padding="10dp">
 
                     <TextView
+                        android:id="@+id/tv_stat_unit_tersedia"
                         style="@style/SF.Text.Title"
                         android:letterSpacing="-0.04"
-                        android:text="215" />
+                        android:text="0" />
 
                     <TextView
                         style="@style/SF.Text.Caption"
@@ -213,9 +217,10 @@
                     android:padding="10dp">
 
                     <TextView
+                        android:id="@+id/tv_stat_stok_menipis"
                         style="@style/SF.Text.Title"
                         android:letterSpacing="-0.04"
-                        android:text="2"
+                        android:text="0"
                         android:textColor="@color/sf_warn" />
 
                     <TextView
@@ -247,10 +252,11 @@
                     <TextView
                         style="@style/SF.Text.Caption"
                         android:layout_marginTop="3dp"
-                        android:text="View v_stok_tersedia · batch kedaluwarsa &amp; ditangani tidak dihitung" />
+                        android:text="View v_stok_tersedia · batch kedaluwarsa $amp; ditangani tidak dihitung" />
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/btn_export_csv"
                     style="@style/SF.Btn.Ghost"
                     android:layout_height="36dp"
                     android:layout_marginStart="10dp"
@@ -260,384 +266,15 @@
                     android:textSize="11sp" />
             </LinearLayout>
 
-            <!-- Daftar stok -->
-            <LinearLayout
+            <!-- RecyclerView untuk Daftar Stok Laporan -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_laporan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/bg_card"
-                android:orientation="vertical"
-                android:paddingHorizontal="15dp"
-                android:paddingVertical="3dp">
-
-                <!-- Indomie Goreng -->
-                <LinearLayout
-                    style="@style/SF.Row"
-                    android:paddingVertical="10dp">
-
-                    <FrameLayout
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:background="@drawable/bg_product_food">
-
-                        <ImageView
-                            android:layout_width="17dp"
-                            android:layout_height="17dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_cookie"
-                            app:tint="#9A6515" />
-                    </FrameLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="9dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/SF.Text.Strong"
-                            android:text="Indomie Goreng" />
-
-                        <TextView
-                            style="@style/SF.Text.Caption"
-                            android:layout_marginTop="2dp"
-                            android:text="SKU-MKN-001 · Makanan" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="9dp"
-                        android:gravity="end"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/SF.Text.Strong"
-                                android:fontFamily="@font/plus_jakarta_sans_extrabold"
-                                android:text="150"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                style="@style/SF.Text.Caption"
-                                android:layout_marginStart="3dp"
-                                android:text="pcs" />
-                        </LinearLayout>
-
-                        <TextView
-                            style="@style/SF.Text.Caption"
-                            android:layout_marginTop="2dp"
-                            android:text="min. 50" />
-                    </LinearLayout>
-
-                    <TextView
-                        style="@style/SF.Pill.Safe"
-                        android:layout_marginStart="9dp"
-                        android:drawableStart="@drawable/ic12_check_circle"
-                        android:text="Aman" />
-                </LinearLayout>
-
-                <View style="@style/SF.Divider" />
-
-                <!-- Ultra Milk -->
-                <LinearLayout
-                    style="@style/SF.Row"
-                    android:paddingVertical="10dp">
-
-                    <FrameLayout
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:background="@drawable/bg_product_drink">
-
-                        <ImageView
-                            android:layout_width="17dp"
-                            android:layout_height="17dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_cup"
-                            app:tint="#2C6B93" />
-                    </FrameLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="9dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/SF.Text.Strong"
-                            android:text="Ultra Milk Full Cream 250ml" />
-
-                        <TextView
-                            style="@style/SF.Text.Caption"
-                            android:layout_marginTop="2dp"
-                            android:text="SKU-MNM-001 · Minuman" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="9dp"
-                        android:gravity="end"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/SF.Text.Strong"
-                                android:fontFamily="@font/plus_jakarta_sans_extrabold"
-                                android:text="40"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                style="@style/SF.Text.Caption"
-                                android:layout_marginStart="3dp"
-                                android:text="pcs" />
-                        </LinearLayout>
-
-                        <TextView
-                            style="@style/SF.Text.Caption"
-                            android:layout_marginTop="2dp"
-                            android:text="min. 20" />
-                    </LinearLayout>
-
-                    <TextView
-                        style="@style/SF.Pill.Safe"
-                        android:layout_marginStart="9dp"
-                        android:drawableStart="@drawable/ic12_check_circle"
-                        android:text="Aman" />
-                </LinearLayout>
-
-                <View style="@style/SF.Divider" />
-
-                <!-- Paracetamol -->
-                <LinearLayout
-                    style="@style/SF.Row"
-                    android:paddingVertical="10dp">
-
-                    <FrameLayout
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:background="@drawable/bg_product_med">
-
-                        <ImageView
-                            android:layout_width="17dp"
-                            android:layout_height="17dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_pill"
-                            app:tint="#9D4D59" />
-                    </FrameLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="9dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/SF.Text.Strong"
-                            android:text="Paracetamol 500mg" />
-
-                        <TextView
-                            style="@style/SF.Text.Caption"
-                            android:layout_marginTop="2dp"
-                            android:text="SKU-UBT-001 · Obat" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="9dp"
-                        android:gravity="end"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/SF.Text.Strong"
-                                android:fontFamily="@font/plus_jakarta_sans_extrabold"
-                                android:text="20"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                style="@style/SF.Text.Caption"
-                                android:layout_marginStart="3dp"
-                                android:text="box" />
-                        </LinearLayout>
-
-                        <TextView
-                            style="@style/SF.Text.Caption"
-                            android:layout_marginTop="2dp"
-                            android:text="min. 10" />
-                    </LinearLayout>
-
-                    <TextView
-                        style="@style/SF.Pill.Safe"
-                        android:layout_marginStart="9dp"
-                        android:drawableStart="@drawable/ic12_check_circle"
-                        android:text="Aman" />
-                </LinearLayout>
-
-                <View style="@style/SF.Divider" />
-
-                <!-- Sunlight -->
-                <LinearLayout
-                    style="@style/SF.Row"
-                    android:paddingVertical="10dp">
-
-                    <FrameLayout
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:background="@drawable/bg_product_home">
-
-                        <ImageView
-                            android:layout_width="17dp"
-                            android:layout_height="17dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_droplet"
-                            app:tint="#397A55" />
-                    </FrameLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="9dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/SF.Text.Strong"
-                            android:text="Sunlight 755ml" />
-
-                        <TextView
-                            style="@style/SF.Text.Caption"
-                            android:layout_marginTop="2dp"
-                            android:text="SKU-RMH-001 · Kebutuhan Rumah" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="9dp"
-                        android:gravity="end"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/SF.Text.Strong"
-                                android:fontFamily="@font/plus_jakarta_sans_extrabold"
-                                android:text="5"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                style="@style/SF.Text.Caption"
-                                android:layout_marginStart="3dp"
-                                android:text="pcs" />
-                        </LinearLayout>
-
-                        <TextView
-                            style="@style/SF.Text.Caption"
-                            android:layout_marginTop="2dp"
-                            android:text="min. 15" />
-                    </LinearLayout>
-
-                    <TextView
-                        style="@style/SF.Pill.Warn"
-                        android:layout_marginStart="9dp"
-                        android:drawableStart="@drawable/ic12_alert_triangle"
-                        android:text="Menipis" />
-                </LinearLayout>
-
-                <View style="@style/SF.Divider" />
-
-                <!-- Tisu Basah -->
-                <LinearLayout
-                    style="@style/SF.Row"
-                    android:paddingVertical="10dp">
-
-                    <FrameLayout
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:background="@drawable/bg_product_other">
-
-                        <ImageView
-                            android:layout_width="17dp"
-                            android:layout_height="17dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_package"
-                            app:tint="#66756C" />
-                    </FrameLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="9dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/SF.Text.Strong"
-                            android:text="Tisu Basah" />
-
-                        <TextView
-                            style="@style/SF.Text.Caption"
-                            android:layout_marginTop="2dp"
-                            android:text="SKU-LNY-001 · Lainnya" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="9dp"
-                        android:gravity="end"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/SF.Text.Strong"
-                                android:fontFamily="@font/plus_jakarta_sans_extrabold"
-                                android:text="0"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                style="@style/SF.Text.Caption"
-                                android:layout_marginStart="3dp"
-                                android:text="pack" />
-                        </LinearLayout>
-
-                        <TextView
-                            style="@style/SF.Text.Caption"
-                            android:layout_marginTop="2dp"
-                            android:text="min. 10" />
-                    </LinearLayout>
-
-                    <TextView
-                        style="@style/SF.Pill.Warn"
-                        android:layout_marginStart="9dp"
-                        android:drawableStart="@drawable/ic12_alert_triangle"
-                        android:text="Menipis" />
-                </LinearLayout>
-            </LinearLayout>
+                android:nestedScrollingEnabled="false"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_barang" />
 
             <!-- csv-note -->
             <LinearLayout

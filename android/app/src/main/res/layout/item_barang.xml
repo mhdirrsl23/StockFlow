@@ -1,6 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText,ContentDescription,UseCompatTextViewDrawableXml">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <FrameLayout
+            android:id="@+id/bg_icon_kategori"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/bg_product_food">
+
+            <ImageView
+                android:id="@+id/iv_icon_kategori"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_cookie"
+                app:tint="#9A6515" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_nama_barang"
+                style="@style/SF.Text.RowTitle"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="Indomie Goreng" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_sku_barang"
+                    style="@style/SF.Text.Mono"
+                    android:text="SKU-MKN-001"
+                    android:textColor="@color/sf_muted_2"
+                    android:textSize="9sp" />
+
+                <TextView
+                    android:id="@+id/tv_kategori_barang"
+                    style="@style/SF.Text.RowSub"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text=" · Makanan · 150 pcs"
+                    android:textSize="10sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="end"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_stok_angka"
+                    style="@style/SF.Text"
+                    android:fontFamily="@font/plus_jakarta_sans_extrabold"
+                    android:text="150"
+                    android:textColor="@color/sf_ink"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_stok_satuan"
+                    style="@style/SF.Text"
+                    android:layout_marginStart="2dp"
+                    android:paddingBottom="1dp"
+                    android:text="pcs"
+                    android:textColor="@color/sf_muted"
+                    android:textSize="9sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_status_stok"
+                style="@style/SF.Pill.Safe"
+                android:layout_marginTop="3dp"
+                android:drawableStart="@drawable/ic12_check_circle"
+                android:text="Aman" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="7dp"
+            android:src="@drawable/ic_chevron_right"
+            app:tint="@color/sf_chev" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider_item"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="45dp"
+        android:background="@color/sf_line" />
+
+</LinearLayout>
