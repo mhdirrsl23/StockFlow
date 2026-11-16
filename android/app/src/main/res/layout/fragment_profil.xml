@@ -530,7 +530,7 @@
                         style="@style/SF.Text"
                         android:layout_marginStart="12dp"
                         android:fontFamily="@font/plus_jakarta_sans_extrabold"
-                        android:text="StockFlow · Edisi Database"
+                        android:text="StokAman · Edisi Database"
                         android:textColor="@color/sf_muted"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -538,7 +538,7 @@
                 <TextView
                     style="@style/SF.Text.Caption"
                     android:layout_marginTop="5dp"
-                    android:text="v1.0 · 30 Oktober 2026 · dari stockflow_database.sql" />
+                    android:text="v1.0 · 30 Oktober 2026 · dari StokAman_database.sql" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   Detail batch — draft.html batchDetailPage() untuk MLK-2411B (Ultra Milk, Kedaluwarsa 1 hr lalu).
-  Data contoh = seed stockflow_database.sql (30 Okt 2026). Tanpa tabbar; actionbar bawah.
+  Data contoh = seed StokAman_database.sql (30 Okt 2026). Tanpa tabbar; actionbar bawah.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"

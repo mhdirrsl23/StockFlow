@@ -93,7 +93,7 @@
                     <TextView
                         style="@style/SF.Text.Caption"
                         android:layout_marginTop="3dp"
-                        android:text="stockflow_database.sql · 399 baris · MySQL 8 / Laravel" />
+                        android:text="StokAman_database.sql · 399 baris · MySQL 8 / Laravel" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -1968,7 +1968,7 @@
                 android:drawablePadding="4dp"
                 android:drawableTint="@color/sf_muted_2"
                 android:padding="2dp"
-                android:text="Sumber: stockflow_database.sql · 10 tabel (termasuk Sanctum) &amp; 2 view · data uji relatif hari ini"
+                android:text="Sumber: StokAman_database.sql · 10 tabel (termasuk Sanctum) &amp; 2 view · data uji relatif hari ini"
                 android:textColor="@color/sf_muted_2" />
 
         </LinearLayout>
