@@ -119,6 +119,9 @@ class FormBatchFragment : Fragment(R.layout.form_batch) {
         val tvJumlah = view.findViewById<TextView>(R.id.batch_jumlah)
         val selectTgl = view.findViewById<View>(R.id.select_tanggal)
 
+        // Dipanggil dari detail barang → barang sudah terpilih.
+        arguments?.getInt("barangId")?.takeIf { it != -1 }?.let { barangId = it }
+
         tvJumlah.text = jumlah.toString()
         view.findViewById<View>(R.id.btn_batch_minus).setOnClickListener { if (jumlah > 1) tvJumlah.text = (--jumlah).toString() }
         view.findViewById<View>(R.id.btn_batch_plus).setOnClickListener { tvJumlah.text = (++jumlah).toString() }
@@ -127,6 +130,10 @@ class FormBatchFragment : Fragment(R.layout.form_batch) {
             runCatching {
                 val res = RetrofitClient.getInstance(requireContext()).getBarang()
                 if (res.isSuccessful && res.body()?.success == true) barangList = res.body()?.data?.items ?: emptyList()
+            }
+            val dipilih = barangList.find { it.id == barangId }
+            if (dipilih != null) {
+                (selectBrg as? TextView)?.text = "${dipilih.kode_sku} - ${dipilih.nama}"
             }
         }
 
@@ -191,6 +198,9 @@ class FormStokKeluarFragment : Fragment(R.layout.form_stok_keluar) {
         val tvJumlah = view.findViewById<TextView>(R.id.keluar_jumlah)
         val etCatatan = view.findViewById<EditText>(R.id.et_catatan)
 
+        // Dipanggil dari detail barang → barang sudah terpilih.
+        arguments?.getInt("barangId")?.takeIf { it != -1 }?.let { barangId = it }
+
         tvJumlah.text = jumlah.toString()
         view.findViewById<View>(R.id.btn_keluar_minus).setOnClickListener { if (jumlah > 1) tvJumlah.text = (--jumlah).toString() }
         view.findViewById<View>(R.id.btn_keluar_plus).setOnClickListener { tvJumlah.text = (++jumlah).toString() }
@@ -199,6 +209,10 @@ class FormStokKeluarFragment : Fragment(R.layout.form_stok_keluar) {
             runCatching {
                 val res = RetrofitClient.getInstance(requireContext()).getBarang()
                 if (res.isSuccessful && res.body()?.success == true) barangList = res.body()?.data?.items ?: emptyList()
+            }
+            val dipilih = barangList.find { it.id == barangId }
+            if (dipilih != null) {
+                (selectBrg as? TextView)?.text = "${dipilih.nama} (Stok: ${dipilih.total_stok_tersedia} ${dipilih.satuan})"
             }
         }
 

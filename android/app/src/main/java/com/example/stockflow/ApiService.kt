@@ -131,6 +131,23 @@ interface ApiService {
     @POST("notifications/read-all")
     suspend fun tandaiSemuaNotifikasiDibaca(): Response<ApiResponse<Any?>>
 
+    // ── Laporan (FR-16, BR-08 — khusus pemilik) ──────────────────────────
+    // Bentuk data: {judul, judul_tabel, header, rows, nama_berkas}
+    @GET("reports/stock")
+    suspend fun getLaporanStok(): Response<ApiResponse<LaporanData>>
+
+    @GET("reports/transactions")
+    suspend fun getLaporanTransaksi(): Response<ApiResponse<LaporanData>>
+
+    @GET("reports/expiry")
+    suspend fun getLaporanKedaluwarsa(): Response<ApiResponse<LaporanData>>
+
+    @GET("reports/export")
+    suspend fun unduhLaporan(
+        @Query("jenis") jenis: String,
+        @Query("format") format: String,
+    ): Response<ResponseBody>
+
     // ── Riwayat aktivitas (FR-31) ────────────────────────────────────────
     @GET("riwayat-aktivitas")
     suspend fun getRiwayatAktivitas(

@@ -242,6 +242,16 @@ data class PengaturanItem(
     val updated_at: String? = null,
 )
 
+// ── Laporan (FR-16) — backend membentuk {judul, header, rows, nama_berkas} ─
+data class LaporanData(
+    val judul: String? = null,
+    val judul_tabel: String? = null,
+    val dibuat_pada: String? = null,
+    val header: List<String> = emptyList(),
+    val rows: List<List<Any?>> = emptyList(),
+    val nama_berkas: String? = null,
+)
+
 // ── Lampiran (FR-14) ─────────────────────────────────────────────────────
 data class LampiranItem(
     val id: Int,

@@ -15,6 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -156,32 +157,124 @@ class BarangStaffFragment : BaseBarangFragment(R.layout.fragment_barang_staff)
 
 class LaporanFragment : Fragment(R.layout.fragment_laporan) {
 
-    private lateinit var adapter: MutasiAdapter
-    private var allMutasi: List<MutasiStokItem> = emptyList()
+    private var jenisEkspor = "stok"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = MutasiAdapter(emptyList())
-        view.bindList("rv_laporan", adapter)
-        view.opt<View>("btn_riwayat_aktivitas")?.setOnClickListener { go("nav_riwayat") }
+        view.opt<View>("btn_notifikasi_laporan")?.setOnClickListener { go("notifikasiFragment") }
 
+        // Tab kategori laporan (FR-16)
         mapOf(
-            "chip_semua" to null,
-            "chip_masuk" to "masuk",
-            "chip_keluar" to "keluar",
-            "chip_penyesuaian" to "penyesuaian",
-            "chip_penanganan" to "penanganan"
+            "tab_laporan_stok" to "stok",
+            "tab_laporan_mutasi" to "mutasi",
+            "tab_laporan_kedaluwarsa" to "kedaluwarsa",
+            "tab_laporan_aktivitas" to "aktivitas",
         ).forEach { (id, jenis) ->
-            view.opt<View>(id)?.setOnClickListener {
-                adapter.updateData(if (jenis == null) allMutasi else allMutasi.filter { it.jenis == jenis })
-            }
+            view.opt<View>(id)?.setOnClickListener { muatLaporan(jenis) }
         }
 
+        // Ekspor berkas xlsx dari tab aktif (khusus pemilik, BR-08)
+        view.opt<View>("btn_export_csv")?.setOnClickListener { unduhLaporan(jenisEkspor) }
+
+        muatLaporan("stok")
+    }
+
+    private fun muatLaporan(jenis: String) {
+        jenisEkspor = jenis
+        val v = view ?: return
+
         runApi { api ->
-            val res = api.getMutasiStok()
-            if (res.isSuccessful && res.body()?.success == true) {
-                allMutasi = res.body()?.data?.items ?: emptyList()
-                adapter.updateData(allMutasi)
+            when (jenis) {
+                "stok" -> {
+                    val res = api.getLaporanStok()
+                    val rows = res.body()?.data?.rows ?: emptyList()
+                    // baris: [kode_sku, nama, kategori, satuan, minimum, tersedia, status]
+                    val adapter = SimpleCardAdapter(rows, mapper = { row ->
+                        val status = (row.getOrNull(6) ?: "-").toString()
+                        val warna = if (status == "Stok Menipis") R.color.sf_danger else R.color.sf_safe
+                        SimpleCardAdapter.RowModel(
+                            title = (row.getOrNull(1) ?: "-").toString(),
+                            sub = "SKU ${(row.getOrNull(0) ?: "-")} · min ${(row.getOrNull(4) ?: 0)} ${(row.getOrNull(3) ?: "")}",
+                            badge = "${row.getOrNull(5) ?: 0} ${(row.getOrNull(3) ?: "")} · $status",
+                            colorRes = warna,
+                        )
+                    })
+                    pasangList(v, adapter)
+                    v.opt<TextView>("tv_stat_barang_aktif")?.text = rows.size.toString()
+                    v.opt<TextView>("tv_stat_unit_tersedia")?.text =
+                        rows.sumOf { (it.getOrNull(5) as? Number)?.toInt() ?: 0 }.toString()
+                    v.opt<TextView>("tv_stat_stok_menipis")?.text =
+                        rows.count { (it.getOrNull(6) ?: "").toString() == "Stok Menipis" }.toString()
+                }
+
+                "mutasi" -> {
+                    val res = api.getMutasiStok()
+                    if (res.isSuccessful && res.body()?.success == true) {
+                        pasangList(v, MutasiAdapter(res.body()?.data?.items ?: emptyList()))
+                    }
+                }
+
+                "kedaluwarsa" -> {
+                    val res = api.getLaporanKedaluwarsa()
+                    val rows = res.body()?.data?.rows ?: emptyList()
+                    // baris: [kode_sku, nama, satuan, nomor_batch, sisa, tanggal, status, penanganan]
+                    val adapter = SimpleCardAdapter(rows, mapper = { row ->
+                        val status = (row.getOrNull(6) ?: "-").toString()
+                        val warna = when (status) {
+                            "Kedaluwarsa" -> R.color.sf_danger
+                            "Mendekati Kedaluwarsa" -> R.color.sf_warn
+                            else -> R.color.sf_muted
+                        }
+                        val badge = if (row.getOrNull(7) != null && (row.getOrNull(7) ?: "-").toString() != "-") {
+                            "Ditangani (${row.getOrNull(7)})"
+                        } else {
+                            status
+                        }
+                        SimpleCardAdapter.RowModel(
+                            title = "${row.getOrNull(1) ?: "-"} · ${row.getOrNull(3) ?: "-"}",
+                            sub = "Sisa ${row.getOrNull(4) ?: 0} ${(row.getOrNull(2) ?: "")} · kedaluwarsa ${row.getOrNull(5) ?: "-"}",
+                            badge = badge,
+                            colorRes = warna,
+                        )
+                    })
+                    pasangList(v, adapter)
+                }
+
+                else -> {
+                    val res = api.getRiwayatAktivitas()
+                    if (res.isSuccessful && res.body()?.success == true) {
+                        pasangList(v, RiwayatAdapter(res.body()?.data?.items ?: emptyList()))
+                    }
+                }
+            }
+        }
+    }
+
+    private fun pasangList(v: View, adapter: RecyclerView.Adapter<*>) {
+        v.opt<RecyclerView>("rv_laporan")?.apply {
+            layoutManager = LinearLayoutManager(context)
+            this.adapter = adapter
+        }
+    }
+
+    private fun unduhLaporan(jenis: String) {
+        runApi { api ->
+            val res = api.unduhLaporan(jenis, "xlsx")
+            val isi = res.body()?.bytes()
+            if (res.isSuccessful && isi != null && isi.isNotEmpty()) {
+                val folder = requireContext().getExternalFilesDir(null)?.resolve("laporan")?.apply { mkdirs() }
+                    ?: return@runApi
+                val berkas = File(folder, "laporan-$jenis-${System.currentTimeMillis()}.xlsx")
+                berkas.writeBytes(isi)
+                val uri = FileProvider.getUriForFile(requireContext(), "${requireContext().packageName}.fileprovider", berkas)
+                val bagikan = Intent(Intent.ACTION_SEND).apply {
+                    type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                    putExtra(Intent.EXTRA_STREAM, uri)
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                }
+                startActivity(Intent.createChooser(bagikan, "Bagikan laporan $jenis"))
+            } else {
+                Toast.makeText(requireContext(), "Gagal mengunduh laporan (khusus pemilik)", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -211,6 +304,18 @@ class ProfilFragment : Fragment(R.layout.fragment_profil) {
         view.opt<TextView>("tv_profil_username")?.text = "@${session.getUsername()}"
         view.opt<TextView>("tv_profil_peran")?.text = if (isOwner) "Pemilik Gudang" else "Staf Gudang"
 
+        // Segarkan profil dari server (GET /me — FR-02) supaya data terkini.
+        runApi { api ->
+            val res = api.getMe()
+            val u = res.body()?.data ?: return@runApi
+            if (res.isSuccessful && res.body()?.success == true) {
+                session.getToken()?.let { token -> session.saveSession(token, u.id, u.nama, u.username, u.peran) }
+                view.opt<TextView>("tv_profil_nama")?.text = u.nama
+                view.opt<TextView>("tv_profil_username")?.text = "@${u.username}"
+                view.opt<TextView>("tv_profil_peran")?.text = if (u.peran == "pemilik") "Pemilik Gudang" else "Staf Gudang"
+            }
+        }
+
         val menuPengguna = view.opt<View>("menu_pengguna")
         val menuPengaturan = view.opt<View>("menu_pengaturan")
         menuPengguna?.visibility = if (isOwner) View.VISIBLE else View.GONE
@@ -239,8 +344,10 @@ class DetailBarangFragment : Fragment(R.layout.fragment_detail_barang) {
         val barangId = arguments?.getInt("barangId") ?: -1
 
         view.opt<View>("btn_back")?.setOnClickListener { findNavController().navigateUp() }
-        view.opt<View>("btn_tambah_batch")?.setOnClickListener { go("formBatchFragment") }
-        view.opt<View>("btn_stok_keluar")?.setOnClickListener { go("formStokKeluarFragment") }
+        val argsBarang = if (barangId != -1) bundleOf("barangId" to barangId) else null
+        view.opt<View>("btn_tambah_batch")?.setOnClickListener { go("formBatchFragment", argsBarang) }
+        view.opt<View>("btn_link_tambah_batch")?.setOnClickListener { go("formBatchFragment", argsBarang) }
+        view.opt<View>("btn_stok_keluar")?.setOnClickListener { go("formStokKeluarFragment", argsBarang) }
 
         val batchAdapter = BatchAdapter(emptyList()) { go("detailBatchFragment", bundleOf("batchId" to it.id)) }
         view.bindList("rv_batch", batchAdapter)
@@ -528,20 +635,58 @@ class PerluDitanganiFragment : Fragment(R.layout.fragment_perlu_ditangani) {
 
 class NotifikasiFragment : Fragment(R.layout.fragment_notifikasi) {
 
+    private lateinit var adapter: NotifikasiAdapter
+    private var jenisAktif: String? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.opt<View>("btn_back")?.setOnClickListener { findNavController().navigateUp() }
-        val adapter = NotifikasiAdapter(emptyList()) { n ->
+        view.opt<View>("btn_back_notifikasi")?.setOnClickListener { findNavController().navigateUp() }
+        adapter = NotifikasiAdapter(emptyList()) { n ->
             when {
                 n.batch_id != null -> go("detailBatchFragment", bundleOf("batchId" to n.batch_id))
                 n.barang_id != null -> go("detailBarangFragment", bundleOf("barangId" to n.barang_id))
             }
         }
         view.bindList("rv_notifikasi", adapter)
-        runApi { api ->
-            val res = api.getNotifikasi()
-            if (res.isSuccessful && res.body()?.success == true) adapter.updateData(res.body()?.data?.items ?: emptyList())
+
+        mapOf(
+            "chip_notif_semua" to null,
+            "chip_notif_mendekati" to "Mendekati Kedaluwarsa",
+            "chip_notif_kedaluwarsa" to "Kedaluwarsa",
+            "chip_notif_menipis" to "Stok Menipis",
+        ).forEach { (id, nilai) ->
+            view.opt<View>(id)?.setOnClickListener {
+                jenisAktif = nilai
+                muatNotifikasi()
+            }
         }
+
+        view.opt<View>("btn_mark_all_read")?.setOnClickListener {
+            runApi { api ->
+                val res = api.tandaiSemuaNotifikasiDibaca()
+                if (res.isSuccessful && res.body()?.success == true) {
+                    Toast.makeText(requireContext(), "Semua notifikasi ditandai dibaca", Toast.LENGTH_SHORT).show()
+                    muatNotifikasi()
+                } else {
+                    Toast.makeText(requireContext(), res.body()?.message ?: "Gagal menandai notifikasi", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        muatNotifikasi()
+    }
+
+    private fun muatNotifikasi() = runApi { api ->
+        val res = api.getNotifikasi(jenis = jenisAktif)
+        val items = if (res.isSuccessful && res.body()?.success == true) {
+            res.body()?.data?.items ?: emptyList()
+        } else {
+            emptyList()
+        }
+        adapter.updateData(items)
+        val v = view ?: return@runApi
+        v.opt<TextView>("tv_count_unread")?.text = items.count { it.ditampilkan_pada == null }.toString()
+        v.opt<View>("empty_state_notifikasi")?.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
     }
 }
 
@@ -551,8 +696,8 @@ class PenggunaFragment : Fragment(R.layout.fragment_pengguna) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.opt<View>("btn_back")?.setOnClickListener { findNavController().navigateUp() }
-        view.opt<View>("btn_tambah_akun")?.setOnClickListener { go("formAkunFragment") }
+        view.opt<View>("btn_back_pengguna")?.setOnClickListener { findNavController().navigateUp() }
+        view.opt<View>("btn_tambah_pengguna")?.setOnClickListener { go("formAkunFragment") }
 
         adapter = UserAdapter(emptyList()) { user ->
             val aktifBaru = !user.aktif
@@ -579,7 +724,17 @@ class PenggunaFragment : Fragment(R.layout.fragment_pengguna) {
 
     private fun muatUsers() = runApi { api ->
         val res = api.getUsers()
-        if (res.isSuccessful && res.body()?.success == true) adapter.updateData(res.body()?.data?.items ?: emptyList())
+        val items = if (res.isSuccessful && res.body()?.success == true) {
+            res.body()?.data?.items ?: emptyList()
+        } else {
+            emptyList()
+        }
+        adapter.updateData(items)
+        val v = view ?: return@runApi
+        v.opt<TextView>("tv_stat_total_akun")?.text = items.size.toString()
+        v.opt<TextView>("tv_stat_aktif_akun")?.text = items.count { it.aktif }.toString()
+        v.opt<TextView>("tv_stat_staf_akun")?.text = items.count { it.peran == "staf" }.toString()
+        v.opt<View>("empty_state_pengguna")?.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
     }
 }
 
