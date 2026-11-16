@@ -1,1058 +1,0 @@
-LRR(http://schemas.android.com/apk/res-autoandroidx.core:core:1.19.1zy$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values/values.xmlà$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable/ic_call_decline_low.xmlù$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable-hdpi-v4/notification_bg_normal_pressed.9.pngù$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable-mdpi-v4/notification_bg_normal_pressed.9.pngû$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable-xhdpi-v4/notification_bg_normal_pressed.9.pngÑ$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable/ic_call_decline.xmlö$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable-hdpi-v4/notification_bg_low_pressed.9.pngö$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable-mdpi-v4/notification_bg_low_pressed.9.pngõ$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable-xhdpi-v4/notification_bg_low_pressed.9.pngï$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable-hdpi-v4/notification_bg_normal.9.pngï$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable-mdpi-v4/notification_bg_normal.9.pngñ$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable-xhdpi-v4/notification_bg_normal.9.pngç$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable/ic_call_answer_video_low.xmlÉ$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable/ic_call_answer.xml†$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable-hdpi-v4/notification_oversize_large_icon_bg.pngâ$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable/notification_tile_bg.xmlô$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable-hdpi-v4/notification_bg_low_normal.9.pngô$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable-mdpi-v4/notification_bg_low_normal.9.pngö$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable-xhdpi-v4/notification_bg_low_normal.9.pngá$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable/ic_call_answer_low.xmlû$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable-hdpi-v4/notify_panel_notification_icon_bg.pngû$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable-mdpi-v4/notify_panel_notification_icon_bg.pngü$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable-xhdpi-v4/notify_panel_notification_icon_bg.pngë$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable/notification_icon_background.xmlì$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable/notification_action_background.xmlâ$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable/ic_call_answer_video.xmlÑ$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable/notification_bg.xmlà$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/drawable/notification_bg_low.xmlì$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/layout/notification_template_custom_big.xmlî$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/layout/ime_secondary_split_test_activity.xmlì$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/layout/notification_template_icon_group.xmlô$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/layout/notification_template_part_chronometer.xmlÄ$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/layout/custom_dialog.xmlÜ$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/layout/notification_action.xmlê$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/layout/notification_action_tombstone.xmlí$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/layout/notification_template_part_time.xmlè$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/layout/ime_base_split_test_activity.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-af/values-af.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-am/values-am.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-ar/values-ar.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-as/values-as.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-az/values-az.xmlç$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-b+sr+Latn/values-b+sr+Latn.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-be/values-be.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-bg/values-bg.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-bn/values-bn.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-bs/values-bs.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-ca/values-ca.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-cs/values-cs.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-da/values-da.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-de/values-de.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-el/values-el.xmlá$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-en-rAU/values-en-rAU.xmlá$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-en-rCA/values-en-rCA.xmlá$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-en-rGB/values-en-rGB.xmlá$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-en-rIN/values-en-rIN.xmlá$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-en-rXC/values-en-rXC.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-es/values-es.xmlá$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-es-rUS/values-es-rUS.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-et/values-et.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-eu/values-eu.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-fa/values-fa.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-fi/values-fi.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-fr/values-fr.xmlá$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-fr-rCA/values-fr-rCA.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-gl/values-gl.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-gu/values-gu.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-hi/values-hi.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-hr/values-hr.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-hu/values-hu.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-hy/values-hy.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-in/values-in.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-is/values-is.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-it/values-it.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-iw/values-iw.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-ja/values-ja.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-ka/values-ka.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-kk/values-kk.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-km/values-km.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-kn/values-kn.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-ko/values-ko.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-ky/values-ky.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-lo/values-lo.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-lt/values-lt.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-lv/values-lv.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-mk/values-mk.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-ml/values-ml.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-mn/values-mn.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-mr/values-mr.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-ms/values-ms.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-my/values-my.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-nb/values-nb.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-ne/values-ne.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-nl/values-nl.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-or/values-or.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-pa/values-pa.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-pl/values-pl.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-pt/values-pt.xmlá$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-pt-rBR/values-pt-rBR.xmlá$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-pt-rPT/values-pt-rPT.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-ro/values-ro.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-ru/values-ru.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-si/values-si.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-sk/values-sk.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-sl/values-sl.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-sq/values-sq.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-sr/values-sr.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-sv/values-sv.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-sw/values-sw.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-ta/values-ta.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-te/values-te.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-th/values-th.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-tl/values-tl.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-tr/values-tr.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-uk/values-uk.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-ur/values-ur.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-uz/values-uz.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-vi/values-vi.xmlá$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-zh-rCN/values-zh-rCN.xmlá$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-zh-rHK/values-zh-rHK.xmlá$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-zh-rTW/values-zh-rTW.xml$GRADLE_USER_HOME/caches/9.6.0/transforms/49e68fecd9fae832ca764312a8b826f6/transformed/core-1.19.1/res/values-zu/values-zu.xml
-attr-android:color "w	∏9w%‘9  android:color "‰	ÃV‰%ËV  fontProviderCerts "â	Û=â<¶>
-reference lStar "|	¿:|,„:float android:startX "’	ÈS’&ÜT  android:ttcIndex "µ	ÄNµ(üN  android:startY "◊	òT◊&µT  android:startColor "¡	ÔP¡*êQ  fontProviderSystemFontFamily "8@sstring fontProviderSystemFontFamily "†	€H†4ÜI  fontProviderSystemFontFamily "ª	∂Oª4·O  fontProviderAuthority "Å	›;Å=ë<string alpha "y	Ê9y,â:float android:fontWeight "≥	°M≥*¬M  android:endX "Ÿ	«TŸ$‚T  android:endY "€	ÙT€$èU  android:lStar "}	Ï:}%à;  fontWeight "´	®K´3“K	integer fontProviderQuery "Ö	Á<Ö9ó=string fontProviderQuery "π	ÑOπ)§O  android:tileMode "ﬁ	¢Uﬁ(¡U  fontProviderPackage "É	£<É;’<string queryPatterns "q	Â7q8î8
-reference android:endColor "≈	÷Q≈(ıQ  
-fontStyle "§	ﬂIßﬁJenumnormal italic	ttcIndex "Ø	öLØ1¬L	integer android:offset "‚	ùV‚&∫V  android:alpha "z	í:z%Æ:  android:font "≤	˝L≤$òM  android:fontStyle "±	‘L±)ÙL  fontProviderFallbackQuery "á	©=áA·=string android:centerColor "√	¢Q√+ƒQ  android:centerY "—	ØS—'ÕS  fontProviderFetchTimeout "ö	õFû…Henum|integerforeverˇˇˇˇandroid:centerX "œ	ˇRœ'ùS  shortcutMatchRequired "s	¶8s>€8	boolean nestedScrollViewStyle "±<Ë
-reference android:fontVariationSettings "¥	ÀM¥5˜M  android:gradientRadius "À	æRÀ.„R  fontVariationSettings "x9¨string fontVariationSettings "≠	‰K≠-àL  fontVariationSettings "Ω	ÛOΩ-óP  fontProviderFetchStrategy "ã	∏>òâFenum	blocking asyncandroid:type "«	áR«$¢R  font "©	J©/ñK
-reference colornotification_icon_bg_color 
-Ü?¿
-#ff9e9e9ecall_notification_answer_color 
-çA…#1d873b$androidx_core_ripple_material_light 
-ÌH∞
-#1f0000004androidx_core_secondary_text_default_material_light 
-µXà
-#8a000000 call_notification_decline_color 
-	Œ	Bã#d93025!notification_action_color_filter 
-
-ê
-vÅ;@color/androidx_core_secondary_text_default_material_lightdimennotification_large_icon_width 
-„=õ64dp%notification_main_column_padding_top 
-†Cﬁ0dp notification_top_pad_large_text 
-!ú!>’5dp(compat_button_padding_vertical_material 
-óFÿ4dp)compat_notification_large_icon_max_width 
-‰I®	320dp*compat_button_padding_horizontal_material 
-œHí8dpnotification_large_icon_height 
-•>ﬁ64dp$notification_right_side_padding_top 
-ﬂBú4dpnotification_action_icon_size 
-≠	=Â	32dp&compat_button_inset_vertical_material 
-ãD 6dp"notification_content_margin_start 
-Â
-@†0dpnotification_action_text_size 
-Í	=¢
-13sp(compat_button_inset_horizontal_material 
-≈FÜ4dpnotification_big_circle_margin 
-ß
->‡
-12dp!notification_media_narrow_margin 
-„@û12dpnotification_subtext_size 
-Ø9„13sp&notification_small_icon_size_as_large 
-ÍE™24dp+notification_small_icon_background_padding 
-°IÂ3dpnotification_right_icon_size 
-£<⁄16dpcompat_control_corner_material 
-›=ï2dpnotification_top_pad 
- Ë 4ó10dp*compat_notification_large_icon_max_height 
-öJﬂ320dp	drawable"notification_template_icon_low_bg 
-#¢#LÈ
-#0cffffffic_call_decline_lownotification_bg_normal_pressednotification_bg_normal_pressednotification_bg_normal_pressedic_call_declinenotification_bg_low_pressednotification_bg_low_pressednotification_bg_low_pressednotification_bg_normal	notification_bg_normal
-notification_bg_normalic_call_answer_video_lowic_call_answer$notification_oversize_large_icon_bgnotification_tile_bgnotification_bg_low_normalnotification_bg_low_normalnotification_bg_low_normalic_call_answer_low"notify_panel_notification_icon_bg"notify_panel_notification_icon_bg"notify_panel_notification_icon_bgnotification_icon_backgroundnotification_template_icon_bg 
-"⁄"Hù
-#3333B5E5notification_action_backgroundic_call_answer_videonotification_bgnotification_bg_lowidLtag_screen_reader_focusable 
-O¿%O9Ù%#notification_main_column_containeraction_dividerhide_ime_idtag_accessibility_actions 
-GÎ!G7ù"icon_grouptext 
-V–(V"Ì(line3 
-F»!F#Ê!line1 
-E•!E#√!notification_main_columninfoedit_text_idnotification_backgroundchronometerchronometeraccessibility_custom_action_7 
-BÙB;™ accessibility_custom_action_6 
-AπA;Ôaccessibility_custom_action_5 
-@˛@;¥"tag_accessibility_clickable_spans 
-H¢"H?‹" tag_on_receive_content_listener 
-Mƒ$M=¸$accessibility_custom_action_4 
-?√?;˘tag_on_apply_window_listener 
-Lä$L:ø$accessibility_custom_action_9 
-DÍ D;†!accessibility_custom_action_8 
-CØ C;Â text2 
-WÚ(W#ê)%tag_window_insets_animation_callback 
-Ué(UBÀ(accessibility_custom_action_3 
-<ê<;∆accessibility_custom_action_30 
-=À=<Çactionsaccessibility_custom_action_2 
-1˝1;≥accessibility_custom_action_1 
-&Í&;†$accessibility_action_clickable_span 
-$Ó$A™accessibility_custom_action_0 
-%Ø%;Âaccessibility_custom_action_31 
->á><æaccessibility_custom_action_27 
-9‹9<ìaccessibility_custom_action_26 
-8†8<◊accessibility_custom_action_29 
-;‘;<ãtag_state_description 
-P˘%P3ß&tag_system_bar_state_monitor 
-Q¨&Q:·&accessibility_custom_action_28 
-:ò:<œicontag_compat_insets_dispatch 
-K“#K8Ö$title 
-Xï)X#≥)dialog_button action_container!action_container"action_image!action_image""tag_on_receive_content_mime_types 
-NÅ%N?ª%right_sidetag_unhandled_key_listeners 
-T’'T9â(accessibility_custom_action_23 
-5Ï5<£accessibility_custom_action_22 
-4∞4<Áaccessibility_custom_action_25 
-7‰7<õaccessibility_custom_action_24 
-6®6<ﬂaccessibility_custom_action_21 
-3Ù3<´tag_transition_group 
-RÊ&R2ì'accessibility_custom_action_20 
-2∏2<Ôaccessibility_custom_action_19 
-0¡0<¯accessibility_custom_action_16 
--ç-<ƒaccessibility_custom_action_15 
-,—,<àaccessibility_custom_action_18 
-/Ö/<ºaccessibility_custom_action_17 
-.….<Ä tag_unhandled_key_event_manager 
-Sò'S=–'action_text!action_text"tag_accessibility_pane_title 
-Jò#J:Õ#tag_accessibility_heading 
-I·"I7ì#accessibility_custom_action_12 
-)ù)<‘right_iconaccessibility_custom_action_11 
-(·(<òaccessibility_custom_action_14 
-+ï+<Ãtimetime#accessibility_custom_action_13 
-*Ÿ*<êaccessibility_custom_action_10 
-'•'<‹integer$status_bar_notification_info_maxnum 
-Y∏)YF˘)999layout	 notification_template_part_time#ime_base_split_test_activity$!notification_template_custom_bigcustom_dialog notification_action_tombstone"notification_action!!notification_template_icon_group"ime_secondary_split_test_activity'notification_template_part_chronometerstring∞!call_notification_decline_action 
-\â+\E…+Decline!call_notification_decline_action%
-Äb›Wys af!call_notification_decline_action&
-˘a’†%ı$¿$‡$ç$!call_notification_decline_action'
-˚_’±¡∂!call_notification_decline_action(
-ÑlÎ™Õ§ÕØæñÕØæ® ïï!call_notification_decline_action)
-ÉgÂ∞mtina edin!call_notification_decline_action*
-Äa‹Odbij!call_notification_decline_action+
-Ädﬂ	ê¥≈÷ª÷∆Ã!call_notification_decline_action,
-áfËû¬≈≤ ¿ªœΩµ!call_notification_decline_action-
-Åf‚¨æ§ø≤ ï∞¡®!call_notification_decline_action.
-Äb›Odbaci!call_notification_decline_action/
-˛c‹Rebutja!call_notification_decline_action0
-Äe‡
-OdmÌtnout!call_notification_decline_action1
-˛a⁄Afvis!call_notification_decline_action2
-Ädﬂ	Ablehnen!call_notification_decline_action3
-Åd‡	ë¿Ã¡¡π»∑!call_notification_decline_action4
-˛c‹Decline!call_notification_decline_action5
-˛c‹Decline!call_notification_decline_action6
-˛c‹Decline!call_notification_decline_action7
-˛c‹Decline!call_notification_decline_action8
-……çné@è@é@é@é@é@é@è@é@è@è@è@é@é@é@é@é@é@è@é@é@è@é@é@é@é@è@è@è@è@è@è@é@è@é@è@è@é@é@è@è@é@è@é@é@é@è@è@é@é@é@é@è@é@é@è@è@è@é@è@é@é@è@è@é@é@é@é@è@é@é@è@è@é@é@è@è@è@è@è@é@é@è@é@é@è@é@é@é@é@è@é@é@è@é@é@Declineé@è@é@é@è@é@!call_notification_decline_action9
-Åd‡	Rechazar!call_notification_decline_action:
-Åd‡	Rechazar!call_notification_decline_action;
-˝b⁄Keeldu!call_notification_decline_action<
-Åd‡	Baztertu!call_notification_decline_action=
-¸c⁄±Ø ©±Ø∆!call_notification_decline_action>
-˛b€Hylk‰‰!call_notification_decline_action?
-ÄcﬁRefuser!call_notification_decline_action@
-ÄcﬁRefuser!call_notification_decline_actionA
-Åd‡	Rexeitar!call_notification_decline_actionB
-Åa›®ïæ∞À!call_notification_decline_actionC
-ÅiÂÖ∏Õµ¿ïæ∞ ï∞«Ç!call_notification_decline_actionD
-Öa·Odbij!call_notification_decline_actionE
-ˇf‡ElutasÌt·s!call_notification_decline_actionF
-Öb‚ƒ
-Â
-ÄÍ
-Â
-Ï
-!call_notification_decline_actionG
-˝aŸTolak!call_notification_decline_actionH
-ÇaﬁHafna!call_notification_decline_actionI
-ÄcﬁRifiuta!call_notification_decline_actionJ
-¸aÿ”◊ŸŸ‘!call_notification_decline_actionK
-¯^—“≈¶®!call_notification_decline_actionL
-˛c‹„!–!‡!Á!›!‰!–!!call_notification_decline_actionM
-Çf„ö	∞±Àª¥∞º∞√!call_notification_decline_actionN
-˛b€î/ä/∑/ü/¡/í/!call_notification_decline_actionO
-Åe·
-®ø∞æï∞ø∏ø!call_notification_decline_actionP
-¯^—ÿàê!call_notification_decline_actionQ
-Çg‰ßµ¬∫µ ∫∞≥√√!call_notification_decline_actionR
-ˇc›õ∞ï¥¿™î!call_notification_decline_actionS
-àcÊAtmesti!call_notification_decline_actionT
-Ädﬂ	Noraid´t!call_notification_decline_actionU
-Äa‹û¥±∏ÿ!call_notification_decline_actionV
-ÖfÊ®ø∞∏øïÕï¡ï!call_notification_decline_actionW
-Äe‡
-¢∞¬≥∞ª∑∞≈!call_notification_decline_actionX
-Ñe‰
-®ïæ∞ ¶ÕØæ!call_notification_decline_actionY
-˝aŸTolak!call_notification_decline_actionZ
-ágÈÑ º Ñ ∫ ∏ ï ö ∫ õ î ∫ !call_notification_decline_action[
-¸aÿAvvis!call_notification_decline_action\
-Éf‰ïæüÕ®¡πÀ∏Õ!call_notification_decline_action]
-Ñd„	Weigeren!call_notification_decline_action^
-ÖgÁÖóÕ∞æπÕﬂ ï∞!call_notification_decline_action_
-Ädﬂ	ïæ≤ ïÒüÀ!call_notification_decline_action`
-ˇb‹Odrzuá!call_notification_decline_actiona
-ˇc›Recusar!call_notification_decline_actionb
-ˇc›Recusar!call_notification_decline_actionc
-ˇc›Recusar!call_notification_decline_actiond
-Ädﬂ	Respinge!call_notification_decline_actione
-Äe‡
-û¬∫ªæΩ∏¬Ã!call_notification_decline_actionf
-ÖiÈ¥ ç@ª≠“ö ¬⁄¥ ö!call_notification_decline_actiong
-˛eﬁ
-OdmietnuÂ!call_notification_decline_actionh
-ˇb‹Zavrni!call_notification_decline_actioni
-ÅbﬁRefuzo!call_notification_decline_actionj
-Äa‹û¥±∏ÿ!call_notification_decline_actionk
-˝b⁄Avvisa!call_notification_decline_actionl
-¸aÿKataa!call_notification_decline_actionm
-ˇc›®ø∞æï∞ø!call_notification_decline_actionn
-äfÎïüÕ ö«ØÇ°ø!call_notification_decline_actiono
-ˇb‹õè¥¿™ò!call_notification_decline_actionp
-ˇeﬂ
-Tanggihan!call_notification_decline_actionq
-ˇb‹Reddet!call_notification_decline_actionr
-Çe‚
-í÷¥≈∏ª∏¬∏!call_notification_decline_actions
-Äf·≈≥™±Ø ©±Ã∫!call_notification_decline_actiont
-Ñe‰
-Rad etish!call_notification_decline_actionu
-ˇc›TÎ= ch—=i!call_notification_decline_actionv
-˘^““≈•«!call_notification_decline_actionw
-˜^–“≈•«!call_notification_decline_actionx
-˜^–“≈•«!call_notification_decline_actiony
-Çc‡Yenqaba!call_notification_hang_up_action 
-]Œ+]Eé,Hang Up!call_notification_hang_up_action%
-‚bøLui af!call_notification_hang_up_action&
-⁄c∏µ$ç$©%ï% ›%ã&!call_notification_hang_up_action'
-⁄gº¬∑π ßƒß™µßƒ!call_notification_hang_up_action(
-i‘ï≤ ïæüø ¶øØºï!call_notification_hang_up_action)
-ÍhÕDŸstŸyi as±n!call_notification_hang_up_action*
-·hƒPrekini vezu!call_notification_hang_up_action+
-‰eƒ
-ó∞≤œ¿»À∆Ã!call_notification_hang_up_action,
-ÌeÕ
-ó∞¬≤∞¿œΩµ!call_notification_hang_up_action-
-Ág…ï≤ ï«ü« ¶ø®!call_notification_hang_up_action.
-‚h≈Prekini vezu!call_notification_hang_up_action/
-·aΩPenja!call_notification_hang_up_action0
-Âc√Zavõsit!call_notification_hang_up_action1
-ﬂbºLÊg pÂ!call_notification_hang_up_action2
-‰d√	Auflegen!call_notification_hang_up_action3
-Âg«§µ¡º±ƒπ√ºÃ¬!call_notification_hang_up_action4
-·cøHang up!call_notification_hang_up_action5
-·cøHang Up!call_notification_hang_up_action6
-·cøHang up!call_notification_hang_up_action7
-·cøHang up!call_notification_hang_up_action8
-í…÷né@è@é@é@é@é@é@è@é@è@è@è@é@é@é@é@é@é@è@é@é@è@é@é@é@é@è@è@è@è@è@è@é@è@é@é@è@é@é@è@è@è@é@è@é@é@é@é@è@é@é@è@é@è@é@è@è@è@é@è@é@é@è@è@é@é@é@é@é@é@è@è@é@è@è@é@é@è@è@è@è@é@é@é@é@é@é@é@é@é@è@é@è@è@è@é@Hang Upé@è@é@é@è@é@!call_notification_hang_up_action9
-Âb¬Colgar!call_notification_hang_up_action:
-Âb¬Colgar!call_notification_hang_up_action;
-ﬂg¡Lıpeta kıne!call_notification_hang_up_action<
-Âg«Amaitu deia!call_notification_hang_up_action=
-ﬂdæ	¬∑π ™≈ß≥!call_notification_hang_up_action>
-‡iƒLopeta puhelu!call_notification_hang_up_action?
-„fƒRaccrocher!call_notification_hang_up_action@
-„fƒRaccrocher!call_notification_hang_up_actionA
-Âb¬Colgar!call_notification_hang_up_actionB
-‚f√∏Ææ™Õ§ ï∞À!call_notification_hang_up_actionC
-Íe 
-ï…≤ ïæü«Ç!call_notification_hang_up_actionD
-ÊcƒPrekini!call_notification_hang_up_actionE
-Âe≈
-BefejezÈs!call_notification_hang_up_actionF
-Ác≈±
-˛
-·
-Äˇ
-Â
-Ï
-!call_notification_hang_up_actionG
-ﬁa∫Tutup!call_notification_hang_up_actionH
-„d¬	Leggja ·!call_notification_hang_up_actionI
-„fƒRiaggancia!call_notification_hang_up_actionJ
-›aπ‡ŸÍ’Á!call_notification_hang_up_actionK
-÷`±ö†Òî¬˙Üù!call_notification_hang_up_actionL
-·cø“!–!◊!ÿ!Ë!’!–!!call_notification_hang_up_actionM
-Ëg ¢±	¬õ	∞ΩÀ õ	æŒ!call_notification_hang_up_actionN
-‡dø	ä/∂/Ä/À/ã@Ö/ª/«/!call_notification_hang_up_actionO
-ÊjÀï∞∆ ï ®∆ó ≥ø∏ø!call_notification_hang_up_actionP
-÷a≤Ñê‘¨  ‡∞‹!call_notification_hang_up_actionQ
-Èkœß∞ª√√Ω√ ±Ø	¬Ø	¿Ø	Ø	!call_notification_hang_up_actionR
-‚bøß≤á™≤ç!call_notification_hang_up_actionS
-ÎgÕBaigti pok.!call_notification_hang_up_actionT
-‰eƒ
-PÅrtraukt!call_notification_hang_up_actionU
-·bæ°ø√»¬∏!call_notification_hang_up_actionV
-ÎhŒïÀ˛ ®ø¸§Õ§¡ï!call_notification_hang_up_actionW
-Âb¬¢∞¡ª∞≈!call_notification_hang_up_actionX
-ÈgÀï…≤ ¨Ç¶ ï∞æ!call_notification_hang_up_actionY
-ﬁn«Tamatkan Panggilan!call_notification_hang_up_actionZ
-Ófœñ Ø î ∫ ∏ Å ª õ î ∫ !call_notification_hang_up_action[
-›cªLegg pÂ!call_notification_hang_up_action\
-ÈjŒ´À® ∞æñÕ®¡πÀ∏Õ!call_notification_hang_up_action]
-Ëd«	Ophangen!call_notification_hang_up_action^
-Ïi–∏Ææ™Õ§ ï∞®Õ§¡!call_notification_hang_up_action_
-‰eƒ
-∏Ææ™§ ï∞À!call_notification_hang_up_action`
-·cøRoz¬Öcz!call_notification_hang_up_actiona
-‚d¡	Desligar!call_notification_hang_up_actionb
-‚d¡	Desligar!call_notification_hang_up_actionc
-‚d¡	Desligar!call_notification_hang_up_actiond
-‰c¬Œnchide!call_notification_hang_up_actione
-Âe≈
-ó∞≤µ¿»∏¬Ã!call_notification_hang_up_actionf
-Ói“¿“√± ∞“ öª± ±!call_notification_hang_up_actiong
-„b¿Zlo˛iÂ!call_notification_hang_up_actionh
-·hƒPrekini klic!call_notification_hang_up_actioni
-„aøMbyll!call_notification_hang_up_actionj
-·hƒü¿µ∫∏Ω∏ ≤µ∑√!call_notification_hang_up_actionk
-ﬂcΩL‰gg pÂ!call_notification_hang_up_actionl
-›eΩ
-Kata simu!call_notification_hang_up_actionm
-‚bø§¡£Õüø!call_notification_hang_up_actionn
-e–
-Æ¡óøÇöÇ°ø!call_notification_hang_up_actiono
-·bæß≤á™≤¢!call_notification_hang_up_actionp
-‰a¿Ibaba!call_notification_hang_up_actionq
-·aΩKapat!call_notification_hang_up_actionr
-Áe«
-ó∞≤µ¿»∏¬∏!call_notification_hang_up_actions
-Êh…≈∆¬∑π ©± ØÃ∫!call_notification_hang_up_actiont
-Èd»	Tugatish!call_notification_hang_up_actionu
-‚d¡	Kø=t th˙c!call_notification_hang_up_actionv
-◊^∞Ç∆≠À!call_notification_hang_up_actionw
-’^Æõ«∑À!call_notification_hang_up_actionx
-’^Æõ«∑À!call_notification_hang_up_actiony
-Âg«Vala Ucingo&call_notification_answer_video_action 
-[¡*[HÑ+Video&call_notification_answer_video_action%
-öf˚Video&call_notification_answer_video_action&
-ïdÙÍ$Ú%Ó%&call_notification_answer_video_action'
-ïfˆ¡ Ø »&call_notification_answer_video_action(
-ùgˇ≠ø°øÖô@&call_notification_answer_video_action)
-ùf˛Video&call_notification_answer_video_action*
-öf˚Video&call_notification_answer_video_action+
-öf˚í÷¥Õ∞&call_notification_answer_video_action,
-ônÇí∏¥µææ±∞∂¥∞Ωµ&call_notification_answer_video_action-
-õf¸≠ø°øì&call_notification_answer_video_action.
-öf˚Video&call_notification_answer_video_action/
-òf˘VÌdeo&call_notification_answer_video_action0
-öf˚Video&call_notification_answer_video_action1
-òf˘Video&call_notification_answer_video_action2
-öf˚Video&call_notification_answer_video_action3
-ög¸íØΩƒµø&call_notification_answer_video_action4
-òf˘Video&call_notification_answer_video_action5
-òf˘Video&call_notification_answer_video_action6
-òf˘Video&call_notification_answer_video_action7
-òf˘Video&call_notification_answer_video_action8
-¸Õƒmé@è@é@é@é@é@é@è@é@è@è@è@é@é@é@é@é@é@è@é@é@è@é@é@é@é@è@è@è@è@è@è@è@è@è@è@è@é@è@é@é@é@é@é@è@é@é@è@è@è@é@é@é@è@é@é@é@è@é@è@é@è@é@é@è@è@é@é@è@è@é@é@è@é@é@é@é@è@é@è@é@è@é@é@è@è@é@è@é@é@è@é@é@é@é@é@é@Videoé@è@é@é@è@é@&call_notification_answer_video_action9
-õf¸VÌdeo&call_notification_answer_video_action:
-õf¸Video&call_notification_answer_video_action;
-óf¯Video&call_notification_answer_video_action<
-ög¸Bideoa&call_notification_answer_video_action=
-ñf˜»ÃØÃ»&call_notification_answer_video_action>
-òf˘Video&call_notification_answer_video_action?
-öf˚VidÈo&call_notification_answer_video_action@
-öf˚VidÈo&call_notification_answer_video_actionA
-õf¸VÌdeo&call_notification_answer_video_actionB
-ög¸µ¿°øØÀ&call_notification_answer_video_actionC
-ög¸µ¿°øØÀ&call_notification_answer_video_actionD
-ökÄVideozapis&call_notification_answer_video_actionE
-ôf˙VideÛ&call_notification_answer_video_actionF
-úiÄ	œ
-Â
-˝
-·
-Ê
-·
-ˆ
-„
-&call_notification_answer_video_actionG
-óf¯Video&call_notification_answer_video_actionH
-ók˝MyndsÌmtal&call_notification_answer_video_actionI
-öf˚Video&call_notification_answer_video_actionJ
-ñf˜’Ÿ”–’&call_notification_answer_video_actionK
-îdÛ”a«a™a&call_notification_answer_video_actionL
-òf˘’!ÿ!”!‘!›!&call_notification_answer_video_actionM
-úf˝ëµπΩµ&call_notification_answer_video_actionN
-óg˘ú/∏/ä/¡/¢/º/&call_notification_answer_video_actionO
-ög¸µ¿°øØ &call_notification_answer_video_actionP
-îdÛŸÁÅå¡Å&call_notification_answer_video_actionQ
-úf˝í∏¥µæ&call_notification_answer_video_actionR
-òg˙ß¥îµ¬≠&call_notification_answer_video_actionS
-önÉVaizdo Øra·as&call_notification_answer_video_actionT
-öf˚Video&call_notification_answer_video_actionU
-öf˚í∏¥µæ&call_notification_answer_video_actionV
-ûgÄµ¿°øØÀ&call_notification_answer_video_actionW
-öf˚í∏¥µæ&call_notification_answer_video_actionX
-úhˇµÕπø°øì&call_notification_answer_video_actionY
-óf¯Video&call_notification_answer_video_actionZ
-ühÇó Æ í Æ ö ≠ Ø &call_notification_answer_video_action[
-ñf˜Video&call_notification_answer_video_action\
-úg˛≠ø°øØÀ&call_notification_answer_video_action]
-ûfˇVideo&call_notification_answer_video_action^
-üfÄ≠ø°øì&call_notification_answer_video_action_
-öf˚µ¿°¿ì&call_notification_answer_video_action`
-ôf˙Wideo&call_notification_answer_video_actiona
-ôf˙VÌdeo&call_notification_answer_video_actionb
-ôf˙VÌdeo&call_notification_answer_video_actionc
-ôf˙VÌdeo&call_notification_answer_video_actiond
-öf˚Video&call_notification_answer_video_actione
-öf˚í∏¥µæ&call_notification_answer_video_actionf
-ûgÄ¿”©“∫›&call_notification_answer_video_actiong
-òf˘Video&call_notification_answer_video_actionh
-ôf˙Video&call_notification_answer_video_actioni
-õf¸Video&call_notification_answer_video_actionj
-öf˚í∏¥µæ&call_notification_answer_video_actionk
-óf¯Video&call_notification_answer_video_actionl
-ñf˜Video&call_notification_answer_video_actionm
-òg˙µ¿üøØÀ&call_notification_answer_video_actionn
-ûlÖµ¿°øØÀ ïæ≤Õ&call_notification_answer_video_actiono
-òg˙ß¥îµ¬≠&call_notification_answer_video_actionp
-ôf˙Video&call_notification_answer_video_actionq
-ôf˙Video&call_notification_answer_video_actionr
-úf˝í÷¥µæ&call_notification_answer_video_actions
-öf˚»ÃàÃ»&call_notification_answer_video_actiont
-ûfˇVideo&call_notification_answer_video_actionu
-ôf˙Video&call_notification_answer_video_actionv
-îeÙ∆ìë±ö†›ó&call_notification_answer_video_actionw
-îcÚñìœ°&call_notification_answer_video_actionx
-îcÚñìäî&call_notification_answer_video_actiony
-öh˝Ividiyo call_notification_answer_action 
-Z˛)ZCº*Answer call_notification_answer_action%
-8bï	Antwoord call_notification_answer_action&
-8]êò$ç$µ$ call_notification_answer_action'
-8]ê±Ø— call_notification_answer_action(
-8eòâ§Õ§ ¶øØºï call_notification_answer_action)
-8eòCavab verin call_notification_answer_action*
-8bï	Odgovori call_notification_answer_action+
-8bï	ê¥∫∞∑∞∆Ã call_notification_answer_action,
-8aîû¬≥æ≤æ¿ call_notification_answer_action-
-8cñ
-â§Õ§∞ ¶ø® call_notification_answer_action.
-8bï	Odgovori call_notification_answer_action/
-8`ìRespon call_notification_answer_action0
-8bï	PŸijmout call_notification_answer_action1
-8`ìBesvar call_notification_answer_action2
-8bï	Annehmen call_notification_answer_action3
-8bï	ë¿¨Ωƒ∑√∑ call_notification_answer_action4
-8`ìAnswer call_notification_answer_action5
-8`ìAnswer call_notification_answer_action6
-8`ìAnswer call_notification_answer_action7
-8`ìAnswer call_notification_answer_action8
-8ƒ˜ké@è@é@é@é@é@é@è@é@è@è@è@é@é@é@é@é@é@è@é@é@è@é@é@é@é@è@è@è@è@è@é@é@è@è@é@é@é@é@è@è@è@é@è@è@é@è@è@é@é@è@é@è@è@é@é@é@é@é@è@é@è@é@è@é@è@è@é@é@è@é@é@è@è@è@è@é@é@è@é@è@é@è@é@é@é@é@é@è@é@è@é@é@é@Answeré@è@é@é@è@é@ call_notification_answer_action9
-8cñ
-Responder call_notification_answer_action:
-8cñ
-Responder call_notification_answer_action;
-8_íVasta call_notification_answer_action<
-8bï	Erantzun call_notification_answer_action=
-8^ë¨»ß® call_notification_answer_action>
-8`ìVastaa call_notification_answer_action?
-8bï	RÈpondre call_notification_answer_action@
-8bï	RÈpondre call_notification_answer_actionA
-8cñ
-Contestar call_notification_answer_actionB
-8bï	úµæ¨ Ü™À call_notification_answer_actionC
-8bï	úµæ¨ ¶«Ç call_notification_answer_actionD
-8bï	Odgovori call_notification_answer_actionE
-8aîFogad·s call_notification_answer_actionF
-8dó 
-·
-ˇ
-·
-˝
-Ì
-·
-ˆ
-Â
-Ï
- call_notification_answer_actionG
-8_íJawab call_notification_answer_actionH
-8_íSvara call_notification_answer_actionI
-8bï	Rispondi call_notification_answer_actionJ
-8^ëﬁ‚‡‘ call_notification_answer_actionK
-8\è‹ø‘ˆ call_notification_answer_actionL
-8`ìﬁ!–!·!„!Ó!ÿ! call_notification_answer_actionM
-8dóñ∞√∞ø ±µ¿√ call_notification_answer_actionN
-8_íÜ/“/õ/æ/ô/ call_notification_answer_actionO
-8bï	â§Õ§∞ø∏ø call_notification_answer_actionP
-8\èµ£‘¨ call_notification_answer_actionQ
-8dóñææø ±µ¿Ø	Ø	 call_notification_answer_actionR
-8`ìÆ±ö™≤ç call_notification_answer_actionS
-8bï	Atsakyti call_notification_answer_actionT
-8bï	Atbildìt call_notification_answer_actionU
-8bï	û¥≥æ≤æ¿∏ call_notification_answer_actionV
-8fôÆ±¡™üø ®˝ï¡ï call_notification_answer_actionW
-8bï	•∞¿∏√ª∞≈ call_notification_answer_actionX
-8dóâ§Õ§∞ ¶ÕØæ call_notification_answer_actionY
-8_íJawab call_notification_answer_actionZ
-8göñ Ø î ∫ ∏ Ä ≠ Ø Ñ ∫ õ î ∫  call_notification_answer_action[
-8^ëSvar call_notification_answer_action\
-8dóâ†æâ®¡πÀ∏Õ call_notification_answer_action]
-8fôBeantwoorden call_notification_answer_action^
-8göâ§Õ§∞ ¶øÖ®Õ§¡ call_notification_answer_action_
-8bï	úµæ¨ ¶øì call_notification_answer_action`
-8aîOdbierz call_notification_answer_actiona
-8aîAtender call_notification_answer_actionb
-8aîAtender call_notification_answer_actionc
-8aîAtender call_notification_answer_actiond
-8bï	RÉspunde call_notification_answer_actione
-8bï	û¬≤µ¬∏¬Ã call_notification_answer_actionf
-8fô¥“≈“≠‘ª‘ ØŸ. call_notification_answer_actiong
-8`ìPrijaÂ call_notification_answer_actionh
-8aîSprejmi call_notification_answer_actioni
-8cñ
-PÎrgjigju call_notification_answer_actionj
-8bï	û¥≥æ≤æ¿∏ call_notification_answer_actionk
-8_íSvara call_notification_answer_actionl
-8^ëJibu call_notification_answer_actionm
-8`ì™§ø≤≥ø call_notification_answer_actionn
-8fô™øï™Õ ö«ØÇ°ø call_notification_answer_actiono
-8`ì£±ö™≤¢ call_notification_answer_actionp
-8aîSagutin call_notification_answer_actionq
-8aîYan±tla call_notification_answer_actionr
-8dóí÷¥øæ≤÷¡¬∏ call_notification_answer_actions
-8bï	¨»ß® ØÃ∫ call_notification_answer_actiont
-8fôJavob berish call_notification_answer_actionu
-8aîTr£= l›=i call_notification_answer_actionv
-8\è•«¨® call_notification_answer_actionw
-8\è•«˝Ä call_notification_answer_actionx
-8\è•«˝Ä call_notification_answer_actiony
-8bï	Phendulacall_notification_ongoing_text 
-_›,_H†-Ongoing callcall_notification_ongoing_text%
-ØmóOproep aan die gangcall_notification_ongoing_text&
-ùf˛•%Ë%$´%Ñ$% Î%à$ •&™$call_notification_ongoing_text'
-®fâ≈√ßƒ≈© ¨ß± ©call_notification_ongoing_text(
-¡d†ö≤ø •ïæ ï≤call_notification_ongoing_text)
-∑iõDavam edŸn zŸngcall_notification_ongoing_text*
-±iïPoziv je u tokucall_notification_ongoing_text+
-≥gïëœ≥√«À ≤À∫ª÷∫call_notification_ongoing_text,
-Ωi°¢µ∫√…æ æ±∞∂¥∞Ωµcall_notification_ongoing_text-
-≥fîöæ≤¡ •æïæ ï≤call_notification_ongoing_text.
-≤fìPoziv u tokucall_notification_ongoing_text/
-¨iêTrucada en curscall_notification_ongoing_text0
-±kóProbÌhajÌcÌ hovorcall_notification_ongoing_text1
-¨mîIgangvÊrende opkaldcall_notification_ongoing_text2
-¥iòAktueller Anrufcall_notification_ongoing_text3
-∏jùöªÆ√∑ √µ µæ≠ªπæ∑call_notification_ongoing_text4
-¨géOn-going callcall_notification_ongoing_text5
-¨fçOngoing callcall_notification_ongoing_text6
-¨géOn-going callcall_notification_ongoing_text7
-¨géOn-going callcall_notification_ongoing_text8
-™ÕÚ	té@è@é@é@é@é@é@è@é@è@è@è@é@é@é@é@é@é@è@é@é@è@é@é@é@é@è@è@è@è@è@è@è@è@è@è@é@è@è@è@è@é@è@é@è@è@é@è@è@è@è@è@è@è@é@è@é@é@é@è@é@è@è@é@é@è@è@è@è@è@é@é@é@é@é@è@é@è@è@è@é@é@é@è@é@è@é@é@è@é@è@è@è@è@è@é@é@Ongoing callé@è@é@é@è@é@call_notification_ongoing_text9
-≤jóLlamada en cursocall_notification_ongoing_text:
-≤jóLlamada en cursocall_notification_ongoing_text;
-∞iîK‰imasolev kınecall_notification_ongoing_text<
-µgóDeia abian dacall_notification_ongoing_text=
-®jç™≈ß≥ Ø±≠ßƒ ß∆¨ß≈call_notification_ongoing_text>
-≤pùK‰ynniss‰ oleva puhelucall_notification_ongoing_text?
-±hîAppel en courscall_notification_ongoing_text@
-±hîAppel en courscall_notification_ongoing_textA
-≤jóChamada en cursocall_notification_ongoing_textB
-Æbã	öæ≤¡ ï…≤call_notification_ongoing_textC
-¿j•™π≤« ∏« úæ∞¿ ï…≤call_notification_ongoing_textD
-±hîPoziv u tijekucall_notification_ongoing_textE
-±kóHÌv·s folyamatbancall_notification_ongoing_textF
-≥fî∏
-ˆ
-È
-·
-ÅÎ
-Ô
- Ê
-·
-ˆ
-„
-call_notification_ongoing_textG
-©vöPanggilan sedang berlangsungcall_notification_ongoing_textH
-ÆhëSÌmtal Ì gangicall_notification_ongoing_textI
-∂kúChiamata in corsocall_notification_ongoing_textJ
-£dÇÈŸ◊‘ ‰‚Ÿ‹‘call_notification_ongoing_textK
-ì]Îö†Òî≠úcall_notification_ongoing_textL
-Æhë€!ÿ!€!”!ÿ!‹!–!‡!‘! ÷!–!‡!ÿ!call_notification_ongoing_textM
-∑aìö	æ£	À¿∞√call_notification_ongoing_textN
-©pîÄ/∂/ö/ã@†/≈/ä/¬/õ/Ä/∆/ñ/ª/Ñ/ä/∆/é/æ/ö/Ä/∂/ö/call_notification_ongoing_textO
-µlúöæ≤Õ§øØ≤Õ≤ø∞¡µ ï∞∆call_notification_ongoing_textP
-óbÙ	ƒìâ´ ëí¯é µ£‘¨call_notification_ongoing_textQ
-∫hù£«√¿¥∞≥À «∞ª√√call_notification_ongoing_textR
-©bÜ	™≤ç¬ó≠≠Åcall_notification_ongoing_textS
-¡n™Vykstantis skambutiscall_notification_ongoing_textT
-¥lõPa·reizìjais zvanscall_notification_ongoing_textU
-¨gé¢µ∫æ≤µΩ øæ≤∏∫call_notification_ongoing_textV
-∫eö∏ú¿µÆæØ ïÀ˛call_notification_ongoing_textW
-∞põî√√¥ª∞≥∞ ≈∏π≥¥Õ∂ ±∞πΩ∞call_notification_ongoing_textX
-∂iö∏¡∞¬ Ö∏≤«≤æ ï…≤call_notification_ongoing_textY
-∂vßPanggilan sedang berlangsungcall_notification_ongoing_textZ
-Ωj¢ú Ä ∫ õ æ ≠ Å ± ´ ∫ Ü ≠ Ø ô æ Ø call_notification_ongoing_text[
-¨jëPÂgÂende samtalecall_notification_ongoing_text\
-µdî≠á∞π«ïÀ ï≤call_notification_ongoing_text]
-∑höActief gesprekcall_notification_ongoing_text^
-∫fõöæ≤ø•ø¨æ ï≤Õcall_notification_ongoing_text_
-Øbå	úæ∞¿ ïæ≤call_notification_ongoing_text`
-∂iöTrwa po¬Öczeniecall_notification_ongoing_texta
-¥nùChamada em andamentocall_notification_ongoing_textb
-¥nùChamada em andamentocall_notification_ongoing_textc
-±jñChamada em cursocall_notification_ongoing_textd
-≠mïApel Ón desfÉôurarecall_notification_ongoing_texte
-≥gï¢µ∫√…∏π ≤À∑æ≤call_notification_ongoing_textf
-∫hùöªúŸ± ∫± á∏≠‘∏call_notification_ongoing_textg
-≥löPrebiehaj˙ci hovorcall_notification_ongoing_texth
-∞fëAktivni kliccall_notification_ongoing_texti
-∞oöTelefonatÎ nÎ vazhdimcall_notification_ongoing_textj
-±iïüæ∑∏≤ ÿµ √ ¬æ∫√call_notification_ongoing_textk
-ÆiíPÂgÂende samtalcall_notification_ongoing_textl
-≠kìSimu inayoendeleacall_notification_ongoing_textm
-Øsùö∆Ø≤ø≤Õ á∞¡ïÕï¡ÆÕ Ö¥»™Õ™¡call_notification_ongoing_textn
-øk•ïæ≤Õ ï ®∏æó¡§ÀÇ¶øcall_notification_ongoing_texto
-™ié™≤¢óµ»™ôóô≤≠¢π»call_notification_ongoing_textp
-∞lóKasalukuyang tawagcall_notification_ongoing_textq
-®jçDevam eden aramacall_notification_ongoing_textr
-µiôê∫¬∏≤Ω∏π ≤∏∫ª∏∫call_notification_ongoing_texts
-µbí	¨ß±Ã ©ßƒcall_notification_ongoing_textt
-πhúJoriy chaqiruvcall_notification_ongoing_textu
-≠qôCuŸ=c gÕ=i ëang thÒ=c hi«=ncall_notification_ongoing_textv
-í^Î„÷®Æö†›ócall_notification_ongoing_textw
-ê]Ëö†Òî≠úcall_notification_ongoing_textx
-ê]Ëö†Òî≠úcall_notification_ongoing_texty
-∂kúIkholi eqhubekayo!call_notification_screening_text 
-`•-`X¯-Screening an incoming call!call_notification_screening_text%
-	ú	xèKeur tans 'n inkomende oproep!call_notification_screening_text&
-	É	d‚à&‚$ •&™$ õ$£&´$ı$!call_notification_screening_text'
-	é	r˚ ™≈ ¡≠µ ßƒ≈√ßƒ≈© ßƒ»ß±Ø©!call_notification_screening_text(
-	•	Å°(èüæ Ö®Õ§ÕóæÆ¿ ï≤ ™¿ïÕ∑æ ïø •ïæ π»õ«!call_notification_screening_text)
-	†	oäGŸlŸn zŸng gˆstŸrilir!call_notification_screening_text*
-	ö	tâProverava se dolazni poziv!call_notification_screening_text+
-	ö	yé §÷ªÃ¬¿∞≤∞ΩΩµ ﬁ≤∞≈æ¥Ω∞≥∞ ≤À∫ª÷∫√!call_notification_screening_text,
-	¶	wòü¿µ≥ªµ∂¥∞ ¡µ ≤≈æ¥œ…æ æ±∞∂¥∞Ωµ!call_notification_screening_text-
-	ô	xåá®ïæÆøÇ ï≤ ∏ÕïÕ∞ø®øÇ ï∞æ πöÕõ«!call_notification_screening_text.
-	ò	uàFiltriranje dolaznog poziva!call_notification_screening_text/
-	ï	~é$S'est‡ filtrant una trucada entrant!call_notification_screening_text0
-	ú	wéProvõŸov·nÌ pŸÌchozÌho hovoru!call_notification_screening_text1
-	ô	väEt indgÂende opkald screenes!call_notification_screening_text2
-	ù	véFilter f¸r eingehenden Anruf!call_notification_screening_text3
-	¢	uíîπ±ªø≥Æ µπ√µ¡«ÃºµΩ∑¬ ∫ªÆ√∑¬!call_notification_screening_text4
-	ì	tÇScreening an incoming call!call_notification_screening_text5
-	í	tÅScreening an incoming call!call_notification_screening_text6
-	ì	tÇScreening an incoming call!call_notification_screening_text7
-	ì	tÇScreening an incoming call!call_notification_screening_text8
-	˜		‘∆{é@è@é@é@é@é@é@è@é@è@è@è@é@é@é@é@é@é@è@é@é@è@é@é@é@é@è@è@è@è@é@é@é@è@è@é@è@é@é@é@è@è@è@é@é@è@é@é@è@é@è@é@é@é@è@è@é@é@è@é@é@é@è@è@è@é@é@è@é@è@é@è@è@è@è@è@é@è@è@è@è@é@è@é@è@è@è@é@é@é@Screening an incoming callé@è@é@é@è@é@!call_notification_screening_text9
-	ú	xèFiltrando una llamada entrante!call_notification_screening_text:
-	ú	xèFiltrando una llamada entrante!call_notification_screening_text;
-	ô	xåSissetuleva kıne filtreerimine!call_notification_screening_text<
-	ú	wéSarrerako dei bat bistaratzen!call_notification_screening_text=
-	í	uÇØ±≠ßƒ ∫±®ßƒ ©±Ø∆ ™≈ß≥ »±»ØÃ!call_notification_screening_text>
-	¢	tëSeulotaan saapuvaa puhelua!call_notification_screening_text?
-	ô	väFiltrage d'un appel entrant!call_notification_screening_text@
-	ô	rÜFiltrer un appel entrant!call_notification_screening_textA
-	ú	tãFiltrando chamada entrante!call_notification_screening_textB
-	ê	zÖ!á®ïÆøÇó ï…≤®¡Ç ∏ÕïÕ∞¿®øÇó •æØ õ«!call_notification_screening_textC
-	™	§&á®ïÆøÇó ï…≤ ïÀ ∏ÕïÕ∞¿® ïøØæ úæ ∞πæ π»!call_notification_screening_textD
-	ô	uâFiltriranje dolaznog poziva!call_notification_screening_textE
-	ú	nÖBejˆv— hÌv·s szÒrÈse!call_notification_screening_textF
-	ô	oÉƒ
-¯
-Çˇ
-Ñ·
-ı
-Î
-ˆ
- Ê
-·
-ˆ
-„
-Î
- Ê
-ˇ
-¯
-ÇÙ
-!call_notification_screening_textG
-	ü	sçMenyaring panggilan masuk!call_notification_screening_textH
-	ñ	oÄSÌar sÌmtal sem berst!call_notification_screening_textI
-	°	Çû)Applicazione filtro a chiamata in arrivo!call_notification_screening_textJ
-	á	jÏ·Ÿ‡’ﬂ ÈŸ◊‘ ‡€‡·Í!call_notification_screening_textK
-		e–¿Ó·üíaπaØaÍa¸aÀaÛa∞a≠ú!call_notification_screening_textL
-	ñ	váË!‘!€!›!€!–!’!–!⁄!ÿ! ÷!–!‡!‘!—!ÿ!·! “!–!Í!Ó!‡!ÿ!⁄!’!–!!call_notification_screening_textM
-	ò	oÇöµª≥µΩ õ	æ£	À¿∞√¥À ¡Ø	∑√!call_notification_screening_textN
-	ô	pÑÄ/∆/ñ/ª/Ñ/ñ/∑/ì/∑/è/“/ô/Ä/∂/ö/ã@†/≈/ã@Ö/º/õ/!call_notification_screening_textO
-	°	Äú'í≥¨∞¡µ ï∞∆Ø®Õ®¡ ∏ÕïÕ∞¿®Õ Ææ°≤æó¡§Õ§ø¶∆!call_notification_screening_textP
-	˘	dÿòÑ‡Ö Ñê‘¨ ÄŸ¨Å ëí!call_notification_screening_textQ
-	¢	oåö∏¿Ø	Ø	«Ø	 «∞ª√√Ω√ ∏¿≥È	È	!call_notification_screening_textR
-	ã	oıÅ≥•±áÅßî™≠ö™≤ç¬ó¿Çª…≤!call_notification_screening_textS
-	Ø	x¢Gaunamojo skambuçio tikrinimas!call_notification_screening_textT
-	†	séIenÅko·Å zvana filtrì·ana!call_notification_screening_textU
-	ì	tÇü¿æ≤µ¿∫∞ Ω∞ ¥æÿ¥æ≤µΩ øæ≤∏∫!call_notification_screening_textV
-	ü	zî!á˚ïÆøÇóÕ ïÀ˛ ∏Õå@ïÕ∞¿˚ ö∆ØÕØ¡®Õ®¡!call_notification_screening_textW
-	†	wíò¿¡ÕΩ ¥√√¥ª∞≥À≥ ≈∞¿√√ª∂ ±∞πΩ∞!call_notification_screening_textX
-	ü	uèá®ïÆøÇó ï…≤ ∏ÕïÕ∞¿® ï∞§ Üπ«!call_notification_screening_textY
-	¨	söMenyaring panggilan masuk!call_notification_screening_textZ
-	ß	wô° ù Ñ ∫ Å ± ´ ∫ Ü ≠ Ø ô æ Ø Ä ≠ Ø  Ö Ö ∫ Ü ± ∏ î ± û ä ∫ !call_notification_screening_text[
-	ñ	xâFiltrerer et innkommende anrop!call_notification_screening_text\
-	ô	lÄÜóÆ® ï≤ úæÅöøÅ¶» õ!call_notification_screening_text]
-	ü	wëEen inkomend gesprek screenen!call_notification_screening_text^
-	†	wíèï á®ïÆøÇ ï≤ï¡ ∏ÕïÕ∞ø®Õ ï∞¡õø!call_notification_screening_text_
-	ë	Åç(á®ïÆøó ïæ≤ ¶¿ ∏ïÕ∞¿®øó ï¿§¿ úæ ∞π¿ π»!call_notification_screening_text`
-	ü	zî!Filtrujô po¬Öczenie przychodzÖce!call_notification_screening_texta
-	¢	xïFiltrando uma ligaÁ„o recebida!call_notification_screening_textb
-	¢	xïFiltrando uma ligaÁ„o recebida!call_notification_screening_textc
-	õ	yè A filtrar uma chamada recebida¶@!call_notification_screening_textd
-	ö	uäSe filtreazÉ un apel primit!call_notification_screening_texte
-	ö	uä§∏ªÃ¬¿∞∆∏œ ≤≈æ¥œ…µ≥æ ≤À∑æ≤∞!call_notification_screening_textf
-	¢	rèë± á∏≠‘∏ö  ¥ª”ö ¬œ öª± ±!call_notification_screening_textg
-	ü	zî!Preveruje sa prich·dzaj˙ci hovor!call_notification_screening_texth
-	ñ	uÜPreverjanje dohodnega klica!call_notification_screening_texti
-	ü	zî!Po filtron njÎ telefonatÎ hyrÎse!call_notification_screening_textj
-	ö	tâü¿æ≤µ¿∞≤∞ ¡µ ¥æª∞∑Ω∏ øæ∑∏≤!call_notification_screening_textk
-	ó	yã Ett inkommande samtal filtreras!call_notification_screening_textl
-	ò	sÜInachuja simu unayopigiwa!call_notification_screening_textm
-	¢	Äù'â≥Õµ∞¡ÆÕ Ö¥»™Õ™» Æ§ø™Õ™æØÕµ¡ ö∆ØÕïø±§¡!call_notification_screening_textn
-	™	|°#á®Õå@ïÆøÇóÕ ïæ≤Õå@®¡ ∏ÕïÕ∞¿®Õ ö«ØÇ°ø!call_notification_screening_texto
-	ì	p˛Å≥•±á™Å£µô™≤¢¿£µ¢Å¿Ç…≤!call_notification_screening_textp
-	ú	zë!Nagsi-screen ng papasok na tawag!call_notification_screening_textq
-	í	o¸Gelen arama s¸z¸l¸yor!call_notification_screening_textr
-	û	qäí≈÷¥Ω∏π ≤∏∫ª∏∫ (§÷ªÃ¬¿)!call_notification_screening_texts
-	ó	rÑß–∆ ©≈∆Ø ©ßƒ ©Ã ß≥©±Ã∆∆Ø!call_notification_screening_textt
-	°	wìKiruvchi chaqiruvni filtrlash!call_notification_screening_textu
-	û	tçêang s‡ng lÕ=c cuŸ=c gÕ=i ëø=n!call_notification_screening_textv
-		`À„÷®Æ«ü‰›ÂŒµÍ!call_notification_screening_textw
-	Ì	`»„÷®ÆŒ†˛ﬂÜü˚≠!call_notification_screening_textx
-	Ì	`»„÷®ÆŒ†˛ﬂÜü˚≠!call_notification_screening_texty
-	°	qçUkuveza ikholi engenayo&status_bar_notification_info_overflow 
-a˝-aGø.999+&status_bar_notification_info_overflow%
-
-î
-eÙ999+&status_bar_notification_info_overflow&
-
-Á
-e«999+&status_bar_notification_info_overflow'
-
-Ä
-e‡999+&status_bar_notification_info_overflow(
-
-¶
-eÜÔÔÔ+&status_bar_notification_info_overflow)
-
-è
-eÔ999+&status_bar_notification_info_overflow*
-
-é
-eÓ999+&status_bar_notification_info_overflow+
-
-ì
-eÛ999+&status_bar_notification_info_overflow,
-
-ù
-e˝999+&status_bar_notification_info_overflow-
-
-ë
-eÒÔÔÔ+&status_bar_notification_info_overflow.
-
-ç
-eÌ999+&status_bar_notification_info_overflow/
-
-ì
-eÛ999+&status_bar_notification_info_overflow0
-
-ì
-eÛ999+&status_bar_notification_info_overflow1
-
-è
-eÔ999+&status_bar_notification_info_overflow2
-
-ì
-eÛ999+&status_bar_notification_info_overflow3
-
-ó
-e˜999+&status_bar_notification_info_overflow4
-
-á
-eÁ999+&status_bar_notification_info_overflow5
-
-Ü
-eÊ999+&status_bar_notification_info_overflow6
-
-á
-eÁ999+&status_bar_notification_info_overflow7
-
-á
-eÁ999+&status_bar_notification_info_overflow8
-
-À
-Ãílé@è@é@é@é@é@é@è@é@è@è@è@é@é@é@é@é@é@è@é@é@è@é@é@é@é@è@è@è@è@è@è@è@è@é@è@é@è@è@è@é@é@é@è@è@è@è@é@é@è@é@é@è@è@é@è@é@è@è@é@é@è@é@è@è@é@é@é@è@é@é@é@é@é@é@é@è@é@é@é@é@è@é@è@é@è@é@é@é@é@è@é@é@é@é@é@é@999+é@è@é@é@è@é@&status_bar_notification_info_overflow9
-
-î
-eÙ999+&status_bar_notification_info_overflow:
-
-î
-eÙ999+&status_bar_notification_info_overflow;
-
-ë
-eÒ999+&status_bar_notification_info_overflow<
-
-ì
-eÛ999+&status_bar_notification_info_overflow=
-
-á
-eÁ999+&status_bar_notification_info_overflow>
-
-ñ
-eˆ999+&status_bar_notification_info_overflow?
-
-è
-eÔ999+&status_bar_notification_info_overflow@
-
-ã
-eÎ999+&status_bar_notification_info_overflowA
-
-ê
-e>999&status_bar_notification_info_overflowB
-
-ä
-eÍ999+&status_bar_notification_info_overflowC
-
-©
-eâ999+&status_bar_notification_info_overflowD
-
-é
-eÓ999+&status_bar_notification_info_overflowE
-
-ä
-eÍ999+&status_bar_notification_info_overflowF
-
-à
-eË999+&status_bar_notification_info_overflowG
-
-í
-eÚ999+&status_bar_notification_info_overflowH
-
-Ö
-eÂ999+&status_bar_notification_info_overflowI
-
-£
-eÉ999+&status_bar_notification_info_overflowJ
-
-Ò
-e—999+&status_bar_notification_info_overflowK
-
-’
-eµ999+&status_bar_notification_info_overflowL
-
-å
-eÏ999+&status_bar_notification_info_overflowM
-
-á
-eÁ999+&status_bar_notification_info_overflowN
-
-â
-eÈ999+&status_bar_notification_info_overflowO
-
-°
-eÅ999+&status_bar_notification_info_overflowP
-
-›
-eΩ999+&status_bar_notification_info_overflowQ
-
-ë
-eÒ999+&status_bar_notification_info_overflowR
-
-˙
-e⁄999+&status_bar_notification_info_overflowS
-
-ß
-eá999+&status_bar_notification_info_overflowT
-
-ì
-eÛ999+&status_bar_notification_info_overflowU
-
-á
-eÁ999+&status_bar_notification_info_overflowV
-
-ô
-e˘999+&status_bar_notification_info_overflowW
-
-ó
-e˜999+&status_bar_notification_info_overflowX
-
-î
-eÙÔÔÔ+&status_bar_notification_info_overflowY
-
-ü
-eˇ999+&status_bar_notification_info_overflowZ
-
-û
-e˛… … … +&status_bar_notification_info_overflow[
-
-é
-eÓ999+&status_bar_notification_info_overflow\
-
-Ö
-eÂÔÔÔ+&status_bar_notification_info_overflow]
-
-ñ
-eˆ999+&status_bar_notification_info_overflow^
-
-ó
-e˜999+&status_bar_notification_info_overflow_
-
-í
-eÚ999+&status_bar_notification_info_overflow`
-
-ô
-e˘999+&status_bar_notification_info_overflowa
-
-ö
-e˙999+&status_bar_notification_info_overflowb
-
-ö
-e˙999+&status_bar_notification_info_overflowc
-
-î
-eÙ999+&status_bar_notification_info_overflowd
-
-è
-eÔ999+&status_bar_notification_info_overflowe
-
-è
-eÔ>999&status_bar_notification_info_overflowf
-
-î
-eÙ999+&status_bar_notification_info_overflowg
-
-ô
-e˘999+&status_bar_notification_info_overflowh
-
-ã
-eÎ999+&status_bar_notification_info_overflowi
-
-ô
-e˘999+&status_bar_notification_info_overflowj
-
-é
-eÓ999+&status_bar_notification_info_overflowk
-
-ê
-e999+&status_bar_notification_info_overflowl
-
-ã
-eÎ999+&status_bar_notification_info_overflowm
-
-¢
-eÇ999+&status_bar_notification_info_overflown
-
-¶
-eÜ999+&status_bar_notification_info_overflowo
-
-É
-e„999+&status_bar_notification_info_overflowp
-
-ñ
-eˆ999+&status_bar_notification_info_overflowq
-
-Å
-e·999+&status_bar_notification_info_overflowr
-
-è
-eÔ999+&status_bar_notification_info_overflows
-
-â
-eÈ+999&status_bar_notification_info_overflowt
-
-ò
-e¯999+&status_bar_notification_info_overflowu
-
-í
-eÚ999+&status_bar_notification_info_overflowv
-
-–
-e∞999+&status_bar_notification_info_overfloww
-
-Õ
-e≠999+&status_bar_notification_info_overflowx
-
-Õ
-e≠999+&status_bar_notification_info_overflowy
-
-í
-eÚ999+ call_notification_incoming_text 
-^ì,^Jÿ,Incoming call call_notification_incoming_text%
-ƒk™Inkomende oproep call_notification_incoming_text&
-Ω`òà&‚$ •&™$ call_notification_incoming_text'
-¡g£≈√ßƒ≈© »ß±Ø© call_notification_incoming_text(
-ŸhºÖ®Õ§ÕóæÆ¿ ï≤ call_notification_incoming_text)
-“e≤GŸlŸn zŸng call_notification_incoming_text*
-…h¨Dolazni poziv call_notification_incoming_text+
-…jÆ£≤∞≈æ¥ΩÀ ≤À∫ª÷∫ call_notification_incoming_text,
-“k∏í≈æ¥œ…æ æ±∞∂¥∞Ωµ call_notification_incoming_text-
-ŒeÆá®ïæÆøÇ ï≤ call_notification_incoming_text.
- h≠Dolazni poziv call_notification_incoming_text/
-¬jßTrucada entrant call_notification_incoming_text0
-»i¨PŸÌchozÌ hovor call_notification_incoming_text1
-¡kßIndgÂende opkald call_notification_incoming_text2
-»lØEingehender Anruf call_notification_incoming_text3
-Ãl≥ïπ√µ¡«ÃºµΩ∑ ∫ªÆ√∑ call_notification_incoming_text4
-ƒhßIncoming call call_notification_incoming_text5
-ƒhßIncoming call call_notification_incoming_text6
-ƒhßIncoming call call_notification_incoming_text7
-ƒhßIncoming call call_notification_incoming_text8
-€œ•ué@è@é@é@é@é@é@è@é@è@è@è@é@é@é@é@é@é@è@é@é@è@é@é@é@é@è@è@è@è@è@è@è@è@é@è@é@è@é@é@è@è@é@é@é@é@è@é@é@è@é@è@é@é@é@é@è@é@é@é@é@è@é@è@è@é@é@é@è@è@è@é@è@è@é@é@é@è@é@é@é@è@è@é@è@é@é@é@è@é@è@è@é@è@è@è@é@Incoming callé@è@é@é@è@é@ call_notification_incoming_text9
-«k≠Llamada entrante call_notification_incoming_text:
-«k≠Llamada entrante call_notification_incoming_text;
-∆j´Sissetulev kıne call_notification_incoming_text<
-Ãi∞Sarrerako deia call_notification_incoming_text=
-√e£™≈ß≥ »±»ØÃ call_notification_incoming_text>
-…i≠Saapuva puhelu call_notification_incoming_text?
-…h¨Appel entrant call_notification_incoming_text@
-…h¨Appel entrant call_notification_incoming_textA
-«k≠Chamada entrante call_notification_incoming_textB
-»f©á®ïÆøÇó ï…≤ call_notification_incoming_textC
-œqªÜ®« µæ≤æ (á®ïÆøÇó) ï…≤ call_notification_incoming_textD
-…h¨Dolazni poziv call_notification_incoming_textE
- g¨Bejˆv— hÌv·s call_notification_incoming_textF
- iÆƒ
-¯
-Çˇ
-Ñ·
-ı
-Î
-ˆ
- Ê
-·
-ˆ
-„
- call_notification_incoming_textG
-øj§Panggilan masuk call_notification_incoming_textH
-«g©SÌmtal berst call_notification_incoming_textI
-…m±Chiamata in arrivo call_notification_incoming_textJ
-æeûÈŸ◊‘ ‡€‡·Í call_notification_incoming_textK
-∂]é¿Ó·ü call_notification_incoming_textL
-ƒj©Ë!‘!€!›!€!–!’!–!⁄!ÿ! ÷!–!‡!ÿ! call_notification_incoming_textM
-œh≤ö÷¿÷¡ õ	æ£	À¿∞√ call_notification_incoming_textN
-ƒe§Ä/∂/ö/ã@†/≈/ã@Ö/º/õ/ call_notification_incoming_textO
-–e∞í≥¨∞¡µ ï∞∆ call_notification_incoming_textP
-∑`íòÑ‡Ö Ñê‘¨ call_notification_incoming_textQ
-‘fµß∞ªÀø ∂∞¬∞¬ call_notification_incoming_textR
-ƒe§™≤ç¬ó¿Çª…≤ call_notification_incoming_textS
-“oºGaunamasis skambutis call_notification_incoming_textT
-…kØIenÅko·ais zvans call_notification_incoming_textU
-√ißîæÿ¥æ≤µΩ øæ≤∏∫ call_notification_incoming_textV
-”gµá˚ïÆøÇóÕ ïÀ˛ call_notification_incoming_textW
-«i´ò¿¡ÕΩ ¥√√¥ª∞≥∞ call_notification_incoming_textX
-–f±á®ïÆøÇó ï…≤ call_notification_incoming_textY
-Ãj±Panggilan masuk call_notification_incoming_textZ
-‘i∏° ù Ñ ∫ Å ± ´ ∫ Ü ≠ Ø ô æ Ø  call_notification_incoming_text[
-¿lßInnkommende anrop call_notification_incoming_text\
-”b∞ÜóÆ® ï≤ call_notification_incoming_text]
-Ãk≤Inkomend gesprek call_notification_incoming_text^
-’eµá®ïÆøÇ ï≤Õ call_notification_incoming_text_
-…f™á®ïÆøó ïæ≤ call_notification_incoming_text`
-ƒr±Po¬Öczenie przychodzÖce call_notification_incoming_texta
-∆nØAlguÈm est· ligando call_notification_incoming_textb
-∆nØAlguÈm est· ligando call_notification_incoming_textc
-∆k¨Chamada recebida call_notification_incoming_textd
-«f®Apel primit call_notification_incoming_texte
- iÆí≈æ¥œ…∏π ≤À∑æ≤ call_notification_incoming_textf
-◊cµ	ë± á∏≠‘∏ call_notification_incoming_textg
-≈nÆPrich·dzaj˙ci hovor call_notification_incoming_texth
-…g´Dohodni klic call_notification_incoming_texti
-ƒl´TelefonatÎ hyrÎse call_notification_incoming_textj
-…h¨îæª∞∑Ω∏ øæ∑∏≤ call_notification_incoming_textk
-¬l©Inkommande samtal call_notification_incoming_textl
-¬k®Simu uliyopigiwa call_notification_incoming_textm
-ƒk™â≥Õµ∞¡ÆÕ Ö¥»™Õ™¡ call_notification_incoming_textn
-’j∫á®Õå@ïÆøÇóÕ ïæ≤Õ call_notification_incoming_texto
-√g•™≤¢¿£µ¢Å¿Ç…≤ call_notification_incoming_textp
-≈k´Papasok na tawag call_notification_incoming_textq
-¬f£Gelen arama call_notification_incoming_textr
-Ãi∞í≈÷¥Ω∏π ≤∏∫ª∏∫ call_notification_incoming_texts
-Œg∞ß–∆ ©≈∆Ø ©ßƒ call_notification_incoming_textt
-Õl¥Kiruvchi chaqiruv call_notification_incoming_textu
-∆g®CuŸ=c gÕ=i ëø=n call_notification_incoming_textv
-µ]çÂŒµÍ call_notification_incoming_textw
-≥]ãÜü˚≠ call_notification_incoming_textx
-≥]ãÜü˚≠ call_notification_incoming_texty
-Ãj±Ikholi engenayostyle(TextAppearance.Compat.Notification.Info "c∏/c~±0;9@android:style/TextAppearance.Material.Notification.Info *Widget.Compat.NotificationActionContainer "g¢3i…4>android:background)@drawable/notification_action_background#TextAppearance.Compat.Notification "bƒ.bt≥/64@android:style/TextAppearance.Material.Notification )TextAppearance.Compat.Notification.Title "f¢2fÄù3<:@android:style/TextAppearance.Material.Notification.Title )TextAppearance.Compat.Notification.Line2 "d∂0dnü1*(TextAppearance.Compat.Notification.Info (TextAppearance.Compat.Notification.Time "e§1e~ù2;9@android:style/TextAppearance.Material.Notification.Time %Widget.Compat.NotificationActionText "jŒ4n©7øandroid:textAppearance#?android:attr/textAppearanceButtonandroid:textColor;@color/androidx_core_secondary_text_default_material_lightandroid:textSize%@dimen/notification_action_text_size
-styleableFontFamilyFont "¢§I∂∏N¥
-
-fontStyleenumnormal italicfont
-reference fontWeightinteger fontVariationSettings  	ttcIndexinteger 
-fontStyle  font  fontWeight  fontVariationSettings  	ttcIndex  FontFamily "¶;°üIõfontProviderAuthoritystring fontProviderPackagestring fontProviderQuerystring fontProviderFallbackQuerystring fontProviderCerts
-reference fontProviderFetchStrategyenum	blocking asyncfontProviderFetchTimeoutenum|integerforeverˇˇˇˇfontProviderSystemFontFamily  GradientColorItem "‡ﬂUÂÅWoffset  color  Capability "oÆ7tÙ89queryPatterns
-reference shortcutMatchRequiredboolean FontFamilyProviderFallback "∑ΩNæ∞PLfontProviderQuery  fontProviderSystemFontFamily  fontVariationSettings  GradientColor "øµPﬂ⁄U~startColor  centerColor  	endColor  type  gradientRadius  centerX  centerY  startX  startY  endX  endY  	tileMode  ColorStateListItem "u˘8~°;3color  alphafloat alpha  lStarfloat lStar  
