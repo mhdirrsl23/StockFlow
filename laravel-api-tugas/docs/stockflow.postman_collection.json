@@ -1,0 +1,639 @@
+{
+	"info": {
+		"name": "StockFlow API (PRD 9.4)",
+		"description": "Koleksi endpoint API Sistem Pemantauan Stok Kedaluwarsa.\n\n1. Set variabel collection: base_url (default http://127.0.0.1:8010/api).\n2. Jalankan POST login (folder Auth) — skrip test otomatis menyimpan token ke variabel collection `token`.\n3. Semua request lain memakai Bearer {{token}}.\n\nFormat respons seragam: {success, message, data|errors} (PRD 9.5).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8010/api"
+		},
+		{
+			"key": "token",
+			"value": ""
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"item": [
+		{
+			"name": "Auth (FR-02, FR-05)",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const body = pm.response.json();",
+									"if (body.success && body.data && body.data.token) {",
+									"    pm.collectionVariables.set('token', body.data.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": { "type": "noauth" },
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"pemilik\",\n  \"password\": \"password\"\n}"
+						},
+						"url": "{{base_url}}/login"
+					}
+				},
+				{
+					"name": "me",
+					"request": { "method": "GET", "url": "{{base_url}}/me" }
+				},
+				{
+					"name": "logout",
+					"request": { "method": "POST", "url": "{{base_url}}/logout" }
+				},
+				{
+					"name": "daftar token",
+					"request": { "method": "GET", "url": "{{base_url}}/tokens" }
+				},
+				{
+					"name": "hapus token",
+					"request": {
+						"method": "DELETE",
+						"url": "{{base_url}}/tokens/:id",
+						"variable": [ { "key": "id", "value": "1" } ]
+					}
+				},
+				{
+					"name": "cabut token lain",
+					"request": { "method": "DELETE", "url": "{{base_url}}/tokens/others" }
+				}
+			]
+		},
+		{
+			"name": "Dashboard (FR-03)",
+			"item": [
+				{
+					"name": "dashboard",
+					"request": { "method": "GET", "url": "{{base_url}}/dashboard" }
+				}
+			]
+		},
+		{
+			"name": "Barang (FR-04, FR-17)",
+			"item": [
+				{
+					"name": "daftar barang",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/products?q=&kategori=&per_page=15",
+							"host": [ "{{base_url}}" ],
+							"path": [ "products" ],
+							"query": [
+								{ "key": "q", "value": "" },
+								{ "key": "kategori", "value": "" },
+								{ "key": "per_page", "value": "15" }
+							]
+						}
+					}
+				},
+				{
+					"name": "detail barang",
+					"request": {
+						"method": "GET",
+						"url": "{{base_url}}/products/:id",
+						"variable": [ { "key": "id", "value": "1" } ]
+					}
+				},
+				{
+					"name": "tambah barang",
+					"request": {
+						"method": "POST",
+						"header": [ { "key": "Content-Type", "value": "application/json" } ],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"kode_sku\": \"SKU-MKN-099\",\n  \"nama\": \"Roti Tawar\",\n  \"kategori\": \"Makanan\",\n  \"satuan\": \"pcs\",\n  \"stok_minimum\": 20\n}"
+						},
+						"url": "{{base_url}}/products"
+					}
+				},
+				{
+					"name": "ubah barang",
+					"request": {
+						"method": "PUT",
+						"header": [ { "key": "Content-Type", "value": "application/json" } ],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nama\": \"Roti Tawar Gandum\",\n  \"stok_minimum\": 15\n}"
+						},
+						"url": "{{base_url}}/products/:id",
+						"variable": [ { "key": "id", "value": "1" } ]
+					}
+				},
+				{
+					"name": "hapus barang",
+					"request": {
+						"method": "DELETE",
+						"url": "{{base_url}}/products/:id",
+						"variable": [ { "key": "id", "value": "1" } ]
+					}
+				},
+				{
+					"name": "hapus massal barang",
+					"request": {
+						"method": "POST",
+						"header": [ { "key": "Content-Type", "value": "application/json" } ],
+						"body": { "mode": "raw", "raw": "{\n  \"ids\": [1, 2]\n}" },
+						"url": "{{base_url}}/products/bulk-delete"
+					}
+				}
+			]
+		},
+		{
+			"name": "Batch stok (FR-05, FR-12)",
+			"item": [
+				{
+					"name": "daftar batch (FEFO, filter status)",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/batches?barang_id=&status=&dari=&sampai=&per_page=20",
+							"host": [ "{{base_url}}" ],
+							"path": [ "batches" ],
+							"query": [
+								{ "key": "barang_id", "value": "" },
+								{ "key": "status", "value": "" },
+								{ "key": "dari", "value": "" },
+								{ "key": "sampai", "value": "" },
+								{ "key": "per_page", "value": "20" }
+							]
+						}
+					}
+				},
+				{
+					"name": "batch per barang",
+					"request": {
+						"method": "GET",
+						"url": "{{base_url}}/products/:barangId/batches",
+						"variable": [ { "key": "barangId", "value": "1" } ]
+					}
+				},
+				{
+					"name": "tambah batch ke barang",
+					"request": {
+						"method": "POST",
+						"header": [ { "key": "Content-Type", "value": "application/json" } ],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nomor_batch\": \"BCH-001\",\n  \"jumlah_awal\": 50,\n  \"tanggal_kedaluwarsa\": \"2027-01-31\"\n}"
+						},
+						"url": "{{base_url}}/products/:barangId/batches",
+						"variable": [ { "key": "barangId", "value": "1" } ]
+					}
+				},
+				{
+					"name": "detail batch",
+					"request": {
+						"method": "GET",
+						"url": "{{base_url}}/batches/:id",
+						"variable": [ { "key": "id", "value": "1" } ]
+					}
+				},
+				{
+					"name": "ubah karakteristik batch (BR-01)",
+					"request": {
+						"method": "PUT",
+						"header": [ { "key": "Content-Type", "value": "application/json" } ],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nomor_batch\": \"BCH-001\",\n  \"tanggal_kedaluwarsa\": \"2027-02-15\"\n}"
+						},
+						"url": "{{base_url}}/batches/:id",
+						"variable": [ { "key": "id", "value": "1" } ]
+					}
+				},
+				{
+					"name": "hapus batch",
+					"request": {
+						"method": "DELETE",
+						"url": "{{base_url}}/batches/:id",
+						"variable": [ { "key": "id", "value": "1" } ]
+					}
+				},
+				{
+					"name": "hapus massal batch",
+					"request": {
+						"method": "POST",
+						"header": [ { "key": "Content-Type", "value": "application/json" } ],
+						"body": { "mode": "raw", "raw": "{\n  \"ids\": [1]\n}" },
+						"url": "{{base_url}}/batches/bulk-delete"
+					}
+				}
+			]
+		},
+		{
+			"name": "Transaksi stok (FR-06, FR-07, FR-13)",
+			"item": [
+				{
+					"name": "riwayat mutasi",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/stock-transactions?jenis=&barang_id=&batch_id=&dari=&sampai=&per_page=20",
+							"host": [ "{{base_url}}" ],
+							"path": [ "stock-transactions" ],
+							"query": [
+								{ "key": "jenis", "value": "" },
+								{ "key": "barang_id", "value": "" },
+								{ "key": "batch_id", "value": "" },
+								{ "key": "dari", "value": "" },
+								{ "key": "sampai", "value": "" },
+								{ "key": "per_page", "value": "20" }
+							]
+						}
+					}
+				},
+				{
+					"name": "stok masuk (batch baru)",
+					"request": {
+						"method": "POST",
+						"header": [ { "key": "Content-Type", "value": "application/json" } ],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"jenis\": \"masuk\",\n  \"barang_id\": 1,\n  \"nomor_batch\": \"BCH-IN-1\",\n  \"tanggal_kedaluwarsa\": \"2027-03-01\",\n  \"jumlah\": 40,\n  \"catatan\": \"penerimaan PO\"\n}"
+						},
+						"url": "{{base_url}}/stock-transactions"
+					}
+				},
+				{
+					"name": "stok masuk (batch ada)",
+					"request": {
+						"method": "POST",
+						"header": [ { "key": "Content-Type", "value": "application/json" } ],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"jenis\": \"masuk\",\n  \"barang_id\": 1,\n  \"batch_id\": 1,\n  \"jumlah\": 10\n}"
+						},
+						"url": "{{base_url}}/stock-transactions"
+					}
+				},
+				{
+					"name": "stok keluar FEFO (BR-03)",
+					"request": {
+						"method": "POST",
+						"header": [ { "key": "Content-Type", "value": "application/json" } ],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"jenis\": \"keluar\",\n  \"barang_id\": 1,\n  \"jumlah\": 30,\n  \"catatan\": \"penjualan\"\n}"
+						},
+						"url": "{{base_url}}/stock-transactions"
+					}
+				},
+				{
+					"name": "penyesuaian (alasan wajib)",
+					"request": {
+						"method": "POST",
+						"header": [ { "key": "Content-Type", "value": "application/json" } ],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"jenis\": \"penyesuaian\",\n  \"barang_id\": 1,\n  \"batch_id\": 1,\n  \"jumlah\": -3,\n  \"catatan\": \"rusak saat pengecekan\"\n}"
+						},
+						"url": "{{base_url}}/stock-transactions"
+					}
+				}
+			]
+		},
+		{
+			"name": "Penanganan kedaluwarsa (FR-12)",
+			"item": [
+				{
+					"name": "catat penanganan",
+					"request": {
+						"method": "POST",
+						"header": [ { "key": "Content-Type", "value": "application/json" } ],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"batch_id\": 4,\n  \"status_penanganan\": \"Dimusnahkan\",\n  \"jumlah\": 30,\n  \"catatan_penanganan\": \"dibuang sesuai SOP\"\n}"
+						},
+						"url": "{{base_url}}/expiry-actions"
+					}
+				}
+			]
+		},
+		{
+			"name": "Monitoring (FR-10, FR-11)",
+			"item": [
+				{
+					"name": "monitoring kedaluwarsa",
+					"request": { "method": "GET", "url": "{{base_url}}/expiry-monitoring" }
+				},
+				{
+					"name": "perlu ditangani",
+					"request": { "method": "GET", "url": "{{base_url}}/expiry-monitoring/perlu-ditangani" }
+				},
+				{
+					"name": "rekomendasi FEFO barang",
+					"request": {
+						"method": "GET",
+						"url": "{{base_url}}/products/:barangId/fefo",
+						"variable": [ { "key": "barangId", "value": "1" } ]
+					}
+				}
+			]
+		},
+		{
+			"name": "Lampiran (FR-14)",
+			"item": [
+				{
+					"name": "unggah bukti batch",
+					"request": {
+						"method": "POST",
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{ "key": "jenis", "value": "bukti_batch", "type": "text" },
+								{ "key": "lampiran", "type": "file", "src": [] }
+							]
+						},
+						"url": "{{base_url}}/batches/:batchId/attachments",
+						"variable": [ { "key": "batchId", "value": "1" } ],
+						"description": "Pilih file JPG/PNG pada key `lampiran`. Batas ukuran mengikuti pengaturan `maks_ukuran_lampiran_mb`."
+					}
+				},
+				{
+					"name": "unduh lampiran",
+					"request": {
+						"method": "GET",
+						"url": "{{base_url}}/attachments/:id/file",
+						"variable": [ { "key": "id", "value": "1" } ]
+					}
+				},
+				{
+					"name": "hapus lampiran",
+					"request": {
+						"method": "DELETE",
+						"url": "{{base_url}}/attachments/:id",
+						"variable": [ { "key": "id", "value": "1" } ]
+					}
+				}
+			]
+		},
+		{
+			"name": "Impor barang (FR-15)",
+			"item": [
+				{
+					"name": "pratinjau xlsx",
+					"request": {
+						"method": "POST",
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{ "key": "berkas", "type": "file", "src": [] }
+							]
+						},
+						"url": "{{base_url}}/imports/products/preview",
+						"description": "File .xlsx/.xls dengan header: kode_sku, nama, kategori, satuan, stok_minimum. Respons menyimpan id + token konfirmasi (30 menit)."
+					}
+				},
+				{
+					"name": "konfirmasi impor",
+					"request": {
+						"method": "POST",
+						"header": [ { "key": "Content-Type", "value": "application/json" } ],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 1,\n  \"token\": \"<token-dari-pratinjau>\"\n}"
+						},
+						"url": "{{base_url}}/imports/products/commit"
+					}
+				},
+				{
+					"name": "riwayat impor",
+					"request": { "method": "GET", "url": "{{base_url}}/imports" }
+				},
+				{
+					"name": "detail impor",
+					"request": {
+						"method": "GET",
+						"url": "{{base_url}}/imports/:id",
+						"variable": [ { "key": "id", "value": "1" } ]
+					}
+				}
+			]
+		},
+		{
+			"name": "Notifikasi (FR-13, FR-24)",
+			"item": [
+				{
+					"name": "daftar notifikasi",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/notifications?jenis=&belum_ditampilkan=&per_page=20",
+							"host": [ "{{base_url}}" ],
+							"path": [ "notifications" ],
+							"query": [
+								{ "key": "jenis", "value": "" },
+								{ "key": "belum_ditampilkan", "value": "" },
+								{ "key": "per_page", "value": "20" }
+							]
+						}
+					}
+				},
+				{
+					"name": "tandai dibaca",
+					"request": {
+						"method": "PATCH",
+						"url": "{{base_url}}/notifications/:id/read",
+						"variable": [ { "key": "id", "value": "1" } ]
+					}
+				},
+				{
+					"name": "tandai semua dibaca",
+					"request": { "method": "POST", "url": "{{base_url}}/notifications/read-all" }
+				}
+			]
+		},
+		{
+			"name": "Laporan (FR-16, BR-08)",
+			"item": [
+				{
+					"name": "laporan stok",
+					"request": { "method": "GET", "url": "{{base_url}}/reports/stock" }
+				},
+				{
+					"name": "laporan transaksi",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/reports/transactions?dari=&sampai=&kategori=",
+							"host": [ "{{base_url}}" ],
+							"path": [ "reports", "transactions" ],
+							"query": [
+								{ "key": "dari", "value": "" },
+								{ "key": "sampai", "value": "" },
+								{ "key": "kategori", "value": "" }
+							]
+						}
+					}
+				},
+				{
+					"name": "laporan kedaluwarsa",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/reports/expiry?dari=&sampai=&status=",
+							"host": [ "{{base_url}}" ],
+							"path": [ "reports", "expiry" ],
+							"query": [
+								{ "key": "dari", "value": "" },
+								{ "key": "sampai", "value": "" },
+								{ "key": "status", "value": "" }
+							]
+						}
+					}
+				},
+				{
+					"name": "produk terlaris",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/reports/fast-moving?dari=&sampai=",
+							"host": [ "{{base_url}}" ],
+							"path": [ "reports", "fast-moving" ],
+							"query": [
+								{ "key": "dari", "value": "" },
+								{ "key": "sampai", "value": "" }
+							]
+						}
+					}
+				},
+				{
+					"name": "ekspor xlsx / pdf",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/reports/export?jenis=stok&format=xlsx",
+							"host": [ "{{base_url}}" ],
+							"path": [ "reports", "export" ],
+							"query": [
+								{ "key": "jenis", "value": "stok", "description": "stok | transaksi | kedaluwarsa | laris" },
+								{ "key": "format", "value": "xlsx", "description": "xlsx | pdf" }
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Riwayat aktivitas (FR-31)",
+			"item": [
+				{
+					"name": "daftar riwayat",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/riwayat-aktivitas?aksi=&entitas=&dari=&sampai=&per_page=20",
+							"host": [ "{{base_url}}" ],
+							"path": [ "riwayat-aktivitas" ],
+							"query": [
+								{ "key": "aksi", "value": "" },
+								{ "key": "entitas", "value": "" },
+								{ "key": "dari", "value": "" },
+								{ "key": "sampai", "value": "" },
+								{ "key": "per_page", "value": "20" }
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Akun (FR-05, BR-08)",
+			"item": [
+				{
+					"name": "daftar akun",
+					"request": { "method": "GET", "url": "{{base_url}}/users" }
+				},
+				{
+					"name": "buat akun staf",
+					"request": {
+						"method": "POST",
+						"header": [ { "key": "Content-Type", "value": "application/json" } ],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nama\": \"Staf Baru\",\n  \"username\": \"staf_baru\",\n  \"password\": \"rahasia123\"\n}"
+						},
+						"url": "{{base_url}}/users"
+					}
+				},
+				{
+					"name": "ubah akun",
+					"request": {
+						"method": "PUT",
+						"header": [ { "key": "Content-Type", "value": "application/json" } ],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nama\": \"Nama Baru\",\n  \"password\": \"rahasia456\"\n}"
+						},
+						"url": "{{base_url}}/users/:id",
+						"variable": [ { "key": "id", "value": "2" } ]
+					}
+				},
+				{
+					"name": "aktif / nonaktif akun",
+					"request": {
+						"method": "PATCH",
+						"header": [ { "key": "Content-Type", "value": "application/json" } ],
+						"body": { "mode": "raw", "raw": "{\n  \"aktif\": false\n}" },
+						"url": "{{base_url}}/users/:id/aktif",
+						"variable": [ { "key": "id", "value": "2" } ]
+					}
+				},
+				{
+					"name": "hapus akun",
+					"request": {
+						"method": "DELETE",
+						"url": "{{base_url}}/users/:id",
+						"variable": [ { "key": "id", "value": "2" } ]
+					}
+				}
+			]
+		},
+		{
+			"name": "Pengaturan (FR-25, BR-08)",
+			"item": [
+				{
+					"name": "daftar pengaturan",
+					"request": { "method": "GET", "url": "{{base_url}}/pengaturan" }
+				},
+				{
+					"name": "ubah pengaturan",
+					"request": {
+						"method": "PUT",
+						"header": [ { "key": "Content-Type", "value": "application/json" } ],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"ambang_peringatan_hari\": 30,\n  \"maks_ukuran_lampiran_mb\": 2,\n  \"maks_ukuran_impor_mb\": 5,\n  \"maks_baris_impor\": 500\n}"
+						},
+						"url": "{{base_url}}/pengaturan"
+					}
+				}
+			]
+		}
+	]
+}
