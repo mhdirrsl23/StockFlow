@@ -19,6 +19,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         session = SessionManager(this)
+        RetrofitClient.resetRedirectFlag()
 
         val etUser = findViewById<EditText>(R.id.et_username)
         val etPass = findViewById<EditText>(R.id.et_password)
@@ -38,16 +39,6 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 loginApi(u, p)
             }
-        }
-
-        findViewById<View>(R.id.demo_pemilik).setOnClickListener {
-            session.saveSession("demo-token", 1, "Budi Santoso", "pemilik", "pemilik")
-            openMain("pemilik")
-        }
-
-        findViewById<View>(R.id.demo_staf).setOnClickListener {
-            session.saveSession("demo-token", 2, "Rina Wulandari", "staf", "staf")
-            openMain("staf")
         }
     }
 
