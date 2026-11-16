@@ -3,29 +3,63 @@
 namespace App\Http\Controllers;
 
 use App\Models\Notifikasi;
+use App\Support\ApiResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class NotifikasiController extends Controller
+final class NotifikasiController extends Controller
 {
-    // Mengambil Notifikasi Hari Ini / Belum Ditampilkan
-    public function index()
+    /**
+     * FR-13 / FR-24: daftar notifikasi (dibaca WorkManager tiap 12 jam),
+     * dengan filter jenis dan flag belum ditampilkan.
+     */
+    public function index(Request $request): JsonResponse
     {
-        $notifikasi = Notifikasi::with(['barang', 'batchStok'])
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $query = Notifikasi::query()
+            ->with('barang:id,kode_sku,nama,satuan', 'batch:id,nomor_batch')
+            ->jenis((string) $request->query('jenis'));
 
-        return response()->json(['status' => true, 'data' => $notifikasi], 200);
-    }
-
-    // Tandai Notifikasi Sudah Ditampilkan di Ponsel
-    public function tandaiTampil($id)
-    {
-        $notif = Notifikasi::find($id);
-
-        if ($notif) {
-            $notif->update(['ditampilkan_pada' => now()]);
+        if ($request->boolean('belum_ditampilkan')) {
+            $query->whereNull('ditampilkan_pada');
         }
 
-        return response()->json(['status' => true], 200);
+        $paginasi = $query->orderBy('created_at')
+            ->orderBy('id')
+            ->paginate(min(100, max(1, (int) ($request->query('per_page', 20)))))->appends($request->query());
+
+        return ApiResponse::ok([
+            'items' => $paginasi->items(),
+            'pagination' => [
+                'halaman' => $paginasi->currentPage(),
+                'per_halaman' => $paginasi->perPage(),
+                'total_baris' => $paginasi->total(),
+                'halaman_terakhir' => $paginasi->lastPage(),
+            ],
+        ], 'Daftar notifikasi ditemukan');
+    }
+
+    /**
+     * FR-24: menandai notifikasi sudah tampil di ponsel.
+     */
+    public function tandaiDibaca(Request $request, Notifikasi $notifikasi): JsonResponse
+    {
+        if ($notifikasi->ditampilkan_pada === null) {
+            $notifikasi->update(['ditampilkan_pada' => now()]);
+        }
+
+        return ApiResponse::ok([
+            'id' => $notifikasi->id,
+            'ditampilkan_pada' => $notifikasi->ditampilkan_pada,
+        ], 'Notifikasi ditandai sebagai telah dibaca');
+    }
+
+    /**
+     * Tandai semua notifikasi telah ditampilkan (FR-24).
+     */
+    public function tandaiSemuaDibaca(Request $request): JsonResponse
+    {
+        $jumlah = Notifikasi::query()->whereNull('ditampilkan_pada')->update(['ditampilkan_pada' => now()]);
+
+        return ApiResponse::ok(['jumlah' => $jumlah], 'Semua notifikasi ditandai sebagai telah dibaca');
     }
 }

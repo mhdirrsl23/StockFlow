@@ -1,58 +1,84 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# StockFlow — API Monitoring Stok Kedaluwarsa
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Backend REST API **Sistem Pemantauan Stok Kedaluwarsa** sesuai PRD 9.4 — Laravel 12 + Sanctum (token personal) + MySQL 8.0. Dipakai aplikasi Android StockFlow (Retrofit).
 
-## About Laravel
+## Format Respons Seragam (PRD 9.5)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+```jsonc
+// sukses
+{ "success": true, "message": "…", "data": { } }
+// gagal validasi
+{ "success": false, "message": "Data tidak valid", "errors": { "kolom": ["…"] } }
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Seluruh pesan berbahasa Indonesia dan merujuk nomor aturan PRD (FR-xx, BR-xx, Q-xx, NFR-xx).
 
-## Contributing
+## Menjalankan
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+composer install
+cp .env.example .env        # isi DB_*; file .env tidak pernah ikut commit
+php artisan key:generate
+php artisan migrate:fresh --seed
+php artisan serve           # http://127.0.0.1:8000
+```
 
-## Code of Conduct
+Database lokal memakai container Docker (port **3307**, tidak mengganggu MySQL lain):
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+docker run -d --name stockflow-mysql \
+  -e MYSQL_ROOT_PASSWORD='*ubuntu123*' \
+  -e MYSQL_DATABASE=stockflow \
+  -e MYSQL_USER=stockflow_app \
+  -e MYSQL_PASSWORD='stockflow_dev_2026' \
+  -p 3307:3306 mysql:8.0
+```
 
-## Security Vulnerabilities
+`.env` minimal: `DB_HOST=127.0.0.1`, `DB_PORT=3307`, `DB_DATABASE=stockflow`, `DB_USERNAME=stockflow_app`, `DB_PASSWORD=stockflow_dev_2026`.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Akun demo (seeder)
 
-## License
+| Username | Password   | Peran   |
+| -------- | ---------- | ------- |
+| pemilik  | password   | pemilik |
+| staf     | password   | staf    |
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Kontrak API — 49 endpoint (`routes/api.php`)
+
+Auth: `POST /api/login`, `POST /api/logout`, `GET /api/me`, manajemen token `GET/DELETE /api/tokens*` (FR-02, FR-05).
+
+| Grup | Endpoint | Keterangan |
+| --- | --- | --- |
+| Dashboard | `GET /api/dashboard` | Ringkasan sesuai peran + rekomendasi FEFO (FR-03) |
+| Barang | `GET/POST /api/products`, `GET/PUT/DELETE /api/products/{id}`, `POST /api/products/bulk-delete` | Master barang + hapus massal (FR-04, FR-17, FR-18, AB-08) |
+| Batch | `GET/POST /api/products/{barang}/batches`, `GET/PUT/DELETE /api/batches/{batch}`, `GET /api/batches`, `POST /api/batches/bulk-delete` | Batch stok, daftar FEFO (FR-05, FR-12) |
+| Transaksi | `GET/POST /api/stock-transactions` | masuk / keluar FEFO / penyesuaian (FR-06, FR-07, FR-13, BR-03) |
+| Penanganan | `POST /api/expiry-actions` | musnah / retur / lainnya (FR-12) |
+| Monitoring | `GET /api/expiry-monitoring`, `GET /api/expiry-monitoring/perlu-ditangani`, `GET /api/products/{barang}/fefo` | status kedaluwarsa & alokasi FEFO (FR-10, FR-11) |
+| Lampiran | `POST /api/batches/{batch}/attachments`, `GET /api/attachments/{id}/file`, `DELETE /api/attachments/{id}` | foto bukti JPG/PNG, akses terotorisasi (FR-14) |
+| Impor | `POST /api/imports/products/preview`, `POST /api/imports/products/commit`, `GET /api/imports[/{id}]` | impor xlsx 2 langkah + token 30 menit (FR-15, BR-06) |
+| Notifikasi | `GET /api/notifications`, `PATCH /api/notifications/{id}/read`, `POST /api/notifications/read-all` | peringatan (FR-13, FR-24) |
+| Laporan | `GET /api/reports/{stock,transactions,expiry,fast-moving}`, `GET /api/reports/export?jenis=&format=xlsx\|pdf` | khusus pemilik (FR-16, BR-08) |
+| Audit | `GET /api/riwayat-aktivitas` | audit tak terubah; staf melihat miliknya (FR-31, NFR-08) |
+| Akun | `GET/POST /api/users`, `PUT/DELETE /api/users/{id}`, `PATCH /api/users/{id}/aktif` | khusus pemilik (FR-05, BR-08) |
+| Pengaturan | `GET/PUT /api/pengaturan` | ambang hari & batas unggah/impor (FR-25, BR-08) |
+
+Aturan inti: FEFO wajib (BR-04), batch kedaluwarsa/Ditangani tidak bisa keluar normal (BR-03), perubahan saldo atomik `DB::transaction` + `lockForUpdate` (NFR-02), batas satu pemilik aktif (FR-05).
+
+## Validasi otomatis
+
+```bash
+php artisan test            # 43 feature test: auth, role, FEFO, monitoring,
+                            # laporan, impor, lampiran, manajemen akun
+vendor/bin/pint --dirty     # format PSR-12
+```
+
+## Terkait aplikasi Android
+
+- BASE_URL mesin: `http://<ip-pc>:8000/api/` (komputer host, bukan emulator/localhost).
+- Kontrak Retrofit diselaraskan ke endpoint tabel di atas + kunci `success` (lihat `ApiService.kt`).
+- Pemantauan otomatis: `php artisan stockflow:monitor` (terjadwal 06.00 & 18.00 via scheduler `routes/console.php`) menyegarkan status batch dan membuat notifikasi (FR-20, FR-23).
+
+## Koleksi Postman
+
+Impor `docs/stockflow.postman_collection.json` — variabel `base_url` + token otomatis tersimpan saat `POST login`.

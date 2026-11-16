@@ -2,86 +2,95 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BatchStok;
+use App\Http\Requests\MutasiStokRequest;
 use App\Models\MutasiStok;
-use App\Models\RiwayatAktivitas;
+use App\Services\StockTransactionService;
+use App\Support\ApiResponse;
+use App\Exceptions\StokException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
+use Illuminate\Validation\ValidationException;
 
-class MutasiStokController extends Controller
+final class MutasiStokController extends Controller
 {
-    // Algoritma Pengeluaran Barang FEFO
-    public function keluarFEFO(Request $request)
+    public function __construct(private readonly StockTransactionService $stockService)
     {
-        $request->validate([
-            'barang_id' => 'required|exists:barang,id',
-            'jumlah'    => 'required|integer|min:1',
-            'catatan'   => 'nullable|string',
-        ]);
+    }
 
-        $barangId = $request->barang_id;
-        $jumlahDibutuhkan = $request->jumlah;
+    /**
+     * FR-08 / FR-35: riwayat seluruh mutasi dengan filter jenis, barang,
+     * batch, dan rentang tanggal. Staf hanya melihat transaksinya sendiri (FR-31).
+     */
+    public function index(Request $request): JsonResponse
+    {
+        $user = $request->user();
+        $query = $user->isPemilik()
+            ? MutasiStok::query()
+            : MutasiStok::query()->where('user_id', $user->id);
 
-        DB::beginTransaction();
-        try {
-            // Ambil batch berurut dari kedaluwarsa paling dekat (FEFO)
-            $batches = BatchStok::where('barang_id', $barangId)
-                ->where('jumlah_sisa', '>', 0)
-                ->where('status', '!=', 'Ditangani')
-                ->orderBy('tanggal_kedaluwarsa', 'asc')
-                ->lockForUpdate()
-                ->get();
+        $query->with(['batch:id,barang_id,nomor_batch', 'barang:id,kode_sku,nama,satuan', 'pengguna:id,nama,username']);
 
-            $totalTersedia = $batches->sum('jumlah_sisa');
-            if ($totalTersedia < $jumlahDibutuhkan) {
-                return response()->json([
-                    'status'  => 'error',
-                    'message' => 'Total stok tidak mencukupi. Tersedia: ' . $totalTersedia
-                ], 400);
-            }
-
-            $sisaPotong = $jumlahDibutuhkan;
-
-            foreach ($batches as $batch) {
-                if ($sisaPotong <= 0) break;
-
-                $dipotong = min($batch->jumlah_sisa, $sisaPotong);
-                $batch->jumlah_sisa -= $dipotong;
-                $batch->save();
-
-                // Record Mutasi Keluar
-                MutasiStok::create([
-                    'batch_id' => $batch->id,
-                    'jenis'    => 'keluar',
-                    'jumlah'   => $dipotong,
-                    'catatan'  => $request->catatan ?? 'Pengeluaran FEFO',
-                    'user_id'  => auth()->id(),
-                    'waktu'    => now(),
-                ]);
-
-                $sisaPotong -= $dipotong;
-            }
-
-            // Audit Log
-            RiwayatAktivitas::create([
-                'user_id'    => auth()->id(),
-                'aksi'       => 'pengeluaran_stok',
-                'entitas'    => 'barang',
-                'entitas_id' => $barangId,
-                'keterangan' => "Pengeluaran stok FEFO sebanyak {$jumlahDibutuhkan} pcs",
-                'waktu'      => now(),
-            ]);
-
-            DB::commit();
-
-            return response()->json([
-                'status' => true,
-                'message' => 'Pengeluaran stok FEFO berhasil diproses'
-            ], 200);
-
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
+        if ($jenis = $request->query('jenis')) {
+            $query->where('jenis', $jenis);
         }
+
+        if ($barangId = $request->query('barang_id')) {
+            $query->whereHas('batch', fn ($q) => $q->where('barang_id', (int) $barangId));
+        }
+
+        if ($batchId = $request->query('batch_id')) {
+            $query->where('batch_id', (int) $batchId);
+        }
+
+        if ($dari = $request->query('dari')) {
+            $query->where('waktu', '>=', Carbon::parse($dari)->startOfDay());
+        }
+
+        if ($sampai = $request->query('sampai')) {
+            $query->where('waktu', '<=', Carbon::parse($sampai)->endOfDay());
+        }
+
+        $paginasi = $query->orderBy('waktu')->orderBy('id')
+            ->paginate(min(100, max(1, (int) ($request->query('per_page', 20)))))->appends($request->query());
+
+        return ApiResponse::ok([
+            'items' => $paginasi->items(),
+            'pagination' => [
+                'halaman' => $paginasi->currentPage(),
+                'per_halaman' => $paginasi->perPage(),
+                'total_baris' => $paginasi->total(),
+                'halaman_terakhir' => $paginasi->lastPage(),
+            ],
+        ], 'Daftar transaksi stok ditemukan');
+    }
+
+    /**
+     * FR-06 / FR-07 / FR-13: catat transaksi masuk, keluar FEFO, penyesuaian.
+     */
+    public function store(MutasiStokRequest $request): JsonResponse
+    {
+        $params = $request->validated();
+        $user = $request->user();
+        $jenis = $params['jenis'];
+
+        try {
+            $hasil = match ($jenis) {
+                'masuk' => $this->stockService->masuk($user, $params),
+                'keluar' => $this->stockService->keluar($user, $params),
+                'penyesuaian' => $this->stockService->penyesuaian($user, $params),
+                default => throw ValidationException::withMessages(['jenis' => 'Jenis transaksi tidak dikenali.']),
+            };
+        } catch (StokException $e) {
+            return ApiResponse::fail($e->pesan, 422, $e->errors);
+        }
+
+        $pesanKesalahan = match ($jenis) {
+            'masuk' => 'Transaksi stok masuk berhasil dicatat (FR-06)',
+            'keluar' => 'Transaksi stok keluar berhasil dicatat sesuai alokasi FEFO (FR-07)',
+            default => 'Penyesuaian stok berhasil dicatat (FR-13)',
+        };
+
+        return ApiResponse::created($hasil, $pesanKesalahan);
     }
 }

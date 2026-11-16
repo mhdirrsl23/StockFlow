@@ -3,24 +3,54 @@
 namespace App\Http\Controllers;
 
 use App\Models\RiwayatAktivitas;
+use App\Support\ApiResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
-class RiwayatAktivitasController extends Controller
+final class RiwayatAktivitasController extends Controller
 {
-    // List Log Audit (FR-31)
-    public function index(Request $request)
+    /**
+     * FR-31: pemilik melihat seluruh riwayat; staf hanya miliknya sendiri,
+     * dengan filter aksi dan rentang waktu (NFR-08: audit tak terubah).
+     */
+    public function index(Request $request): JsonResponse
     {
         $user = $request->user();
-        $query = RiwayatAktivitas::with('user:id,nama,username,peran')
-            ->orderBy('waktu', 'desc');
 
-        // Jika peran staf, batasi hanya melihat aktivitas miliknya sendiri (FR-31)
-        if ($user->peran === 'staf') {
-            $query->where('user_id', $user->id);
+        $query = $user->isPemilik()
+            ? RiwayatAktivitas::query()
+            : RiwayatAktivitas::query()->where('user_id', $user->id);
+
+        $query->with('pengguna:id,nama,username');
+
+        if ($aksi = $request->query('aksi')) {
+            $query->where('aksi', $aksi);
         }
 
-        $riwayat = $query->limit(100)->get();
+        if ($dari = $request->query('dari')) {
+            $query->where('waktu', '>=', Carbon::parse($dari)->startOfDay());
+        }
 
-        return response()->json(['status' => true, 'data' => $riwayat], 200);
+        if ($sampai = $request->query('sampai')) {
+            $query->where('waktu', '<=', Carbon::parse($sampai)->endOfDay());
+        }
+
+        if ($entitas = $request->query('entitas')) {
+            $query->where('entitas', $entitas);
+        }
+
+        $paginasi = $query->orderBy('waktu', 'desc')->orderBy('id', 'desc')
+            ->paginate(min(100, max(1, (int) ($request->query('per_page', 20)))))->appends($request->query());
+
+        return ApiResponse::ok([
+            'items' => $paginasi->items(),
+            'pagination' => [
+                'halaman' => $paginasi->currentPage(),
+                'per_halaman' => $paginasi->perPage(),
+                'total_baris' => $paginasi->total(),
+                'halaman_terakhir' => $paginasi->lastPage(),
+            ],
+        ], 'Riwayat aktivitas ditemukan');
     }
 }

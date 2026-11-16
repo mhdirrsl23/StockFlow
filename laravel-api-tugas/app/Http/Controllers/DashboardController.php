@@ -4,48 +4,69 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\BatchStok;
-use Illuminate\Http\Request;
+use App\Models\MutasiStok;
+use App\Models\Notifikasi;
+use App\Support\ApiResponse;
+use Illuminate\Support\Facades\DB;
 
-class DashboardController extends Controller
+final class DashboardController extends Controller
 {
-    public function summary()
+    /**
+     * FR-03: ringkasan sesuai peran: jumlah barang/batch, stok menipis,
+     * keperluan kedaluwarsa, transaksi terbaru, rekomendasi FEFO.
+     */
+    public function index(): mixed
     {
-        // 1. Total Jenis Barang
-        $totalBarang = Barang::count();
+        $stokMenipis = DB::table('v_stok_tersedia')
+            ->where('status_stok', 'Stok Menipis')
+            ->orderBy('total_stok_tersedia')
+            ->limit(5)
+            ->get(['barang_id', 'kode_sku', 'nama', 'total_stok_tersedia', 'stok_minimum', 'satuan']);
 
-        // 2. Hitung Barang Stok Minim (Aman dari error SQL stok_total)
-        $stokMinim = Barang::all()->filter(function ($barang) {
-            $totalStok = 0;
+        $perluDitangani = DB::table('v_perlu_ditangani')
+            ->orderBy('tanggal_kedaluwarsa')
+            ->limit(5)
+            ->get();
 
-            // Jika ada relasi batchStok/batch_stok, hitung dari total jumlah_sisa
-            if (method_exists($barang, 'batchStok') && $barang->batchStok) {
-                $totalStok = $barang->batchStok->sum('jumlah_sisa');
-            } elseif (isset($barang->stok_total)) {
-                $totalStok = $barang->stok_total;
-            }
+        $mendekatiKedaluwarsa = BatchStok::query()
+            ->where('status', 'Mendekati Kedaluwarsa')
+            ->whereNull('deleted_at')
+            ->where('jumlah_sisa', '>', 0)
+            ->fefo()
+            ->with('barang:id,kode_sku,nama,satuan')
+            ->limit(5)
+            ->get(['id', 'barang_id', 'nomor_batch', 'jumlah_sisa', 'tanggal_kedaluwarsa', 'status']);
 
-            return $totalStok <= ($barang->stok_minimum ?? 0);
-        })->count();
+        $rekomendasiFefo = BatchStok::query()
+            ->layakJual()
+            ->fefo()
+            ->with('barang:id,kode_sku,nama,satuan')
+            ->limit(5)
+            ->get(['id', 'barang_id', 'nomor_batch', 'jumlah_sisa', 'tanggal_kedaluwarsa', 'status']);
 
-        // 3. Total Batch Mendekati Kedaluwarsa (<= 30 hari lagi)
-        $batchMendekatiKedaluwarsa = BatchStok::where('jumlah_sisa', '>', 0)
-            ->whereDate('tanggal_kedaluwarsa', '<=', now()->addDays(30))
-            ->whereDate('tanggal_kedaluwarsa', '>=', now())
-            ->count();
+        $transaksiTerbaru = MutasiStok::query()
+            ->with(['batch:id,barang_id,nomor_batch', 'pengguna:id,nama'])
+            ->latest('waktu')
+            ->latest('id')
+            ->limit(5)
+            ->get(['id', 'batch_id', 'jenis', 'jumlah', 'waktu', 'user_id']);
 
-        // 4. Total Batch Sudah Kedaluwarsa
-        $batchKedaluwarsa = BatchStok::where('jumlah_sisa', '>', 0)
-            ->whereDate('tanggal_kedaluwarsa', '<', now())
-            ->count();
+        $jumlahNotifikasiBelumDibaca = Notifikasi::query()->whereNull('ditampilkan_pada')->count();
 
-        return response()->json([
-            'status' => true,
-            'data' => [
-                'total_barang' => $totalBarang,
-                'stok_minim' => $stokMinim,
-                'batch_mendekati_kedaluwarsa' => $batchMendekatiKedaluwarsa,
-                'batch_kedaluwarsa' => $batchKedaluwarsa,
-            ]
-        ], 200);
+        return ApiResponse::ok([
+            'ringkasan' => [
+                'total_barang_aktif' => Barang::query()->whereNull('deleted_at')->count(),
+                'total_batch_aktif' => BatchStok::query()->whereNull('deleted_at')->count(),
+                'stok_menipis' => DB::table('v_stok_tersedia')->where('status_stok', 'Stok Menipis')->count(),
+                'batch_mendekati_kedaluwarsa' => DB::table('batch_stok')->where('status', 'Mendekati Kedaluwarsa')->whereNull('deleted_at')->where('jumlah_sisa', '>', 0)->count(),
+                'batch_kedaluwarsa' => DB::table('batch_stok')->where('status', 'Kedaluwarsa')->whereNull('deleted_at')->where('jumlah_sisa', '>', 0)->count(),
+                'notifikasi_belum_dibaca' => $jumlahNotifikasiBelumDibaca,
+            ],
+            'stok_menipis' => $stokMenipis,
+            'perlu_ditangani' => $perluDitangani,
+            'mendekati_kedaluwarsa' => $mendekatiKedaluwarsa,
+            'rekomendasi_fefo' => $rekomendasiFefo,
+            'transaksi_terbaru' => $transaksiTerbaru,
+        ], 'Ringkasan dashboard ditemukan');
     }
 }

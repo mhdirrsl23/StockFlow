@@ -1,59 +1,122 @@
 <?php
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+
 use App\Http\Controllers\BarangController;
-use App\Http\Controllers\BatchStokController;
+use App\Http\Controllers\BatchStockController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExpiryMonitoringController;
+use App\Http\Controllers\ImporController;
+use App\Http\Controllers\LampiranController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\MutasiStokController;
 use App\Http\Controllers\NotifikasiController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\LampiranController;
-use App\Http\Controllers\RiwayatAktivitasController;
+use App\Http\Controllers\PenangananKedaluwarsaController;
 use App\Http\Controllers\PengaturanController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PersonalAccessTokenController;
+use App\Http\Controllers\RiwayatAktivitasController;
+use App\Http\Controllers\UsersController;
+use Illuminate\Support\Facades\Route;
 
-// Public Route
-Route::post('/login', [AuthController::class, 'login']);
+/*
+|--------------------------------------------------------------------------
+| API StockFlow — kontrak PRD 9.4 + pelengkap menu Android
+| Format respons seragam {success, message, data|errors} (PRD 9.5).
+|--------------------------------------------------------------------------
+*/
 
-// Protected Routes (Satu Pintu autentikasi Sanctum)
-Route::middleware('auth:sanctum')->group(function () {
+// ── Autentikasi (FR-02) ────────────────────────────────────────────────────
+Route::post('login', [UsersController::class, 'login'])
+    ->middleware('throttle:login')
+    ->name('login');
 
-    // Auth & User Profile
-    Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('/me', [AuthController::class, 'me']);
+Route::middleware('auth:sanctum')->group(function (): void {
+    Route::post('logout', [UsersController::class, 'logout'])->name('logout');
+    Route::get('me', [UsersController::class, 'me'])->name('me');
 
-    // Dashboard & Summary View
-    Route::get('/dashboard/summary', [DashboardController::class, 'summary']);
+    // ── Dashboard (FR-03) ────────────────────────────────────────────────
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
-    // Master Barang
-    Route::get('/barang', [BarangController::class, 'index']);
-    Route::post('/barang', [BarangController::class, 'store']);
-    Route::get('/barang/{id}', [BarangController::class, 'show']);
-    Route::put('/barang/{id}', [BarangController::class, 'update']);
-    Route::delete('/barang/{id}', [BarangController::class, 'destroy']);
+    // ── Produk (FR-04, FR-17, FR-18) ─────────────────────────────────────
+    Route::post('products/bulk-delete', [BarangController::class, 'bulkDelete'])->name('products.bulk-delete');
+    Route::apiResource('products', BarangController::class)
+        ->parameters(['products' => 'barang']);
+    Route::get('products/{barang}/batches', [BatchStockController::class, 'untukBarang'])
+        ->name('products.batches.index');
+    Route::post('products/{barang}/batches', [BatchStockController::class, 'store'])
+        ->name('products.batches.store');
+    Route::get('products/{barang}/fefo', [ExpiryMonitoringController::class, 'fefo'])
+        ->name('products.fefo');
 
-    // Batch Stok & Smart Expiry
-    Route::post('/batch', [BatchStokController::class, 'store']);
-    Route::get('/batch/perlu-ditangani', [BatchStokController::class, 'perluDitangani']);
-    Route::post('/batch/{id}/tangani', [BatchStokController::class, 'tanganiKedaluwarsa']);
+    // ── Batch (FR-05, FR-12, FR-18) ──────────────────────────────────────
+    Route::post('batches/bulk-delete', [BatchStockController::class, 'bulkDelete'])->name('batches.bulk-delete');
+    Route::apiResource('batches', BatchStockController::class)
+        ->parameters(['batches' => 'batch'])
+        ->only(['index', 'show', 'update', 'destroy']);
 
-    // Mutasi Stok (FEFO)
-    Route::post('/mutasi/keluar-fefo', [MutasiStokController::class, 'keluarFEFO']);
+    // ── Transaksi stok masuk/keluar/penyesuaian (FR-06, FR-07, FR-13) ────
+    Route::get('stock-transactions', [MutasiStokController::class, 'index'])->name('stock-transactions.index');
+    Route::post('stock-transactions', [MutasiStokController::class, 'store'])->name('stock-transactions.store');
 
-    // Upload Lampiran Foto
-    Route::post('/lampiran', [LampiranController::class, 'store']);
+    // ── Penanganan kedaluwarsa (FR-12) ───────────────────────────────────
+    Route::post('expiry-actions', [PenangananKedaluwarsaController::class, 'store'])->name('expiry-actions.store');
 
-    // Notifikasi
-    Route::get('/notifikasi', [NotifikasiController::class, 'index']);
-    Route::post('/notifikasi/{id}/tandai-tampil', [NotifikasiController::class, 'tandaiTampil']);
+    // ── Monitoring kedaluwarsa (FR-10, FR-20, FR-26) ─────────────────────
+    Route::get('expiry-monitoring', [ExpiryMonitoringController::class, 'index'])->name('expiry-monitoring.index');
+    Route::get('expiry-monitoring/perlu-ditangani', [ExpiryMonitoringController::class, 'perluDitangani'])
+        ->name('expiry-monitoring.perlu-ditangani');
 
-    // Audit Log Aktivitas
-    Route::get('/riwayat-aktivitas', [RiwayatAktivitasController::class, 'index']);
+    // ── Notifikasi (FR-13, FR-24) ────────────────────────────────────────
+    Route::post('notifications/read-all', [NotifikasiController::class, 'tandaiSemuaDibaca'])
+        ->name('notifications.read-all');
+    Route::patch('notifications/{notifikasi}/read', [NotifikasiController::class, 'tandaiDibaca'])
+        ->name('notifications.read');
+    Route::get('notifications', [NotifikasiController::class, 'index'])->name('notifications.index');
 
-    // Pengaturan & Kelola Staf (Khusus Pemilik)
-    Route::get('/pengaturan', [PengaturanController::class, 'index']);
-    Route::put('/pengaturan', [PengaturanController::class, 'update']);
-    Route::get('/users/staf', [UserController::class, 'index']);
-    Route::post('/users/staf', [UserController::class, 'store']);
-    Route::patch('/users/staf/{id}/toggle-aktif', [UserController::class, 'toggleAktif']);
+    // ── Impor Excel (FR-15, BR-06) ───────────────────────────────────────
+    Route::prefix('imports/products')->name('imports.')->group(function (): void {
+        Route::post('preview', [ImporController::class, 'preview'])->name('preview');
+        Route::post('commit', [ImporController::class, 'commit'])->name('commit');
+    });
+    Route::get('imports', [ImporController::class, 'index'])->name('imports.index');
+    Route::get('imports/{impor}', [ImporController::class, 'show'])->name('imports.show');
+
+    // ── Laporan & ekspor (FR-16, BR-08: khusus pemilik) ──────────────────
+    Route::prefix('reports')->name('reports.')->middleware('role:pemilik')->group(function (): void {
+        Route::get('stock', [LaporanController::class, 'stok'])->name('stock');
+        Route::get('transactions', [LaporanController::class, 'transaksi'])->name('transactions');
+        Route::get('expiry', [LaporanController::class, 'kedaluwarsa'])->name('expiry');
+        Route::get('fast-moving', [LaporanController::class, 'laris'])->name('fast-moving');
+        Route::get('export', [LaporanController::class, 'ekspor'])->name('export');
+    });
+
+    // ── Riwayat aktivitas (FR-31) ────────────────────────────────────────
+    Route::get('riwayat-aktivitas', [RiwayatAktivitasController::class, 'index'])->name('riwayat-aktivitas.index');
+
+    // ── Pengaturan (FR-25, BR-08: khusus pemilik) ────────────────────────
+    Route::get('pengaturan', [PengaturanController::class, 'index'])
+        ->middleware('role:pemilik')->name('pengaturan.index');
+    Route::put('pengaturan', [PengaturanController::class, 'update'])
+        ->middleware('role:pemilik')->name('pengaturan.update');
+
+    // ── Lampiran batch (FR-14) ───────────────────────────────────────────
+    Route::post('batches/{batch}/attachments', [LampiranController::class, 'store'])
+        ->name('lampiran.store');
+    Route::get('attachments/{lampiran}/file', [LampiranController::class, 'file'])
+        ->name('lampiran.file');
+    Route::delete('attachments/{lampiran}', [LampiranController::class, 'destroy'])
+        ->name('lampiran.destroy');
+
+    // ── Manajemen akun staf (FR-05, BR-08: khusus pemilik) ───────────────
+    Route::prefix('users')->middleware('role:pemilik')->name('users.')->group(function (): void {
+        Route::get('', [UsersController::class, 'index'])->name('index');
+        Route::post('', [UsersController::class, 'store'])->name('store');
+        Route::put('{user}', [UsersController::class, 'update'])->name('update');
+        Route::patch('{user}/aktif', [UsersController::class, 'ubahAktif'])->name('aktif');
+        Route::delete('{user}', [UsersController::class, 'destroy'])->name('destroy');
+    });
+
+    // ── Manajemen sesi token (FR-05) ─────────────────────────────────────
+    Route::get('tokens', [PersonalAccessTokenController::class, 'index'])->name('tokens.index');
+    Route::delete('tokens/others', [PersonalAccessTokenController::class, 'hapusLainnya'])
+        ->name('tokens.hapus-lainnya');
+    Route::delete('tokens/{token}', [PersonalAccessTokenController::class, 'destroy'])->name('tokens.destroy');
 });
-?>

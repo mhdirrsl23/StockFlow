@@ -49,7 +49,7 @@ private fun <T> Fragment.submitApi(
         try {
             val api = RetrofitClient.getInstance(requireContext())
             val res = call(api)
-            if (res.isSuccessful && res.body()?.status == true) {
+            if (res.isSuccessful && res.body()?.success == true) {
                 onSuccess?.invoke(api, res.body()?.data)
                 Toast.makeText(requireContext(), successMsg, Toast.LENGTH_SHORT).show()
                 findNavController().navigateUp()
@@ -126,7 +126,7 @@ class FormBatchFragment : Fragment(R.layout.form_batch) {
         viewLifecycleOwner.lifecycleScope.launch {
             runCatching {
                 val res = RetrofitClient.getInstance(requireContext()).getBarang()
-                if (res.isSuccessful && res.body()?.status == true) barangList = res.body()?.data ?: emptyList()
+                if (res.isSuccessful && res.body()?.success == true) barangList = res.body()?.data?.items ?: emptyList()
             }
         }
 
@@ -158,7 +158,7 @@ class FormBatchFragment : Fragment(R.layout.form_batch) {
             submitApi(
                 "Batch stok berhasil ditambahkan",
                 "Gagal menyimpan batch",
-                { it.storeBatchStok(BatchStokRequest(barangId, nomor, jumlah, tanggal)) },
+                { it.storeBatchStok(barangId, BatchStokRequest(nomor, jumlah, tanggal)) },
                 { api, batch ->
                     val uri = imageUri ?: return@submitApi
                     val batchId = batch?.id ?: return@submitApi
@@ -166,8 +166,10 @@ class FormBatchFragment : Fragment(R.layout.form_batch) {
                         val stream = requireContext().contentResolver.openInputStream(uri) ?: return@runCatching
                         val file = File(requireContext().cacheDir, "bukti_batch_$batchId.jpg")
                         file.outputStream().use { stream.copyTo(it) }
-                        val part = MultipartBody.Part.createFormData("file", file.name, file.asRequestBody("image/jpeg".toMediaTypeOrNull()))
-                        api.uploadLampiran(batchId, part)
+                        // FR-14: part file bernama "lampiran" + part "jenis"
+                        val filePart = MultipartBody.Part.createFormData("lampiran", file.name, file.asRequestBody("image/jpeg".toMediaTypeOrNull()))
+                        val jenisPart = MultipartBody.Part.createFormData("jenis", "bukti_batch")
+                        api.uploadLampiran(batchId, filePart, jenisPart)
                     }
                 }
             )
@@ -196,7 +198,7 @@ class FormStokKeluarFragment : Fragment(R.layout.form_stok_keluar) {
         viewLifecycleOwner.lifecycleScope.launch {
             runCatching {
                 val res = RetrofitClient.getInstance(requireContext()).getBarang()
-                if (res.isSuccessful && res.body()?.status == true) barangList = res.body()?.data ?: emptyList()
+                if (res.isSuccessful && res.body()?.success == true) barangList = res.body()?.data?.items ?: emptyList()
             }
         }
 
@@ -216,7 +218,7 @@ class FormStokKeluarFragment : Fragment(R.layout.form_stok_keluar) {
             }
             val catatan = etCatatan.text.toString().trim().ifEmpty { null }
             submitApi("Stok keluar FEFO berhasil dicatat", "Gagal mencatat stok keluar", {
-                it.storeStokKeluar(StokKeluarRequest(barangId, jumlah, catatan))
+                it.storeStokKeluar(TransaksiRequest(jenis = "keluar", barang_id = barangId, jumlah = jumlah, catatan = catatan))
             })
         }
     }
@@ -229,6 +231,7 @@ class FormPenyesuaianFragment : Fragment(R.layout.form_penyesuaian) {
         bindCloseButtons(view)
 
         val batchId = arguments?.getInt("batchId") ?: -1
+        val barangId = arguments?.getInt("barangId") ?: -1
         val stokAwal = arguments?.getInt("jumlahSisa") ?: 0
         val etSelisih = view.findViewById<EditText>(R.id.adjust_selisih)
         val tvPreview = view.findViewById<TextView>(R.id.adjust_preview)
@@ -249,8 +252,15 @@ class FormPenyesuaianFragment : Fragment(R.layout.form_penyesuaian) {
                 Toast.makeText(requireContext(), "Selisih dan alasan penyesuaian wajib diisi", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            submitApi("Penyesuaian stok berhasil disimpan", "Gagal menyimpan penyesuaian", {
-                it.storePenyesuaian(PenyesuaianRequest(batchId, selisih, alasan))
+            submitApi("Penyesuaian stok berhasil disimpan", "Gagal menyimpan penyesuaian", { api ->
+                // Penyesuaian wajib membawa barang_id — ambil dari argumen,
+                // atau dari detail batch bila tidak tersedia.
+                val bId = if (barangId != -1) barangId
+                else api.getDetailBatch(batchId).body()?.data?.barang_id ?: -1
+                if (bId == -1) throw IllegalStateException("Barang tidak dikenali untuk penyesuaian")
+                api.storePenyesuaian(
+                    TransaksiRequest(jenis = "penyesuaian", barang_id = bId, jumlah = selisih, catatan = alasan, batch_id = batchId),
+                )
             })
         }
     }
@@ -282,7 +292,8 @@ class FormAkunFragment : Fragment(R.layout.form_akun) {
                 return@setOnClickListener
             }
             submitApi("Akun pengguna berhasil disimpan", "Gagal menyimpan akun", {
-                it.storeUser(UserRequest(nama, username, password, peran, if (switchAktif.isChecked) 1 else 0))
+                // FR-05: akun yang dibuat selalu peran staf & aktif — peran/aktif diputuskan backend.
+                it.storeUser(UserRequest(nama, username, password))
             })
         }
     }

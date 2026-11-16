@@ -2,46 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PengaturanRequest;
 use App\Models\Pengaturan;
-use App\Models\RiwayatAktivitas;
-use Illuminate\Http\Request;
+use App\Support\Aktivitas;
+use App\Support\ApiResponse;
+use Illuminate\Http\JsonResponse;
 
-class PengaturanController extends Controller
+final class PengaturanController extends Controller
 {
-    // Ambil Seluruh Pengaturan (FR-25)
-    public function index()
+    /**
+     * FR-25: daftar seluruh pengaturan (BR-08: khusus pemilik di route).
+     */
+    public function index(): JsonResponse
     {
-        $pengaturan = Pengaturan::all()->pluck('nilai', 'kunci');
-
-        return response()->json(['status' => true, 'data' => $pengaturan], 200);
+        return ApiResponse::ok(
+            Pengaturan::query()->orderBy('kunci')->get(['kunci', 'nilai', 'updated_at']),
+            'Daftar pengaturan ditemukan'
+        );
     }
 
-    // Ubah Nilai Pengaturan (Khusus Pemilik)
-    public function update(Request $request)
+    /**
+     * FR-25: ubah ambang & pengaturan lain; setiap perubahan tercatat (BR-05).
+     */
+    public function update(PengaturanRequest $request): JsonResponse
     {
-        $request->validate([
-            'ambang_peringatan_hari' => 'required|numeric|min:1|max:365',
-        ]);
+        $valid = array_filter($request->validated(), fn ($nilai) => $nilai !== null);
+        $lupa = [];
 
-        $pengaturan = Pengaturan::updateOrCreate(
-            ['kunci' => 'ambang_peringatan_hari'],
-            ['nilai' => $request->ambang_peringatan_hari]
+        foreach ($valid as $kunci => $nilai) {
+            $lama = Pengaturan::nilai($kunci, '(tidak ada)');
+            Pengaturan::atur($kunci, (string) $nilai);
+            $lupa[] = "Atur {$kunci} menjadi {$nilai} (sebelumnya {$lama})";
+        }
+
+        Aktivitas::catat($request->user(), 'ubah_pengaturan', 'pengaturan', null, implode('; ', $lupa));
+
+        return ApiResponse::ok(
+            Pengaturan::query()->orderBy('kunci')->get(['kunci', 'nilai', 'updated_at']),
+            'Pengaturan berhasil diperbarui'
         );
-
-        // Audit Log
-        RiwayatAktivitas::create([
-            'user_id'    => auth()->id(),
-            'aksi'       => 'ubah_pengaturan',
-            'entitas'    => 'pengaturan',
-            'entitas_id' => null,
-            'keterangan' => "Mengubah ambang peringatan kedaluwarsa menjadi {$request->ambang_peringatan_hari} hari",
-            'waktu'      => now(),
-        ]);
-
-        return response()->json([
-            'status' => true,
-            'message' => 'Pengaturan berhasil diperbarui',
-            'data'    => $pengaturan
-        ], 200);
     }
 }

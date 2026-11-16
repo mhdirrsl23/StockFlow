@@ -1,68 +1,149 @@
 package com.example.stockflow
 
 import okhttp3.MultipartBody
+import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
 
+/**
+ * Kontrak Retrofit ke backend PRD 9.4 (routes/api.php — 49 endpoint).
+ * Seluruh path & kunci respons mengikuti backend kanonik: {success, message, data|errors}.
+ * Respons daftar terpaginasi berbentuk data = {items: [...], pagination: {...}}.
+ */
 interface ApiService {
 
+    // ── Auth (FR-02, FR-05) ──────────────────────────────────────────────
     @POST("login")
     suspend fun login(@Body request: LoginRequest): Response<LoginResponse>
 
     @POST("logout")
-    suspend fun logout(): Response<ApiResponse<Any>>
+    suspend fun logout(): Response<ApiResponse<Any?>>
 
+    @GET("me")
+    suspend fun getMe(): Response<ApiResponse<UserItem>>
+
+    // ── Dashboard ringkasan (FR-03) ──────────────────────────────────────
     @GET("dashboard")
     suspend fun getDashboard(): Response<ApiResponse<DashboardData>>
 
-    @GET("barang")
-    suspend fun getBarang(@Query("search") search: String? = null, @Query("kategori") kategori: String? = null): Response<ApiResponse<List<BarangItem>>>
+    // ── Master barang (FR-17, FR-04, FR-18, AB-08) ───────────────────────
+    @GET("products")
+    suspend fun getBarang(
+        @Query("q") search: String? = null,
+        @Query("kategori") kategori: String? = null,
+        @Query("per_page") perPage: Int = 15,
+    ): Response<ApiResponse<DaftarResponse<BarangItem>>>
 
-    @GET("barang/{id}")
+    @GET("products/{id}")
     suspend fun getDetailBarang(@Path("id") id: Int): Response<ApiResponse<BarangItem>>
 
-    @POST("barang")
+    @POST("products")
     suspend fun storeBarang(@Body request: BarangRequest): Response<ApiResponse<BarangItem>>
 
-    @PUT("barang/{id}")
+    @PUT("products/{id}")
     suspend fun updateBarang(@Path("id") id: Int, @Body request: BarangRequest): Response<ApiResponse<BarangItem>>
 
-    @DELETE("barang/{id}")
-    suspend fun deleteBarang(@Path("id") id: Int): Response<ApiResponse<Any>>
+    @DELETE("products/{id}")
+    suspend fun deleteBarang(@Path("id") id: Int): Response<ApiResponse<Any?>>
 
-    @GET("batch-stok")
-    suspend fun getBatchStok(@Query("barang_id") barangId: Int? = null, @Query("status") status: String? = null): Response<ApiResponse<List<BatchStokItem>>>
+    @POST("products/bulk-delete")
+    suspend fun bulkDeleteBarang(@Body request: BulkDeleteRequest): Response<ApiResponse<BulkDeleteResult>>
 
-    @GET("batch-stok/{id}")
+    // ── Batch stok (FR-05, FR-12) ────────────────────────────────────────
+    @GET("batches")
+    suspend fun getBatchStok(
+        @Query("barang_id") barangId: Int? = null,
+        @Query("status") status: String? = null,
+        @Query("dari") dari: String? = null,
+        @Query("sampai") sampai: String? = null,
+        @Query("per_page") perPage: Int = 20,
+    ): Response<ApiResponse<DaftarResponse<BatchStokItem>>>
+
+    @GET("batches/{id}")
     suspend fun getDetailBatch(@Path("id") id: Int): Response<ApiResponse<BatchStokItem>>
 
-    @POST("batch-stok")
-    suspend fun storeBatchStok(@Body request: BatchStokRequest): Response<ApiResponse<BatchStokItem>>
+    @GET("products/{barangId}/batches")
+    suspend fun getBatchPerBarang(@Path("barangId") barangId: Int): Response<ApiResponse<BatchBarangData>>
 
-    @POST("batch-stok/{id}/penanganan")
-    suspend fun tanganiBatch(@Path("id") id: Int, @Body request: PenangananRequest): Response<ApiResponse<BatchStokItem>>
+    // barang_id lewat path; body cukup {nomor_batch, jumlah_awal, tanggal_kedaluwarsa}
+    @POST("products/{barangId}/batches")
+    suspend fun storeBatchStok(@Path("barangId") barangId: Int, @Body request: BatchStokRequest): Response<ApiResponse<BatchStokItem>>
 
+    @PUT("batches/{id}")
+    suspend fun updateBatch(@Path("id") id: Int, @Body request: BatchUpdateRequest): Response<ApiResponse<BatchStokItem>>
+
+    @DELETE("batches/{id}")
+    suspend fun deleteBatch(@Path("id") id: Int): Response<ApiResponse<Any?>>
+
+    @POST("batches/bulk-delete")
+    suspend fun bulkDeleteBatch(@Body request: BulkDeleteRequest): Response<ApiResponse<BulkDeleteResult>>
+
+    // ── Lampiran (FR-14) — file terotorisasi, bukan jalur publik ─────────
+    // Multipart: file di part "lampiran", jenis di part "jenis" (bukti_batch/bukti_penanganan)
     @Multipart
-    @POST("batch-stok/{id}/lampiran")
-    suspend fun uploadLampiran(@Path("id") batchId: Int, @Part file: MultipartBody.Part): Response<ApiResponse<Any>>
+    @POST("batches/{batchId}/attachments")
+    suspend fun uploadLampiran(
+        @Path("batchId") batchId: Int,
+        @Part lampiran: MultipartBody.Part,
+        @Part jenis: MultipartBody.Part,
+    ): Response<ApiResponse<LampiranItem>>
 
-    @POST("mutasi-stok/keluar")
-    suspend fun storeStokKeluar(@Body request: StokKeluarRequest): Response<ApiResponse<Any>>
+    @GET("attachments/{id}/file")
+    suspend fun unduhLampiran(@Path("id") id: Int): Response<ResponseBody>
 
-    @POST("mutasi-stok/penyesuaian")
-    suspend fun storePenyesuaian(@Body request: PenyesuaianRequest): Response<ApiResponse<Any>>
+    @DELETE("attachments/{id}")
+    suspend fun deleteLampiran(@Path("id") id: Int): Response<ApiResponse<Any?>>
 
-    @GET("mutasi-stok")
-    suspend fun getMutasiStok(): Response<ApiResponse<List<MutasiStokItem>>>
+    // ── Transaksi stok (FR-06, FR-07, FR-13) ─────────────────────────────
+    // Satu endpoint untuk masuk/keluar/penyesuaian — bedakan lewat request.jenis
+    // ("masuk" | "keluar" | "penyesuaian"); penyesuaian wajib batch_id + catatan.
+    @GET("stock-transactions")
+    suspend fun getMutasiStok(
+        @Query("jenis") jenis: String? = null,
+        @Query("barang_id") barangId: Int? = null,
+        @Query("batch_id") batchId: Int? = null,
+        @Query("dari") dari: String? = null,
+        @Query("sampai") sampai: String? = null,
+        @Query("per_page") perPage: Int = 20,
+    ): Response<ApiResponse<DaftarResponse<MutasiStokItem>>>
 
+    @POST("stock-transactions")
+    suspend fun storeStokKeluar(@Body request: TransaksiRequest): Response<ApiResponse<Any?>>
+
+    @POST("stock-transactions")
+    suspend fun storePenyesuaian(@Body request: TransaksiRequest): Response<ApiResponse<Any?>>
+
+    // ── Penanganan kedaluwarsa (FR-12) ───────────────────────────────────
+    @POST("expiry-actions")
+    suspend fun tanganiKedaluwarsa(@Body request: PenangananRequest): Response<ApiResponse<Any?>>
+
+    // ── Notifikasi (FR-13, FR-24) ────────────────────────────────────────
+    @GET("notifications")
+    suspend fun getNotifikasi(
+        @Query("jenis") jenis: String? = null,
+        @Query("belum_ditampilkan") belumDitampilkan: Boolean? = null,
+        @Query("per_page") perPage: Int = 20,
+    ): Response<ApiResponse<DaftarResponse<NotifikasiItem>>>
+
+    @PATCH("notifications/{id}/read")
+    suspend fun tandaiNotifikasiDibaca(@Path("id") id: Int): Response<ApiResponse<Any?>>
+
+    @POST("notifications/read-all")
+    suspend fun tandaiSemuaNotifikasiDibaca(): Response<ApiResponse<Any?>>
+
+    // ── Riwayat aktivitas (FR-31) ────────────────────────────────────────
     @GET("riwayat-aktivitas")
-    suspend fun getRiwayatAktivitas(): Response<ApiResponse<List<RiwayatAktivitasItem>>>
+    suspend fun getRiwayatAktivitas(
+        @Query("aksi") aksi: String? = null,
+        @Query("entitas") entitas: String? = null,
+        @Query("dari") dari: String? = null,
+        @Query("sampai") sampai: String? = null,
+        @Query("per_page") perPage: Int = 20,
+    ): Response<ApiResponse<DaftarResponse<RiwayatAktivitasItem>>>
 
-    @GET("notifikasi")
-    suspend fun getNotifikasi(): Response<ApiResponse<List<NotifikasiItem>>>
-
+    // ── Manajemen akun (FR-05, BR-08) ────────────────────────────────────
     @GET("users")
-    suspend fun getUsers(): Response<ApiResponse<List<UserItem>>>
+    suspend fun getUsers(): Response<ApiResponse<UserListData>>
 
     @POST("users")
     suspend fun storeUser(@Body request: UserRequest): Response<ApiResponse<UserItem>>
@@ -70,9 +151,18 @@ interface ApiService {
     @PUT("users/{id}")
     suspend fun updateUser(@Path("id") id: Int, @Body request: UserRequest): Response<ApiResponse<UserItem>>
 
+    @PATCH("users/{id}/aktif")
+    suspend fun ubahAkunAktif(@Path("id") id: Int, @Body request: AktifRequest): Response<ApiResponse<UserItem>>
+
+    @DELETE("users/{id}")
+    suspend fun deleteUser(@Path("id") id: Int): Response<ApiResponse<Any?>>
+
+    // ── Pengaturan (FR-25, BR-08) ────────────────────────────────────────
     @GET("pengaturan")
     suspend fun getPengaturan(): Response<ApiResponse<List<PengaturanItem>>>
 
-    @POST("pengaturan")
-    suspend fun updatePengaturan(@Body items: Map<String, String>): Response<ApiResponse<Any>>
+    // Kunci valid: ambang_peringatan_hari, maks_ukuran_lampiran_mb,
+    // maks_ukuran_impor_mb, maks_baris_impor
+    @PUT("pengaturan")
+    suspend fun updatePengaturan(@Body items: Map<String, Int>): Response<ApiResponse<List<PengaturanItem>>>
 }

@@ -2,36 +2,41 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class MutasiStok extends Model
 {
-    use HasFactory;
+    /**
+     * Tabel audit tanpa kolom timestamps Laravel; kolom `waktu` diisi eksplisit.
+     */
+    public $timestamps = false;
 
     protected $table = 'mutasi_stok';
 
-    // Matikan timestamps bawaan karena tabel ini menggunakan kolom 'waktu'
-    public $timestamps = false;
+    protected $fillable = ['batch_id', 'jenis', 'jumlah', 'catatan', 'user_id', 'waktu'];
 
-    protected $fillable = [
-        'batch_id',
-        'jenis',
-        'jumlah',
-        'catatan',
-        'user_id',
-        'waktu',
+    protected $casts = [
+        'waktu' => 'datetime',
+        'jumlah' => 'integer',
     ];
 
-    // Relasi ke BatchStok
-    public function batchStok()
+    public function batch()
     {
         return $this->belongsTo(BatchStok::class, 'batch_id');
     }
 
-    // Relasi ke User pelaku mutasi
-    public function user()
+    public function barang()
+    {
+        return $this->hasOneThrough(Barang::class, BatchStok::class, 'id', 'id', 'batch_id', 'barang_id');
+    }
+
+    public function pengguna()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function scopeJenis($query, ?string $jenis)
+    {
+        return $jenis ? $query->where('jenis', $jenis) : $query;
     }
 }

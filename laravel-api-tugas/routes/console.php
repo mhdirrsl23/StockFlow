@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schedule;
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote');
+// Pemeriksaan stok minimum dan kedaluwarsa dua kali sehari (FR-23, jadwal ERP PRD 9.4)
+// memakai zona waktu aplikasi Asia/Jakarta (WIB).
+Schedule::command('stockflow:monitor')->dailyAt('06:00');
+Schedule::command('stockflow:monitor')->dailyAt('18:00');

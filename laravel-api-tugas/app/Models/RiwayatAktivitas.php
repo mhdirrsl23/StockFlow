@@ -2,29 +2,28 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class RiwayatAktivitas extends Model
 {
-    use HasFactory;
+    /**
+     * Tabel audit immutable (NFR-08); tidak pernah diubah melalui aplikasi.
+     */
+    public $timestamps = false;
 
     protected $table = 'riwayat_aktivitas';
 
-    // Matikan timestamps bawaan (pakai kolom 'waktu')
-    public $timestamps = false;
+    protected $fillable = ['user_id', 'aksi', 'entitas', 'entitas_id', 'keterangan', 'waktu'];
 
-    protected $fillable = [
-        'user_id',
-        'aksi',
-        'entitas',
-        'entitas_id',
-        'keterangan',
-        'waktu',
-    ];
+    protected $casts = ['waktu' => 'datetime'];
 
-    public function user()
+    public function pengguna()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function scopeAksi($query, ?string $aksi)
+    {
+        return $aksi ? $query->where('aksi', $aksi) : $query;
     }
 }
