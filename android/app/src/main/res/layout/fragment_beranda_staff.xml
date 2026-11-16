@@ -126,6 +126,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_sapaan"
                         style="@style/SF.Text.Heading"
                         android:text="Halo, Rina" />
 
@@ -231,6 +232,7 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/tv_kedaluwarsa"
                                     style="@style/SF.Text"
                                     android:fontFamily="@font/plus_jakarta_sans_extrabold"
                                     android:letterSpacing="-0.05"
@@ -282,6 +284,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/tv_mendekati_kedaluwarsa"
                                 style="@style/SF.Text"
                                 android:fontFamily="@font/plus_jakarta_sans_extrabold"
                                 android:text="3"
@@ -309,6 +312,7 @@
                             android:paddingStart="12dp">
 
                             <TextView
+                                android:id="@+id/tv_stok_menipis"
                                 style="@style/SF.Text"
                                 android:fontFamily="@font/plus_jakarta_sans_extrabold"
                                 android:text="2"
@@ -336,6 +340,7 @@
                             android:paddingStart="12dp">
 
                             <TextView
+                                android:id="@+id/tv_notif_baru"
                                 style="@style/SF.Text"
                                 android:fontFamily="@font/plus_jakarta_sans_extrabold"
                                 android:text="4"
@@ -355,6 +360,7 @@
 
             <!-- Notice: kedaluwarsa -->
             <LinearLayout
+                android:id="@+id/btn_perlu_ditangani"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -386,6 +392,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_alert_kedaluwarsa"
                         style="@style/SF.Text"
                         android:fontFamily="@font/plus_jakarta_sans_bold"
                         android:text="1 batch kedaluwarsa perlu ditangani"
@@ -408,6 +415,7 @@
 
             <!-- Notice: stok menipis -->
             <LinearLayout
+                android:id="@+id/btn_barang_menipis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -439,6 +447,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_alert_menipis"
                         style="@style/SF.Text"
                         android:fontFamily="@font/plus_jakarta_sans_bold"
                         android:text="2 barang di bawah stok minimum"
@@ -496,6 +505,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tv_stok_menipis_2"
                             style="@style/SF.Text.Value"
                             android:text="2" />
 
@@ -536,6 +546,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tv_mendekati_kedaluwarsa_2"
                             style="@style/SF.Text.Value"
                             android:text="3" />
 
@@ -583,6 +594,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tv_kedaluwarsa_2"
                             style="@style/SF.Text.Value"
                             android:text="1" />
 
@@ -623,6 +635,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tv_total_stok"
                             style="@style/SF.Text.Value"
                             android:text="6" />
 
@@ -681,6 +694,7 @@
                     </FrameLayout>
 
                     <TextView
+                        android:id="@+id/btn_stok_masuk"
                         style="@style/SF.Text"
                         android:layout_marginTop="6dp"
                         android:fontFamily="@font/plus_jakarta_sans_bold"
@@ -712,6 +726,7 @@
                     </FrameLayout>
 
                     <TextView
+                        android:id="@+id/btn_stok_keluar"
                         style="@style/SF.Text"
                         android:layout_marginTop="6dp"
                         android:fontFamily="@font/plus_jakarta_sans_bold"
@@ -743,6 +758,7 @@
                     </FrameLayout>
 
                     <TextView
+                        android:id="@+id/btn_tangani"
                         style="@style/SF.Text"
                         android:layout_marginTop="6dp"
                         android:fontFamily="@font/plus_jakarta_sans_bold"
@@ -774,6 +790,7 @@
                     </FrameLayout>
 
                     <TextView
+                        android:id="@+id/btn_tambah_barang"
                         style="@style/SF.Text"
                         android:layout_marginTop="6dp"
                         android:fontFamily="@font/plus_jakarta_sans_bold"
@@ -809,6 +826,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/btn_lihat_semua_barang"
                     style="@style/SF.Text.Link"
                     android:drawableEnd="@drawable/ic12_chevron_right"
                     android:text="Semua batch"

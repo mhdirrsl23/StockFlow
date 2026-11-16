@@ -69,7 +69,11 @@ open class BaseBerandaFragment(layoutId: Int, private val fallbackNama: String) 
             "btn_stok_keluar" to "formStokKeluarFragment",
             "btn_lihat_semua_barang" to "nav_barang",
             "btn_lihat_laporan" to "nav_laporan",
-            "btn_lihat_riwayat" to "nav_riwayat"
+            "btn_lihat_riwayat" to "nav_riwayat",
+            // Aksi beranda staf (id hanya ada di layout staf)
+            "btn_stok_masuk" to "formBatchFragment",
+            "btn_tangani" to "perluDitanganiFragment",
+            "btn_barang_menipis" to "nav_barang",
         ).forEach { (btnId, dest) ->
             view.opt<View>(btnId)?.setOnClickListener { go(dest) }
         }
@@ -82,6 +86,16 @@ open class BaseBerandaFragment(layoutId: Int, private val fallbackNama: String) 
             view.opt<TextView>("tv_mendekati_kedaluwarsa")?.text = d.ringkasan.batch_mendekati_kedaluwarsa.toString()
             view.opt<TextView>("tv_kedaluwarsa")?.text = d.ringkasan.batch_kedaluwarsa.toString()
             view.opt<TextView>("tv_perlu_ditangani")?.text = d.ringkasan.batch_kedaluwarsa.toString()
+
+            // Angka & kalimat khusus beranda staf (id tidak ada di beranda pemilik → no-op)
+            view.opt<TextView>("tv_notif_baru")?.text = d.ringkasan.notifikasi_belum_dibaca.toString()
+            view.opt<TextView>("tv_kedaluwarsa_2")?.text = d.ringkasan.batch_kedaluwarsa.toString()
+            view.opt<TextView>("tv_mendekati_kedaluwarsa_2")?.text = d.ringkasan.batch_mendekati_kedaluwarsa.toString()
+            view.opt<TextView>("tv_stok_menipis_2")?.text = d.ringkasan.stok_menipis.toString()
+            view.opt<TextView>("tv_alert_kedaluwarsa")?.text =
+                "${d.ringkasan.batch_kedaluwarsa} batch kedaluwarsa perlu ditangani"
+            view.opt<TextView>("tv_alert_menipis")?.text =
+                "${d.ringkasan.stok_menipis} barang di bawah stok minimum"
         }
     }
 }
