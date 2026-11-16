@@ -1,14 +1,19 @@
 package com.example.stockflow
 
 import android.app.AlertDialog
+import android.app.DatePickerDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -16,6 +21,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
+import java.util.concurrent.TimeUnit
 
 private inline fun <reified T : View> View.opt(idName: String): T? {
     val id = resources.getIdentifier(idName, "id", context.packageName)
@@ -260,10 +274,17 @@ class DetailBatchFragment : Fragment(R.layout.fragment_detail_batch) {
 
     private var currentBatch: BatchStokItem? = null
 
+    private val pickFoto = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        val b = currentBatch ?: return@registerForActivityResult
+        if (uri != null) unggahFoto(uri, b.id)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val batchId = arguments?.getInt("batchId") ?: -1
         view.opt<View>("btn_back")?.setOnClickListener { findNavController().navigateUp() }
+        view.opt<View>("btn_more_batch")?.setOnClickListener { tampilkanMenuAksi(batchId) }
+        view.opt<View>("btn_tambah_foto")?.setOnClickListener { pickFoto.launch("image/*") }
 
         view.opt<View>("btn_penyesuaian")?.setOnClickListener {
             val b = currentBatch ?: return@setOnClickListener
@@ -302,7 +323,179 @@ class DetailBatchFragment : Fragment(R.layout.fragment_detail_batch) {
         view.opt<TextView>("tv_jumlah_sisa")?.text = "${b.jumlah_sisa} / ${b.jumlah_awal}"
         view.opt<TextView>("tv_tanggal_kedaluwarsa")?.text = b.tanggal_kedaluwarsa
         view.opt<TextView>("tv_status_batch")?.text = b.status
+        view.opt<TextView>("tv_label_sisa_rel")?.text = labelRelatif(b.tanggal_kedaluwarsa)
     }
+
+    // ── Menu aksi tambahan (ikon ⋮ di topbar) ─────────────────────────────
+    private fun tampilkanMenuAksi(batchId: Int) {
+        val b = currentBatch
+        val opsi = arrayOf("Tambah stok ke batch (masuk)", "Ubah karakteristik batch (BR-01)", "Hapus batch")
+        AlertDialog.Builder(requireContext())
+            .setTitle("Aksi batch ${b?.nomor_batch ?: "#$batchId"}")
+            .setItems(opsi) { _, i ->
+                when (i) {
+                    0 -> dialogStokMasuk(b)
+                    1 -> dialogUbahKarakteristik(b)
+                    else -> dialogHapusBatch(batchId)
+                }
+            }
+            .show()
+    }
+
+    private fun dialogStokMasuk(b: BatchStokItem?) {
+        if (b == null) return
+        val input = EditText(requireContext()).apply {
+            inputType = InputType.TYPE_CLASS_NUMBER
+            hint = "Jumlah masuk"
+        }
+        AlertDialog.Builder(requireContext())
+            .setTitle("Tambah stok — ${b.nomor_batch}")
+            .setView(input)
+            .setPositiveButton("Simpan") { _, _ ->
+                val jumlah = input.text.toString().trim().toIntOrNull()
+                if (jumlah == null || jumlah <= 0) {
+                    Toast.makeText(requireContext(), "Jumlah wajib angka lebih dari 0", Toast.LENGTH_SHORT).show()
+                    return@setPositiveButton
+                }
+                runApi { api ->
+                    val res = api.storeStokKeluar(
+                        TransaksiRequest(
+                            jenis = "masuk",
+                            barang_id = b.barang_id,
+                            jumlah = jumlah,
+                            catatan = "Stok masuk ke batch ${b.nomor_batch}",
+                            batch_id = b.id,
+                        ),
+                    )
+                    if (res.isSuccessful && res.body()?.success == true) {
+                        Toast.makeText(requireContext(), "Stok masuk tercatat", Toast.LENGTH_SHORT).show()
+                        muatDetail(b.id, requireView())
+                    } else {
+                        Toast.makeText(requireContext(), res.body()?.message ?: "Gagal mencatat stok masuk", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+            .setNegativeButton("Batal", null)
+            .show()
+    }
+
+    // BR-01: hanya nomor_batch & tanggal_kedaluwarsa yang boleh diubah.
+    private fun dialogUbahKarakteristik(b: BatchStokItem?) {
+        if (b == null) return
+        var tanggalBaru = b.tanggal_kedaluwarsa ?: ""
+
+        val kontainer = LinearLayout(requireContext()).apply {
+            orientation = LinearLayout.VERTICAL
+            val pad = (16 * resources.displayMetrics.density).toInt()
+            setPadding(pad, pad, pad, 0)
+        }
+        val etNomor = EditText(requireContext()).apply { setText(b.nomor_batch) }
+        val pilihTanggal = TextView(requireContext()).apply {
+            text = "Kedaluwarsa: $tanggalBaru (ketuk untuk ubah)"
+            setPadding(0, 8, 0, 0)
+            setOnClickListener {
+                val kal = Calendar.getInstance()
+                val bagian = tanggalBaru.split("-")
+                if (bagian.size == 3) {
+                    runCatching { kal.set(bagian[0].toInt(), bagian[1].toInt() - 1, bagian[2].toInt()) }
+                }
+                DatePickerDialog(
+                    requireContext(),
+                    { _, y, m, d ->
+                        tanggalBaru = String.format(Locale.US, "%04d-%02d-%02d", y, m + 1, d)
+                        text = "Kedaluwarsa: $tanggalBaru (ketuk untuk ubah)"
+                    },
+                    kal.get(Calendar.YEAR),
+                    kal.get(Calendar.MONTH),
+                    kal.get(Calendar.DAY_OF_MONTH),
+                ).show()
+            }
+        }
+        kontainer.addView(etNomor)
+        kontainer.addView(pilihTanggal)
+
+        AlertDialog.Builder(requireContext())
+            .setTitle("Ubah karakteristik batch (BR-01)")
+            .setView(kontainer)
+            .setPositiveButton("Simpan") { _, _ ->
+                val nomor = etNomor.text.toString().trim()
+                if (nomor.isEmpty() || tanggalBaru.isEmpty()) {
+                    Toast.makeText(requireContext(), "Nomor batch dan tanggal wajib diisi", Toast.LENGTH_SHORT).show()
+                    return@setPositiveButton
+                }
+                runApi { api ->
+                    val res = api.updateBatch(b.id, BatchUpdateRequest(nomor_batch = nomor, tanggal_kedaluwarsa = tanggalBaru))
+                    if (res.isSuccessful && res.body()?.success == true) {
+                        Toast.makeText(requireContext(), "Karakteristik batch diperbarui", Toast.LENGTH_SHORT).show()
+                        muatDetail(b.id, requireView())
+                    } else {
+                        Toast.makeText(requireContext(), res.body()?.message ?: "Gagal mengubah batch", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+            .setNegativeButton("Batal", null)
+            .show()
+    }
+
+    private fun dialogHapusBatch(batchId: Int) {
+        if (batchId == -1) return
+        AlertDialog.Builder(requireContext())
+            .setTitle("Hapus batch")
+            .setMessage("Batch akan dihapus permanen. Yakin?")
+            .setPositiveButton("Hapus") { _, _ ->
+                runApi { api ->
+                    val res = api.deleteBatch(batchId)
+                    if (res.isSuccessful && res.body()?.success == true) {
+                        Toast.makeText(requireContext(), "Batch dihapus", Toast.LENGTH_SHORT).show()
+                        findNavController().navigateUp()
+                    } else {
+                        Toast.makeText(requireContext(), res.body()?.message ?: "Gagal menghapus batch", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+            .setNegativeButton("Batal", null)
+            .show()
+    }
+
+    // FR-14: unggah foto bukti batch (JPG/PNG).
+    private fun unggahFoto(uri: Uri, batchId: Int) {
+        runApi { api ->
+            val stream = requireContext().contentResolver.openInputStream(uri) ?: return@runApi
+            val file = File(requireContext().cacheDir, "bukti_batch_$batchId.jpg")
+            file.outputStream().use { stream.copyTo(it) }
+            val filePart = MultipartBody.Part.createFormData("lampiran", file.name, file.asRequestBody("image/jpeg".toMediaTypeOrNull()))
+            val jenisPart = MultipartBody.Part.createFormData("jenis", "bukti_batch")
+            val res = api.uploadLampiran(batchId, filePart, jenisPart)
+            if (res.isSuccessful && res.body()?.success == true) {
+                Toast.makeText(requireContext(), "Foto bukti diunggah", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), res.body()?.message ?: "Gagal mengunggah foto", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun labelRelatif(tanggal: String?): String {
+        val selisih = selisihHari(tanggal) ?: return tanggal ?: "-"
+        return when {
+            selisih < 0 -> "Kedaluwarsa ${-selisih} hr lalu"
+            selisih == 0L -> "Kedaluwarsa hari ini"
+            else -> "$selisih hr lagi"
+        }
+    }
+
+    private fun selisihHari(tanggal: String?): Long? = runCatching {
+        val pola = SimpleDateFormat("yyyy-MM-dd", Locale.US).apply { isLenient = false }
+        val tgl = pola.parse(tanggal ?: error("tanggal kosong")) ?: error("format tanggal")
+        fun tengahMalam(d: Date): Calendar =
+            Calendar.getInstance().apply {
+                time = d
+                set(Calendar.HOUR_OF_DAY, 0)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+            }
+        TimeUnit.MILLISECONDS.toDays(tengahMalam(tgl).timeInMillis - tengahMalam(Date()).timeInMillis)
+    }.getOrNull()
 }
 
 class PerluDitanganiFragment : Fragment(R.layout.fragment_perlu_ditangani) {
@@ -381,25 +574,41 @@ class PengaturanFragment : Fragment(R.layout.fragment_pengaturan) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.opt<View>("btn_back")?.setOnClickListener { findNavController().navigateUp() }
+        view.opt<View>("btn_batal")?.setOnClickListener { findNavController().navigateUp() }
+
         val etAmbang = view.opt<EditText>("et_ambang_hari")
+        val etLampiran = view.opt<EditText>("et_maks_lampiran_mb")
+        val etBarisImpor = view.opt<EditText>("et_maks_baris_impor")
 
         runApi { api ->
-            val ambang = api.getPengaturan().body()?.data?.find { it.kunci == "ambang_peringatan_hari" }?.nilai
-            if (!ambang.isNullOrEmpty()) etAmbang?.setText(ambang)
+            val data = api.getPengaturan().body()?.data ?: return@runApi
+            fun ambil(kunci: String): String? = data.find { it.kunci == kunci }?.nilai
+            ambil("ambang_peringatan_hari")?.let { etAmbang?.setText(it) }
+            ambil("maks_ukuran_lampiran_mb")?.let { etLampiran?.setText(it) }
+            ambil("maks_baris_impor")?.let { etBarisImpor?.setText(it) }
         }
 
         view.opt<View>("btn_simpan_pengaturan")?.setOnClickListener {
-            val nilai = etAmbang?.text?.toString()?.trim().orEmpty()
-            val angka = nilai.toIntOrNull()
-            if (angka == null) {
-                Toast.makeText(requireContext(), "Ambang hari wajib berupa angka", Toast.LENGTH_SHORT).show()
+            val ambang = etAmbang?.text?.toString()?.trim()?.toIntOrNull()
+            val maksLampiran = etLampiran?.text?.toString()?.trim()?.toIntOrNull()
+            val maksBaris = etBarisImpor?.text?.toString()?.trim()?.toIntOrNull()
+            if (ambang == null || maksLampiran == null || maksBaris == null) {
+                Toast.makeText(requireContext(), "Seluruh kolom wajib berupa angka", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             runApi { api ->
-                val res = api.updatePengaturan(mapOf("ambang_peringatan_hari" to angka))
+                val res = api.updatePengaturan(
+                    mapOf(
+                        "ambang_peringatan_hari" to ambang,
+                        "maks_ukuran_lampiran_mb" to maksLampiran,
+                        "maks_baris_impor" to maksBaris,
+                    ),
+                )
                 if (res.isSuccessful && res.body()?.success == true) {
                     Toast.makeText(requireContext(), "Pengaturan disimpan", Toast.LENGTH_SHORT).show()
                     findNavController().navigateUp()
+                } else {
+                    Toast.makeText(requireContext(), res.body()?.message ?: "Gagal menyimpan pengaturan", Toast.LENGTH_SHORT).show()
                 }
             }
         }
