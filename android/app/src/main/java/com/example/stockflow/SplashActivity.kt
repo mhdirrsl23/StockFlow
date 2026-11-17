@@ -12,7 +12,13 @@ class SplashActivity : AppCompatActivity() {
 
     private val handler = Handler(Looper.getMainLooper())
     private val navigateRunnable = Runnable {
-        val intent = Intent(this, LoginActivity::class.java)
+        // Sudah login → langsung beranda sesuai peran; belum → form login.
+        val sesi = SessionManager(this)
+        val intent = if (sesi.isLoggedIn()) {
+            Intent(this, MainActivity::class.java).putExtra("USER_ROLE", sesi.getPeran())
+        } else {
+            Intent(this, LoginActivity::class.java)
+        }
         val options = ActivityOptions.makeCustomAnimation(
             this,
             android.R.anim.fade_in,

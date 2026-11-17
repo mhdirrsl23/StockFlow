@@ -15,6 +15,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -39,13 +41,36 @@ private fun Fragment.showPicker(title: String, items: Array<String>, target: Vie
         .show()
 }
 
+/**
+ * Urai pesan gagal dari respons API: untuk status non-2xx (mis. 422 validasi)
+ * isi JSON ada di errorBody — ambil message + rincian errors per kolom (PRD 9.5).
+ */
+private fun Fragment.uraikanGagal(res: Response<*>, bawaan: String): String {
+    val teks = res.errorBody()?.string()
+    if (teks != null) {
+        return runCatching {
+            val obj = Gson().fromJson(teks, JsonObject::class.java)
+            val pesan = obj.get("message")?.asString ?: bawaan
+            val errors = obj.getAsJsonObject("errors")
+            val rincian = errors?.entrySet()?.take(3)?.joinToString("\n") { (kunci, nilai) ->
+                "• ${(nilai.asJsonArray.firstOrNull()?.asString ?: kunci)}"
+            }
+            if (rincian.isNullOrEmpty()) pesan else "$pesan\n$rincian"
+        }.getOrDefault(bawaan)
+    }
+    return (res.body() as? ApiResponse<*>)?.message ?: bawaan
+}
+
 private fun <T> Fragment.submitApi(
     successMsg: String,
     failMsg: String,
     call: suspend (ApiService) -> Response<ApiResponse<T>>,
-    onSuccess: (suspend (ApiService, T?) -> Unit)? = null
+    onSuccess: (suspend (ApiService, T?) -> Unit)? = null,
+    tombol: View? = null,
 ) {
     viewLifecycleOwner.lifecycleScope.launch {
+        tombol?.isEnabled = false
+        tombol?.alpha = 0.6f
         try {
             val api = RetrofitClient.getInstance(requireContext())
             val res = call(api)
@@ -54,10 +79,13 @@ private fun <T> Fragment.submitApi(
                 Toast.makeText(requireContext(), successMsg, Toast.LENGTH_SHORT).show()
                 findNavController().navigateUp()
             } else {
-                Toast.makeText(requireContext(), res.body()?.message ?: failMsg, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), uraikanGagal(res, failMsg), Toast.LENGTH_LONG).show()
             }
         } catch (e: Exception) {
             Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+        } finally {
+            tombol?.isEnabled = true
+            tombol?.alpha = 1f
         }
     }
 }
@@ -88,9 +116,12 @@ class FormBarangFragment : Fragment(R.layout.form_barang) {
                 Toast.makeText(requireContext(), "SKU, nama barang, dan satuan wajib diisi", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            submitApi("Barang berhasil disimpan", "Gagal menyimpan barang", {
-                it.storeBarang(BarangRequest(sku, nama, kategori, satuan, min))
-            })
+            submitApi(
+                "Barang berhasil disimpan",
+                "Gagal menyimpan barang",
+                { it.storeBarang(BarangRequest(sku, nama, kategori, satuan, min)) },
+                tombol = view.findViewById(R.id.btn_simpan),
+            )
         }
     }
 }
@@ -119,6 +150,9 @@ class FormBatchFragment : Fragment(R.layout.form_batch) {
         val tvJumlah = view.findViewById<TextView>(R.id.batch_jumlah)
         val selectTgl = view.findViewById<View>(R.id.select_tanggal)
 
+        // Dipanggil dari detail barang → barang sudah terpilih.
+        arguments?.getInt("barangId")?.takeIf { it != -1 }?.let { barangId = it }
+
         tvJumlah.text = jumlah.toString()
         view.findViewById<View>(R.id.btn_batch_minus).setOnClickListener { if (jumlah > 1) tvJumlah.text = (--jumlah).toString() }
         view.findViewById<View>(R.id.btn_batch_plus).setOnClickListener { tvJumlah.text = (++jumlah).toString() }
@@ -127,6 +161,10 @@ class FormBatchFragment : Fragment(R.layout.form_batch) {
             runCatching {
                 val res = RetrofitClient.getInstance(requireContext()).getBarang()
                 if (res.isSuccessful && res.body()?.success == true) barangList = res.body()?.data?.items ?: emptyList()
+            }
+            val dipilih = barangList.find { it.id == barangId }
+            if (dipilih != null) {
+                (selectBrg as? TextView)?.text = "${dipilih.kode_sku} - ${dipilih.nama}"
             }
         }
 
@@ -159,7 +197,8 @@ class FormBatchFragment : Fragment(R.layout.form_batch) {
                 "Batch stok berhasil ditambahkan",
                 "Gagal menyimpan batch",
                 { it.storeBatchStok(barangId, BatchStokRequest(nomor, jumlah, tanggal)) },
-                { api, batch ->
+                tombol = view.findViewById(R.id.btn_simpan),
+                onSuccess = { api, batch ->
                     val uri = imageUri ?: return@submitApi
                     val batchId = batch?.id ?: return@submitApi
                     runCatching {
@@ -191,6 +230,9 @@ class FormStokKeluarFragment : Fragment(R.layout.form_stok_keluar) {
         val tvJumlah = view.findViewById<TextView>(R.id.keluar_jumlah)
         val etCatatan = view.findViewById<EditText>(R.id.et_catatan)
 
+        // Dipanggil dari detail barang → barang sudah terpilih.
+        arguments?.getInt("barangId")?.takeIf { it != -1 }?.let { barangId = it }
+
         tvJumlah.text = jumlah.toString()
         view.findViewById<View>(R.id.btn_keluar_minus).setOnClickListener { if (jumlah > 1) tvJumlah.text = (--jumlah).toString() }
         view.findViewById<View>(R.id.btn_keluar_plus).setOnClickListener { tvJumlah.text = (++jumlah).toString() }
@@ -199,6 +241,10 @@ class FormStokKeluarFragment : Fragment(R.layout.form_stok_keluar) {
             runCatching {
                 val res = RetrofitClient.getInstance(requireContext()).getBarang()
                 if (res.isSuccessful && res.body()?.success == true) barangList = res.body()?.data?.items ?: emptyList()
+            }
+            val dipilih = barangList.find { it.id == barangId }
+            if (dipilih != null) {
+                (selectBrg as? TextView)?.text = "${dipilih.nama} (Stok: ${dipilih.total_stok_tersedia} ${dipilih.satuan})"
             }
         }
 
@@ -217,9 +263,12 @@ class FormStokKeluarFragment : Fragment(R.layout.form_stok_keluar) {
                 return@setOnClickListener
             }
             val catatan = etCatatan.text.toString().trim().ifEmpty { null }
-            submitApi("Stok keluar FEFO berhasil dicatat", "Gagal mencatat stok keluar", {
-                it.storeStokKeluar(TransaksiRequest(jenis = "keluar", barang_id = barangId, jumlah = jumlah, catatan = catatan))
-            })
+            submitApi(
+                "Stok keluar FEFO berhasil dicatat",
+                "Gagal mencatat stok keluar",
+                { it.storeStokKeluar(TransaksiRequest(jenis = "keluar", barang_id = barangId, jumlah = jumlah, catatan = catatan)) },
+                tombol = view.findViewById(R.id.btn_catat_keluar),
+            )
         }
     }
 }
@@ -252,16 +301,21 @@ class FormPenyesuaianFragment : Fragment(R.layout.form_penyesuaian) {
                 Toast.makeText(requireContext(), "Selisih dan alasan penyesuaian wajib diisi", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            submitApi("Penyesuaian stok berhasil disimpan", "Gagal menyimpan penyesuaian", { api ->
-                // Penyesuaian wajib membawa barang_id — ambil dari argumen,
-                // atau dari detail batch bila tidak tersedia.
-                val bId = if (barangId != -1) barangId
-                else api.getDetailBatch(batchId).body()?.data?.barang_id ?: -1
-                if (bId == -1) throw IllegalStateException("Barang tidak dikenali untuk penyesuaian")
-                api.storePenyesuaian(
-                    TransaksiRequest(jenis = "penyesuaian", barang_id = bId, jumlah = selisih, catatan = alasan, batch_id = batchId),
-                )
-            })
+            submitApi(
+                "Penyesuaian stok berhasil disimpan",
+                "Gagal menyimpan penyesuaian",
+                { api ->
+                    // Penyesuaian wajib membawa barang_id — ambil dari argumen,
+                    // atau dari detail batch bila tidak tersedia.
+                    val bId = if (barangId != -1) barangId
+                    else api.getDetailBatch(batchId).body()?.data?.barang_id ?: -1
+                    if (bId == -1) throw IllegalStateException("Barang tidak dikenali untuk penyesuaian")
+                    api.storePenyesuaian(
+                        TransaksiRequest(jenis = "penyesuaian", barang_id = bId, jumlah = selisih, catatan = alasan, batch_id = batchId),
+                    )
+                },
+                tombol = view.findViewById(R.id.btn_simpan),
+            )
         }
     }
 }
@@ -291,10 +345,15 @@ class FormAkunFragment : Fragment(R.layout.form_akun) {
                 Toast.makeText(requireContext(), "Nama, username, dan password wajib diisi", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            submitApi("Akun pengguna berhasil disimpan", "Gagal menyimpan akun", {
-                // FR-05: akun yang dibuat selalu peran staf & aktif — peran/aktif diputuskan backend.
-                it.storeUser(UserRequest(nama, username, password))
-            })
+            submitApi(
+                "Akun pengguna berhasil disimpan",
+                "Gagal menyimpan akun",
+                {
+                    // FR-05: akun yang dibuat selalu peran staf & aktif — peran/aktif diputuskan backend.
+                    it.storeUser(UserRequest(nama, username, password))
+                },
+                tombol = view.findViewById(R.id.btn_simpan),
+            )
         }
     }
 }

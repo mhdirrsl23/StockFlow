@@ -26,6 +26,7 @@
         android:paddingBottom="10dp">
 
         <ImageView
+            android:id="@+id/btn_back"
             style="@style/SF.IconBtn.Boxed"
             android:src="@drawable/ic_arrow_left" />
 
@@ -180,6 +181,7 @@
                         android:orientation="horizontal">
 
                         <EditText
+                            android:id="@+id/et_ambang_hari"
                             style="@style/SF.Input"
                             android:layout_width="57dp"
                             android:layout_height="34dp"
@@ -334,6 +336,7 @@
                         android:orientation="horizontal">
 
                         <EditText
+                            android:id="@+id/et_maks_lampiran_mb"
                             style="@style/SF.Input"
                             android:layout_width="57dp"
                             android:layout_height="34dp"
@@ -386,6 +389,7 @@
                         android:orientation="horizontal">
 
                         <EditText
+                            android:id="@+id/et_maks_baris_impor"
                             style="@style/SF.Input"
                             android:layout_width="57dp"
                             android:layout_height="34dp"
@@ -680,12 +684,14 @@
         android:paddingBottom="11dp">
 
         <TextView
+            android:id="@+id/btn_batal"
             style="@style/SF.Btn.Ghost"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="Batal" />
 
         <TextView
+            android:id="@+id/btn_simpan_pengaturan"
             style="@style/SF.Btn.Primary"
             android:layout_width="0dp"
             android:layout_marginStart="8dp"
