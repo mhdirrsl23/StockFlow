@@ -12,7 +12,13 @@ data class LoginRequest(val username: String, val password: String)
 data class SesiData(val token: String? = null, val user: UserItem? = null)
 data class LoginResponse(val success: Boolean, val message: String, val data: SesiData? = null)
 
-data class ApiResponse<T>(val success: Boolean, val message: String, val data: T? = null)
+data class ApiResponse<T>(
+    val success: Boolean,
+    val message: String,
+    val data: T? = null,
+    /** Detail validasi 422: {kolom: [pesan, ...]} (PRD 9.5) */
+    val errors: Map<String, List<String>>? = null,
+)
 
 /** Respons daftar terpaginasi: data = {items, pagination} */
 data class Paginasi(

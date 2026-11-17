@@ -21,6 +21,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -46,6 +48,26 @@ private fun Fragment.runApi(block: suspend (ApiService) -> Unit) {
     viewLifecycleOwner.lifecycleScope.launch {
         runCatching { block(RetrofitClient.getInstance(requireContext())) }
     }
+}
+
+/**
+ * Urai pesan gagal dari respons API: untuk status non-2xx (mis. 422 validasi)
+ * isi JSON ada di errorBody — ambil message + rincian errors per kolom (PRD 9.5).
+ */
+private fun Fragment.uraikanGagal(res: retrofit2.Response<*>, bawaan: String): String {
+    val teks = res.errorBody()?.string()
+    if (teks != null) {
+        return runCatching {
+            val obj = Gson().fromJson(teks, JsonObject::class.java)
+            val pesan = obj.get("message")?.asString ?: bawaan
+            val errors = obj.getAsJsonObject("errors")
+            val rincian = errors?.entrySet()?.take(3)?.joinToString("\n") { (kunci, nilai) ->
+                "• ${(nilai.asJsonArray.firstOrNull()?.asString ?: kunci)}"
+            }
+            if (rincian.isNullOrEmpty()) pesan else "$pesan\n$rincian"
+        }.getOrDefault(bawaan)
+    }
+    return (res.body() as? ApiResponse<*>)?.message ?: bawaan
 }
 
 private fun <VH : RecyclerView.ViewHolder> View.bindList(rvId: String, adapter: RecyclerView.Adapter<VH>) {
@@ -146,9 +168,15 @@ open class BaseBarangFragment(layoutId: Int) : Fragment(layoutId) {
 
     private fun loadBarang() = runApi { api ->
         val res = api.getBarang(search, kategori)
-        if (res.isSuccessful && res.body()?.success == true) {
-            adapter.updateData(res.body()?.data?.items ?: emptyList())
+        val items = if (res.isSuccessful && res.body()?.success == true) {
+            res.body()?.data?.items ?: emptyList()
+        } else {
+            emptyList()
         }
+        adapter.updateData(items)
+        val kosong = items.isEmpty()
+        view?.opt<View>("layout_empty_barang")?.visibility = if (kosong) View.VISIBLE else View.GONE
+        view?.opt<View>("empty_state_barang_staff")?.visibility = if (kosong) View.VISIBLE else View.GONE
     }
 }
 
@@ -288,7 +316,14 @@ class RiwayatFragment : Fragment(R.layout.fragment_riwayat) {
         view.bindList("rv_riwayat", adapter)
         runApi { api ->
             val res = api.getRiwayatAktivitas()
-            if (res.isSuccessful && res.body()?.success == true) adapter.updateData(res.body()?.data?.items ?: emptyList())
+            val items = if (res.isSuccessful && res.body()?.success == true) {
+                res.body()?.data?.items ?: emptyList()
+            } else {
+                emptyList()
+            }
+            adapter.updateData(items)
+            view?.opt<View>("empty_state_riwayat")?.visibility =
+                if (items.isEmpty()) View.VISIBLE else View.GONE
         }
     }
 }
@@ -364,7 +399,7 @@ class DetailBarangFragment : Fragment(R.layout.fragment_detail_barang) {
                             Toast.makeText(requireContext(), "Barang dihapus", Toast.LENGTH_SHORT).show()
                             findNavController().navigateUp()
                         } else {
-                            Toast.makeText(requireContext(), res.body()?.message ?: "Gagal menghapus", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), uraikanGagal(res, "Gagal menghapus"), Toast.LENGTH_LONG).show()
                         }
                     }
                 }
@@ -426,7 +461,7 @@ class DetailBatchFragment : Fragment(R.layout.fragment_detail_batch) {
                             Toast.makeText(requireContext(), "Batch berhasil ditangani", Toast.LENGTH_SHORT).show()
                             muatDetail(batchId, view)
                         } else {
-                            Toast.makeText(requireContext(), res.body()?.message ?: "Gagal memproses penanganan", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), uraikanGagal(res, "Gagal memproses penanganan"), Toast.LENGTH_LONG).show()
                         }
                     }
                 }
@@ -492,7 +527,7 @@ class DetailBatchFragment : Fragment(R.layout.fragment_detail_batch) {
                         Toast.makeText(requireContext(), "Stok masuk tercatat", Toast.LENGTH_SHORT).show()
                         muatDetail(b.id, requireView())
                     } else {
-                        Toast.makeText(requireContext(), res.body()?.message ?: "Gagal mencatat stok masuk", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), uraikanGagal(res, "Gagal mencatat stok masuk"), Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -550,7 +585,7 @@ class DetailBatchFragment : Fragment(R.layout.fragment_detail_batch) {
                         Toast.makeText(requireContext(), "Karakteristik batch diperbarui", Toast.LENGTH_SHORT).show()
                         muatDetail(b.id, requireView())
                     } else {
-                        Toast.makeText(requireContext(), res.body()?.message ?: "Gagal mengubah batch", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), uraikanGagal(res, "Gagal mengubah batch"), Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -570,7 +605,7 @@ class DetailBatchFragment : Fragment(R.layout.fragment_detail_batch) {
                         Toast.makeText(requireContext(), "Batch dihapus", Toast.LENGTH_SHORT).show()
                         findNavController().navigateUp()
                     } else {
-                        Toast.makeText(requireContext(), res.body()?.message ?: "Gagal menghapus batch", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), uraikanGagal(res, "Gagal menghapus batch"), Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -590,7 +625,7 @@ class DetailBatchFragment : Fragment(R.layout.fragment_detail_batch) {
             if (res.isSuccessful && res.body()?.success == true) {
                 Toast.makeText(requireContext(), "Foto bukti diunggah", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(requireContext(), res.body()?.message ?: "Gagal mengunggah foto", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), uraikanGagal(res, "Gagal mengunggah foto"), Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -628,7 +663,14 @@ class PerluDitanganiFragment : Fragment(R.layout.fragment_perlu_ditangani) {
         view.bindList("rv_perlu_ditangani", adapter)
         runApi { api ->
             val res = api.getBatchStok(status = "Kedaluwarsa")
-            if (res.isSuccessful && res.body()?.success == true) adapter.updateData(res.body()?.data?.items ?: emptyList())
+            val items = if (res.isSuccessful && res.body()?.success == true) {
+                res.body()?.data?.items ?: emptyList()
+            } else {
+                emptyList()
+            }
+            adapter.updateData(items)
+            view?.opt<View>("empty_state_perlu_ditangani")?.visibility =
+                if (items.isEmpty()) View.VISIBLE else View.GONE
         }
     }
 }
@@ -668,7 +710,7 @@ class NotifikasiFragment : Fragment(R.layout.fragment_notifikasi) {
                     Toast.makeText(requireContext(), "Semua notifikasi ditandai dibaca", Toast.LENGTH_SHORT).show()
                     muatNotifikasi()
                 } else {
-                    Toast.makeText(requireContext(), res.body()?.message ?: "Gagal menandai notifikasi", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), uraikanGagal(res, "Gagal menandai notifikasi"), Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -711,7 +753,7 @@ class PenggunaFragment : Fragment(R.layout.fragment_pengguna) {
                             Toast.makeText(requireContext(), "Status akun diperbarui", Toast.LENGTH_SHORT).show()
                             muatUsers()
                         } else {
-                            Toast.makeText(requireContext(), res.body()?.message ?: "Gagal mengubah status", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), uraikanGagal(res, "Gagal mengubah status"), Toast.LENGTH_LONG).show()
                         }
                     }
                 }
@@ -777,7 +819,7 @@ class PengaturanFragment : Fragment(R.layout.fragment_pengaturan) {
                     Toast.makeText(requireContext(), "Pengaturan disimpan", Toast.LENGTH_SHORT).show()
                     findNavController().navigateUp()
                 } else {
-                    Toast.makeText(requireContext(), res.body()?.message ?: "Gagal menyimpan pengaturan", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), uraikanGagal(res, "Gagal menyimpan pengaturan"), Toast.LENGTH_LONG).show()
                 }
             }
         }

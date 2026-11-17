@@ -8,6 +8,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
@@ -53,12 +55,32 @@ class LoginActivity : AppCompatActivity() {
                     session.saveSession(sesi.token, u.id, u.nama, u.username, u.peran)
                     openMain(u.peran)
                 } else {
-                    Toast.makeText(this@LoginActivity, body?.message ?: "Username atau kata sandi salah", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, uraiGagal(res), Toast.LENGTH_LONG).show()
                 }
             } catch (e: Exception) {
                 Toast.makeText(this@LoginActivity, "Gagal terhubung ke server: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    /**
+     * Urai pesan gagal login: 401 kredensial salah, 422 kolom kosong, 429 throttle.
+     * Isi JSON untuk status non-2xx berada di errorBody (PRD 9.5).
+     */
+    private fun uraiGagal(res: retrofit2.Response<LoginResponse>): String {
+        val teks = res.errorBody()?.string()
+        if (teks != null) {
+            return runCatching {
+                val obj = Gson().fromJson(teks, JsonObject::class.java)
+                val pesan = obj.get("message")?.asString ?: "Username atau kata sandi salah"
+                val errors = obj.getAsJsonObject("errors")
+                val rincian = errors?.entrySet()?.take(2)?.joinToString("\n") { (kunci, nilai) ->
+                    "• ${(nilai.asJsonArray.firstOrNull()?.asString ?: kunci)}"
+                }
+                if (rincian.isNullOrEmpty()) pesan else "$pesan\n$rincian"
+            }.getOrDefault("Username atau kata sandi salah")
+        }
+        return "Username atau kata sandi salah"
     }
 
     private fun openMain(peran: String) {
