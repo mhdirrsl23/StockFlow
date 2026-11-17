@@ -9,6 +9,7 @@ import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
 import android.view.View
+import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -42,6 +43,21 @@ private inline fun <reified T : View> View.opt(idName: String): T? {
 private fun Fragment.go(destName: String, args: Bundle? = null) {
     val id = resources.getIdentifier(destName, "id", requireContext().packageName)
     if (id != 0) runCatching { findNavController().navigate(id, args) }
+}
+
+/**
+ * Pasang aksi klik pada tombol kontainer. Beberapa tombol ikon dibungkus
+ * FrameLayout ber-id dengan anak ImageView berclickable (style SF.IconBtn) —
+ * tanpa listener di anak, tap ditelan anak dan tombol terasa mati.
+ * Pasang listener yang sama di anak clickable agar keduanya merespons.
+ */
+private fun View.pasangKlik(blok: (View) -> Unit) {
+    setOnClickListener(blok)
+    val grp = this as? ViewGroup ?: return
+    for (i in 0 until grp.childCount) {
+        val anak = grp.getChildAt(i)
+        if (anak.isClickable) anak.setOnClickListener(blok)
+    }
 }
 
 private fun Fragment.runApi(block: suspend (ApiService) -> Unit) {
@@ -98,7 +114,7 @@ open class BaseBerandaFragment(layoutId: Int, private val fallbackNama: String) 
             "btn_tangani" to "perluDitanganiFragment",
             "btn_barang_menipis" to "nav_barang",
         ).forEach { (btnId, dest) ->
-            view.opt<View>(btnId)?.setOnClickListener { go(dest) }
+            view.opt<View>(btnId)?.pasangKlik { go(dest) }
         }
 
         runApi { api ->
@@ -135,6 +151,10 @@ open class BaseBarangFragment(layoutId: Int) : Fragment(layoutId) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter = BarangAdapter(emptyList()) { go("detailBarangFragment", bundleOf("barangId" to it.id)) }
+
+        // Lonceng notifikasi: id berbeda per varian layout (pemilik / staf) — opt() no-op bila tidak ada.
+        view.opt<View>("btn_notifikasi")?.pasangKlik { go("notifikasiFragment") }
+        view.opt<View>("btn_notifikasi_staff")?.pasangKlik { go("notifikasiFragment") }
         view.bindList("rv_barang", adapter)
 
         view.opt<View>("btn_tambah_barang")?.setOnClickListener { go("formBarangFragment") }
@@ -189,7 +209,7 @@ class LaporanFragment : Fragment(R.layout.fragment_laporan) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.opt<View>("btn_notifikasi_laporan")?.setOnClickListener { go("notifikasiFragment") }
+        view.opt<View>("btn_notifikasi_laporan")?.pasangKlik { go("notifikasiFragment") }
 
         // Tab kategori laporan (FR-16)
         mapOf(
@@ -286,13 +306,24 @@ class LaporanFragment : Fragment(R.layout.fragment_laporan) {
     }
 
     private fun unduhLaporan(jenis: String) {
+        // Kontrak backend ReportRequest: jenis ∈ {stok, transaksi, kedaluwarsa, laris}.
+        // Tab UI memakai nama sendiri → petakan; tab aktivitas (audit) tidak punya ekspor di kontrak.
+        val jenisEkspor = when (jenis) {
+            "mutasi" -> "transaksi"
+            "aktivitas" -> ""
+            else -> jenis
+        }
+        if (jenisEkspor.isEmpty()) {
+            Toast.makeText(requireContext(), "Ekspor tersedia untuk laporan stok, mutasi, dan kedaluwarsa", Toast.LENGTH_LONG).show()
+            return
+        }
         runApi { api ->
-            val res = api.unduhLaporan(jenis, "xlsx")
+            val res = api.unduhLaporan(jenisEkspor, "xlsx")
             val isi = res.body()?.bytes()
             if (res.isSuccessful && isi != null && isi.isNotEmpty()) {
                 val folder = requireContext().getExternalFilesDir(null)?.resolve("laporan")?.apply { mkdirs() }
                     ?: return@runApi
-                val berkas = File(folder, "laporan-$jenis-${System.currentTimeMillis()}.xlsx")
+                val berkas = File(folder, "laporan-$jenisEkspor-${System.currentTimeMillis()}.xlsx")
                 berkas.writeBytes(isi)
                 val uri = FileProvider.getUriForFile(requireContext(), "${requireContext().packageName}.fileprovider", berkas)
                 val bagikan = Intent(Intent.ACTION_SEND).apply {
@@ -302,7 +333,7 @@ class LaporanFragment : Fragment(R.layout.fragment_laporan) {
                 }
                 startActivity(Intent.createChooser(bagikan, "Bagikan laporan $jenis"))
             } else {
-                Toast.makeText(requireContext(), "Gagal mengunduh laporan (khusus pemilik)", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), uraikanGagal(res, "Gagal mengunduh laporan (khusus pemilik)"), Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -313,6 +344,7 @@ class RiwayatFragment : Fragment(R.layout.fragment_riwayat) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = RiwayatAdapter(emptyList())
+        view.opt<View>("btn_notifikasi_riwayat")?.pasangKlik { go("notifikasiFragment") }
         view.bindList("rv_riwayat", adapter)
         runApi { api ->
             val res = api.getRiwayatAktivitas()
@@ -659,6 +691,7 @@ class PerluDitanganiFragment : Fragment(R.layout.fragment_perlu_ditangani) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.opt<View>("btn_back")?.setOnClickListener { findNavController().navigateUp() }
+        view.opt<View>("btn_notifikasi_ditangani")?.pasangKlik { go("notifikasiFragment") }
         val adapter = BatchAdapter(emptyList()) { go("detailBatchFragment", bundleOf("batchId" to it.id)) }
         view.bindList("rv_perlu_ditangani", adapter)
         runApi { api ->
