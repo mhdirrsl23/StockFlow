@@ -49,7 +49,7 @@ Aplikasi manajemen stok barang dengan pemantauan kedaluwarsa berbasis **FEFO** (
                                                                          │ Eloquent
                                                                          ▼
                                                               ┌────────────────────┐
-                                                              │  MySQL 8 (Docker)  │
+                                                              │  MySQL 8 (Laragon) │
                                                               └────────────────────┘
 ```
 
@@ -73,36 +73,55 @@ StockFlow/
 | Komponen | Versi |
 |---|---|
 | PHP + Composer | PHP ≥ 8.3 |
-| MySQL | 8.0 (disarankan via Docker) |
+| MySQL | 8.0 via **Laragon** (disarankan; Docker opsional) |
 | JDK | 17+ |
 | Android SDK | compileSdk 37, minSdk 24 (Android 7.0+) |
 | Gradle | 9.6 (via wrapper, tidak perlu instal manual) |
 
-## Menjalankan backend
+## Menjalankan backend (Laragon)
 
-1. **Siapkan database** (contoh Docker):
+Panduan ini memakai **Laragon Full** (PHP + MySQL dalam satu paket). XAMPP secara prinsip mirip, tetapi proyek ini diuji dengan Laragon.
 
-   ```bash
-   docker run -d --name stockflow-mysql -p 3307:3306 \
-     -e MYSQL_ROOT_PASSWORD=<root_password> \
-     -e MYSQL_DATABASE=stockflow \
-     -e MYSQL_USER=stockflow_app \
-     -e MYSQL_PASSWORD=<password_app> \
-     mysql:8.0
-   ```
+> **Alur cepat untuk anggota tim:** `git pull` → `composer install` → buat database → `php artisan migrate --seed` → `php artisan serve --host=0.0.0.0 --port=8010` → sesuaikan `BASE_URL` di aplikasi Android.
 
-2. **Konfigurasi dan migrasi**:
+1. **Siapkan Laragon** — pastikan tersedia **PHP ≥ 8.3** dan **MySQL 8** (pilih versi lewat menu Laragon → PHP/MySQL bila perlu; hindari MariaDB agar sama dengan lingkungan pengujian), lalu klik **Start All** (Apache/Nginx dan MySQL menyala).
+
+2. **Pasang dependensi**:
 
    ```bash
    cd laravel-api-tugas
-   cp .env.example .env
-   # Sesuaikan DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD di .env
    composer install
+   cp .env.example .env        # Windows cmd: copy .env.example .env
+   ```
+
+3. **Buat database** lewat tombol **Database** di Laragon (HeidiSQL) atau terminal:
+
+   ```sql
+   CREATE DATABASE stockflow CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+   CREATE DATABASE stockflow_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; -- dipakai php artisan test
+   ```
+
+4. **Sesuaikan `.env`** (bawaan Laragon: pengguna `root` tanpa kata sandi):
+
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=stockflow
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
+
+5. **Bangun skema dan data demo**:
+
+   ```bash
    php artisan key:generate
    php artisan migrate --seed
    ```
 
-3. **Jalankan server**:
+   > **Tidak perlu mengimpor berkas `.sql` apa pun.** Seluruh struktur tabel dan data demo (akun `pemilik`/`staf`, barang, batch, notifikasi) dibangun oleh migrasi + seeder. Berkas `stockflow_database.sql` dari 28 Oktober hanyalah rancangan awal, bukan yang dipakai aplikasi.
+
+6. **Jalankan server**:
 
    ```bash
    php artisan serve --host=0.0.0.0 --port=8010
@@ -110,11 +129,28 @@ StockFlow/
 
    > Port **8010** dipakai karena port 8000 pada mesin pengembangan sering sudah terpakai layanan lain (mis. HPLIP printer). Port bebas diganti — yang penting konsisten dengan `BASE_URL` di aplikasi Android.
 
-4. **Verifikasi**:
+7. **Verifikasi**:
 
    ```bash
    php artisan test        # semua pengujian harus hijau
    ```
+
+   > Opsional: set `default-time-zone = '+07:00'` di `my.ini` MySQL Laragon lalu restart MySQL, agar `CURDATE()` pada view konsisten dengan WIB.
+
+### Alternatif Docker (opsional)
+
+Bila familiar dengan Docker, jalankan MySQL 8 lewat container di port **3307**:
+
+```bash
+docker run -d --name stockflow-mysql -p 3307:3306 \
+  -e MYSQL_ROOT_PASSWORD=<root_password> \
+  -e MYSQL_DATABASE=stockflow \
+  -e MYSQL_USER=stockflow_app \
+  -e MYSQL_PASSWORD=<password_app> \
+  mysql:8.0
+```
+
+Lalu sesuaikan `DB_PORT=3307` dan kredensialnya di `.env`; langkah lainnya sama.
 
 ## Membangun aplikasi Android
 
@@ -206,6 +242,8 @@ Detail parameter dan contoh lengkap: lihat [`laravel-api-tugas/README.md`](larav
 | Gejala | Penyebab umum | Solusi |
 |---|---|---|
 | "Gagal terhubung ke server" | HP & PC beda jaringan, backend mati, atau `BASE_URL` salah | Pastikan satu WiFi, jalankan `php artisan serve --host=0.0.0.0 --port=8010`, cocokkan IP LAN di `BASE_URL` |
+| `Unknown database 'stockflow'` atau `Access denied` | Database belum dibuat atau kredensial `.env` salah | Buat database (langkah 3 panduan backend), lalu cocokkan `DB_USERNAME`/`DB_PASSWORD` — Laragon bawaan memakai `root` tanpa sandi |
+| Koneksi database ditolak | `DB_PORT` tidak cocok dengan MySQL yang dipakai | Laragon memakai **3306**, Docker memakai **3307** — samakan dengan `DB_PORT` di `.env` |
 | "App not installed" saat update APK | APK berasal dari komputer lain (tanda tangan berbeda) | Uninstall aplikasi lama, lalu install APK baru |
 | Login langsung ditolak / sesi berakhir | Akun yang sama dipakai di perangkat lain (sesi tunggal) | Gunakan akun berbeda atau login ulang |
 | "Terlalu banyak percobaan" | Throttle 5 login/menit | Tunggu ± 1 menit |
