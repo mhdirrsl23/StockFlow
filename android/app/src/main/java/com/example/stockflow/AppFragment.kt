@@ -3,6 +3,7 @@ package com.example.stockflow
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
@@ -15,6 +16,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
@@ -33,6 +35,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import java.util.TimeZone
 import java.util.concurrent.TimeUnit
 
 private inline fun <reified T : View> View.opt(idName: String): T? {
@@ -93,7 +96,7 @@ private fun <VH : RecyclerView.ViewHolder> View.bindList(rvId: String, adapter: 
     }
 }
 
-open class BaseBerandaFragment(layoutId: Int, private val fallbackNama: String) : Fragment(layoutId) {
+open class BaseBerandaFragment(private val layoutId: Int, private val fallbackNama: String) : Fragment(layoutId) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -102,6 +105,7 @@ open class BaseBerandaFragment(layoutId: Int, private val fallbackNama: String) 
 
         mapOf(
             "btn_notifikasi" to "notifikasiFragment",
+            "btn_notifikasi_staff" to "notifikasiFragment",
             "btn_perlu_ditangani" to "perluDitanganiFragment",
             "btn_tambah_barang" to "formBarangFragment",
             "btn_tambah_batch" to "formBatchFragment",
@@ -131,10 +135,212 @@ open class BaseBerandaFragment(layoutId: Int, private val fallbackNama: String) 
             view.opt<TextView>("tv_kedaluwarsa_2")?.text = d.ringkasan.batch_kedaluwarsa.toString()
             view.opt<TextView>("tv_mendekati_kedaluwarsa_2")?.text = d.ringkasan.batch_mendekati_kedaluwarsa.toString()
             view.opt<TextView>("tv_stok_menipis_2")?.text = d.ringkasan.stok_menipis.toString()
-            view.opt<TextView>("tv_alert_kedaluwarsa")?.text =
-                "${d.ringkasan.batch_kedaluwarsa} batch kedaluwarsa perlu ditangani"
-            view.opt<TextView>("tv_alert_menipis")?.text =
-                "${d.ringkasan.stok_menipis} barang di bawah stok minimum"
+            bindDashboardLanjutan(view, d)
+        }
+    }
+
+    /**
+     * Mengikat bagian beranda yang sebelumnya masih berisi teks demo statis:
+     * tanggal, alert, prioritas FEFO, stok menipis, dan aktivitas terbaru.
+     */
+    private fun bindDashboardLanjutan(view: View, d: DashboardData) {
+        val tanggal = SimpleDateFormat("EEE, d MMM", Locale("id", "ID")).format(Date())
+        view.opt<TextView>("tv_tanggal_1")?.text = tanggal
+        view.opt<TextView>("tv_tanggal_2")?.text = tanggal
+
+        val belumDibaca = d.ringkasan.notifikasi_belum_dibaca
+        view.opt<TextView>("tv_notif_badge")?.apply {
+            text = belumDibaca.toString()
+            visibility = if (belumDibaca > 0) View.VISIBLE else View.GONE
+        }
+
+        val perlu = d.perlu_ditangani
+        val menipis = d.stok_menipis
+        val jumlahKedaluwarsa = maxOf(d.ringkasan.batch_kedaluwarsa, perlu.size)
+        val jumlahMenipis = maxOf(d.ringkasan.stok_menipis, menipis.size)
+
+        view.opt<TextView>("tv_stok_menipis_besar")?.text = jumlahMenipis.toString()
+        view.opt<TextView>("tv_batch_aktif")?.text = d.ringkasan.total_batch_aktif.toString()
+
+        view.opt<TextView>("tv_alert_kedaluwarsa")?.text =
+            "$jumlahKedaluwarsa batch kedaluwarsa perlu ditangani"
+        view.opt<TextView>("tv_alert_kedaluwarsa_detail")?.text =
+            perlu.firstOrNull()?.let {
+                "${namaBarang(it)} · ${it.nomor_batch ?: "-"} · sisa ${it.jumlah_sisa ?: 0} ${satuanBarang(it)}".trim()
+            } ?: "Buka Perlu Ditangani untuk melihat detail"
+        view.opt<View>("card_alert_kedaluwarsa")?.visibility =
+            if (jumlahKedaluwarsa > 0) View.VISIBLE else View.GONE
+        if (layoutId == R.layout.fragment_beranda_staff) {
+            // Di beranda staf, kartu alert memakai id tombol yang sudah ada.
+            view.opt<View>("btn_perlu_ditangani")?.visibility =
+                if (jumlahKedaluwarsa > 0) View.VISIBLE else View.GONE
+        }
+
+        view.opt<TextView>("tv_alert_menipis")?.text =
+            "$jumlahMenipis barang di bawah stok minimum"
+        view.opt<TextView>("tv_alert_menipis_detail")?.text =
+            menipis.firstOrNull()?.let {
+                if (menipis.size > 1) "${namaBarang(it)} dan ${menipis.size - 1} lainnya butuh restok."
+                else "${namaBarang(it)} butuh restok."
+            } ?: "Semua stok berada di atas minimum"
+        view.opt<View>("card_alert_menipis")?.visibility =
+            if (jumlahMenipis > 0) View.VISIBLE else View.GONE
+        if (layoutId == R.layout.fragment_beranda_staff) {
+            // Di beranda staf, kartu alert memakai id tombol yang sudah ada.
+            view.opt<View>("btn_barang_menipis")?.visibility =
+                if (jumlahMenipis > 0) View.VISIBLE else View.GONE
+        }
+
+        val fefo = d.rekomendasi_fefo.take(4)
+        bindDaftar(
+            view,
+            listOf("fefo_row_1", "fefo_row_2", "fefo_row_3", "fefo_row_4"),
+            listOf("fefo_div_1", "fefo_div_2", "fefo_div_3"),
+            fefo.map { b ->
+                listOf(
+                    namaBarang(b),
+                    b.nomor_batch ?: "-",
+                    "sisa ${b.jumlah_sisa ?: 0} ${satuanBarang(b)}".trim(),
+                    b.status ?: "-",
+                    hariRelatif(b.tanggal_kedaluwarsa)
+                )
+            },
+            gayaStatus = true
+        )
+        tampilkanSeksi(view, "section_fefo_header", "section_fefo_items", fefo.isNotEmpty())
+
+        val stok = menipis.take(2)
+        bindDaftar(
+            view,
+            listOf("stok_row_1", "stok_row_2"),
+            listOf("stok_div_1"),
+            stok.map { b ->
+                listOf(
+                    namaBarang(b),
+                    "${b.total_stok_tersedia ?: 0} / min. ${b.stok_minimum ?: 0} ${satuanBarang(b)}".trim(),
+                    "Menipis"
+                )
+            }
+        )
+        tampilkanSeksi(view, "section_stok_header", "section_stok_items", stok.isNotEmpty())
+
+        val aktivitas = d.transaksi_terbaru.take(3)
+        bindDaftar(
+            view,
+            listOf("aktivitas_row_1", "aktivitas_row_2", "aktivitas_row_3"),
+            listOf("aktivitas_div_1", "aktivitas_div_2"),
+            aktivitas.map { t ->
+                listOf(
+                    "${labelJenis(t.jenis)} ${t.jumlah}",
+                    "batch #${t.batch_id ?: "-"} · ${t.pengguna?.nama ?: "Sistem"}",
+                    jamTransaksi(t.waktu)
+                )
+            }
+        )
+        tampilkanSeksi(view, "section_aktivitas_header", "section_aktivitas_items", aktivitas.isNotEmpty())
+    }
+
+    private fun bindDaftar(
+        view: View,
+        rowIds: List<String>,
+        divIds: List<String>,
+        data: List<List<String>>,
+        gayaStatus: Boolean = false
+    ) {
+        rowIds.forEachIndexed { i, namaId ->
+            val row = view.opt<View>(namaId) ?: return@forEachIndexed
+            val isi = data.getOrNull(i)
+            row.visibility = if (isi == null) View.GONE else View.VISIBLE
+            if (isi != null && row is ViewGroup) {
+                val textViews = mutableListOf<TextView>()
+                fun kumpulkan(v: View) {
+                    if (v is TextView) textViews.add(v)
+                    else if (v is ViewGroup) for (j in 0 until v.childCount) kumpulkan(v.getChildAt(j))
+                }
+                kumpulkan(row)
+                textViews.forEachIndexed { j, tv -> tv.text = isi.getOrElse(j) { "" } }
+                if (gayaStatus) {
+                    textViews.firstOrNull { tv ->
+                        tv.text.toString() in setOf("Aman", "Mendekati Kedaluwarsa", "Kedaluwarsa")
+                    }?.let { hiasPillStatus(it, it.text.toString()) }
+                }
+            }
+        }
+        divIds.forEachIndexed { i, namaId ->
+            view.opt<View>(namaId)?.visibility = if (data.size > i + 1) View.VISIBLE else View.GONE
+        }
+    }
+
+    /** Menyesuaikan warna pill status FEFO agar "Aman" tidak tampil merah. */
+    private fun hiasPillStatus(pill: TextView, status: String) {
+        val (latar, warna, ikon) = when (status) {
+            "Aman" -> Triple(R.drawable.bg_pill_safe, R.color.sf_safe, 0)
+            "Mendekati Kedaluwarsa" -> Triple(R.drawable.bg_pill_warn, R.color.sf_warn, R.drawable.ic12_alert_triangle)
+            "Kedaluwarsa" -> Triple(R.drawable.bg_pill_danger, R.color.sf_danger, R.drawable.ic12_alert_triangle)
+            else -> return
+        }
+        val warnaTeks = ContextCompat.getColor(pill.context, warna)
+        pill.setBackgroundResource(latar)
+        pill.setTextColor(warnaTeks)
+        pill.compoundDrawableTintList = ColorStateList.valueOf(warnaTeks)
+        pill.setCompoundDrawablesRelativeWithIntrinsicBounds(ikon, 0, 0, 0)
+    }
+
+    private fun namaBarang(item: ItemRingkas): String =
+        item.barang?.nama ?: item.nama_barang ?: item.nama ?: "-"
+
+    private fun satuanBarang(item: ItemRingkas): String =
+        item.barang?.satuan ?: item.satuan.orEmpty()
+
+    private fun tampilkanSeksi(view: View, headerId: String, itemsId: String, tampil: Boolean) {
+        val visibilitas = if (tampil) View.VISIBLE else View.GONE
+        view.opt<View>(headerId)?.visibility = visibilitas
+        view.opt<View>(itemsId)?.visibility = visibilitas
+    }
+
+    private fun labelJenis(jenis: String): String = when (jenis) {
+        "masuk" -> "Stok masuk"
+        "keluar" -> "Stok keluar"
+        "penyesuaian" -> "Penyesuaian"
+        "penanganan" -> "Penanganan"
+        else -> jenis.replaceFirstChar { it.uppercase() }
+    }
+
+    private fun jamTransaksi(waktu: String?): String {
+        if (waktu.isNullOrBlank()) return "-"
+        val bersih = waktu.replace(' ', 'T').substringBefore('.').removeSuffix("Z")
+        val masuk = runCatching {
+            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US).apply {
+                timeZone = TimeZone.getTimeZone("UTC")
+            }.parse(bersih)
+        }.getOrNull() ?: return "-"
+        return SimpleDateFormat("HH.mm", Locale("id", "ID"))
+            .apply { timeZone = TimeZone.getDefault() }
+            .format(Date(masuk.time))
+    }
+
+    private fun hariRelatif(tanggal: String?): String {
+        if (tanggal.isNullOrBlank()) return "-"
+        val pola = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+        val tgl = runCatching { pola.parse(tanggal) }.getOrNull() ?: return tanggal
+        val hariIni = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+        }
+        val target = Calendar.getInstance().apply {
+            time = tgl
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+        }
+        val selisih = TimeUnit.MILLISECONDS.toDays(target.timeInMillis - hariIni.timeInMillis)
+        return when {
+            selisih < 0 -> "${-selisih} hr lalu"
+            selisih == 0L -> "hari ini"
+            else -> "$selisih hr lagi"
         }
     }
 }

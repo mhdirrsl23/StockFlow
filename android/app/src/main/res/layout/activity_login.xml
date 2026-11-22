@@ -205,7 +205,7 @@
                 android:layout_marginStart="6dp"
                 android:layout_weight="1"
                 android:lineSpacingMultiplier="1.25"
-                android:text="Data uji: 5 barang · 7 batch · 4 notifikasi. Status dihitung relatif terhadap hari ini."
+                android:text="Akun demo: pemilik / staf · kata sandi: password"
                 android:textColor="#90B7A3"
                 android:textSize="11sp" />
         </LinearLayout>
