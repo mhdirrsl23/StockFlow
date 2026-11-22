@@ -113,6 +113,9 @@ open class BaseBerandaFragment(private val layoutId: Int, private val fallbackNa
             "btn_lihat_semua_barang" to "nav_barang",
             "btn_lihat_laporan" to "nav_laporan",
             "btn_lihat_riwayat" to "nav_riwayat",
+            // Kartu alert beranda pemilik (id hanya ada di layout pemilik)
+            "card_alert_kedaluwarsa" to "perluDitanganiFragment",
+            "card_alert_menipis" to "nav_barang",
             // Aksi beranda staf (id hanya ada di layout staf)
             "btn_stok_masuk" to "formBatchFragment",
             "btn_tangani" to "perluDitanganiFragment",
