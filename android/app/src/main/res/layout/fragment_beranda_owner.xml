@@ -70,6 +70,7 @@
                 android:src="@drawable/ic_bell" />
 
             <TextView
+                android:id="@+id/tv_notif_badge"
                 style="@style/SF.Text"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
@@ -136,6 +137,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_tanggal_1"
                     style="@style/SF.Text"
                     android:layout_marginStart="12dp"
                     android:background="@drawable/bg_date_chip"
@@ -198,6 +200,7 @@
                             android:textSize="9sp" />
 
                         <TextView
+                            android:id="@+id/tv_tanggal_2"
                             style="@style/SF.Text"
                             android:text="Jum, 30 Okt"
                             android:textColor="#B1DAC7"
@@ -339,6 +342,7 @@
                             android:paddingStart="12dp">
 
                             <TextView
+                                android:id="@+id/tv_stok_menipis_besar"
                                 style="@style/SF.Text"
                                 android:fontFamily="@font/plus_jakarta_sans_extrabold"
                                 android:text="2"
@@ -358,6 +362,7 @@
 
             <!-- Notice: kedaluwarsa -->
             <LinearLayout
+                android:id="@+id/card_alert_kedaluwarsa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -389,6 +394,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_alert_kedaluwarsa"
                         style="@style/SF.Text"
                         android:fontFamily="@font/plus_jakarta_sans_bold"
                         android:text="1 batch kedaluwarsa perlu ditangani"
@@ -396,6 +402,7 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/tv_alert_kedaluwarsa_detail"
                         style="@style/SF.Text.Caption"
                         android:layout_marginTop="2dp"
                         android:text="Ultra Milk Full Cream 250ml · MLK-2411B · sisa 30 pcs" />
@@ -411,6 +418,7 @@
 
             <!-- Notice: stok menipis -->
             <LinearLayout
+                android:id="@+id/card_alert_menipis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -442,6 +450,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_alert_menipis"
                         style="@style/SF.Text"
                         android:fontFamily="@font/plus_jakarta_sans_bold"
                         android:text="2 barang di bawah stok minimum"
@@ -449,6 +458,7 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/tv_alert_menipis_detail"
                         style="@style/SF.Text.Caption"
                         android:layout_marginTop="2dp"
                         android:text="Sunlight 755ml dan lainnya butuh restok." />
@@ -629,6 +639,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tv_batch_aktif"
                             style="@style/SF.Text.Value"
                             android:text="6" />
 
@@ -803,6 +814,7 @@
 
             <!-- Prioritas FEFO -->
             <LinearLayout
+                android:id="@+id/section_fefo_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -837,6 +849,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/section_fefo_items"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -847,6 +860,7 @@
 
                 <!-- MLK-2411B -->
                 <LinearLayout
+                    android:id="@+id/fefo_row_1"
                     style="@style/SF.Row">
 
                     <FrameLayout
@@ -910,10 +924,12 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <View style="@style/SF.Divider" />
+                <View
+                    android:id="@+id/fefo_div_1" style="@style/SF.Divider" />
 
                 <!-- PRC-2410A -->
                 <LinearLayout
+                    android:id="@+id/fefo_row_2"
                     style="@style/SF.Row">
 
                     <FrameLayout
@@ -977,10 +993,12 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <View style="@style/SF.Divider" />
+                <View
+                    android:id="@+id/fefo_div_2" style="@style/SF.Divider" />
 
                 <!-- MLK-2411A -->
                 <LinearLayout
+                    android:id="@+id/fefo_row_3"
                     style="@style/SF.Row">
 
                     <FrameLayout
@@ -1044,10 +1062,12 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <View style="@style/SF.Divider" />
+                <View
+                    android:id="@+id/fefo_div_3" style="@style/SF.Divider" />
 
                 <!-- MGN-2411B -->
                 <LinearLayout
+                    android:id="@+id/fefo_row_4"
                     style="@style/SF.Row">
 
                     <FrameLayout
@@ -1114,6 +1134,7 @@
 
             <!-- Stok menipis -->
             <LinearLayout
+                android:id="@+id/section_stok_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -1131,6 +1152,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/section_stok_items"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -1139,6 +1161,7 @@
                 android:padding="15dp">
 
                 <LinearLayout
+                    android:id="@+id/stok_row_1"
                     style="@style/SF.Row"
                     android:paddingTop="0dp">
 
@@ -1185,9 +1208,11 @@
                         android:text="Menipis" />
                 </LinearLayout>
 
-                <View style="@style/SF.Divider" />
+                <View
+                    android:id="@+id/stok_div_1" style="@style/SF.Divider" />
 
                 <LinearLayout
+                    android:id="@+id/stok_row_2"
                     style="@style/SF.Row"
                     android:paddingBottom="0dp">
 
@@ -1237,6 +1262,7 @@
 
             <!-- Aktivitas terbaru -->
             <LinearLayout
+                android:id="@+id/section_aktivitas_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -1271,6 +1297,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/section_aktivitas_items"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -1280,6 +1307,7 @@
                 android:paddingVertical="4dp">
 
                 <LinearLayout
+                    android:id="@+id/aktivitas_row_1"
                     style="@style/SF.Row"
                     android:gravity="top">
 
@@ -1319,9 +1347,11 @@
                         android:text="13.05" />
                 </LinearLayout>
 
-                <View style="@style/SF.Divider" />
+                <View
+                    android:id="@+id/aktivitas_div_1" style="@style/SF.Divider" />
 
                 <LinearLayout
+                    android:id="@+id/aktivitas_row_2"
                     style="@style/SF.Row"
                     android:gravity="top">
 
@@ -1361,9 +1391,11 @@
                         android:text="11.30" />
                 </LinearLayout>
 
-                <View style="@style/SF.Divider" />
+                <View
+                    android:id="@+id/aktivitas_div_2" style="@style/SF.Divider" />
 
                 <LinearLayout
+                    android:id="@+id/aktivitas_row_3"
                     style="@style/SF.Row"
                     android:gravity="top">
 
@@ -1411,7 +1443,7 @@
                 android:drawableStart="@drawable/ic12_database"
                 android:drawablePadding="4dp"
                 android:drawableTint="#94A49C"
-                android:text="Sumber: v_stok_tersedia · v_perlu_ditangani · seed 30 Okt 2026"
+                android:text="Sumber: v_stok_tersedia · v_perlu_ditangani"
                 android:textColor="#94A49C"
                 android:textSize="9sp" />
         </LinearLayout>

@@ -46,17 +46,20 @@ data class ItemRingkas(
     val batch_id: Int? = null,
     val kode_sku: String? = null,
     val nama: String? = null,
+    val nama_barang: String? = null,
     val nomor_batch: String? = null,
     val satuan: String? = null,
     val stok_minimum: Int? = null,
     val total_stok_tersedia: Int? = null,
     val jumlah_sisa: Int? = null,
     val tanggal_kedaluwarsa: String? = null,
+    val sisa_hari: Int? = null,
     val status: String? = null,
     val jenis: String? = null,
     val jumlah: Int? = null,
     val waktu: String? = null,
     val user_id: Int? = null,
+    val barang: BarangRingkas? = null,
 )
 
 data class TransaksiRingkas(
