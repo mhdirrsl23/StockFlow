@@ -307,6 +307,7 @@
                 <View style="@style/SF.Divider" />
 
                 <LinearLayout
+                    android:id="@+id/menu_notifikasi"
                     style="@style/SF.Row"
                     android:clickable="true"
                     android:focusable="true"

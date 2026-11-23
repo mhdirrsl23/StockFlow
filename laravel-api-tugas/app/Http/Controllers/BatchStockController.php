@@ -7,7 +7,6 @@ use App\Models\Barang;
 use App\Models\BatchStok;
 use App\Models\MutasiStok;
 use App\Models\Notifikasi;
-use App\Services\StockTransactionService;
 use App\Support\Aktivitas;
 use App\Support\ApiResponse;
 use Illuminate\Http\Request;
@@ -103,7 +102,7 @@ final class BatchStockController extends Controller
      */
     public function store(BatchRequest $request, Barang $barang): mixed
     {
-        $hasil = app(StockTransactionService::class)->masuk($request->user(), [
+        $hasil = app(\App\Services\StockTransactionService::class)->masuk($request->user(), [
             'barang_id' => $barang->id,
             'jumlah' => (int) $request->input('jumlah_awal'),
             'nomor_batch' => $request->input('nomor_batch'),
@@ -212,7 +211,6 @@ final class BatchStockController extends Controller
 
                 if ($batch === null) {
                     $hasil[] = ['id' => $id, 'berhasil' => false, 'pesan' => 'Batch tidak ditemukan'];
-
                     continue;
                 }
 
@@ -222,7 +220,6 @@ final class BatchStockController extends Controller
                         'berhasil' => false,
                         'pesan' => 'Akses ditolak: staf hanya menghapus batch miliknya sendiri (AB-08)',
                     ];
-
                     continue;
                 }
 

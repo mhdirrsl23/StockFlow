@@ -51,6 +51,11 @@ private inline fun <reified T : View> View.opt(idName: String): T? {
 }
 
 private fun Fragment.go(destName: String, args: Bundle? = null) {
+    if (destName == "notifikasiFragment") {
+        findNavController().navigate(R.id.action_global_notifikasi)
+        return
+    }
+
     val ctx = context ?: return
     val isOwner = SessionManager(ctx).getPeran() == "pemilik"
     val targetName = when (destName) {
@@ -68,7 +73,6 @@ private fun Fragment.go(destName: String, args: Bundle? = null) {
                 "formBatchFragment" -> if (isOwner) "action_berandaOwner_to_formBatch" else "action_berandaStaff_to_formBatch"
                 "formStokKeluarFragment" -> if (isOwner) "action_berandaOwner_to_formStokKeluar" else "action_berandaStaff_to_formStokKeluar"
                 "formBarangFragment" -> if (isOwner) "action_berandaOwner_to_formBarang" else "action_berandaStaff_to_formBarang"
-                "notifikasiFragment" -> "action_global_notifikasi"
                 else -> ""
             }
             val actId = if (actionName.isNotEmpty()) resources.getIdentifier(actionName, "id", ctx.packageName) else 0
@@ -748,6 +752,7 @@ class ProfilFragment : Fragment(R.layout.fragment_profil) {
 
         val menuPengguna = view.opt<View>("menu_pengguna")
         val menuPengaturan = view.opt<View>("menu_pengaturan")
+        val menuNotifikasi = view.opt<View>("menu_notifikasi")
         val menuDataSkema = view.opt<View>("menu_data_skema")
         menuPengguna?.visibility = if (isOwner) View.VISIBLE else View.GONE
         menuPengaturan?.visibility = View.VISIBLE
@@ -755,6 +760,7 @@ class ProfilFragment : Fragment(R.layout.fragment_profil) {
 
         menuPengguna?.setOnClickListener { go("penggunaFragment") }
         menuPengaturan?.setOnClickListener { go("pengaturanFragment") }
+        menuNotifikasi?.pasangKlik { go("notifikasiFragment") }
         menuDataSkema?.setOnClickListener { go("dataSkemaFragment") }
 
         view.opt<View>("btn_logout")?.setOnClickListener {

@@ -3,8 +3,8 @@
 namespace App\Services;
 
 use App\Exceptions\StokException;
-use App\Models\Barang;
 use App\Models\BatchStok;
+use App\Models\Barang;
 use App\Models\MutasiStok;
 use App\Models\User;
 use App\Support\Aktivitas;
