@@ -307,9 +307,12 @@
                             android:background="#1FFFFFFF" />
 
                         <LinearLayout
+                            android:id="@+id/card_hero_perlu_ditangani"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:clickable="true"
+                            android:focusable="true"
                             android:orientation="vertical"
                             android:paddingStart="12dp">
 
@@ -480,11 +483,14 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/card_stat_menipis"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_card_14"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:orientation="horizontal"
                     android:padding="12dp">
 
@@ -521,11 +527,14 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/card_stat_mendekati"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_card_14"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:orientation="horizontal"
                     android:padding="12dp">
 
@@ -569,11 +578,14 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/card_stat_kedaluwarsa"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_card_14"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:orientation="horizontal"
                     android:padding="12dp">
 

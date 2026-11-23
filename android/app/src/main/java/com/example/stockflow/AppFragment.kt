@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
@@ -56,11 +57,18 @@ private fun Fragment.go(destName: String, args: Bundle? = null) {
  */
 private fun View.pasangKlik(blok: (View) -> Unit) {
     setOnClickListener(blok)
+    isClickable = true
     val grp = this as? ViewGroup ?: return
-    for (i in 0 until grp.childCount) {
-        val anak = grp.getChildAt(i)
-        if (anak.isClickable) anak.setOnClickListener(blok)
+    fun pasangRecursively(v: View) {
+        v.setOnClickListener(blok)
+        v.isClickable = true
+        if (v is ViewGroup) {
+            for (i in 0 until v.childCount) {
+                pasangRecursively(v.getChildAt(i))
+            }
+        }
     }
+    pasangRecursively(grp)
 }
 
 private fun Fragment.runApi(block: suspend (ApiService) -> Unit) {
@@ -113,10 +121,14 @@ open class BaseBerandaFragment(private val layoutId: Int, private val fallbackNa
             "btn_lihat_semua_barang" to "nav_barang",
             "btn_lihat_laporan" to "nav_laporan",
             "btn_lihat_riwayat" to "nav_riwayat",
-            // Kartu alert beranda pemilik (id hanya ada di layout pemilik)
+            // Kartu alert & stat beranda
             "card_alert_kedaluwarsa" to "perluDitanganiFragment",
             "card_alert_menipis" to "nav_barang",
-            // Aksi beranda staf (id hanya ada di layout staf)
+            "card_stat_kedaluwarsa" to "perluDitanganiFragment",
+            "card_stat_mendekati" to "perluDitanganiFragment",
+            "card_hero_perlu_ditangani" to "perluDitanganiFragment",
+            "card_stat_menipis" to "nav_barang",
+            // Aksi beranda staf
             "btn_stok_masuk" to "formBatchFragment",
             "btn_tangani" to "perluDitanganiFragment",
             "btn_barang_menipis" to "nav_barang",
@@ -173,6 +185,12 @@ open class BaseBerandaFragment(private val layoutId: Int, private val fallbackNa
             } ?: "Buka Perlu Ditangani untuk melihat detail"
         view.opt<View>("card_alert_kedaluwarsa")?.visibility =
             if (jumlahKedaluwarsa > 0) View.VISIBLE else View.GONE
+        view.opt<View>("card_alert_kedaluwarsa")?.pasangKlik { go("perluDitanganiFragment") }
+        view.opt<View>("btn_perlu_ditangani")?.pasangKlik { go("perluDitanganiFragment") }
+        view.opt<View>("btn_tangani")?.pasangKlik { go("perluDitanganiFragment") }
+        view.opt<View>("card_stat_kedaluwarsa")?.pasangKlik { go("perluDitanganiFragment") }
+        view.opt<View>("card_stat_mendekati")?.pasangKlik { go("perluDitanganiFragment") }
+        view.opt<View>("card_hero_perlu_ditangani")?.pasangKlik { go("perluDitanganiFragment") }
         if (layoutId == R.layout.fragment_beranda_staff) {
             // Di beranda staf, kartu alert memakai id tombol yang sudah ada.
             view.opt<View>("btn_perlu_ditangani")?.visibility =
@@ -379,18 +397,45 @@ open class BaseBarangFragment(layoutId: Int) : Fragment(layoutId) {
             }
         })
 
-        mapOf(
+        val chipMap = mapOf(
             "chip_semua" to null,
             "chip_makanan" to "Makanan",
             "chip_minuman" to "Minuman",
             "chip_obat" to "Obat",
             "chip_rumah" to "Kebutuhan Rumah",
             "chip_lainnya" to "Lainnya"
-        ).forEach { (id, kat) ->
+        )
+        fun updateCategoryChips(selectedId: String) {
+            val allChipIds = chipMap.keys + "chip_stok_menipis"
+            allChipIds.forEach { id ->
+                val v = view.opt<View>(id) ?: return@forEach
+                val isSelected = (id == selectedId)
+                if (v is TextView) {
+                    if (isSelected) {
+                        v.setBackgroundResource(R.drawable.bg_chip_active)
+                        v.setTextColor(ContextCompat.getColor(requireContext(), R.color.sf_on_brand))
+                    } else {
+                        v.setBackgroundResource(R.drawable.bg_chip)
+                        v.setTextColor(ContextCompat.getColor(requireContext(), R.color.sf_chip_text))
+                    }
+                } else if (v is ViewGroup) {
+                    v.setBackgroundResource(if (isSelected) R.drawable.bg_chip_active else R.drawable.bg_chip)
+                    val tv = (v.getChildAt(1) as? TextView) ?: (v.getChildAt(0) as? TextView)
+                    tv?.setTextColor(ContextCompat.getColor(requireContext(), if (isSelected) R.color.sf_on_brand else R.color.sf_chip_text))
+                }
+            }
+        }
+        chipMap.forEach { (id, kat) ->
             view.opt<View>(id)?.setOnClickListener {
+                updateCategoryChips(id)
                 kategori = kat
                 loadBarang()
             }
+        }
+        view.opt<View>("chip_stok_menipis")?.setOnClickListener {
+            updateCategoryChips("chip_stok_menipis")
+            kategori = null
+            loadBarang()
         }
         loadBarang()
     }
@@ -421,13 +466,29 @@ class LaporanFragment : Fragment(R.layout.fragment_laporan) {
         view.opt<View>("btn_notifikasi_laporan")?.pasangKlik { go("notifikasiFragment") }
 
         // Tab kategori laporan (FR-16)
-        mapOf(
+        val tabMap = mapOf(
             "tab_laporan_stok" to "stok",
             "tab_laporan_mutasi" to "mutasi",
             "tab_laporan_kedaluwarsa" to "kedaluwarsa",
             "tab_laporan_aktivitas" to "aktivitas",
-        ).forEach { (id, jenis) ->
-            view.opt<View>(id)?.setOnClickListener { muatLaporan(jenis) }
+        )
+        fun updateTabs(selectedId: String) {
+            tabMap.keys.forEach { id ->
+                val v = view?.opt<TextView>(id) ?: return@forEach
+                if (id == selectedId) {
+                    v.setBackgroundResource(R.drawable.bg_segment_active)
+                    v.setTextColor(ContextCompat.getColor(requireContext(), R.color.sf_brand))
+                } else {
+                    v.background = null
+                    v.setTextColor(Color.parseColor("#6E8277"))
+                }
+            }
+        }
+        tabMap.forEach { (id, jenis) ->
+            view.opt<View>(id)?.setOnClickListener {
+                updateTabs(id)
+                muatLaporan(jenis)
+            }
         }
 
         // Ekspor berkas xlsx dari tab aktif (khusus pemilik, BR-08)
@@ -900,6 +961,7 @@ class PerluDitanganiFragment : Fragment(R.layout.fragment_perlu_ditangani) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.opt<View>("btn_back")?.setOnClickListener { findNavController().navigateUp() }
+        view.opt<View>("btn_back_perlu_ditangani")?.setOnClickListener { findNavController().navigateUp() }
         view.opt<View>("btn_notifikasi_ditangani")?.pasangKlik { go("notifikasiFragment") }
         val adapter = BatchAdapter(emptyList()) { go("detailBatchFragment", bundleOf("batchId" to it.id)) }
         view.bindList("rv_perlu_ditangani", adapter)
@@ -924,6 +986,7 @@ class NotifikasiFragment : Fragment(R.layout.fragment_notifikasi) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        view.opt<View>("btn_back")?.setOnClickListener { findNavController().navigateUp() }
         view.opt<View>("btn_back_notifikasi")?.setOnClickListener { findNavController().navigateUp() }
         adapter = NotifikasiAdapter(emptyList()) { n ->
             when {
@@ -933,13 +996,27 @@ class NotifikasiFragment : Fragment(R.layout.fragment_notifikasi) {
         }
         view.bindList("rv_notifikasi", adapter)
 
-        mapOf(
+        val notifChips = mapOf(
             "chip_notif_semua" to null,
             "chip_notif_mendekati" to "Mendekati Kedaluwarsa",
             "chip_notif_kedaluwarsa" to "Kedaluwarsa",
             "chip_notif_menipis" to "Stok Menipis",
-        ).forEach { (id, nilai) ->
+        )
+        fun updateNotifChips(selectedId: String) {
+            notifChips.keys.forEach { id ->
+                val v = view.opt<TextView>(id) ?: return@forEach
+                if (id == selectedId) {
+                    v.setBackgroundResource(R.drawable.bg_chip_active)
+                    v.setTextColor(ContextCompat.getColor(requireContext(), R.color.sf_on_brand))
+                } else {
+                    v.setBackgroundResource(R.drawable.bg_chip)
+                    v.setTextColor(ContextCompat.getColor(requireContext(), R.color.sf_chip_text))
+                }
+            }
+        }
+        notifChips.forEach { (id, nilai) ->
             view.opt<View>(id)?.setOnClickListener {
+                updateNotifChips(id)
                 jenisAktif = nilai
                 muatNotifikasi()
             }

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.EditText
 import android.widget.TextView
@@ -31,11 +32,25 @@ private fun Fragment.bindCloseButtons(view: View) {
     view.findViewById<View>(R.id.btn_batal)?.setOnClickListener { findNavController().navigateUp() }
 }
 
+private fun View.updateSelectText(text: String) {
+    if (this is TextView) {
+        this.text = text
+    } else if (this is ViewGroup) {
+        for (i in 0 until childCount) {
+            val child = getChildAt(i)
+            if (child is TextView) {
+                child.text = text
+                break
+            }
+        }
+    }
+}
+
 private fun Fragment.showPicker(title: String, items: Array<String>, target: View, onPick: (Int) -> Unit) {
     AlertDialog.Builder(requireContext())
         .setTitle(title)
         .setItems(items) { _, i ->
-            (target as? TextView)?.text = items[i]
+            target.updateSelectText(items[i])
             onPick(i)
         }
         .show()
@@ -164,7 +179,7 @@ class FormBatchFragment : Fragment(R.layout.form_batch) {
             }
             val dipilih = barangList.find { it.id == barangId }
             if (dipilih != null) {
-                (selectBrg as? TextView)?.text = "${dipilih.kode_sku} - ${dipilih.nama}"
+                selectBrg.updateSelectText("${dipilih.kode_sku} - ${dipilih.nama}")
             }
         }
 
@@ -181,7 +196,7 @@ class FormBatchFragment : Fragment(R.layout.form_batch) {
             val cal = Calendar.getInstance()
             DatePickerDialog(requireContext(), { _, y, m, d ->
                 tanggal = String.format(Locale.US, "%04d-%02d-%02d", y, m + 1, d)
-                (selectTgl as? TextView)?.text = tanggal
+                selectTgl.updateSelectText(tanggal)
             }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show()
         }
 
@@ -244,7 +259,7 @@ class FormStokKeluarFragment : Fragment(R.layout.form_stok_keluar) {
             }
             val dipilih = barangList.find { it.id == barangId }
             if (dipilih != null) {
-                (selectBrg as? TextView)?.text = "${dipilih.nama} (Stok: ${dipilih.total_stok_tersedia} ${dipilih.satuan})"
+                selectBrg.updateSelectText("${dipilih.nama} (Stok: ${dipilih.total_stok_tersedia} ${dipilih.satuan})")
             }
         }
 
