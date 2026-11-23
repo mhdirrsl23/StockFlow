@@ -152,18 +152,19 @@
                     android:orientation="horizontal">
 
                     <ProgressBar
+                        android:id="@+id/progress_jumlah_sisa"
                         style="@style/SF.Progress.Danger"
                         android:layout_width="0dp"
                         android:layout_height="5dp"
                         android:layout_weight="1"
-                        android:progress="100" />
+                        android:progress="0" />
 
                     <TextView
                         android:id="@+id/tv_jumlah_sisa"
                         style="@style/SF.Text.Caption"
                         android:layout_marginStart="7dp"
                         android:fontFamily="@font/plus_jakarta_sans_bold"
-                        android:text="30/30" />
+                        android:text="—" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -189,6 +190,7 @@
 
             <!-- Alert strip: perlu ditangani -->
             <LinearLayout
+                android:id="@+id/alert_batch_kedaluwarsa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -265,7 +267,8 @@
                         style="@style/SF.Text"
                         android:fontFamily="@font/plus_jakarta_sans_extrabold"
                         android:letterSpacing="-0.04"
-                        android:text="30"
+                        android:id="@+id/tv_ringkasan_jumlah_sisa"
+                        android:text="—"
                         android:textColor="@color/sf_ink"
                         android:textSize="18sp" />
 
@@ -273,7 +276,7 @@
                         style="@style/SF.Text.Caption"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/plus_jakarta_sans_bold"
-                        android:text="sisa pcs" />
+                        android:text="sisa stok" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -289,7 +292,8 @@
                         style="@style/SF.Text"
                         android:fontFamily="@font/plus_jakarta_sans_extrabold"
                         android:letterSpacing="-0.04"
-                        android:text="30"
+                        android:id="@+id/tv_ringkasan_jumlah_awal"
+                        android:text="—"
                         android:textColor="@color/sf_ink"
                         android:textSize="18sp" />
 
@@ -371,12 +375,14 @@
 
                     <TextView
                         style="@style/SF.Text.Strong"
-                        android:text="Masuk 30 pcs" />
+                        android:id="@+id/tv_mutasi_aksi"
+                        android:text="—" />
 
                     <TextView
                         style="@style/SF.Text.RowSub"
                         android:layout_marginTop="2dp"
-                        android:text="Stok awal · Rina Wulandari" />
+                        android:id="@+id/tv_mutasi_keterangan"
+                        android:text="—" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -390,13 +396,15 @@
                     <TextView
                         style="@style/SF.Text"
                         android:fontFamily="@font/plus_jakarta_sans_extrabold"
-                        android:text="+30"
+                        android:id="@+id/tv_mutasi_jumlah"
+                        android:text="—"
                         android:textColor="@color/sf_safe" />
 
                     <TextView
                         style="@style/SF.Text.Caption"
                         android:layout_marginTop="2dp"
-                        android:text="07.34" />
+                        android:id="@+id/tv_mutasi_waktu"
+                        android:text="—" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -446,6 +454,7 @@
 
                     <TextView
                         style="@style/SF.Pill.Outline"
+                        android:id="@+id/tv_jumlah_lampiran"
                         android:text="0 file" />
                 </LinearLayout>
 
@@ -473,6 +482,22 @@
                         android:text="Tambah foto" />
                 </LinearLayout>
 
+                <HorizontalScrollView
+                    android:id="@+id/scroll_lampiran_batch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:horizontalScrollBarEnabled="false"
+                    android:overScrollMode="never"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:id="@+id/list_lampiran_batch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" />
+                </HorizontalScrollView>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -493,7 +518,7 @@
                         android:layout_marginStart="4dp"
                         android:layout_weight="1"
                         android:lineSpacingMultiplier="1.2"
-                        android:text="Di mockup ini nama file disimpan ke tabel lampiran; unggahan nyata ditangani Laravel." />
+                        android:text="Unggahan file dokumen dan foto bukti didukung." />
                 </LinearLayout>
             </LinearLayout>
 
@@ -512,7 +537,7 @@
                 <TextView
                     style="@style/SF.Text.Caption"
                     android:layout_marginTop="3dp"
-                    android:text="Kolom tabel batch_stok" />
+                    android:text="Informasi detail batch" />
             </LinearLayout>
 
             <LinearLayout
@@ -774,13 +799,14 @@
                         android:text="Dibuat oleh" />
 
                     <TextView
+                        android:id="@+id/tv_batch_pembuat"
                         style="@style/SF.Text.Strong"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="18dp"
                         android:layout_weight="0.58"
                         android:gravity="end"
-                        android:text="Rina Wulandari" />
+                        android:text="Tidak diketahui" />
                 </LinearLayout>
 
                 <View style="@style/SF.Divider" />
@@ -834,17 +860,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Catatan sumber -->
-            <TextView
-                style="@style/SF.Text.Caption"
-                android:layout_marginTop="16dp"
-                android:drawableStart="@drawable/ic12_database"
-                android:drawablePadding="4dp"
-                android:drawableTint="@color/sf_muted_2"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="2dp"
-                android:text="Sumber: batch_stok #4 · status dihitung dari ambang 30 hari"
-                android:textColor="@color/sf_muted_2" />
+
         </LinearLayout>
     </ScrollView>
 

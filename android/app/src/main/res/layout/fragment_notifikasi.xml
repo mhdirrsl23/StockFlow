@@ -229,7 +229,7 @@
                     <TextView
                         style="@style/SF.Text"
                         android:fontFamily="@font/plus_jakarta_sans_bold"
-                        android:text="Dibuat penjadwal Laravel."
+                        android:text="Pemeriksaan otomatis berkala."
                         android:textColor="@color/sf_info_ink"
                         android:textSize="11sp" />
 
@@ -237,32 +237,13 @@
                         style="@style/SF.Text"
                         android:layout_marginTop="2dp"
                         android:lineSpacingMultiplier="1.35"
-                        android:text="Pukul 06.00 $amp; 18.00 WIB, lalu dibaca WorkManager tiap 12 jam."
+                        android:text="Pukul 06.00 &amp; 18.00 WIB, diperbarui secara berkala."
                         android:textColor="@color/sf_info_ink"
                         android:textSize="11sp" />
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Catatan sumber -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingHorizontal="2dp">
 
-                <ImageView
-                    android:layout_width="13dp"
-                    android:layout_height="13dp"
-                    android:src="@drawable/ic_database"
-                    app:tint="@color/sf_muted_2" />
-
-                <TextView
-                    style="@style/SF.Text.Caption"
-                    android:layout_marginStart="6dp"
-                    android:text="Sumber: notifikasi · semua belum ditampilkan" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

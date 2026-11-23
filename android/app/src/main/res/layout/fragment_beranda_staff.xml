@@ -50,15 +50,6 @@
                 android:text="StokAman"
                 android:textColor="@color/sf_ink"
                 android:textSize="16sp" />
-
-            <TextView
-                style="@style/SF.Text"
-                android:layout_marginTop="2dp"
-                android:fontFamily="@font/plus_jakarta_sans_bold"
-                android:letterSpacing="0.11"
-                android:text="EDISI DATABASE"
-                android:textColor="@color/sf_muted"
-                android:textSize="9sp" />
         </LinearLayout>
 
         <!-- Notifikasi + badge -->
@@ -1434,16 +1425,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Sumber data -->
-            <TextView
-                style="@style/SF.Text"
-                android:layout_marginTop="16dp"
-                android:drawableStart="@drawable/ic12_database"
-                android:drawablePadding="4dp"
-                android:drawableTint="#94A49C"
-                android:text="Sumber: v_stok_tersedia · v_perlu_ditangani"
-                android:textColor="#94A49C"
-                android:textSize="9sp" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

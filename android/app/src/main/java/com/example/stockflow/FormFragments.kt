@@ -24,6 +24,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Response
 import java.io.File
+import java.io.IOException
 import java.util.Calendar
 import java.util.Locale
 
@@ -152,7 +153,12 @@ class FormBatchFragment : Fragment(R.layout.form_batch) {
     private val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         if (uri != null) {
             imageUri = uri
-            Toast.makeText(requireContext(), "Foto bukti dipilih", Toast.LENGTH_SHORT).show()
+            view?.findViewById<TextView>(R.id.tv_status_foto_batch)?.text = "Foto batch dipilih"
+            Toast.makeText(
+                requireContext(),
+                "Foto dipilih; foto akan diunggah saat batch disimpan",
+                Toast.LENGTH_SHORT,
+            ).show()
         }
     }
 
@@ -162,15 +168,32 @@ class FormBatchFragment : Fragment(R.layout.form_batch) {
 
         val selectBrg = view.findViewById<View>(R.id.select_barang)
         val etBatch = view.findViewById<EditText>(R.id.et_nomor_batch)
-        val tvJumlah = view.findViewById<TextView>(R.id.batch_jumlah)
+        val etJumlah = view.findViewById<EditText>(R.id.batch_jumlah)
         val selectTgl = view.findViewById<View>(R.id.select_tanggal)
 
         // Dipanggil dari detail barang → barang sudah terpilih.
-        arguments?.getInt("barangId")?.takeIf { it != -1 }?.let { barangId = it }
+        arguments?.getInt("barangId", -1)?.takeIf { it > 0 }?.let { barangId = it }
 
-        tvJumlah.text = jumlah.toString()
-        view.findViewById<View>(R.id.btn_batch_minus).setOnClickListener { if (jumlah > 1) tvJumlah.text = (--jumlah).toString() }
-        view.findViewById<View>(R.id.btn_batch_plus).setOnClickListener { tvJumlah.text = (++jumlah).toString() }
+        jumlah = etJumlah?.text?.toString()?.trim()?.toIntOrNull() ?: 1
+        etJumlah?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                jumlah = s?.toString()?.trim()?.toIntOrNull() ?: 0
+            }
+        })
+        view.findViewById<View>(R.id.btn_batch_minus).setOnClickListener {
+            if (jumlah > 1) {
+                jumlah--
+                etJumlah?.setText(jumlah.toString())
+                etJumlah?.setSelection(etJumlah.text.length)
+            }
+        }
+        view.findViewById<View>(R.id.btn_batch_plus).setOnClickListener {
+            jumlah++
+            etJumlah?.setText(jumlah.toString())
+            etJumlah?.setSelection(etJumlah.text.length)
+        }
 
         viewLifecycleOwner.lifecycleScope.launch {
             runCatching {
@@ -204,29 +227,125 @@ class FormBatchFragment : Fragment(R.layout.form_batch) {
 
         view.findViewById<View>(R.id.btn_simpan).setOnClickListener {
             val nomor = etBatch.text.toString().trim()
-            if (barangId == -1 || nomor.isEmpty() || tanggal.isEmpty()) {
-                Toast.makeText(requireContext(), "Barang, nomor batch, dan tanggal kedaluwarsa wajib diisi", Toast.LENGTH_SHORT).show()
+            val fieldBelumDiisi = mutableListOf<String>()
+            if (barangId <= 0) {
+                fieldBelumDiisi.add("barang")
+            }
+            if (nomor.isEmpty()) {
+                fieldBelumDiisi.add("nomor batch")
+            }
+            if (tanggal.isEmpty()) {
+                fieldBelumDiisi.add("tanggal kedaluwarsa")
+            }
+            if (fieldBelumDiisi.isNotEmpty()) {
+                Toast.makeText(
+                    requireContext(),
+                    "Lengkapi ${fieldBelumDiisi.joinToString(", ")} terlebih dahulu",
+                    Toast.LENGTH_SHORT,
+                ).show()
                 return@setOnClickListener
             }
-            submitApi(
-                "Batch stok berhasil ditambahkan",
-                "Gagal menyimpan batch",
-                { it.storeBatchStok(barangId, BatchStokRequest(nomor, jumlah, tanggal)) },
-                tombol = view.findViewById(R.id.btn_simpan),
-                onSuccess = { api, batch ->
-                    val uri = imageUri ?: return@submitApi
-                    val batchId = batch?.id ?: return@submitApi
-                    runCatching {
-                        val stream = requireContext().contentResolver.openInputStream(uri) ?: return@runCatching
-                        val file = File(requireContext().cacheDir, "bukti_batch_$batchId.jpg")
-                        file.outputStream().use { stream.copyTo(it) }
-                        // FR-14: part file bernama "lampiran" + part "jenis"
-                        val filePart = MultipartBody.Part.createFormData("lampiran", file.name, file.asRequestBody("image/jpeg".toMediaTypeOrNull()))
+
+            val tombolSimpan = view.findViewById<View>(R.id.btn_simpan)
+            viewLifecycleOwner.lifecycleScope.launch {
+                tombolSimpan.isEnabled = false
+                tombolSimpan.alpha = 0.6f
+                var batchTersimpan = false
+                try {
+                    val api = RetrofitClient.getInstance(requireContext())
+                    val response = api.storeBatchStok(
+                        barangId,
+                        BatchStokRequest(nomor, jumlah, tanggal),
+                    )
+                    val body = response.body()
+                    if (!response.isSuccessful || body?.success != true) {
+                        Toast.makeText(
+                            requireContext(),
+                            uraikanGagal(response, "Gagal menyimpan batch"),
+                            Toast.LENGTH_LONG,
+                        ).show()
+                        return@launch
+                    }
+
+                    batchTersimpan = true
+                    val uri = imageUri
+                    if (uri == null) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Batch stok berhasil ditambahkan",
+                            Toast.LENGTH_SHORT,
+                        ).show()
+                        findNavController().navigateUp()
+                        return@launch
+                    }
+
+                    val batchId = body?.data?.id
+                    if (batchId == null) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Batch tersimpan, tetapi ID batch tidak diterima sehingga foto belum diunggah",
+                            Toast.LENGTH_LONG,
+                        ).show()
+                        findNavController().navigateUp()
+                        return@launch
+                    }
+
+                    val contentResolver = requireContext().contentResolver
+                    val mimeType = contentResolver.getType(uri)
+                    val extension = when (mimeType) {
+                        "image/jpeg" -> "jpg"
+                        "image/png" -> "png"
+                        else -> throw IOException("Foto harus berformat JPG atau PNG")
+                    }
+                    val file = File(requireContext().cacheDir, "bukti_batch_$batchId.$extension")
+                    val uploadResponse = try {
+                        val input = contentResolver.openInputStream(uri)
+                            ?: throw IOException("Foto tidak dapat dibaca")
+                        input.use { stream ->
+                            file.outputStream().use { output -> stream.copyTo(output) }
+                        }
+                        val filePart = MultipartBody.Part.createFormData(
+                            "lampiran",
+                            file.name,
+                            file.asRequestBody(mimeType.toMediaTypeOrNull()),
+                        )
                         val jenisPart = MultipartBody.Part.createFormData("jenis", "bukti_batch")
                         api.uploadLampiran(batchId, filePart, jenisPart)
+                    } finally {
+                        file.delete()
                     }
+
+                    if (uploadResponse.isSuccessful && uploadResponse.body()?.success == true) {
+                        view.findViewById<TextView>(R.id.tv_status_foto_batch).text = "Foto batch berhasil diunggah"
+                        Toast.makeText(
+                            requireContext(),
+                            "Batch dan foto batch berhasil disimpan",
+                            Toast.LENGTH_SHORT,
+                        ).show()
+                    } else {
+                        view.findViewById<TextView>(R.id.tv_status_foto_batch).text = "Foto gagal diunggah"
+                        Toast.makeText(
+                            requireContext(),
+                            "Batch tersimpan, tetapi foto gagal diunggah: ${uraikanGagal(uploadResponse, "unggahan ditolak")}",
+                            Toast.LENGTH_LONG,
+                        ).show()
+                    }
+                    findNavController().navigateUp()
+                } catch (exception: Exception) {
+                    val message = if (batchTersimpan) {
+                        "Batch tersimpan, tetapi foto gagal diunggah: ${exception.message ?: "kesalahan berkas"}"
+                    } else {
+                        "Gagal menyimpan batch: ${exception.message ?: "kesalahan jaringan"}"
+                    }
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+                    if (batchTersimpan) {
+                        findNavController().navigateUp()
+                    }
+                } finally {
+                    tombolSimpan.isEnabled = true
+                    tombolSimpan.alpha = 1f
                 }
-            )
+            }
         }
     }
 }
@@ -242,15 +361,33 @@ class FormStokKeluarFragment : Fragment(R.layout.form_stok_keluar) {
         bindCloseButtons(view)
 
         val selectBrg = view.findViewById<View>(R.id.select_barang)
-        val tvJumlah = view.findViewById<TextView>(R.id.keluar_jumlah)
+        val etJumlah = view.findViewById<EditText>(R.id.keluar_jumlah)
         val etCatatan = view.findViewById<EditText>(R.id.et_catatan)
 
         // Dipanggil dari detail barang → barang sudah terpilih.
         arguments?.getInt("barangId")?.takeIf { it != -1 }?.let { barangId = it }
 
-        tvJumlah.text = jumlah.toString()
-        view.findViewById<View>(R.id.btn_keluar_minus).setOnClickListener { if (jumlah > 1) tvJumlah.text = (--jumlah).toString() }
-        view.findViewById<View>(R.id.btn_keluar_plus).setOnClickListener { tvJumlah.text = (++jumlah).toString() }
+        etJumlah?.setText(jumlah.toString())
+        etJumlah?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                jumlah = s?.toString()?.trim()?.toIntOrNull() ?: 0
+            }
+        })
+
+        view.findViewById<View>(R.id.btn_keluar_minus).setOnClickListener {
+            if (jumlah > 1) {
+                jumlah--
+                etJumlah?.setText(jumlah.toString())
+                etJumlah?.setSelection(etJumlah.text.length)
+            }
+        }
+        view.findViewById<View>(R.id.btn_keluar_plus).setOnClickListener {
+            jumlah++
+            etJumlah?.setText(jumlah.toString())
+            etJumlah?.setSelection(etJumlah.text.length)
+        }
 
         viewLifecycleOwner.lifecycleScope.launch {
             runCatching {
@@ -269,7 +406,9 @@ class FormStokKeluarFragment : Fragment(R.layout.form_stok_keluar) {
                 return@setOnClickListener
             }
             val labels = barangList.map { "${it.nama} (Stok: ${it.total_stok_tersedia} ${it.satuan})" }.toTypedArray()
-            showPicker("Pilih Barang Keluar (FEFO)", labels, selectBrg) { barangId = barangList[it].id }
+            showPicker("Pilih Barang Keluar (FEFO)", labels, selectBrg) { i ->
+                barangId = barangList[i].id
+            }
         }
 
         view.findViewById<View>(R.id.btn_catat_keluar).setOnClickListener {
@@ -277,6 +416,22 @@ class FormStokKeluarFragment : Fragment(R.layout.form_stok_keluar) {
                 Toast.makeText(requireContext(), "Pilih barang terlebih dahulu", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            val inputJumlah = etJumlah?.text?.toString()?.trim()?.toIntOrNull() ?: 0
+            if (inputJumlah <= 0) {
+                Toast.makeText(requireContext(), "Jumlah keluar minimal 1", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            val dipilih = barangList.find { it.id == barangId }
+            val stokTersedia = dipilih?.total_stok_tersedia ?: Int.MAX_VALUE
+            if (inputJumlah > stokTersedia) {
+                Toast.makeText(
+                    requireContext(),
+                    "Peringatan: Jumlah keluar ($inputJumlah) melebihi stok tersedia (${stokTersedia} ${dipilih?.satuan ?: "unit"})!",
+                    Toast.LENGTH_LONG
+                ).show()
+                return@setOnClickListener
+            }
+            jumlah = inputJumlah
             val catatan = etCatatan.text.toString().trim().ifEmpty { null }
             submitApi(
                 "Stok keluar FEFO berhasil dicatat",

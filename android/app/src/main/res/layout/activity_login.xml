@@ -43,15 +43,6 @@
                     android:text="StokAman"
                     android:textColor="#F2FFF9"
                     android:textSize="16sp" />
-
-                <TextView
-                    style="@style/SF.Text"
-                    android:layout_marginTop="3dp"
-                    android:fontFamily="@font/plus_jakarta_sans_bold"
-                    android:letterSpacing="0.14"
-                    android:text="EDISI DATABASE"
-                    android:textColor="#84B9A2"
-                    android:textSize="9sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -192,42 +183,13 @@
             android:background="@drawable/bg_auth_note"
             android:padding="10dp">
 
-            <ImageView
-                android:layout_width="13dp"
-                android:layout_height="13dp"
-                android:layout_marginTop="1dp"
-                android:src="@drawable/ic_database"
-                app:tint="#8DC8AB" />
-
             <TextView
                 style="@style/SF.Text"
-                android:layout_width="0dp"
-                android:layout_marginStart="6dp"
-                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:lineSpacingMultiplier="1.25"
                 android:text="Akun demo: pemilik / staf · kata sandi: password"
                 android:textColor="#90B7A3"
                 android:textSize="11sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:src="@drawable/ic_shield_check"
-                app:tint="@color/sf_auth_foot_strong" />
-
-            <TextView
-                style="@style/SF.Text.Mono"
-                android:layout_marginStart="5dp"
-                android:text="StokAman_database.sql · MySQL 8 · Laravel Sanctum"
-                android:textColor="@color/sf_auth_foot_strong"
-                android:textSize="10sp" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

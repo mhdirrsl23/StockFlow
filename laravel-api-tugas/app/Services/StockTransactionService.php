@@ -3,8 +3,8 @@
 namespace App\Services;
 
 use App\Exceptions\StokException;
-use App\Models\BatchStok;
 use App\Models\Barang;
+use App\Models\BatchStok;
 use App\Models\MutasiStok;
 use App\Models\User;
 use App\Support\Aktivitas;
@@ -235,12 +235,6 @@ final class StockTransactionService
 
             $barang = Barang::find($barangId);
 
-            $layakDitangani = $batch->status === 'Kedaluwarsa' || $batch->tanggal_kedaluwarsa->lessThan(today());
-
-            if (! $layakDitangani) {
-                throw StokException::field('batch_id', "Batch {$batch->nomor_batch} belum kedaluwarsa ({$batch->tanggal_kedaluwarsa->toDateString()}); penanganan hanya untuk batch kedaluwarsa (FR-12).", 'Batch belum kedaluwarsa');
-            }
-
             if ($batch->jumlah_sisa <= 0) {
                 throw StokException::field('batch_id', 'Batch ini tidak memiliki stok tersisa untuk ditangani.', 'Batch tidak memiliki sisa stok');
             }
@@ -374,12 +368,12 @@ final class StockTransactionService
         }
 
         try {
-            $batch = $barang->batches()->create([
+            $batch = $user->batchDibuat()->create([
+                'barang_id' => $barang->id,
                 'nomor_batch' => trim((string) $params['nomor_batch']),
                 'jumlah_awal' => $jumlah,
                 'jumlah_sisa' => $jumlah,
                 'tanggal_kedaluwarsa' => $tanggal->toDateString(),
-                'created_by' => $user->id,
             ]);
             $batch->refresh();
         } catch (QueryException $e) {

@@ -158,8 +158,8 @@
                         android:layout_weight="1"
                         android:ellipsize="end"
                         android:singleLine="true"
-                        android:text="Indomie Goreng · SKU-MKN-001"
-                        android:textColor="@color/sf_ink"
+                        android:text="Pilih barang"
+                        android:textColor="@color/sf_muted"
                         android:textSize="13sp" />
 
                     <ImageView
@@ -355,7 +355,7 @@
                         android:includeFontPadding="false"
                         android:inputType="number"
                         android:padding="0dp"
-                        android:text="10"
+                        android:text="1"
                         android:textColor="@color/sf_ink"
                         android:textSize="14sp" />
 
@@ -476,8 +476,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="29/11/2026"
-                        android:textColor="@color/sf_ink"
+                        android:text="Pilih tanggal kedaluwarsa"
+                        android:textColor="@color/sf_muted"
                         android:textSize="13sp" />
 
                     <ImageView
@@ -597,6 +597,7 @@
                         app:tint="@color/sf_ghost_text" />
 
                     <TextView
+                        android:id="@+id/tv_status_foto_batch"
                         style="@style/SF.Text"
                         android:layout_marginStart="7dp"
                         android:fontFamily="@font/plus_jakarta_sans_bold"
@@ -657,28 +658,7 @@
                     android:textSize="11sp" />
             </LinearLayout>
 
-            <!-- Sumber -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="2dp">
 
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/ic_database"
-                    app:tint="@color/sf_muted_2" />
-
-                <TextView
-                    style="@style/SF.Text"
-                    android:layout_marginStart="4dp"
-                    android:text="Sumber: tabel batch_stok + mutasi_stok · FEFO memakai tanggal_kedaluwarsa"
-                    android:textColor="@color/sf_muted_2"
-                    android:textSize="10sp" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

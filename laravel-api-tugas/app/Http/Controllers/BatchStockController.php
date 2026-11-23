@@ -7,6 +7,7 @@ use App\Models\Barang;
 use App\Models\BatchStok;
 use App\Models\MutasiStok;
 use App\Models\Notifikasi;
+use App\Services\StockTransactionService;
 use App\Support\Aktivitas;
 use App\Support\ApiResponse;
 use Illuminate\Http\Request;
@@ -102,7 +103,7 @@ final class BatchStockController extends Controller
      */
     public function store(BatchRequest $request, Barang $barang): mixed
     {
-        $hasil = app(\App\Services\StockTransactionService::class)->masuk($request->user(), [
+        $hasil = app(StockTransactionService::class)->masuk($request->user(), [
             'barang_id' => $barang->id,
             'jumlah' => (int) $request->input('jumlah_awal'),
             'nomor_batch' => $request->input('nomor_batch'),
@@ -211,6 +212,7 @@ final class BatchStockController extends Controller
 
                 if ($batch === null) {
                     $hasil[] = ['id' => $id, 'berhasil' => false, 'pesan' => 'Batch tidak ditemukan'];
+
                     continue;
                 }
 
@@ -220,6 +222,7 @@ final class BatchStockController extends Controller
                         'berhasil' => false,
                         'pesan' => 'Akses ditolak: staf hanya menghapus batch miliknya sendiri (AB-08)',
                     ];
+
                     continue;
                 }
 
@@ -249,10 +252,20 @@ final class BatchStockController extends Controller
      */
     public function show(BatchStok $batch): mixed
     {
-        $batch->load(['barang:id,kode_sku,nama,satuan', 'lampiran']);
-        $mutasiTerbaru = $batch->mutasi()->limit(20)->get();
+        $batch->load(['barang:id,kode_sku,nama,satuan', 'lampiran', 'pembuat:id,nama']);
+        $mutasiTerbaru = $batch->mutasi()
+            ->reorder('waktu', 'desc')
+            ->orderByDesc('id')
+            ->limit(20)
+            ->get();
+        $namaPembuat = $batch->pembuat?->nama
+            ?? $batch->mutasi()
+                ->where('jenis', 'masuk')
+                ->with('pengguna:id,nama')
+                ->first()?->pengguna?->nama;
 
         return ApiResponse::ok($this->bentuk($batch) + [
+            'nama_pembuat' => $namaPembuat,
             'mutasi_terbaru' => $mutasiTerbaru,
             'lampiran' => $batch->lampiran->toArray(),
         ], 'Batch ditemukan');

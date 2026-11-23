@@ -453,16 +453,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <TextView
-                style="@style/SF.Text.Caption"
-                android:layout_marginTop="16dp"
-                android:drawableStart="@drawable/ic12_database"
-                android:drawablePadding="4dp"
-                android:drawableTint="@color/sf_muted_2"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="2dp"
-                android:text="Sumber: tabel barang · view v_stok_tersedia"
-                android:textColor="@color/sf_muted_2" />
+
         </LinearLayout>
     </ScrollView>
 

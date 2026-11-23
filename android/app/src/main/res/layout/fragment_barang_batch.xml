@@ -408,25 +408,7 @@
                     android:text="Coba kata kunci atau status lain." />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingHorizontal="2dp">
 
-                <ImageView
-                    android:layout_width="13dp"
-                    android:layout_height="13dp"
-                    android:src="@drawable/ic_database"
-                    app:tint="@color/sf_muted_2" />
-
-                <TextView
-                    style="@style/SF.Text.Caption"
-                    android:layout_marginStart="6dp"
-                    android:text="Sumber: batch_stok · status dihitung dari tanggal kedaluwarsa" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

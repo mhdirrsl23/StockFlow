@@ -219,29 +219,7 @@
                     android:text="Belum ada akun yang terdaftar pada sistem." />
             </LinearLayout>
 
-            <!-- Sumber -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:orientation="horizontal"
-                android:padding="2dp">
 
-                <ImageView
-                    android:layout_width="11dp"
-                    android:layout_height="11dp"
-                    android:layout_marginTop="1dp"
-                    android:src="@drawable/ic_database"
-                    app:tint="@color/sf_muted_2" />
-
-                <TextView
-                    style="@style/SF.Text.Caption"
-                    android:layout_marginStart="4dp"
-                    android:text="Sumber: users · peran pemilik/staf · aktif 0/1 · unique username"
-                    android:textColor="@color/sf_muted_2" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

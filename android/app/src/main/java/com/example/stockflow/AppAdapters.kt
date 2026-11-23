@@ -15,6 +15,25 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
+fun resolveStatus(apiStatus: String?, expDate: String?): String {
+    if (apiStatus == "Ditangani") return "Ditangani"
+    val days = runCatching {
+        if (expDate.isNullOrEmpty()) return@runCatching null
+        val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).apply { isLenient = false }
+        val target = format.parse(expDate.take(10)) ?: return@runCatching null
+        val today = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, 0); set(Calendar.MINUTE, 0); set(Calendar.SECOND, 0); set(Calendar.MILLISECOND, 0)
+        }.time
+        (target.time - today.time) / (1000 * 60 * 60 * 24)
+    }.getOrNull() ?: return apiStatus ?: "Aman"
+
+    return when {
+        days < 0 -> "Kedaluwarsa"
+        days <= 30 -> "Mendekati Kedaluwarsa"
+        else -> "Aman"
+    }
+}
+
 open class SimpleCardAdapter<T>(
     private var items: List<T>,
     private val mapper: (T) -> RowModel,
@@ -182,7 +201,8 @@ class BatchAdapter(
         holder.tvNomor.text = if (item.nama_barang != null) "${item.nomor_batch} · ${item.nama_barang}" else item.nomor_batch
         holder.tvInfo.text = "Sisa ${item.jumlah_sisa} / ${item.jumlah_awal} · exp $expDate"
 
-        when (item.status) {
+        val statusToUse = resolveStatus(item.status, expDate)
+        when (statusToUse) {
             "Kedaluwarsa" -> {
                 holder.tvStatus.text = "Kedaluwarsa"
                 holder.tvStatus.setBackgroundResource(R.drawable.bg_pill_warn)
@@ -295,7 +315,8 @@ class BatchCardAdapter(
             (target.time - today.time) / (1000 * 60 * 60 * 24)
         }.getOrNull()
 
-        when (item.status) {
+        val statusToUse = resolveStatus(item.status, expDate)
+        when (statusToUse) {
             "Kedaluwarsa" -> {
                 holder.tvPillStatus.text = "Kedaluwarsa"
                 holder.tvPillStatus.setBackgroundResource(R.drawable.bg_pill_danger)

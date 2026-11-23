@@ -412,26 +412,7 @@
                     android:textSize="11sp" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="center_vertical"
-                android:padding="2dp">
 
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/ic_database"
-                    app:tint="@color/sf_muted_2" />
-
-                <TextView
-                    style="@style/SF.Text"
-                    android:layout_marginStart="4dp"
-                    android:text="Sumber: tabel users · password bcrypt · peran pemilik/staf"
-                    android:textColor="@color/sf_muted_2"
-                    android:textSize="10sp" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
