@@ -492,9 +492,6 @@ class FormPenyesuaianFragment : Fragment(R.layout.form_penyesuaian) {
 
 class FormAkunFragment : Fragment(R.layout.form_akun) {
 
-    private var peran = "staf"
-    private val listPeran = arrayOf("pemilik", "staf")
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindCloseButtons(view)
@@ -502,10 +499,7 @@ class FormAkunFragment : Fragment(R.layout.form_akun) {
         val etNama = view.findViewById<EditText>(R.id.et_nama)
         val etUser = view.findViewById<EditText>(R.id.et_username)
         val etPass = view.findViewById<EditText>(R.id.et_password)
-        val selectPeran = view.findViewById<View>(R.id.select_peran)
         val switchAktif = view.findViewById<CompoundButton>(R.id.switch_aktif)
-
-        selectPeran.setOnClickListener { showPicker("Pilih Peran", listPeran, selectPeran) { peran = listPeran[it] } }
 
         view.findViewById<View>(R.id.btn_simpan).setOnClickListener {
             val nama = etNama.text.toString().trim()
