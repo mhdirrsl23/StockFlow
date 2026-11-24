@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -409,14 +410,33 @@ class BerandaStaffFragment : BaseBerandaFragment(R.layout.fragment_beranda_staff
 open class BaseBarangFragment(layoutId: Int) : Fragment(layoutId) {
 
     private lateinit var adapter: BarangAdapter
+    private lateinit var batchAdapter: BatchAdapter
     private var search: String? = null
     private var kategori: String? = null
+    private var isBatchMode = false
+    private var isSelectionMode = false
+    private var isDeletingBulk = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = BarangAdapter(emptyList()) { go("detailBarangFragment", bundleOf("barangId" to it.id)) }
-        val batchAdapter = BatchAdapter(emptyList()) { go("detailBatchFragment", bundleOf("batchId" to it.id)) }
-        var isBatchMode = false
+        adapter = BarangAdapter(
+            emptyList(),
+            onClick = { go("detailBarangFragment", bundleOf("barangId" to it.id)) },
+            onSelectionChanged = {
+                if (!isBatchMode) {
+                    updateSelectionControls(view, it)
+                }
+            },
+        )
+        batchAdapter = BatchAdapter(
+            emptyList(),
+            onClick = { go("detailBatchFragment", bundleOf("batchId" to it.id)) },
+            onSelectionChanged = {
+                if (isBatchMode) {
+                    updateSelectionControls(view, it)
+                }
+            },
+        )
 
         // Lonceng notifikasi: id berbeda per varian layout (pemilik / staf) — opt() no-op bila tidak ada.
         view.opt<View>("btn_notifikasi")?.pasangKlik { go("notifikasiFragment") }
@@ -429,6 +449,9 @@ open class BaseBarangFragment(layoutId: Int) : Fragment(layoutId) {
         val tabBatch = view.opt<View>("tab_batch") ?: view.opt<View>("tab_batch_staff")
 
         fun switchTab(batchMode: Boolean) {
+            if (isBatchMode != batchMode) {
+                setSelectionMode(false, view)
+            }
             isBatchMode = batchMode
             tabBarang?.setBackgroundResource(if (!batchMode) R.drawable.bg_segment_active else 0)
             tabBatch?.setBackgroundResource(if (batchMode) R.drawable.bg_segment_active else 0)
@@ -447,6 +470,12 @@ open class BaseBarangFragment(layoutId: Int) : Fragment(layoutId) {
 
         tabBarang?.setOnClickListener { switchTab(false) }
         tabBatch?.setOnClickListener { switchTab(true) }
+        view.opt<View>("btn_pilih_barang_batch")?.setOnClickListener {
+            setSelectionMode(!isSelectionMode, view)
+        }
+        view.opt<View>("btn_hapus_terpilih")?.setOnClickListener {
+            konfirmasiHapusTerpilih()
+        }
 
         view.opt<View>("btn_tambah_barang")?.setOnClickListener { go("formBarangFragment") }
         view.opt<View>("btn_tambah_barang_staff")?.setOnClickListener { go("formBarangFragment") }
@@ -548,6 +577,136 @@ open class BaseBarangFragment(layoutId: Int) : Fragment(layoutId) {
         val count = items.size.toString()
         view?.opt<TextView>("tv_count_tab_batch")?.text = count
         view?.opt<TextView>("tv_count_tab_batch_staff")?.text = count
+    }
+
+    private fun updateSelectionControls(view: View, selectedCount: Int) {
+        view.opt<TextView>("btn_pilih_barang_batch")?.apply {
+            text = if (isSelectionMode) "Batal pilih" else "Pilih"
+            isEnabled = !isDeletingBulk
+        }
+        view.opt<TextView>("btn_hapus_terpilih")?.apply {
+            text = "Hapus terpilih ($selectedCount)"
+            visibility = if (isSelectionMode && selectedCount > 0) View.VISIBLE else View.GONE
+            isEnabled = !isDeletingBulk
+        }
+    }
+
+    private fun setSelectionMode(enabled: Boolean, view: View) {
+        isSelectionMode = enabled
+        adapter.setSelectionMode(enabled && !isBatchMode)
+        batchAdapter.setSelectionMode(enabled && isBatchMode)
+        updateSelectionControls(
+            view,
+            if (isBatchMode) batchAdapter.selectedIds().size else adapter.selectedIds().size,
+        )
+    }
+
+    private fun konfirmasiHapusTerpilih() {
+        val ids = if (isBatchMode) batchAdapter.selectedIds() else adapter.selectedIds()
+        if (ids.isEmpty()) {
+            return
+        }
+
+        val jenis = if (isBatchMode) "batch" else "barang"
+        AlertDialog.Builder(requireContext())
+            .setTitle("Hapus $jenis terpilih?")
+            .setMessage("${ids.size} $jenis akan dihapus. Tindakan ini tidak dapat dibatalkan.")
+            .setNegativeButton("Batal", null)
+            .setPositiveButton("Hapus") { _, _ -> hapusMassal(ids, isBatchMode) }
+            .show()
+    }
+
+    private fun hapusMassal(ids: List<Int>, batchMode: Boolean) {
+        if (isDeletingBulk) {
+            return
+        }
+
+        isDeletingBulk = true
+        view?.let {
+            updateSelectionControls(
+                it,
+                if (isBatchMode) batchAdapter.selectedIds().size else adapter.selectedIds().size,
+            )
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                val jenis = if (batchMode) "batch" else "barang"
+                val api = RetrofitClient.getInstance(requireContext())
+                val response = if (batchMode) {
+                    api.bulkDeleteBatch(BulkDeleteRequest(ids))
+                } else {
+                    api.bulkDeleteBarang(BulkDeleteRequest(ids))
+                }
+                val result = response.body()
+                    ?.takeIf { response.isSuccessful && it.success }
+                    ?.data
+
+                if (result == null) {
+                    val pesanGagal = if (response.isSuccessful) {
+                        "API tidak mengembalikan hasil penghapusan $jenis"
+                    } else {
+                        uraikanGagal(response, "Gagal menghapus $jenis")
+                    }
+                    Toast.makeText(
+                        requireContext(),
+                        pesanGagal,
+                        Toast.LENGTH_LONG,
+                    ).show()
+                    return@launch
+                }
+
+                val gagal = result.hasil.filterNot { it.berhasil }
+                val selectionStillActive = isSelectionMode && isBatchMode == batchMode
+                if (gagal.isEmpty() && selectionStillActive) {
+                    view?.let { setSelectionMode(false, it) }
+                } else if (gagal.isNotEmpty() && selectionStillActive) {
+                    val gagalIds = gagal.map { it.id }.toSet()
+                    if (batchMode) {
+                        batchAdapter.retainSelectedIds(gagalIds)
+                    } else {
+                        adapter.retainSelectedIds(gagalIds)
+                    }
+                }
+
+                if (batchMode) {
+                    loadBatch(batchAdapter)
+                } else {
+                    loadBarang()
+                }
+
+                if (gagal.isEmpty()) {
+                    Toast.makeText(
+                        requireContext(),
+                        "${result.berhasil} $jenis berhasil dihapus",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                } else {
+                    val rincian = gagal.joinToString("\n") { "• #${it.id}: ${it.pesan}" }
+                    AlertDialog.Builder(requireContext())
+                        .setTitle("Sebagian $jenis gagal dihapus")
+                        .setMessage("Berhasil: ${result.berhasil}, gagal: ${result.gagal}.\n$rincian")
+                        .setPositiveButton("OK", null)
+                        .show()
+                }
+            } catch (exception: CancellationException) {
+                throw exception
+            } catch (exception: Exception) {
+                Toast.makeText(
+                    requireContext(),
+                    "Gagal menghapus: ${exception.message ?: "terjadi kesalahan jaringan"}",
+                    Toast.LENGTH_LONG,
+                ).show()
+            } finally {
+                isDeletingBulk = false
+                view?.let {
+                updateSelectionControls(
+                    it,
+                    if (isBatchMode) batchAdapter.selectedIds().size else adapter.selectedIds().size,
+                )
+                }
+            }
+        }
     }
 }
 
