@@ -46,15 +46,6 @@
                 android:text="StokAman"
                 android:textColor="@color/sf_ink"
                 android:textSize="16sp" />
-
-            <TextView
-                style="@style/SF.Text"
-                android:layout_marginTop="2dp"
-                android:fontFamily="@font/plus_jakarta_sans_bold"
-                android:letterSpacing="0.11"
-                android:text="EDISI DATABASE"
-                android:textColor="@color/sf_muted"
-                android:textSize="9sp" />
         </LinearLayout>
 
         <!-- Notifikasi + badge -->
@@ -307,9 +298,12 @@
                             android:background="#1FFFFFFF" />
 
                         <LinearLayout
+                            android:id="@+id/card_hero_perlu_ditangani"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:clickable="true"
+                            android:focusable="true"
                             android:orientation="vertical"
                             android:paddingStart="12dp">
 
@@ -480,11 +474,14 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/card_stat_menipis"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_card_14"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:orientation="horizontal"
                     android:padding="12dp">
 
@@ -521,11 +518,14 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/card_stat_mendekati"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_card_14"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:orientation="horizontal"
                     android:padding="12dp">
 
@@ -569,11 +569,14 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/card_stat_kedaluwarsa"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_card_14"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:orientation="horizontal"
                     android:padding="12dp">
 
@@ -1436,16 +1439,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Sumber data -->
-            <TextView
-                style="@style/SF.Text"
-                android:layout_marginTop="16dp"
-                android:drawableStart="@drawable/ic12_database"
-                android:drawablePadding="4dp"
-                android:drawableTint="#94A49C"
-                android:text="Sumber: v_stok_tersedia · v_perlu_ditangani"
-                android:textColor="#94A49C"
-                android:textSize="9sp" />
+
         </LinearLayout>
     </ScrollView>
 

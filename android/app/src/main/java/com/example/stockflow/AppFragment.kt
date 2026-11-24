@@ -4,6 +4,9 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
@@ -12,7 +15,9 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -26,7 +31,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -44,8 +52,36 @@ private inline fun <reified T : View> View.opt(idName: String): T? {
 }
 
 private fun Fragment.go(destName: String, args: Bundle? = null) {
-    val id = resources.getIdentifier(destName, "id", requireContext().packageName)
-    if (id != 0) runCatching { findNavController().navigate(id, args) }
+    if (destName == "notifikasiFragment") {
+        findNavController().navigate(R.id.action_global_notifikasi)
+        return
+    }
+
+    val ctx = context ?: return
+    val isOwner = SessionManager(ctx).getPeran() == "pemilik"
+    val targetName = when (destName) {
+        "nav_barang" -> if (isOwner) "nav_barang_owner" else "nav_barang_staff"
+        "nav_beranda" -> if (isOwner) "nav_beranda_owner" else "nav_beranda_staff"
+        else -> destName
+    }
+    val id = resources.getIdentifier(targetName, "id", ctx.packageName)
+    if (id != 0) {
+        runCatching {
+            findNavController().navigate(id, args)
+        }.onFailure {
+            val actionName = when (targetName) {
+                "perluDitanganiFragment" -> if (isOwner) "action_berandaOwner_to_perluDitangani" else "action_berandaStaff_to_perluDitangani"
+                "formBatchFragment" -> if (isOwner) "action_berandaOwner_to_formBatch" else "action_berandaStaff_to_formBatch"
+                "formStokKeluarFragment" -> if (isOwner) "action_berandaOwner_to_formStokKeluar" else "action_berandaStaff_to_formStokKeluar"
+                "formBarangFragment" -> if (isOwner) "action_berandaOwner_to_formBarang" else "action_berandaStaff_to_formBarang"
+                else -> ""
+            }
+            val actId = if (actionName.isNotEmpty()) resources.getIdentifier(actionName, "id", ctx.packageName) else 0
+            if (actId != 0) {
+                runCatching { findNavController().navigate(actId, args) }
+            }
+        }
+    }
 }
 
 /**
@@ -56,11 +92,18 @@ private fun Fragment.go(destName: String, args: Bundle? = null) {
  */
 private fun View.pasangKlik(blok: (View) -> Unit) {
     setOnClickListener(blok)
+    isClickable = true
     val grp = this as? ViewGroup ?: return
-    for (i in 0 until grp.childCount) {
-        val anak = grp.getChildAt(i)
-        if (anak.isClickable) anak.setOnClickListener(blok)
+    fun pasangRecursively(v: View) {
+        v.setOnClickListener(blok)
+        v.isClickable = true
+        if (v is ViewGroup) {
+            for (i in 0 until v.childCount) {
+                pasangRecursively(v.getChildAt(i))
+            }
+        }
     }
+    pasangRecursively(grp)
 }
 
 private fun Fragment.runApi(block: suspend (ApiService) -> Unit) {
@@ -113,10 +156,14 @@ open class BaseBerandaFragment(private val layoutId: Int, private val fallbackNa
             "btn_lihat_semua_barang" to "nav_barang",
             "btn_lihat_laporan" to "nav_laporan",
             "btn_lihat_riwayat" to "nav_riwayat",
-            // Kartu alert beranda pemilik (id hanya ada di layout pemilik)
+            // Kartu alert & stat beranda
             "card_alert_kedaluwarsa" to "perluDitanganiFragment",
             "card_alert_menipis" to "nav_barang",
-            // Aksi beranda staf (id hanya ada di layout staf)
+            "card_stat_kedaluwarsa" to "perluDitanganiFragment",
+            "card_stat_mendekati" to "perluDitanganiFragment",
+            "card_hero_perlu_ditangani" to "perluDitanganiFragment",
+            "card_stat_menipis" to "nav_barang",
+            // Aksi beranda staf
             "btn_stok_masuk" to "formBatchFragment",
             "btn_tangani" to "perluDitanganiFragment",
             "btn_barang_menipis" to "nav_barang",
@@ -173,6 +220,12 @@ open class BaseBerandaFragment(private val layoutId: Int, private val fallbackNa
             } ?: "Buka Perlu Ditangani untuk melihat detail"
         view.opt<View>("card_alert_kedaluwarsa")?.visibility =
             if (jumlahKedaluwarsa > 0) View.VISIBLE else View.GONE
+        view.opt<View>("card_alert_kedaluwarsa")?.pasangKlik { go("perluDitanganiFragment") }
+        view.opt<View>("btn_perlu_ditangani")?.pasangKlik { go("perluDitanganiFragment") }
+        view.opt<View>("btn_tangani")?.pasangKlik { go("perluDitanganiFragment") }
+        view.opt<View>("card_stat_kedaluwarsa")?.pasangKlik { go("perluDitanganiFragment") }
+        view.opt<View>("card_stat_mendekati")?.pasangKlik { go("perluDitanganiFragment") }
+        view.opt<View>("card_hero_perlu_ditangani")?.pasangKlik { go("perluDitanganiFragment") }
         if (layoutId == R.layout.fragment_beranda_staff) {
             // Di beranda staf, kartu alert memakai id tombol yang sudah ada.
             view.opt<View>("btn_perlu_ditangani")?.visibility =
@@ -188,6 +241,9 @@ open class BaseBerandaFragment(private val layoutId: Int, private val fallbackNa
             } ?: "Semua stok berada di atas minimum"
         view.opt<View>("card_alert_menipis")?.visibility =
             if (jumlahMenipis > 0) View.VISIBLE else View.GONE
+        view.opt<View>("card_alert_menipis")?.pasangKlik { go("nav_barang") }
+        view.opt<View>("btn_barang_menipis")?.pasangKlik { go("nav_barang") }
+        view.opt<View>("card_stat_menipis")?.pasangKlik { go("nav_barang") }
         if (layoutId == R.layout.fragment_beranda_staff) {
             // Di beranda staf, kartu alert memakai id tombol yang sudah ada.
             view.opt<View>("btn_barang_menipis")?.visibility =
@@ -354,43 +410,140 @@ class BerandaStaffFragment : BaseBerandaFragment(R.layout.fragment_beranda_staff
 open class BaseBarangFragment(layoutId: Int) : Fragment(layoutId) {
 
     private lateinit var adapter: BarangAdapter
+    private lateinit var batchAdapter: BatchAdapter
     private var search: String? = null
     private var kategori: String? = null
+    private var isBatchMode = false
+    private var isSelectionMode = false
+    private var isDeletingBulk = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = BarangAdapter(emptyList()) { go("detailBarangFragment", bundleOf("barangId" to it.id)) }
+        adapter = BarangAdapter(
+            emptyList(),
+            onClick = { go("detailBarangFragment", bundleOf("barangId" to it.id)) },
+            onSelectionChanged = {
+                if (!isBatchMode) {
+                    updateSelectionControls(view, it)
+                }
+            },
+        )
+        batchAdapter = BatchAdapter(
+            emptyList(),
+            onClick = { go("detailBatchFragment", bundleOf("batchId" to it.id)) },
+            onSelectionChanged = {
+                if (isBatchMode) {
+                    updateSelectionControls(view, it)
+                }
+            },
+        )
 
         // Lonceng notifikasi: id berbeda per varian layout (pemilik / staf) — opt() no-op bila tidak ada.
         view.opt<View>("btn_notifikasi")?.pasangKlik { go("notifikasiFragment") }
         view.opt<View>("btn_notifikasi_staff")?.pasangKlik { go("notifikasiFragment") }
         view.bindList("rv_barang", adapter)
+        view.bindList("rv_barang_staff", adapter)
+        view.bindList("rv_batch_all", adapter)
+
+        val tabBarang = view.opt<View>("tab_barang") ?: view.opt<View>("tab_barang_staff")
+        val tabBatch = view.opt<View>("tab_batch") ?: view.opt<View>("tab_batch_staff")
+
+        fun switchTab(batchMode: Boolean) {
+            if (isBatchMode != batchMode) {
+                setSelectionMode(false, view)
+            }
+            isBatchMode = batchMode
+            tabBarang?.setBackgroundResource(if (!batchMode) R.drawable.bg_segment_active else 0)
+            tabBatch?.setBackgroundResource(if (batchMode) R.drawable.bg_segment_active else 0)
+            if (batchMode) {
+                view.bindList("rv_barang", batchAdapter)
+                view.bindList("rv_barang_staff", batchAdapter)
+                view.bindList("rv_batch_all", batchAdapter)
+                loadBatch(batchAdapter)
+            } else {
+                view.bindList("rv_barang", adapter)
+                view.bindList("rv_barang_staff", adapter)
+                view.bindList("rv_batch_all", adapter)
+                loadBarang()
+            }
+        }
+
+        tabBarang?.setOnClickListener { switchTab(false) }
+        tabBatch?.setOnClickListener { switchTab(true) }
+        view.opt<View>("btn_pilih_barang_batch")?.setOnClickListener {
+            setSelectionMode(!isSelectionMode, view)
+        }
+        view.opt<View>("btn_hapus_terpilih")?.setOnClickListener {
+            konfirmasiHapusTerpilih()
+        }
 
         view.opt<View>("btn_tambah_barang")?.setOnClickListener { go("formBarangFragment") }
+        view.opt<View>("btn_tambah_barang_staff")?.setOnClickListener { go("formBarangFragment") }
         view.opt<View>("btn_tambah_batch")?.setOnClickListener { go("formBatchFragment") }
+        view.opt<View>("btn_tambah_batch_top")?.setOnClickListener { go("formBatchFragment") }
         view.opt<View>("btn_stok_keluar")?.setOnClickListener { go("formStokKeluarFragment") }
 
-        view.opt<EditText>("et_search")?.addTextChangedListener(object : TextWatcher {
+        val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
                 search = s?.toString()?.trim()?.ifEmpty { null }
                 loadBarang()
             }
-        })
+        }
+        view.opt<EditText>("et_search")?.addTextChangedListener(textWatcher)
+        view.opt<EditText>("et_search_barang_staff")?.addTextChangedListener(textWatcher)
 
-        mapOf(
+        val chipMap = mapOf(
             "chip_semua" to null,
             "chip_makanan" to "Makanan",
             "chip_minuman" to "Minuman",
             "chip_obat" to "Obat",
             "chip_rumah" to "Kebutuhan Rumah",
-            "chip_lainnya" to "Lainnya"
-        ).forEach { (id, kat) ->
+            "chip_lainnya" to "Lainnya",
+            "chip_staff_semua" to null,
+            "chip_staff_makanan" to "Makanan",
+            "chip_staff_minuman" to "Minuman",
+            "chip_staff_obat" to "Obat",
+            "chip_staff_rumah" to "Kebutuhan Rumah",
+            "chip_staff_lainnya" to "Lainnya"
+        )
+        fun updateCategoryChips(selectedId: String) {
+            val allChipIds = chipMap.keys + listOf("chip_stok_menipis", "chip_staff_menipis")
+            allChipIds.forEach { id ->
+                val v = view.opt<View>(id) ?: return@forEach
+                val isSelected = (id == selectedId)
+                if (v is TextView) {
+                    if (isSelected) {
+                        v.setBackgroundResource(R.drawable.bg_chip_active)
+                        v.setTextColor(ContextCompat.getColor(requireContext(), R.color.sf_on_brand))
+                    } else {
+                        v.setBackgroundResource(R.drawable.bg_chip)
+                        v.setTextColor(ContextCompat.getColor(requireContext(), R.color.sf_chip_text))
+                    }
+                } else if (v is ViewGroup) {
+                    v.setBackgroundResource(if (isSelected) R.drawable.bg_chip_active else R.drawable.bg_chip)
+                    val tv = (v.getChildAt(1) as? TextView) ?: (v.getChildAt(0) as? TextView)
+                    tv?.setTextColor(ContextCompat.getColor(requireContext(), if (isSelected) R.color.sf_on_brand else R.color.sf_chip_text))
+                }
+            }
+        }
+        chipMap.forEach { (id, kat) ->
             view.opt<View>(id)?.setOnClickListener {
+                updateCategoryChips(id)
                 kategori = kat
                 loadBarang()
             }
+        }
+        view.opt<View>("chip_stok_menipis")?.setOnClickListener {
+            updateCategoryChips("chip_stok_menipis")
+            kategori = null
+            loadBarang()
+        }
+        view.opt<View>("chip_staff_menipis")?.setOnClickListener {
+            updateCategoryChips("chip_staff_menipis")
+            kategori = null
+            loadBarang()
         }
         loadBarang()
     }
@@ -403,9 +556,157 @@ open class BaseBarangFragment(layoutId: Int) : Fragment(layoutId) {
             emptyList()
         }
         adapter.updateData(items)
+        val count = items.size.toString()
+        view?.opt<TextView>("tv_count_tab_barang")?.text = count
+        view?.opt<TextView>("tv_count_tab_barang_staff")?.text = count
+        view?.opt<TextView>("tv_jumlah_cari")?.text = "$count barang"
+        view?.opt<TextView>("tv_jumlah_barang_staff_label")?.text = "$count barang"
         val kosong = items.isEmpty()
         view?.opt<View>("layout_empty_barang")?.visibility = if (kosong) View.VISIBLE else View.GONE
         view?.opt<View>("empty_state_barang_staff")?.visibility = if (kosong) View.VISIBLE else View.GONE
+    }
+
+    private fun loadBatch(batchAdapter: BatchAdapter) = runApi { api ->
+        val res = api.getBatchStok()
+        val items = if (res.isSuccessful && res.body()?.success == true) {
+            res.body()?.data?.items ?: emptyList()
+        } else {
+            emptyList()
+        }
+        batchAdapter.updateData(items)
+        val count = items.size.toString()
+        view?.opt<TextView>("tv_count_tab_batch")?.text = count
+        view?.opt<TextView>("tv_count_tab_batch_staff")?.text = count
+    }
+
+    private fun updateSelectionControls(view: View, selectedCount: Int) {
+        view.opt<TextView>("btn_pilih_barang_batch")?.apply {
+            text = if (isSelectionMode) "Batal pilih" else "Pilih"
+            isEnabled = !isDeletingBulk
+        }
+        view.opt<TextView>("btn_hapus_terpilih")?.apply {
+            text = "Hapus terpilih ($selectedCount)"
+            visibility = if (isSelectionMode && selectedCount > 0) View.VISIBLE else View.GONE
+            isEnabled = !isDeletingBulk
+        }
+    }
+
+    private fun setSelectionMode(enabled: Boolean, view: View) {
+        isSelectionMode = enabled
+        adapter.setSelectionMode(enabled && !isBatchMode)
+        batchAdapter.setSelectionMode(enabled && isBatchMode)
+        updateSelectionControls(
+            view,
+            if (isBatchMode) batchAdapter.selectedIds().size else adapter.selectedIds().size,
+        )
+    }
+
+    private fun konfirmasiHapusTerpilih() {
+        val ids = if (isBatchMode) batchAdapter.selectedIds() else adapter.selectedIds()
+        if (ids.isEmpty()) {
+            return
+        }
+
+        val jenis = if (isBatchMode) "batch" else "barang"
+        AlertDialog.Builder(requireContext())
+            .setTitle("Hapus $jenis terpilih?")
+            .setMessage("${ids.size} $jenis akan dihapus. Tindakan ini tidak dapat dibatalkan.")
+            .setNegativeButton("Batal", null)
+            .setPositiveButton("Hapus") { _, _ -> hapusMassal(ids, isBatchMode) }
+            .show()
+    }
+
+    private fun hapusMassal(ids: List<Int>, batchMode: Boolean) {
+        if (isDeletingBulk) {
+            return
+        }
+
+        isDeletingBulk = true
+        view?.let {
+            updateSelectionControls(
+                it,
+                if (isBatchMode) batchAdapter.selectedIds().size else adapter.selectedIds().size,
+            )
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                val jenis = if (batchMode) "batch" else "barang"
+                val api = RetrofitClient.getInstance(requireContext())
+                val response = if (batchMode) {
+                    api.bulkDeleteBatch(BulkDeleteRequest(ids))
+                } else {
+                    api.bulkDeleteBarang(BulkDeleteRequest(ids))
+                }
+                val result = response.body()
+                    ?.takeIf { response.isSuccessful && it.success }
+                    ?.data
+
+                if (result == null) {
+                    val pesanGagal = if (response.isSuccessful) {
+                        "API tidak mengembalikan hasil penghapusan $jenis"
+                    } else {
+                        uraikanGagal(response, "Gagal menghapus $jenis")
+                    }
+                    Toast.makeText(
+                        requireContext(),
+                        pesanGagal,
+                        Toast.LENGTH_LONG,
+                    ).show()
+                    return@launch
+                }
+
+                val gagal = result.hasil.filterNot { it.berhasil }
+                val selectionStillActive = isSelectionMode && isBatchMode == batchMode
+                if (gagal.isEmpty() && selectionStillActive) {
+                    view?.let { setSelectionMode(false, it) }
+                } else if (gagal.isNotEmpty() && selectionStillActive) {
+                    val gagalIds = gagal.map { it.id }.toSet()
+                    if (batchMode) {
+                        batchAdapter.retainSelectedIds(gagalIds)
+                    } else {
+                        adapter.retainSelectedIds(gagalIds)
+                    }
+                }
+
+                if (batchMode) {
+                    loadBatch(batchAdapter)
+                } else {
+                    loadBarang()
+                }
+
+                if (gagal.isEmpty()) {
+                    Toast.makeText(
+                        requireContext(),
+                        "${result.berhasil} $jenis berhasil dihapus",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                } else {
+                    val rincian = gagal.joinToString("\n") { "• #${it.id}: ${it.pesan}" }
+                    AlertDialog.Builder(requireContext())
+                        .setTitle("Sebagian $jenis gagal dihapus")
+                        .setMessage("Berhasil: ${result.berhasil}, gagal: ${result.gagal}.\n$rincian")
+                        .setPositiveButton("OK", null)
+                        .show()
+                }
+            } catch (exception: CancellationException) {
+                throw exception
+            } catch (exception: Exception) {
+                Toast.makeText(
+                    requireContext(),
+                    "Gagal menghapus: ${exception.message ?: "terjadi kesalahan jaringan"}",
+                    Toast.LENGTH_LONG,
+                ).show()
+            } finally {
+                isDeletingBulk = false
+                view?.let {
+                updateSelectionControls(
+                    it,
+                    if (isBatchMode) batchAdapter.selectedIds().size else adapter.selectedIds().size,
+                )
+                }
+            }
+        }
     }
 }
 
@@ -421,13 +722,29 @@ class LaporanFragment : Fragment(R.layout.fragment_laporan) {
         view.opt<View>("btn_notifikasi_laporan")?.pasangKlik { go("notifikasiFragment") }
 
         // Tab kategori laporan (FR-16)
-        mapOf(
+        val tabMap = mapOf(
             "tab_laporan_stok" to "stok",
             "tab_laporan_mutasi" to "mutasi",
             "tab_laporan_kedaluwarsa" to "kedaluwarsa",
             "tab_laporan_aktivitas" to "aktivitas",
-        ).forEach { (id, jenis) ->
-            view.opt<View>(id)?.setOnClickListener { muatLaporan(jenis) }
+        )
+        fun updateTabs(selectedId: String) {
+            tabMap.keys.forEach { id ->
+                val v = view?.opt<TextView>(id) ?: return@forEach
+                if (id == selectedId) {
+                    v.setBackgroundResource(R.drawable.bg_segment_active)
+                    v.setTextColor(ContextCompat.getColor(requireContext(), R.color.sf_brand))
+                } else {
+                    v.background = null
+                    v.setTextColor(Color.parseColor("#6E8277"))
+                }
+            }
+        }
+        tabMap.forEach { (id, jenis) ->
+            view.opt<View>(id)?.setOnClickListener {
+                updateTabs(id)
+                muatLaporan(jenis)
+            }
         }
 
         // Ekspor berkas xlsx dari tab aktif (khusus pemilik, BR-08)
@@ -594,12 +911,16 @@ class ProfilFragment : Fragment(R.layout.fragment_profil) {
 
         val menuPengguna = view.opt<View>("menu_pengguna")
         val menuPengaturan = view.opt<View>("menu_pengaturan")
+        val menuNotifikasi = view.opt<View>("menu_notifikasi")
+        val menuDataSkema = view.opt<View>("menu_data_skema")
         menuPengguna?.visibility = if (isOwner) View.VISIBLE else View.GONE
-        menuPengaturan?.visibility = if (isOwner) View.VISIBLE else View.GONE
+        menuPengaturan?.visibility = View.VISIBLE
+        menuDataSkema?.visibility = if (isOwner) View.VISIBLE else View.GONE
 
         menuPengguna?.setOnClickListener { go("penggunaFragment") }
         menuPengaturan?.setOnClickListener { go("pengaturanFragment") }
-        view.opt<View>("menu_data_skema")?.setOnClickListener { go("dataSkemaFragment") }
+        menuNotifikasi?.pasangKlik { go("notifikasiFragment") }
+        menuDataSkema?.setOnClickListener { go("dataSkemaFragment") }
 
         view.opt<View>("btn_logout")?.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
@@ -655,6 +976,11 @@ class DetailBarangFragment : Fragment(R.layout.fragment_detail_barang) {
                     view.findViewById<TextView>(R.id.meta_sku).text = b.kode_sku
                     view.findViewById<TextView>(R.id.meta_kategori).text = b.kategori
                     view.findViewById<TextView>(R.id.meta_satuan).text = b.satuan
+                    view.opt<TextView>("tv_info_id")?.text = "#${b.id}"
+                    view.opt<TextView>("tv_info_sku")?.text = b.kode_sku
+                    view.opt<TextView>("tv_info_kategori")?.text = b.kategori
+                    view.opt<TextView>("tv_info_satuan")?.text = b.satuan
+                    view.opt<TextView>("tv_info_minimum")?.text = "${b.stok_minimum} ${b.satuan}"
                     view.opt<TextView>("tv_total_stok")?.text = "${b.total_stok_tersedia} ${b.satuan}"
                     view.opt<TextView>("tv_stok_minimum")?.text = "${b.stok_minimum} ${b.satuan}"
                 }
@@ -692,7 +1018,7 @@ class DetailBatchFragment : Fragment(R.layout.fragment_detail_batch) {
             if (batchId == -1) return@setOnClickListener
             val opsi = arrayOf("Dimusnahkan", "Dikembalikan ke Pemasok", "Lainnya")
             AlertDialog.Builder(requireContext())
-                .setTitle("Tindakan Kedaluwarsa")
+                .setTitle("Penanganan Batch")
                 .setItems(opsi) { _, i ->
                     runApi { api ->
                         val res = api.tanganiKedaluwarsa(
@@ -718,9 +1044,122 @@ class DetailBatchFragment : Fragment(R.layout.fragment_detail_batch) {
         view.opt<TextView>("tv_nomor_batch")?.text = b.nomor_batch
         view.opt<TextView>("tv_nama_barang")?.text = b.nama_barang ?: "Barang #${b.barang_id}"
         view.opt<TextView>("tv_jumlah_sisa")?.text = "${b.jumlah_sisa} / ${b.jumlah_awal}"
+        val persentaseStok = if (b.jumlah_awal > 0) {
+            ((b.jumlah_sisa.toDouble() / b.jumlah_awal) * 100).toInt().coerceIn(0, 100)
+        } else {
+            0
+        }
+        view.opt<ProgressBar>("progress_jumlah_sisa")?.progress = persentaseStok
         view.opt<TextView>("tv_tanggal_kedaluwarsa")?.text = b.tanggal_kedaluwarsa
         view.opt<TextView>("tv_status_batch")?.text = b.status
         view.opt<TextView>("tv_label_sisa_rel")?.text = labelRelatif(b.tanggal_kedaluwarsa)
+        view.opt<View>("alert_batch_kedaluwarsa")?.visibility =
+            if (b.status == "Kedaluwarsa" && b.jumlah_sisa > 0) View.VISIBLE else View.GONE
+        view.opt<TextView>("tv_ringkasan_jumlah_sisa")?.text = b.jumlah_sisa.toString()
+        view.opt<TextView>("tv_ringkasan_jumlah_awal")?.text = b.jumlah_awal.toString()
+
+        val mutasi = b.mutasi_terbaru.firstOrNull()
+        view.opt<TextView>("tv_mutasi_aksi")?.text = mutasi?.let {
+            val jenis = when (it.jenis) {
+                "masuk" -> "Masuk"
+                "keluar" -> "Keluar"
+                "penanganan" -> "Penanganan"
+                "penyesuaian" -> "Penyesuaian"
+                else -> it.jenis
+            }
+            "$jenis ${kotlin.math.abs(it.jumlah)}"
+        } ?: "Belum ada mutasi"
+        view.opt<TextView>("tv_mutasi_keterangan")?.text = mutasi?.catatan ?: "—"
+        view.opt<TextView>("tv_mutasi_jumlah")?.text = mutasi?.let {
+            val tanda = if (it.jenis in setOf("keluar", "penanganan") || it.jumlah < 0) "-" else "+"
+            "$tanda${kotlin.math.abs(it.jumlah)}"
+        } ?: "—"
+        view.opt<TextView>("tv_mutasi_waktu")?.text =
+            mutasi?.waktu?.substringAfter(' ')?.take(5) ?: "—"
+        view.opt<TextView>("tv_batch_pembuat")?.text = b.nama_pembuat ?: "Tidak diketahui"
+        tampilkanLampiran(api, view, b.lampiran)
+    }
+
+    private suspend fun tampilkanLampiran(api: ApiService, view: View, lampiran: List<LampiranItem>) {
+        val daftarFoto = view.opt<LinearLayout>("list_lampiran_batch") ?: return
+        val scrollFoto = view.opt<View>("scroll_lampiran_batch")
+        daftarFoto.removeAllViews()
+        view.opt<TextView>("tv_jumlah_lampiran")?.text =
+            if (lampiran.size == 1) "1 file" else "${lampiran.size} file"
+        scrollFoto?.visibility = if (lampiran.isEmpty()) View.GONE else View.VISIBLE
+
+        if (lampiran.isEmpty()) {
+            return
+        }
+
+        val ukuranFoto = (112 * resources.displayMetrics.density).toInt()
+        var pesanGagal: String? = null
+        for (berkas in lampiran) {
+            val response = try {
+                api.unduhLampiran(berkas.id)
+            } catch (exception: java.io.IOException) {
+                pesanGagal = "Gagal memuat foto lampiran: ${exception.message ?: "kesalahan jaringan"}"
+                continue
+            }
+
+            if (!response.isSuccessful) {
+                pesanGagal = uraikanGagal(response, "Gagal memuat foto lampiran")
+                continue
+            }
+
+            val body = response.body()
+            if (body == null) {
+                pesanGagal = "Respons foto lampiran kosong"
+                continue
+            }
+
+            val bitmap = try {
+                withContext(Dispatchers.IO) {
+                    val bytes = body.use { it.bytes() }
+                    decodeThumbnail(bytes, ukuranFoto)
+                }
+            } catch (exception: java.io.IOException) {
+                pesanGagal = "Gagal membaca foto lampiran: ${exception.message ?: "berkas tidak dapat dibaca"}"
+                continue
+            }
+
+            if (bitmap == null) {
+                pesanGagal = "Foto lampiran tidak dapat ditampilkan"
+                continue
+            }
+
+            val foto = ImageView(requireContext()).apply {
+                contentDescription = "Foto lampiran batch ${berkas.id}"
+                scaleType = ImageView.ScaleType.CENTER_CROP
+                setImageBitmap(bitmap)
+                setBackgroundResource(R.drawable.bg_card)
+                clipToOutline = true
+            }
+            val params = LinearLayout.LayoutParams(ukuranFoto, ukuranFoto).apply {
+                marginEnd = (8 * resources.displayMetrics.density).toInt()
+            }
+            daftarFoto.addView(foto, params)
+        }
+
+        if (pesanGagal != null) {
+            Toast.makeText(requireContext(), pesanGagal, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun decodeThumbnail(bytes: ByteArray, ukuranFoto: Int): Bitmap? {
+        val batas = BitmapFactory.Options().apply { inJustDecodeBounds = true }
+        BitmapFactory.decodeByteArray(bytes, 0, bytes.size, batas)
+        if (batas.outWidth <= 0 || batas.outHeight <= 0) {
+            return null
+        }
+
+        var sampleSize = 1
+        while (batas.outWidth / sampleSize > ukuranFoto || batas.outHeight / sampleSize > ukuranFoto) {
+            sampleSize *= 2
+        }
+
+        val opsi = BitmapFactory.Options().apply { inSampleSize = sampleSize }
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.size, opsi)
     }
 
     // ── Menu aksi tambahan (ikon ⋮ di topbar) ─────────────────────────────
@@ -865,6 +1304,7 @@ class DetailBatchFragment : Fragment(R.layout.fragment_detail_batch) {
             val res = api.uploadLampiran(batchId, filePart, jenisPart)
             if (res.isSuccessful && res.body()?.success == true) {
                 Toast.makeText(requireContext(), "Foto bukti diunggah", Toast.LENGTH_SHORT).show()
+                view?.let { muatDetail(batchId, it) }
             } else {
                 Toast.makeText(requireContext(), uraikanGagal(res, "Gagal mengunggah foto"), Toast.LENGTH_LONG).show()
             }
@@ -900,6 +1340,7 @@ class PerluDitanganiFragment : Fragment(R.layout.fragment_perlu_ditangani) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.opt<View>("btn_back")?.setOnClickListener { findNavController().navigateUp() }
+        view.opt<View>("btn_back_perlu_ditangani")?.setOnClickListener { findNavController().navigateUp() }
         view.opt<View>("btn_notifikasi_ditangani")?.pasangKlik { go("notifikasiFragment") }
         val adapter = BatchAdapter(emptyList()) { go("detailBatchFragment", bundleOf("batchId" to it.id)) }
         view.bindList("rv_perlu_ditangani", adapter)
@@ -924,6 +1365,7 @@ class NotifikasiFragment : Fragment(R.layout.fragment_notifikasi) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        view.opt<View>("btn_back")?.setOnClickListener { findNavController().navigateUp() }
         view.opt<View>("btn_back_notifikasi")?.setOnClickListener { findNavController().navigateUp() }
         adapter = NotifikasiAdapter(emptyList()) { n ->
             when {
@@ -933,13 +1375,27 @@ class NotifikasiFragment : Fragment(R.layout.fragment_notifikasi) {
         }
         view.bindList("rv_notifikasi", adapter)
 
-        mapOf(
+        val notifChips = mapOf(
             "chip_notif_semua" to null,
             "chip_notif_mendekati" to "Mendekati Kedaluwarsa",
             "chip_notif_kedaluwarsa" to "Kedaluwarsa",
             "chip_notif_menipis" to "Stok Menipis",
-        ).forEach { (id, nilai) ->
+        )
+        fun updateNotifChips(selectedId: String) {
+            notifChips.keys.forEach { id ->
+                val v = view.opt<TextView>(id) ?: return@forEach
+                if (id == selectedId) {
+                    v.setBackgroundResource(R.drawable.bg_chip_active)
+                    v.setTextColor(ContextCompat.getColor(requireContext(), R.color.sf_on_brand))
+                } else {
+                    v.setBackgroundResource(R.drawable.bg_chip)
+                    v.setTextColor(ContextCompat.getColor(requireContext(), R.color.sf_chip_text))
+                }
+            }
+        }
+        notifChips.forEach { (id, nilai) ->
             view.opt<View>(id)?.setOnClickListener {
+                updateNotifChips(id)
                 jenisAktif = nilai
                 muatNotifikasi()
             }

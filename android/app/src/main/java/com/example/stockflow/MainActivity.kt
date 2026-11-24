@@ -3,7 +3,6 @@ package com.example.stockflow
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -41,13 +40,8 @@ class MainActivity : AppCompatActivity() {
                 else -> return@setOnItemSelectedListener false
             }
 
-            if (navController.currentDestination?.id != targetDestId) {
-                val navOptions = NavOptions.Builder()
-                    .setLaunchSingleTop(true)
-                    .setRestoreState(true)
-                    .setPopUpTo(startDestId, inclusive = false, saveState = true)
-                    .build()
-                navController.navigate(targetDestId, null, navOptions)
+            runCatching {
+                navController.navigate(targetDestId)
             }
             true
         }
@@ -59,7 +53,8 @@ class MainActivity : AppCompatActivity() {
             R.id.nav_barang_staff,
             R.id.nav_laporan,
             R.id.nav_riwayat,
-            R.id.nav_profil
+            R.id.nav_profil,
+            R.id.perluDitanganiFragment
         )
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
@@ -70,7 +65,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             val menuId = when (destination.id) {
-                R.id.nav_beranda_owner, R.id.nav_beranda_staff -> R.id.nav_beranda
+                R.id.nav_beranda_owner, R.id.nav_beranda_staff, R.id.perluDitanganiFragment -> R.id.nav_beranda
                 R.id.nav_barang_owner, R.id.nav_barang_staff -> R.id.nav_barang
                 R.id.nav_laporan, R.id.nav_riwayat -> R.id.nav_transaksi
                 R.id.nav_profil -> R.id.nav_profil

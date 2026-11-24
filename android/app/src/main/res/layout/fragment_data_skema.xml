@@ -1960,16 +1960,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Catatan sumber -->
-            <TextView
-                style="@style/SF.Text.Caption"
-                android:layout_marginTop="16dp"
-                android:drawableStart="@drawable/ic12_database"
-                android:drawablePadding="4dp"
-                android:drawableTint="@color/sf_muted_2"
-                android:padding="2dp"
-                android:text="Sumber: StokAman_database.sql · 10 tabel (termasuk Sanctum) &amp; 2 view · data uji relatif hari ini"
-                android:textColor="@color/sf_muted_2" />
+
 
         </LinearLayout>
     </ScrollView>

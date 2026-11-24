@@ -249,10 +249,20 @@ final class BatchStockController extends Controller
      */
     public function show(BatchStok $batch): mixed
     {
-        $batch->load(['barang:id,kode_sku,nama,satuan', 'lampiran']);
-        $mutasiTerbaru = $batch->mutasi()->limit(20)->get();
+        $batch->load(['barang:id,kode_sku,nama,satuan', 'lampiran', 'pembuat:id,nama']);
+        $mutasiTerbaru = $batch->mutasi()
+            ->reorder('waktu', 'desc')
+            ->orderByDesc('id')
+            ->limit(20)
+            ->get();
+        $namaPembuat = $batch->pembuat?->nama
+            ?? $batch->mutasi()
+                ->where('jenis', 'masuk')
+                ->with('pengguna:id,nama')
+                ->first()?->pengguna?->nama;
 
         return ApiResponse::ok($this->bentuk($batch) + [
+            'nama_pembuat' => $namaPembuat,
             'mutasi_terbaru' => $mutasiTerbaru,
             'lampiran' => $batch->lampiran->toArray(),
         ], 'Batch ditemukan');

@@ -4,6 +4,7 @@ import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -14,6 +15,25 @@ import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+
+fun resolveStatus(apiStatus: String?, expDate: String?): String {
+    if (apiStatus == "Ditangani") return "Ditangani"
+    val days = runCatching {
+        if (expDate.isNullOrEmpty()) return@runCatching null
+        val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).apply { isLenient = false }
+        val target = format.parse(expDate.take(10)) ?: return@runCatching null
+        val today = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, 0); set(Calendar.MINUTE, 0); set(Calendar.SECOND, 0); set(Calendar.MILLISECOND, 0)
+        }.time
+        (target.time - today.time) / (1000 * 60 * 60 * 24)
+    }.getOrNull() ?: return apiStatus ?: "Aman"
+
+    return when {
+        days < 0 -> "Kedaluwarsa"
+        days <= 30 -> "Mendekati Kedaluwarsa"
+        else -> "Aman"
+    }
+}
 
 open class SimpleCardAdapter<T>(
     private var items: List<T>,
@@ -72,6 +92,7 @@ open class SimpleCardAdapter<T>(
 
 class BarangAdapter(
     private var items: List<BarangItem>,
+    private val onSelectionChanged: (Int) -> Unit = {},
     private val onClick: (BarangItem) -> Unit
 ) : RecyclerView.Adapter<BarangAdapter.VH>() {
 
@@ -84,8 +105,12 @@ class BarangAdapter(
         val tvStokAngka: TextView = view.findViewById(R.id.tv_stok_angka)
         val tvStokSatuan: TextView = view.findViewById(R.id.tv_stok_satuan)
         val tvStatus: TextView = view.findViewById(R.id.tv_status_stok)
+        val cbSelected: CheckBox = view.findViewById(R.id.cb_select_barang)
         val divider: View = view.findViewById(R.id.divider_item)
     }
+
+    private var selectionMode = false
+    private val selectedIds = mutableSetOf<Int>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_barang, parent, false)
@@ -101,6 +126,14 @@ class BarangAdapter(
         holder.tvKategori.text = " · ${item.kategori} · Min ${item.stok_minimum} ${item.satuan}"
         holder.tvStokAngka.text = item.total_stok_tersedia.toString()
         holder.tvStokSatuan.text = item.satuan
+
+        holder.cbSelected.visibility = if (selectionMode) View.VISIBLE else View.GONE
+        holder.cbSelected.contentDescription = "Pilih ${item.nama}"
+        holder.cbSelected.setOnCheckedChangeListener(null)
+        holder.cbSelected.isChecked = item.id in selectedIds
+        holder.cbSelected.setOnCheckedChangeListener { _, isChecked ->
+            setSelected(item.id, isChecked)
+        }
 
         when (item.kategori) {
             "Makanan" -> {
@@ -143,19 +176,56 @@ class BarangAdapter(
         }
 
         holder.divider.visibility = if (position == items.lastIndex) View.GONE else View.VISIBLE
-        holder.itemView.setOnClickListener { onClick(item) }
+        holder.itemView.setOnClickListener {
+            if (selectionMode) {
+                setSelected(item.id, item.id !in selectedIds)
+            } else {
+                onClick(item)
+            }
+        }
     }
 
     override fun getItemCount(): Int = items.size
 
     fun updateData(newItems: List<BarangItem>) {
         items = newItems
+        selectedIds.retainAll(newItems.map { it.id }.toSet())
         notifyDataSetChanged()
+        onSelectionChanged(selectedIds.size)
+    }
+
+    fun setSelectionMode(enabled: Boolean) {
+        selectionMode = enabled
+        if (!enabled) {
+            selectedIds.clear()
+        }
+        notifyDataSetChanged()
+        onSelectionChanged(selectedIds.size)
+    }
+
+    fun selectedIds(): List<Int> = selectedIds.toList()
+
+    fun retainSelectedIds(ids: Set<Int>) {
+        selectedIds.retainAll(ids)
+        notifyDataSetChanged()
+        onSelectionChanged(selectedIds.size)
+    }
+
+    private fun setSelected(id: Int, selected: Boolean) {
+        val changed = if (selected) selectedIds.add(id) else selectedIds.remove(id)
+        if (changed) {
+            val position = items.indexOfFirst { it.id == id }
+            if (position >= 0) {
+                notifyItemChanged(position)
+            }
+            onSelectionChanged(selectedIds.size)
+        }
     }
 }
 
 class BatchAdapter(
     private var items: List<BatchStokItem>,
+    private val onSelectionChanged: (Int) -> Unit = {},
     private val onClick: (BatchStokItem) -> Unit
 ) : RecyclerView.Adapter<BatchAdapter.VH>() {
 
@@ -166,8 +236,12 @@ class BatchAdapter(
         val tvInfo: TextView = view.findViewById(R.id.tv_info_batch)
         val tvStatus: TextView = view.findViewById(R.id.tv_status_batch)
         val tvSisaHari: TextView = view.findViewById(R.id.tv_sisa_hari)
+        val cbSelected: CheckBox = view.findViewById(R.id.cb_select_batch)
         val divider: View = view.findViewById(R.id.divider_batch)
     }
+
+    private var selectionMode = false
+    private val selectedIds = mutableSetOf<Int>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_batch, parent, false)
@@ -182,7 +256,16 @@ class BatchAdapter(
         holder.tvNomor.text = if (item.nama_barang != null) "${item.nomor_batch} · ${item.nama_barang}" else item.nomor_batch
         holder.tvInfo.text = "Sisa ${item.jumlah_sisa} / ${item.jumlah_awal} · exp $expDate"
 
-        when (item.status) {
+        holder.cbSelected.visibility = if (selectionMode) View.VISIBLE else View.GONE
+        holder.cbSelected.contentDescription = "Pilih batch ${item.nomor_batch}"
+        holder.cbSelected.setOnCheckedChangeListener(null)
+        holder.cbSelected.isChecked = item.id in selectedIds
+        holder.cbSelected.setOnCheckedChangeListener { _, isChecked ->
+            setSelected(item.id, isChecked)
+        }
+
+        val statusToUse = resolveStatus(item.status, expDate)
+        when (statusToUse) {
             "Kedaluwarsa" -> {
                 holder.tvStatus.text = "Kedaluwarsa"
                 holder.tvStatus.setBackgroundResource(R.drawable.bg_pill_warn)
@@ -233,14 +316,50 @@ class BatchAdapter(
 
         holder.tvSisaHari.text = sisaHariText
         holder.divider.visibility = if (position == items.lastIndex) View.GONE else View.VISIBLE
-        holder.itemView.setOnClickListener { onClick(item) }
+        holder.itemView.setOnClickListener {
+            if (selectionMode) {
+                setSelected(item.id, item.id !in selectedIds)
+            } else {
+                onClick(item)
+            }
+        }
     }
 
     override fun getItemCount(): Int = items.size
 
     fun updateData(newItems: List<BatchStokItem>) {
         items = newItems
+        selectedIds.retainAll(newItems.map { it.id }.toSet())
         notifyDataSetChanged()
+        onSelectionChanged(selectedIds.size)
+    }
+
+    fun setSelectionMode(enabled: Boolean) {
+        selectionMode = enabled
+        if (!enabled) {
+            selectedIds.clear()
+        }
+        notifyDataSetChanged()
+        onSelectionChanged(selectedIds.size)
+    }
+
+    fun selectedIds(): List<Int> = selectedIds.toList()
+
+    fun retainSelectedIds(ids: Set<Int>) {
+        selectedIds.retainAll(ids)
+        notifyDataSetChanged()
+        onSelectionChanged(selectedIds.size)
+    }
+
+    private fun setSelected(id: Int, selected: Boolean) {
+        val changed = if (selected) selectedIds.add(id) else selectedIds.remove(id)
+        if (changed) {
+            val position = items.indexOfFirst { it.id == id }
+            if (position >= 0) {
+                notifyItemChanged(position)
+            }
+            onSelectionChanged(selectedIds.size)
+        }
     }
 }
 
@@ -295,7 +414,8 @@ class BatchCardAdapter(
             (target.time - today.time) / (1000 * 60 * 60 * 24)
         }.getOrNull()
 
-        when (item.status) {
+        val statusToUse = resolveStatus(item.status, expDate)
+        when (statusToUse) {
             "Kedaluwarsa" -> {
                 holder.tvPillStatus.text = "Kedaluwarsa"
                 holder.tvPillStatus.setBackgroundResource(R.drawable.bg_pill_danger)

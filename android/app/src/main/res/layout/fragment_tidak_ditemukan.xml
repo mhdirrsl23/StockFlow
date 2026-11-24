@@ -99,7 +99,7 @@
                     android:gravity="center"
                     android:lineSpacingMultiplier="1.35"
                     android:maxWidth="250dp"
-                    android:text="Tautan yang Anda buka tidak tersedia pada edisi database ini." />
+                    android:text="Tautan yang Anda buka tidak tersedia." />
 
                 <TextView
                     style="@style/SF.Btn.Primary"

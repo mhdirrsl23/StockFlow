@@ -170,6 +170,29 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="end"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btn_pilih_barang_batch"
+                    style="@style/SF.Btn.Soft"
+                    android:layout_height="36dp"
+                    android:contentDescription="Pilih beberapa barang atau batch"
+                    android:text="Pilih" />
+
+                <TextView
+                    android:id="@+id/btn_hapus_terpilih"
+                    style="@style/SF.Btn.DangerSoft"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="8dp"
+                    android:text="Hapus terpilih"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="42dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/bg_search"
@@ -414,26 +437,7 @@
                     android:text="Coba kata kunci lain." />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingHorizontal="2dp">
 
-                <ImageView
-                    android:layout_width="13dp"
-                    android:layout_height="13dp"
-                    android:src="@drawable/ic_database"
-                    app:tint="@color/sf_muted_2" />
-
-                <TextView
-                    android:id="@+id/tv_footer_sumber"
-                    style="@style/SF.Text.Caption"
-                    android:layout_marginStart="6dp"
-                    android:text="Sumber: view v_stok_tersedia" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

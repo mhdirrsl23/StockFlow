@@ -225,26 +225,7 @@
                     android:text="Semua stok batch dalam kondisi aman atau sudah ditangani." />
             </LinearLayout>
 
-            <!-- Catatan sumber -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingHorizontal="2dp">
 
-                <ImageView
-                    android:layout_width="13dp"
-                    android:layout_height="13dp"
-                    android:src="@drawable/ic_database"
-                    app:tint="@color/sf_muted_2" />
-
-                <TextView
-                    style="@style/SF.Text.Caption"
-                    android:layout_marginStart="6dp"
-                    android:text="Sumber: view v_perlu_ditangani · sisa_hari = DATEDIFF(tanggal_kedaluwarsa, hari ini)" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
