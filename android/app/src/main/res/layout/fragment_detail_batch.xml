@@ -453,6 +453,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/tv_jumlah_lampiran"
                         style="@style/SF.Pill.Outline"
                         android:text="0 file" />
                 </LinearLayout>
@@ -480,6 +481,21 @@
                         android:fontFamily="@font/plus_jakarta_sans_bold"
                         android:text="Tambah foto" />
                 </LinearLayout>
+
+                <HorizontalScrollView
+                    android:id="@+id/scroll_lampiran_batch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:scrollbars="none"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:id="@+id/list_lampiran_batch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" />
+                </HorizontalScrollView>
 
                 <LinearLayout
                     android:layout_width="match_parent"
