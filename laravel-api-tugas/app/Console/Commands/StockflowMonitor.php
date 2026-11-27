@@ -7,9 +7,6 @@ use Illuminate\Console\Command;
 
 class StockflowMonitor extends Command
 {
-    /**
-     * Signature command monitoring harian (FR-23): dijadwalkan 06.00 & 18.00 WIB.
-     */
     protected $signature = 'stockflow:monitor';
 
     protected $description = 'Perbarui status kedaluwarsa batch dan buat notifikasi pemeriksaan harian (FR-23)';

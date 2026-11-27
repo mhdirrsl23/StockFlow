@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:ignore="HardcodedText,ContentDescription,UseCompatTextViewDrawableXml">
 
-    <!-- Topbar brand -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
                 android:textSize="16sp" />
         </LinearLayout>
 
-        <!-- Notifikasi + badge -->
+
         <FrameLayout
             android:id="@+id/btn_notifikasi"
             android:layout_width="36dp"
@@ -103,7 +103,7 @@
             android:paddingEnd="18dp"
             android:paddingBottom="26dp">
 
-            <!-- Sapaan -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -143,7 +143,7 @@
                     android:textSize="10sp" />
             </LinearLayout>
 
-            <!-- Hero pemilik -->
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -354,7 +354,7 @@
                 </LinearLayout>
             </FrameLayout>
 
-            <!-- Notice: kedaluwarsa -->
+
             <LinearLayout
                 android:id="@+id/card_alert_kedaluwarsa"
                 android:layout_width="match_parent"
@@ -410,7 +410,7 @@
                     app:tint="@color/sf_muted" />
             </LinearLayout>
 
-            <!-- Notice: stok menipis -->
+
             <LinearLayout
                 android:id="@+id/card_alert_menipis"
                 android:layout_width="match_parent"
@@ -466,7 +466,7 @@
                     app:tint="@color/sf_muted" />
             </LinearLayout>
 
-            <!-- Metrik 2x2 -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -654,7 +654,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Aksi cepat -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -815,7 +815,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Prioritas FEFO -->
+
             <LinearLayout
                 android:id="@+id/section_fefo_header"
                 android:layout_width="match_parent"
@@ -861,7 +861,7 @@
                 android:paddingHorizontal="15dp"
                 android:paddingVertical="4dp">
 
-                <!-- MLK-2411B -->
+
                 <LinearLayout
                     android:id="@+id/fefo_row_1"
                     style="@style/SF.Row">
@@ -930,7 +930,7 @@
                 <View
                     android:id="@+id/fefo_div_1" style="@style/SF.Divider" />
 
-                <!-- PRC-2410A -->
+
                 <LinearLayout
                     android:id="@+id/fefo_row_2"
                     style="@style/SF.Row">
@@ -999,7 +999,7 @@
                 <View
                     android:id="@+id/fefo_div_2" style="@style/SF.Divider" />
 
-                <!-- MLK-2411A -->
+
                 <LinearLayout
                     android:id="@+id/fefo_row_3"
                     style="@style/SF.Row">
@@ -1068,7 +1068,7 @@
                 <View
                     android:id="@+id/fefo_div_3" style="@style/SF.Divider" />
 
-                <!-- MGN-2411B -->
+
                 <LinearLayout
                     android:id="@+id/fefo_row_4"
                     style="@style/SF.Row">
@@ -1135,7 +1135,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Stok menipis -->
+
             <LinearLayout
                 android:id="@+id/section_stok_header"
                 android:layout_width="match_parent"
@@ -1263,7 +1263,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Aktivitas terbaru -->
+
             <LinearLayout
                 android:id="@+id/section_aktivitas_header"
                 android:layout_width="match_parent"

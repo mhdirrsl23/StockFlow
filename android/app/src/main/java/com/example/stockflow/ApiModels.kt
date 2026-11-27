@@ -1,14 +1,14 @@
 package com.example.stockflow
 
-/**
- * DTO untuk backend PRD 9.4 — format respons {success, message, data|errors}.
- * Field data mengikuti formatter controller backend kanonik.
- */
 
-// ── Envelope ─────────────────────────────────────────────────────────────
+
+
+
+
+
 data class LoginRequest(val username: String, val password: String)
 
-/** POST /login → data = {token, user} */
+
 data class SesiData(val token: String? = null, val user: UserItem? = null)
 data class LoginResponse(val success: Boolean, val message: String, val data: SesiData? = null)
 
@@ -16,11 +16,11 @@ data class ApiResponse<T>(
     val success: Boolean,
     val message: String,
     val data: T? = null,
-    /** Detail validasi 422: {kolom: [pesan, ...]} (PRD 9.5) */
+
     val errors: Map<String, List<String>>? = null,
 )
 
-/** Respons daftar terpaginasi: data = {items, pagination} */
+
 data class Paginasi(
     val halaman: Int = 1,
     val per_halaman: Int = 15,
@@ -29,7 +29,7 @@ data class Paginasi(
 )
 data class DaftarResponse<T>(val items: List<T> = emptyList(), val pagination: Paginasi? = null)
 
-// ── Dashboard (FR-03) ────────────────────────────────────────────────────
+
 data class RingkasanDashboard(
     val total_barang_aktif: Int = 0,
     val total_batch_aktif: Int = 0,
@@ -39,7 +39,7 @@ data class RingkasanDashboard(
     val notifikasi_belum_dibaca: Int = 0,
 )
 
-/** Item ringkas lintas-list dashboard; field yang tidak ada tetap null. */
+
 data class ItemRingkas(
     val id: Int? = null,
     val barang_id: Int? = null,
@@ -83,7 +83,7 @@ data class DashboardData(
     val transaksi_terbaru: List<TransaksiRingkas> = emptyList(),
 )
 
-// ── Akun (FR-05) ─────────────────────────────────────────────────────────
+
 data class UserItem(
     val id: Int,
     val nama: String,
@@ -100,10 +100,10 @@ data class UserRequest(
 
 data class AktifRequest(val aktif: Boolean)
 
-/** GET /users → data = {items: [...]} (tanpa pagination) */
+
 data class UserListData(val items: List<UserItem> = emptyList())
 
-// ── Barang (FR-17, FR-04, FR-18) ─────────────────────────────────────────
+
 data class BarangItem(
     val id: Int,
     val kode_sku: String,
@@ -117,7 +117,7 @@ data class BarangItem(
     val created_by: Int? = null,
     val created_at: String? = null,
     val updated_at: String? = null,
-    val batches: List<BatchStokItem> = emptyList(), // hanya di GET /products/{id}
+    val batches: List<BatchStokItem> = emptyList(),
 )
 
 data class BarangRequest(
@@ -137,12 +137,13 @@ data class BulkDeleteResult(
     val hasil: List<HasilHapus> = emptyList(),
 )
 
-// ── Batch stok (FR-05, FR-12) ────────────────────────────────────────────
+
 data class BatchStokItem(
     val id: Int,
     val barang_id: Int,
     val kode_sku: String? = null,
     val nama_barang: String? = null,
+    val satuan: String? = null,
     val nama_pembuat: String? = null,
     val nomor_batch: String,
     val jumlah_awal: Int,
@@ -156,22 +157,23 @@ data class BatchStokItem(
     val sisa_hari: Long? = null,
     val created_at: String? = null,
     val updated_at: String? = null,
+    val deleted_at: String? = null,
 )
 
-/** POST /products/{barangId}/batches — barang_id lewat path */
+
 data class BatchStokRequest(
     val nomor_batch: String,
     val jumlah_awal: Int,
     val tanggal_kedaluwarsa: String,
 )
 
-/** PUT /batches/{id} — hanya karakteristik yang boleh diubah (BR-01) */
+
 data class BatchUpdateRequest(
     val nomor_batch: String? = null,
     val tanggal_kedaluwarsa: String? = null,
 )
 
-/** GET /products/{barangId}/batches → {barang, items, rekomendasi_fefo} */
+
 data class BarangRingkas(
     val id: Int = 0,
     val kode_sku: String = "",
@@ -187,9 +189,9 @@ data class BatchBarangData(
     val rekomendasi_fefo: Int? = null,
 )
 
-// ── Transaksi stok (FR-06, FR-07, FR-13) ─────────────────────────────────
-// jenis: "masuk" (nomor_batch+tanggal_kedaluwarsa atau batch_id),
-//        "keluar" (barang_id+jumlah), "penyesuaian" (batch_id+jumlah selisih+catatan wajib)
+
+
+
 data class TransaksiRequest(
     val jenis: String,
     val barang_id: Int,
@@ -201,8 +203,8 @@ data class TransaksiRequest(
     val waktu: String? = null,
 )
 
-// ── Penanganan kedaluwarsa (FR-12) ───────────────────────────────────────
-// status_penanganan: "Dimusnahkan" | "Dikembalikan ke Pemasok" | "Lainnya"
+
+
 data class PenangananRequest(
     val batch_id: Int,
     val status_penanganan: String,
@@ -211,7 +213,7 @@ data class PenangananRequest(
     val waktu: String? = null,
 )
 
-// ── Mutasi & audit ───────────────────────────────────────────────────────
+
 data class MutasiStokItem(
     val id: Int,
     val batch_id: Int,
@@ -236,7 +238,7 @@ data class RiwayatAktivitasItem(
     val pengguna: PenggunaRingkas? = null,
 )
 
-// ── Notifikasi (FR-13, FR-24) ────────────────────────────────────────────
+
 data class NotifikasiItem(
     val id: Int,
     val jenis: String,
@@ -247,14 +249,14 @@ data class NotifikasiItem(
     val ditampilkan_pada: String? = null,
 )
 
-// ── Pengaturan (FR-25) ───────────────────────────────────────────────────
+
 data class PengaturanItem(
     val kunci: String,
     val nilai: String,
     val updated_at: String? = null,
 )
 
-// ── Laporan (FR-16) — backend membentuk {judul, header, rows, nama_berkas} ─
+
 data class LaporanData(
     val judul: String? = null,
     val judul_tabel: String? = null,
@@ -264,7 +266,7 @@ data class LaporanData(
     val nama_berkas: String? = null,
 )
 
-// ── Lampiran (FR-14) ─────────────────────────────────────────────────────
+
 data class LampiranItem(
     val id: Int,
     val batch_id: Int,

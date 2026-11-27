@@ -57,10 +57,10 @@ private fun Fragment.showPicker(title: String, items: Array<String>, target: Vie
         .show()
 }
 
-/**
- * Urai pesan gagal dari respons API: untuk status non-2xx (mis. 422 validasi)
- * isi JSON ada di errorBody — ambil message + rincian errors per kolom (PRD 9.5).
- */
+
+
+
+
 private fun Fragment.uraikanGagal(res: Response<*>, bawaan: String): String {
     val teks = res.errorBody()?.string()
     if (teks != null) {
@@ -171,7 +171,7 @@ class FormBatchFragment : Fragment(R.layout.form_batch) {
         val etJumlah = view.findViewById<EditText>(R.id.batch_jumlah)
         val selectTgl = view.findViewById<View>(R.id.select_tanggal)
 
-        // Dipanggil dari detail barang → barang sudah terpilih.
+
         arguments?.getInt("barangId", -1)?.takeIf { it > 0 }?.let { barangId = it }
 
         jumlah = etJumlah?.text?.toString()?.trim()?.toIntOrNull() ?: 1
@@ -364,7 +364,7 @@ class FormStokKeluarFragment : Fragment(R.layout.form_stok_keluar) {
         val etJumlah = view.findViewById<EditText>(R.id.keluar_jumlah)
         val etCatatan = view.findViewById<EditText>(R.id.et_catatan)
 
-        // Dipanggil dari detail barang → barang sudah terpilih.
+
         arguments?.getInt("barangId")?.takeIf { it != -1 }?.let { barangId = it }
 
         etJumlah?.setText(jumlah.toString())
@@ -475,8 +475,8 @@ class FormPenyesuaianFragment : Fragment(R.layout.form_penyesuaian) {
                 "Penyesuaian stok berhasil disimpan",
                 "Gagal menyimpan penyesuaian",
                 { api ->
-                    // Penyesuaian wajib membawa barang_id — ambil dari argumen,
-                    // atau dari detail batch bila tidak tersedia.
+
+
                     val bId = if (barangId != -1) barangId
                     else api.getDetailBatch(batchId).body()?.data?.barang_id ?: -1
                     if (bId == -1) throw IllegalStateException("Barang tidak dikenali untuk penyesuaian")
@@ -513,7 +513,7 @@ class FormAkunFragment : Fragment(R.layout.form_akun) {
                 "Akun pengguna berhasil disimpan",
                 "Gagal menyimpan akun",
                 {
-                    // FR-05: akun yang dibuat selalu peran staf & aktif — peran/aktif diputuskan backend.
+
                     it.storeUser(UserRequest(nama, username, password))
                 },
                 tombol = view.findViewById(R.id.btn_simpan),

@@ -6,9 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pengaturan extends Model
 {
-    /**
-     * Tabel key-value dengan primary key kolom `kunci` (FR-25).
-     */
     public $timestamps = false;
 
     protected $table = 'pengaturan';

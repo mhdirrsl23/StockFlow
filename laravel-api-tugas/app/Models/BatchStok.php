@@ -49,10 +49,6 @@ class BatchStok extends Model
         return $this->hasMany(Lampiran::class, 'batch_id');
     }
 
-    /**
-     * Batch layak dijual untuk stok keluar normal (FR-07, BR-03):
-     * belum kedaluwarsa dan belum Ditangani.
-     */
     public function scopeLayakJual(Builder $query): Builder
     {
         return $query->whereDate('tanggal_kedaluwarsa', '>=', today())
@@ -60,17 +56,11 @@ class BatchStok extends Model
             ->where('jumlah_sisa', '>', 0);
     }
 
-    /**
-     * Urutan bawaan FEFO: kedaluwarsa terdekat, lalu dibuat lebih awal (AB-02, BR-04).
-     */
     public function scopeFefo(Builder $query): Builder
     {
         return $query->orderBy('tanggal_kedaluwarsa')->orderBy('created_at')->orderBy('id');
     }
 
-    /**
-     * sisa_hari (WIB) mengikuti FR-23; dapat negatif.
-     */
     public function sisaHari(): int
     {
         return today()->diffInDays($this->tanggal_kedaluwarsa, false);

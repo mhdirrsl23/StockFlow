@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * users — FR-02, FR-04, FR-05; NFR-01.
-     * Login username + password (bcrypt), dua peran, akun staf
-     * dibuat/dinonaktifkan oleh pemilik. Tidak ada registrasi mandiri.
-     */
     public function up(): void
     {
         Schema::dropIfExists('sessions');
@@ -25,7 +20,7 @@ return new class extends Migration
             $table->string('username', 50)->unique('uq_users_username');
             $table->string('password')->comment('Hash bcrypt, tidak pernah plaintext');
             $table->enum('peran', ['pemilik', 'staf'])->default('staf');
-            // 0 = nonaktif: login ditolak, token dicabut (FR-05)
+
             $table->boolean('aktif')->default(true);
             $table->rememberToken();
             $table->timestamps();

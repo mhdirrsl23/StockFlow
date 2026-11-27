@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Tema edisi database. Kern tampilan memakai Material 3:
-  MaterialCardView, MaterialButton, Chip, TextInputLayout, BottomNavigationView.
--->
+
+
+
+
 <resources xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <style name="Theme.StockFlow" parent="Theme.Material3.Light.NoActionBar">
@@ -20,7 +20,7 @@
         <item name="fontFamily">@font/plus_jakarta_sans</item>
     </style>
 
-    <!-- Kartu dasar -->
+
     <style name="StockFlow.Card" parent="">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -32,7 +32,7 @@
         <item name="android:layout_marginBottom">@dimen/sf_space_md</item>
     </style>
 
-    <!-- Tombol pill -->
+
     <style name="StockFlow.Pill" parent="">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

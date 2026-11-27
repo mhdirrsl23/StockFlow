@@ -14,11 +14,6 @@ class FefoTransactionTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * Siapkan pemilik + barang dengan dua batch: terdekat 20, jauh 40.
-     *
-     * @return array{0: User, 1: Barang, 2: BatchStok, 3: BatchStok}
-     */
     private function siapkanStok(): array
     {
         $pemilik = User::factory()->pemilik()->create();

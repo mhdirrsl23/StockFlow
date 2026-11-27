@@ -6,10 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * impor — tambahan di luar SQL asli untuk alur impor Excel dua langkah
-     * (FR-15): preview → konfirmasi → commit, dengan token konfirmasi.
-     */
     public function up(): void
     {
         Schema::create('impor', function (Blueprint $table) {
@@ -22,7 +18,7 @@ return new class extends Migration
             $table->unsignedInteger('jumlah_baris')->default(0);
             $table->unsignedInteger('berhasil')->default(0);
             $table->unsignedInteger('gagal')->default(0);
-            // Baris valid + konteks, JSON (dipakai ulang saat commit token)
+
             $table->json('baris_valid')->nullable();
             $table->json('kesalahan')->nullable();
             $table->dateTime('kedaluwarsa_token')->nullable();

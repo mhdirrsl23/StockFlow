@@ -13,10 +13,6 @@ class MutasiStokRequest extends FormRequest
         return true;
     }
 
-    /**
-     * FR-06 / FR-07 / FR-13 / BR-05: validasi aturan transaksi masuk, keluar FEFO,
-     * dan penyesuaian dengan alasan wajib.
-     */
     public function rules(): array
     {
         $jenis = (string) $this->input('jenis');
@@ -77,9 +73,6 @@ class MutasiStokRequest extends FormRequest
         ];
     }
 
-    /**
-     * Normalisasi ringan sebelum validasi.
-     */
     public function prepareForValidation(): void
     {
         if ($this->filled('batch_id')) {

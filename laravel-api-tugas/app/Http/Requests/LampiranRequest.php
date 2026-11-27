@@ -12,10 +12,6 @@ class LampiranRequest extends FormRequest
         return true;
     }
 
-    /**
-     * FR-14 / Q-05: foto JPG/PNG; batas ukuran membaca pengaturan
-     * `maks_ukuran_lampiran_mb` sehingga tetap dinamis.
-     */
     public function rules(): array
     {
         $maksKb = ($this->batasMb() * 1024) - 1;
@@ -39,6 +35,6 @@ class LampiranRequest extends FormRequest
 
     private function batasMb(): int
     {
-        return max(1, (int) (\App\Models\Pengaturan::nilai('maks_ukuran_lampiran_mb', '2')));
+        return max(1, (int) (Pengaturan::nilai('maks_ukuran_lampiran_mb', '2')));
     }
 }

@@ -2,23 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BatchStok;
 use App\Models\Barang;
+use App\Models\BatchStok;
+use App\Services\ExpiryMonitoringService;
 use App\Support\ApiResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 final class ExpiryMonitoringController extends Controller
 {
-    /**
-     * FR-10 / FR-20: daftar batch sesuai tingkat urgensi; status disegarkan
-     * saat dipanggil agar tetap sinkron dengan hari WIB (BR-03).
-     */
     public function index(Request $request): JsonResponse
     {
-        app(\App\Services\ExpiryMonitoringService::class)->jalankan();
+        app(ExpiryMonitoringService::class)->jalankan();
 
         $query = BatchStok::query()
             ->with('barang:id,kode_sku,nama,satuan')
@@ -78,9 +74,6 @@ final class ExpiryMonitoringController extends Controller
         ], 'Daftar monitoring kedaluwarsa ditemukan');
     }
 
-    /**
-     * Data pembantu daftar "Perlu Ditangani" langsung dari view (FR-26).
-     */
     public function perluDitangani(): JsonResponse
     {
         $items = DB::table('v_perlu_ditangani')

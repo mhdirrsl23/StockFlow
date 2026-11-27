@@ -8,33 +8,15 @@ use App\Models\Pengaturan;
 use App\Models\User;
 use App\Support\Aktivitas;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-/**
- * Impor barang Excel dua langkah (FR-15, BR-06):
- * menganalisis() (pratinjau) memvalidasi kolom + baris lalu menyimpan draf dengan
- * token konfirmasi berlaku 30 menit; simpan() (konfirmasi) hanya menuliskan baris
- * valid — baris invalid tidak pernah masuk secara diam-diam (BR-06).
- */
 final class ImportService
 {
-    /**
-     * Kolom wajib berkas impor.
-     */
     private const HEADER_WAJIB = ['kode_sku', 'nama', 'kategori', 'satuan', 'stok_minimum'];
 
     private const KATEGORI = ['Makanan', 'Minuman', 'Obat', 'Kebutuhan Rumah', 'Lainnya'];
 
-    /**
-     * Analisis berkas dan terbitkan draf impor + token konfirmasi.
-     *
-     * @return array{id: int, token: string, kedaluwarsa_token: string|null, nama_berkas: string,
-     *              jumlah_baris: int, valid: int, gagal: int,
-     *              baris_valid: list<array<string, mixed>>, kesalahan: array<int, list<string>>}
-     */
     public function menganalisis(User $user, UploadedFile $berkas): array
     {
         $this->pastikanUkuran($berkas);
@@ -50,14 +32,13 @@ final class ImportService
 
             if ($masalah !== []) {
                 $kesalahan[$nomorBaris] = $masalah;
+
                 continue;
             }
 
             $barisValid[] = ['baris' => $nomorBaris] + $data;
         }
 
-        // Duplikasi kode di dalam berkas: baris ulangan ditolak agar
-        // perbaikan berkas diminta sebelum impor (BR-06).
         $lihatKode = [];
         foreach ($barisValid as $indeks => $item) {
             $kode = $item['kode_sku'];
@@ -65,6 +46,7 @@ final class ImportService
             if (isset($lihatKode[$kode])) {
                 unset($barisValid[$indeks]);
                 $kesalahan[$item['baris']] = ["Kode SKU {$kode} duplikat di dalam berkas; perbaiki sebelum impor (BR-06)."];
+
                 continue;
             }
 
@@ -113,12 +95,6 @@ final class ImportService
         ];
     }
 
-    /**
-     * Menuliskan baris valid draf impor setelah token konfirmasi cocok (FR-15).
-     *
-     * @return array{total: int, berhasil: int, gagal: int,
-     *              detail_gagal: array<int, string>, barang: list<array<string, mixed>>}
-     */
     public function simpan(User $user, int $idImpor, string $token): array
     {
         $impor = Impor::query()->find($idImpor)
@@ -148,6 +124,7 @@ final class ImportService
 
             if ($ada) {
                 $detailGagal[$item['baris']] = "Kode SKU {$item['kode_sku']} sudah ada sebagai barang aktif saat konfirmasi.";
+
                 continue;
             }
 
@@ -197,9 +174,6 @@ final class ImportService
         ];
     }
 
-    /**
-     * Batas ukuran berkas dibaca dari pengaturan (BR-06).
-     */
     private function pastikanUkuran(UploadedFile $berkas): void
     {
         $maksMb = max(1, (int) Pengaturan::nilai('maks_ukuran_impor_mb', '5'));
@@ -212,11 +186,6 @@ final class ImportService
         }
     }
 
-    /**
-     * Baca seluruh baris data (mulai baris 2) via IOFactory::createReaderForFile.
-     *
-     * @return array{array<string, int>, list<array<string, string|int|float|null>>}
-     */
     private function bacaBerkas(UploadedFile $berkas): array
     {
         $path = $berkas->getRealPath();
@@ -232,7 +201,6 @@ final class ImportService
             ]);
         }
 
-        // Peta header: label -> indeks kolom
         $headerMentah = $sheet->rangeToArray("A1:{$sheet->getHighestColumn()}1", null, true, true, true);
         $headerIndeks = [];
 
@@ -273,7 +241,7 @@ final class ImportService
             $kaburSeluruhnya = implode('', array_map(fn ($nilai) => trim(is_array($nilai) ? '' : (string) $nilai), $satuBaris));
 
             if ($kaburSeluruhnya === '') {
-                continue; // baris kosong dilewati, bukan kesalahan
+                continue;
             }
 
             $koleksiBaris[$nomorBaris] = $satuBaris;
@@ -285,13 +253,6 @@ final class ImportService
         return [$headerIndeks, $koleksiBaris];
     }
 
-    /**
-     * Tarik data satu baris berdasarkan indeks kolom header.
-     *
-     * @param  array<string, string|int|float|null>  $satuBaris
-     * @param  array<string, string>  $headerIndeks
-     * @return array<string, string>
-     */
     private function tarikData(array $satuBaris, array $headerIndeks): array
     {
         $data = [];
@@ -305,12 +266,6 @@ final class ImportService
         return $data;
     }
 
-    /**
-     * Validasi konten satu baris impor (FR-15).
-     *
-     * @param  array<string, string>  $data
-     * @return list<string>
-     */
     private function validasiBaris(array $data): array
     {
         $masalah = [];

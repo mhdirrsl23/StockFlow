@@ -11,9 +11,6 @@ class PengaturanRequest extends FormRequest
         return true;
     }
 
-    /**
-     * FR-25: pemilik mengubah pengaturan; nilai divalidasi aman rentangnya.
-     */
     public function rules(): array
     {
         return [

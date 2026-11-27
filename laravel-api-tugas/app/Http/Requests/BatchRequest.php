@@ -11,9 +11,6 @@ class BatchRequest extends FormRequest
         return true;
     }
 
-    /**
-     * FR-05: nomor batch wajib, jumlah awal > 0, kedaluwarsa harus dalam waktunya.
-     */
     public function rules(): array
     {
         return [

@@ -13,9 +13,6 @@ class BarangRequest extends FormRequest
         return true;
     }
 
-    /**
-     * FR-04: kode unik, nama/kategori/satuan/stok_minimum divalidasi.
-     */
     public function rules(): array
     {
         $barangId = $this->route('barang') instanceof Barang ? $this->route('barang')->id : null;

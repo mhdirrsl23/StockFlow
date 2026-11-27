@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:ignore="HardcodedText,ContentDescription,UseCompatTextViewDrawableXml">
 
-    <!-- Topbar sub-halaman -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
             android:paddingEnd="18dp"
             android:paddingBottom="26dp">
 
-            <!-- Metrik -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Alert strip info -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -172,7 +172,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- RecyclerView untuk Daftar Pengguna -->
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_pengguna"
                 android:layout_width="match_parent"
@@ -182,7 +182,7 @@
                 tools:itemCount="2"
                 tools:listitem="@layout/item_barang" />
 
-            <!-- State kosong jika tidak ada pengguna -->
+
             <LinearLayout
                 android:id="@+id/empty_state_pengguna"
                 android:layout_width="match_parent"

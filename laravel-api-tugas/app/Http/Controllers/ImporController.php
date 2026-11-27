@@ -11,23 +11,15 @@ use Illuminate\Http\Request;
 
 final class ImporController extends Controller
 {
-    public function __construct(private readonly ImportService $importService)
-    {
-    }
+    public function __construct(private readonly ImportService $importService) {}
 
-    /**
-     * FR-15 langkah 1: validasi + pratinjau berkas; tidak ada penulisan barang.
-     */
     public function preview(ImporPreviewRequest $request): JsonResponse
     {
-        $hasil = $this->importService->menganalisis($request->user(), $request->file('berkas'), );
+        $hasil = $this->importService->menganalisis($request->user(), $request->file('berkas'));
 
         return ApiResponse::ok($hasil, 'Pratinjau impor tersimpan; konfirmasi dengan token dalam 30 menit (FR-15)');
     }
 
-    /**
-     * FR-15 langkah 2: konfirmasi dengan token → barang valid dibuat.
-     */
     public function commit(Request $request): JsonResponse
     {
         $request->validate([
@@ -44,9 +36,6 @@ final class ImporController extends Controller
         return ApiResponse::created($hasil, 'Impor selesai — ringkasan hasil menyertai (FR-15)');
     }
 
-    /**
-     * Riwayat impor milik pengguna (kewirausahaan audit FR-31).
-     */
     public function index(Request $request): JsonResponse
     {
         $kueri = Impor::query()->with('pengguna:id,nama,username');
@@ -70,9 +59,6 @@ final class ImporController extends Controller
         ], 'Riwayat impor ditemukan');
     }
 
-    /**
-     * Detail satu draf/key imporan (token tidak pernah dibocorkan ulang).
-     */
     public function show(Request $request, Impor $impor): JsonResponse
     {
         if (! $request->user()->isPemilik() && $impor->user_id !== $request->user()->id) {
@@ -82,9 +68,6 @@ final class ImporController extends Controller
         return ApiResponse::ok($this->bentuk($impor), 'Data impor ditemukan');
     }
 
-    /**
-     * Bentuk ringkas tanpa mengekspos token demi keamanan (NFR-01).
-     */
     private function bentuk(Impor $impor): array
     {
         return [

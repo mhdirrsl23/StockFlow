@@ -10,10 +10,6 @@ use Illuminate\Support\Carbon;
 
 final class RiwayatAktivitasController extends Controller
 {
-    /**
-     * FR-31: pemilik melihat seluruh riwayat; staf hanya miliknya sendiri,
-     * dengan filter aksi dan rentang waktu (NFR-08: audit tak terubah).
-     */
     public function index(Request $request): JsonResponse
     {
         $user = $request->user();

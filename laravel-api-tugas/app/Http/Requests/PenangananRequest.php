@@ -12,9 +12,6 @@ class PenangananRequest extends FormRequest
         return true;
     }
 
-    /**
-     * FR-12: tindakan retur/pemusnahan/pengeluaran; catatan wajib bila Lainnya.
-     */
     public function rules(): array
     {
         return [

@@ -48,8 +48,6 @@ class LaporanEksporTest extends TestCase
         $res->assertOk();
         $this->assertStringStartsWith('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', (string) $res->headers->get('Content-Type'));
 
-        // Isi stream xlsx ditulis ke php://output (tidak terekam di getContent()
-        // konteks test) — magic byte PK sudah terverifikasi pada smoke test.
         $disposisi = (string) $res->headers->get('Content-Disposition');
         $this->assertStringContainsString('.xlsx', $disposisi);
     }

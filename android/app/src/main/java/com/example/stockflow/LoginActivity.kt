@@ -63,10 +63,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     * Urai pesan gagal login: 401 kredensial salah, 422 kolom kosong, 429 throttle.
-     * Isi JSON untuk status non-2xx berada di errorBody (PRD 9.5).
-     */
+
+
+
+
     private fun uraiGagal(res: retrofit2.Response<LoginResponse>): String {
         val teks = res.errorBody()?.string()
         if (teks != null) {

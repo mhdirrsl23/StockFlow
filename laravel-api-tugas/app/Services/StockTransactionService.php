@@ -3,8 +3,8 @@
 namespace App\Services;
 
 use App\Exceptions\StokException;
-use App\Models\BatchStok;
 use App\Models\Barang;
+use App\Models\BatchStok;
 use App\Models\MutasiStok;
 use App\Models\User;
 use App\Support\Aktivitas;
@@ -13,28 +13,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
-/**
- * Aturan stok inti (BR-01 s/d BR-05):
- * - setiap perubahan saldo dilakukan dalam DB::transaction + lockForUpdate (NFR-02);
- * - pengeluaran memakai alokasi FEFO (AB-02, FR-11);
- * - setiap batch yang dialokasi menghasilkan satu baris mutasi (5.9 A);
- * - batch kedaluwarsa / Ditangani tidak bisa keluar normal (FR-07, BR-03);
- * - urutan kunci konsisten: baris barang selalu dikunci lebih dahulu
- *   untuk mencegah deadlock antaroperasi.
- */
 final class StockTransactionService
 {
-    /**
-     * Stok masuk (FR-06): menambah batch yang sudah ada, atau membuat batch baru.
-     *
-     * @param  array{barang_id?: int, batch_id?: int, jumlah?: int, nomor_batch?: string,
-     *               tanggal_kedaluwarsa?: string, catatan?: string, waktu?: string}  $params
-     * @return array{
-     *     transaksi: array<int, array<string, mixed>>,
-     *     batch: array<string, mixed>,
-     *     barang: array<string, mixed>
-     * }
-     */
     public function masuk(User $user, array $params): array
     {
         $jumlah = (int) ($params['jumlah'] ?? 0);
@@ -89,17 +69,6 @@ final class StockTransactionService
         ];
     }
 
-    /**
-     * Stok keluar FEFO (FR-07, FR-11): alokasi dari batch kedaluwarsa terdekat dahulu;
-     * setiap batch teralokasi menghasilkan satu baris mutasi (5.9 A).
-     *
-     * @param  array{barang_id?: int, jumlah?: int, batch_id?: int, catatan?: string, waktu?: string}  $params
-     * @return array{
-     *     transaksi: array<int, array<string, mixed>>,
-     *     barang: array<string, mixed>,
-     *     sisa_layak_jual: int
-     * }
-     */
     public function keluar(User $user, array $params): array
     {
         $jumlah = (int) ($params['jumlah'] ?? 0);
@@ -139,7 +108,6 @@ final class StockTransactionService
             "Keluar {$jumlah} {$barang->satuan} {$barang->nama} secara FEFO dari {$jumlahBatch} batch"
         );
 
-        // Peringatan stok menipis diperbarui ketika transaksi mengubah kondisi stok (FR-13, BR-02)
         ExpiryMonitoringService::notifikasiStokMenipisSekarang();
 
         return [
@@ -149,12 +117,6 @@ final class StockTransactionService
         ];
     }
 
-    /**
-     * Penyesuaian (FR-13): koreksi saldo batch dengan selisih dan alasan.
-     *
-     * @param  array{batch_id?: int, jumlah?: int, catatan?: string, waktu?: string}  $params
-     * @return array{transaksi: array<int, array<string, mixed>>, batch: array<string, mixed>}
-     */
     public function penyesuaian(User $user, array $params): array
     {
         $hasil = DB::transaction(function () use ($user, $params) {
@@ -163,7 +125,6 @@ final class StockTransactionService
             $barangId = BatchStok::query()->where('id', $batchId)->value('barang_id')
                 ?? throw StokException::field('batch_id', 'Batch tidak ditemukan.', 'Batch tidak ditemukan');
 
-            // Urutan kunci konsisten: barang lebih dahulu, lalu batch
             Barang::query()->lockForUpdate()->find($barangId);
 
             $batch = BatchStok::query()->lockForUpdate()->find($batchId)
@@ -208,18 +169,6 @@ final class StockTransactionService
         ];
     }
 
-    /**
-     * Penanganan kedaluwarsa (FR-12): mengeluarkan stok batch kedaluwarsa
-     * (penuh atau bertahap), lalu menandai status Ditangani saat sisa habis.
-     *
-     * @param  array{batch_id?: int, status_penanganan?: string, jumlah?: int,
-     *               catatan_penanganan?: string, waktu?: string}  $params
-     * @return array{
-     *     transaksi: array<int, array<string, mixed>>,
-     *     batch: array<string, mixed>,
-     *     selesai: bool
-     * }
-     */
     public function penanganan(User $user, array $params): array
     {
         $hasil = DB::transaction(function () use ($user, $params) {
@@ -297,12 +246,6 @@ final class StockTransactionService
         ];
     }
 
-    /**
-     * Alokasi FEFO (BR-04): kedaluwarsa terdekat dahulu, lalu dibuat lebih awal,
-     * dengan menolak transaksi bila stok layak jual tidak cukup.
-     *
-     * @return array<int, array{batch: BatchStok, ambil: int}>
-     */
     private function alokasikan(Barang $barang, ?int $batchTertentu, int $jumlah): array
     {
         if ($jumlah <= 0) {
@@ -348,9 +291,6 @@ final class StockTransactionService
         return $alokasi;
     }
 
-    /**
-     * Membuat batch baru untuk penerimaan (FR-06, FR-05).
-     */
     private function buatBatchBaru(Barang $barang, int $jumlah, array $params, User $user): BatchStok
     {
         if (empty($params['nomor_batch'])) {
@@ -377,7 +317,7 @@ final class StockTransactionService
             ]);
             $batch->refresh();
         } catch (QueryException $e) {
-            // Bentrok dengan uq_batch_nomor_aktif (nomor_batch unik di antara batch aktif)
+
             if ($e->getMessage() !== '' && str_contains($e->getMessage(), 'uq_batch_nomor_aktif')) {
                 throw StokException::field('nomor_batch', "Nomor batch {$params['nomor_batch']} sudah dipakai pada barang ini (AB-07).", 'Nomor batch duplikat');
             }
@@ -388,11 +328,6 @@ final class StockTransactionService
         return $batch->load('barang');
     }
 
-    /**
-     * Catat baris mutasi (AB-10) dan kembalikan sebagai array serial.
-     *
-     * @return array<string, mixed>
-     */
     private function catatMutasi(
         BatchStok $batch,
         string $jenis,

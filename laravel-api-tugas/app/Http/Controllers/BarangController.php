@@ -12,9 +12,6 @@ use Illuminate\Support\Facades\DB;
 
 final class BarangController extends Controller
 {
-    /**
-     * FR-17: daftar barang + pencarian kode/nama + filter kategori + pagination.
-     */
     public function index(Request $request): mixed
     {
         $query = Barang::query()
@@ -53,9 +50,6 @@ final class BarangController extends Controller
         ], 'Daftar barang ditemukan');
     }
 
-    /**
-     * Store via mutasi masuk terpisah.
-     */
     public function store(BarangRequest $request): mixed
     {
         $validasi = $request->validated();
@@ -71,9 +65,6 @@ final class BarangController extends Controller
         return ApiResponse::created($this->bentuk($barang), 'Barang berhasil dibuat');
     }
 
-    /**
-     * FR-04: detail barang dengan list batch FEFO dan ringkasan stok.
-     */
     public function show(Barang $barang): mixed
     {
         $batches = $barang->batches()->fefo()->with('lampiran')->limit(100)->get();
@@ -105,10 +96,6 @@ final class BarangController extends Controller
         return ApiResponse::ok($this->bentuk($diperbarui), 'Barang berhasil diperbarui');
     }
 
-    /**
-     * AB-08: pemilik menghapus kapan pun; staf hanya barang pembuatannya sendiri.
-     * BR-07: barang dengan batch aktif ditolak; nonaktifkan barang sesuai alur Android.
-     */
     public function destroy(Request $request, Barang $barang): mixed
     {
         $user = $request->user();
@@ -125,7 +112,6 @@ final class BarangController extends Controller
             $barang->deleted_by = $user->id;
             $barang->delete();
 
-            // Notifikasi milik barang ini tidak berlaku lagi
             Notifikasi::query()->where('barang_id', $barang->id)->delete();
 
             Aktivitas::catat($user, 'hapus', 'barang', $barang->id, 'Hapus barang '.$barang->nama);
@@ -134,9 +120,6 @@ final class BarangController extends Controller
         });
     }
 
-    /**
-     * FR-18: hapus massal barang; hasil per item.
-     */
     public function bulkDelete(Request $request): mixed
     {
         $ids = $request->input('ids', []);
@@ -158,11 +141,13 @@ final class BarangController extends Controller
 
                 if ($barang === null) {
                     $hasil[] = ['id' => $id, 'berhasil' => false, 'pesan' => 'Barang tidak ditemukan'];
+
                     continue;
                 }
 
                 if ($barang->deleted_at !== null) {
                     $hasil[] = ['id' => $id, 'berhasil' => false, 'pesan' => 'Barang sudah terhapus'];
+
                     continue;
                 }
 
@@ -172,6 +157,7 @@ final class BarangController extends Controller
                         'berhasil' => false,
                         'pesan' => 'Barang masih memiliki batch aktif (BR-07)',
                     ];
+
                     continue;
                 }
 
@@ -181,6 +167,7 @@ final class BarangController extends Controller
                         'berhasil' => false,
                         'pesan' => 'Akses ditolak: staf hanya menghapus barang miliknya sendiri (AB-08)',
                     ];
+
                     continue;
                 }
 
@@ -203,9 +190,6 @@ final class BarangController extends Controller
         });
     }
 
-    /**
-     * Format ringkas data barang; total stok tetap membaca view WIB (AB-01).
-     */
     private function bentuk(Barang $barang): array
     {
         $tercatat = DB::table('v_stok_tersedia')->where('barang_id', $barang->id)->first();

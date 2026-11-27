@@ -6,9 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class RiwayatAktivitas extends Model
 {
-    /**
-     * Tabel audit immutable (NFR-08); tidak pernah diubah melalui aplikasi.
-     */
     public $timestamps = false;
 
     protected $table = 'riwayat_aktivitas';

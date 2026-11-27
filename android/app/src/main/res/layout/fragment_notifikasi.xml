@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:ignore="HardcodedText,ContentDescription,UseCompatTextViewDrawableXml">
 
-    <!-- Topbar sub-halaman -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
             android:paddingEnd="18dp"
             android:paddingBottom="26dp">
 
-            <!-- Ringkasan belum dibaca -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
                 </FrameLayout>
             </LinearLayout>
 
-            <!-- Chip filter -->
+
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -155,7 +155,7 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
-            <!-- RecyclerView untuk Daftar Notifikasi -->
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_notifikasi"
                 android:layout_width="match_parent"
@@ -165,7 +165,7 @@
                 tools:itemCount="3"
                 tools:listitem="@layout/item_barang" />
 
-            <!-- State kosong jika tidak ada notifikasi -->
+
             <LinearLayout
                 android:id="@+id/empty_state_notifikasi"
                 android:layout_width="match_parent"
@@ -202,7 +202,7 @@
                     android:text="Semua pemberitahuan sistem sudah bersih." />
             </LinearLayout>
 
-            <!-- Info penjadwal -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

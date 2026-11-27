@@ -14,9 +14,6 @@ use Illuminate\Validation\Rule;
 
 final class UsersController extends Controller
 {
-    /**
-     * FR-02: login (rate limit 5 percobaan/menit via middleware throttle:login).
-     */
     public function login(LoginRequest $request): mixed
     {
         $user = User::query()->where('username', $request->input('username'))->first();
@@ -31,7 +28,6 @@ final class UsersController extends Controller
             return ApiResponse::fail('Akun dinonaktifkan oleh pemilik; hubungi pemilik toko (FR-05).', 403);
         }
 
-        // FR-05: sesi tunggal — token lama dicabut ketika login sukses berikutnya.
         $user->tokens()->delete();
 
         $token = $user->createToken('stockflow-mobile')->plainTextToken;
@@ -41,17 +37,11 @@ final class UsersController extends Controller
         return ApiResponse::ok($this->dataSesi($user, $token), 'Login berhasil');
     }
 
-    /**
-     * Info profil via token (FR-02) — dipakai Android saat aplikasi dibuka.
-     */
     public function me(Request $request): mixed
     {
         return ApiResponse::ok($this->profil($request->user()), 'Profil ditemukan');
     }
 
-    /**
-     * FR-02: logout membatalkan token saat ini (BR: sesi tunggal).
-     */
     public function logout(Request $request): mixed
     {
         $user = $request->user();
@@ -62,9 +52,6 @@ final class UsersController extends Controller
         return ApiResponse::ok(null, 'Logout berhasil');
     }
 
-    /**
-     * FR-05 / BR-08 (rute): daftar seluruh akun untuk pemilik.
-     */
     public function index(Request $request): JsonResponse
     {
         $items = User::query()
@@ -75,9 +62,6 @@ final class UsersController extends Controller
         return ApiResponse::ok(['items' => $items], 'Daftar akun ditemukan');
     }
 
-    /**
-     * FR-05: pemilik membuat akun staf (tanpa registrasi mandiri; NFR-01).
-     */
     public function store(Request $request): JsonResponse
     {
         $data = $request->validate([
@@ -104,9 +88,6 @@ final class UsersController extends Controller
         return ApiResponse::created($this->profil($user), 'Akun staf berhasil dibuat');
     }
 
-    /**
-     * FR-05: pemilik memperbarui profil/kredensial akun bawahan.
-     */
     public function update(Request $request, User $user): JsonResponse
     {
         $data = $request->validate([
@@ -134,7 +115,6 @@ final class UsersController extends Controller
         if (array_key_exists('password', $data) && $data['password'] !== null) {
             $user->password = $data['password'];
 
-            // Kredensial baru → sesi lama dicabut (FR-05)
             $user->tokens()->delete();
         }
 
@@ -145,9 +125,6 @@ final class UsersController extends Controller
         return ApiResponse::ok($this->profil($user->refresh()), 'Akun berhasil diperbarui');
     }
 
-    /**
-     * FR-05: aktif/nonaktif akun dengan pencabutan seluruh token saat nonaktif.
-     */
     public function ubahAktif(Request $request, User $user): JsonResponse
     {
         $request->validate([
@@ -184,10 +161,6 @@ final class UsersController extends Controller
         return ApiResponse::ok($this->profil($user->refresh()), $aktif ? 'Akun diaktifkan' : 'Akun dinonaktifkan dan seluruh sesi dicabut');
     }
 
-    /**
-     * FR-05 / BR-07: menghapus akun staf; akun berriwayat transaksi hanya dapat
-     * dinonaktifkan agar audit tidak rusak (NFR-08).
-     */
     public function destroy(Request $request, User $user): JsonResponse
     {
         if ($user->id === $request->user()->id) {
@@ -219,21 +192,11 @@ final class UsersController extends Controller
         return ApiResponse::ok(null, 'Akun dihapus');
     }
 
-    /**
-     * Bentuk payload sesi login (FR-02).
-     *
-     * @return array<string, mixed>
-     */
     private function dataSesi(User $user, string $token): array
     {
         return ['token' => $token, 'user' => $this->profil($user)];
     }
 
-    /**
-     * Bentuk profil ringkas tanpa pembocoran kolom sensitif (NFR-01).
-     *
-     * @return array<string, mixed>
-     */
     private function profil(User $user): array
     {
         return [

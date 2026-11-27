@@ -6,9 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class MutasiStok extends Model
 {
-    /**
-     * Tabel audit tanpa kolom timestamps Laravel; kolom `waktu` diisi eksplisit.
-     */
     public $timestamps = false;
 
     protected $table = 'mutasi_stok';

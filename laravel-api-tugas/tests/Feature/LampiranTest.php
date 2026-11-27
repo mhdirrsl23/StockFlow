@@ -14,9 +14,6 @@ class LampiranTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * Byte PNG valid 1x1 piksel.
-     */
     private function pngBytes(): string
     {
         return (string) base64_decode(
@@ -69,9 +66,6 @@ class LampiranTest extends TestCase
         $res->assertOk();
         $this->assertStringStartsWith('image/png', (string) $res->headers->get('Content-Type'));
 
-        // BinaryFileResponse tidak membawa isi ke getContent() pada konteks test —
-        // byte yang dilayani diverifikasi langsung dari penyimpanan (server asli
-        // sudah terbukti benar pada smoke test).
         $this->assertSame($this->pngBytes(), Storage::disk('local')->get($path));
     }
 

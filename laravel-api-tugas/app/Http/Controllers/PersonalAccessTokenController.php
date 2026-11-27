@@ -11,10 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 final class PersonalAccessTokenController extends Controller
 {
-    /**
-     * FR-05: daftar sesi/token aktif milik pengguna login —
-     * apps lama yang kehilangan perangkat dapat dipantau pemilik dari sini.
-     */
     public function index(Request $request): JsonResponse
     {
         $tokens = DB::table('personal_access_tokens')
@@ -36,9 +32,6 @@ final class PersonalAccessTokenController extends Controller
         return ApiResponse::ok(['items' => $items], 'Daftar sesi ditemukan');
     }
 
-    /**
-     * FR-05: cabut sesi tertentu milik sendiri (Logout Semua Perangkat).
-     */
     public function destroy(Request $request, int $token): JsonResponse
     {
         $dihapus = DB::table('personal_access_tokens')
@@ -56,9 +49,6 @@ final class PersonalAccessTokenController extends Controller
         return ApiResponse::ok(null, 'Sesi berhasil dicabut');
     }
 
-    /**
-     * FR-05: cabut seluruh sesi kecuali sesi saat ini.
-     */
     public function hapusLainnya(Request $request): JsonResponse
     {
         $idSaatIni = (int) ($request->user()->currentAccessToken()?->id ?? 0);

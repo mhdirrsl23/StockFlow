@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Detail batch — draft.html batchDetailPage() untuk MLK-2411B (Ultra Milk, Kedaluwarsa 1 hr lalu).
-  Data contoh = seed StokAman_database.sql (30 Okt 2026). Tanpa tabbar; actionbar bawah.
--->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,7 +9,7 @@
     android:orientation="vertical"
     tools:ignore="HardcodedText,ContentDescription,UseCompatTextViewDrawableXml">
 
-    <!-- Topbar sub-halaman -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,7 +60,7 @@
             android:paddingEnd="18dp"
             android:paddingBottom="26dp">
 
-            <!-- Kartu status batch -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -88,7 +85,7 @@
                         android:id="@+id/tv_status_batch"
                         style="@style/SF.Pill.Danger"
                         android:drawableStart="@drawable/ic12_alert_triangle"
-                        android:text="Kedaluwarsa" />
+                        android:text="-" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -121,7 +118,7 @@
                         <TextView
                             android:id="@+id/tv_nama_barang"
                             style="@style/SF.Text.RowTitle"
-                            android:text="Ultra Milk Full Cream 250ml" />
+                            android:text="-" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -134,12 +131,13 @@
                                 android:id="@+id/tv_nomor_batch"
                                 style="@style/SF.Text.Mono"
                                 android:fontFamily="monospace"
-                                android:text="MLK-2411B"
+                                android:text="-"
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/tv_detail_sku"
                                 style="@style/SF.Text.RowSub"
-                                android:text=" · SKU-MNM-001" />
+                                android:text="" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -179,16 +177,16 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Kedaluwarsa 1 hr lalu" />
+                        android:text="-" />
 
                     <TextView
                         android:id="@+id/tv_tanggal_kedaluwarsa"
                         style="@style/SF.Text.Muted"
-                        android:text="29 Okt 2026" />
+                        android:text="-" />
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Alert strip: perlu ditangani -->
+
             <LinearLayout
                 android:id="@+id/alert_batch_kedaluwarsa"
                 android:layout_width="match_parent"
@@ -230,7 +228,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Ringkasan stok -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -317,11 +315,13 @@
                         style="@style/SF.Text"
                         android:fontFamily="@font/plus_jakarta_sans_extrabold"
                         android:letterSpacing="-0.04"
-                        android:text="1"
-                        android:textColor="@color/sf_danger"
+                        android:id="@+id/tv_ringkasan_hari"
+                        android:text="—"
+                        android:textColor="@color/sf_muted"
                         android:textSize="18sp" />
 
                     <TextView
+                        android:id="@+id/tv_ringkasan_label_hari"
                         style="@style/SF.Text.Caption"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/plus_jakarta_sans_bold"
@@ -329,7 +329,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Mutasi batch -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -342,9 +342,10 @@
                     android:text="Mutasi batch" />
 
                 <TextView
+                    android:id="@+id/tv_mutasi_count"
                     style="@style/SF.Text.Caption"
                     android:layout_marginTop="3dp"
-                    android:text="1 entri audit" />
+                    android:text="—" />
             </LinearLayout>
 
             <LinearLayout
@@ -408,7 +409,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Lampiran -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -521,7 +522,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Informasi batch -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -562,6 +563,7 @@
                         android:text="ID batch" />
 
                     <TextView
+                        android:id="@+id/tv_detail_id"
                         style="@style/SF.Text.Mono"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -569,7 +571,7 @@
                         android:layout_weight="0.58"
                         android:fontFamily="monospace"
                         android:gravity="end"
-                        android:text="#4"
+                        android:text="-"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -589,6 +591,7 @@
                         android:text="Nomor batch" />
 
                     <TextView
+                        android:id="@+id/tv_detail_nomor_batch"
                         style="@style/SF.Text.Mono"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -596,7 +599,7 @@
                         android:layout_weight="0.58"
                         android:fontFamily="monospace"
                         android:gravity="end"
-                        android:text="MLK-2411B"
+                        android:text="-"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -616,6 +619,7 @@
                         android:text="Barang" />
 
                     <TextView
+                        android:id="@+id/tv_detail_nama_barang"
                         style="@style/SF.Text.Link"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -623,7 +627,7 @@
                         android:layout_weight="0.58"
                         android:drawableEnd="@drawable/ic12_chevron_right"
                         android:gravity="end"
-                        android:text="Ultra Milk Full Cream 250ml" />
+                        android:text="-" />
                 </LinearLayout>
 
                 <View style="@style/SF.Divider" />
@@ -642,13 +646,14 @@
                         android:text="Jumlah awal" />
 
                     <TextView
+                        android:id="@+id/tv_detail_jumlah_awal"
                         style="@style/SF.Text.Strong"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="18dp"
                         android:layout_weight="0.58"
                         android:gravity="end"
-                        android:text="30 pcs" />
+                        android:text="-" />
                 </LinearLayout>
 
                 <View style="@style/SF.Divider" />
@@ -667,13 +672,14 @@
                         android:text="Jumlah sisa" />
 
                     <TextView
+                        android:id="@+id/tv_detail_jumlah_sisa"
                         style="@style/SF.Text.Strong"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="18dp"
                         android:layout_weight="0.58"
                         android:gravity="end"
-                        android:text="30 pcs" />
+                        android:text="-" />
                 </LinearLayout>
 
                 <View style="@style/SF.Divider" />
@@ -698,7 +704,8 @@
                         android:layout_marginStart="18dp"
                         android:layout_weight="0.58"
                         android:gravity="end"
-                        android:text="29 Oktober 2026" />
+                        android:id="@+id/tv_detail_tanggal_kedaluwarsa"
+                        android:text="-" />
                 </LinearLayout>
 
                 <View style="@style/SF.Divider" />
@@ -726,9 +733,10 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tv_detail_status"
                             style="@style/SF.Pill.Danger"
                             android:drawableStart="@drawable/ic12_alert_triangle"
-                            android:text="Kedaluwarsa" />
+                            android:text="-" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -748,6 +756,7 @@
                         android:text="Status penanganan" />
 
                     <TextView
+                        android:id="@+id/tv_detail_status_penanganan"
                         style="@style/SF.Text.Strong"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -773,6 +782,7 @@
                         android:text="Catatan penanganan" />
 
                     <TextView
+                        android:id="@+id/tv_detail_catatan_penanganan"
                         style="@style/SF.Text.Strong"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -824,13 +834,14 @@
                         android:text="Dibuat pada" />
 
                     <TextView
+                        android:id="@+id/tv_detail_created_at"
                         style="@style/SF.Text.Strong"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="18dp"
                         android:layout_weight="0.58"
                         android:gravity="end"
-                        android:text="30 Okt 2026 · 07.34 WIB" />
+                        android:text="-" />
                 </LinearLayout>
 
                 <View style="@style/SF.Divider" />
@@ -849,6 +860,7 @@
                         android:text="Deleted at" />
 
                     <TextView
+                        android:id="@+id/tv_detail_deleted_at"
                         style="@style/SF.Text.Strong"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -863,7 +875,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Actionbar -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

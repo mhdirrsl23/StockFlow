@@ -2,27 +2,14 @@
 
 namespace App\Services;
 
-use App\Models\BatchStok;
 use App\Models\Barang;
+use App\Models\BatchStok;
 use App\Models\Notifikasi;
 use App\Models\Pengaturan;
 use Illuminate\Support\Facades\DB;
 
-/**
- * Monitoring harian kedaluwarsa + stok minimum (FR-23, BR-03):
- * - status batch disegarkan dari tanggal kedaluwarsa terhadap hari WIB;
- * - notifikasi dibuat sekali per jenis per barang/batch per hari (uq index),
- *   sehingga proses idempoten saat dijalankan berulang;
- * - stok menipis diperiksa per barang dan juga dapat dipicu dari
- *   layanan transaksi stok setelah mutasi keluar.
- */
 final class ExpiryMonitoringService
 {
-    /**
-     * Refresh status batch, buat notifikasi kedaluwarsa & stok menipis.
-     *
-     * @return array{barang:int, mendekati:int, kedaluwarsa:int, stok_menipis:int}
-     */
     public function jalankan(): array
     {
         $mendekati = $this->refreshStatusDanNotifikasiMendekati();
@@ -37,10 +24,6 @@ final class ExpiryMonitoringService
         ];
     }
 
-    /**
-     * Set ulang status batch aktif (FR-20) lalu buat notifikasi
-     * "Mendekati Kedaluwarsa" untuk batch yang berstatus tersebut.
-     */
     private function refreshStatusDanNotifikasiMendekati(): int
     {
         $this->segarkanStatus();
@@ -54,9 +37,6 @@ final class ExpiryMonitoringService
         return $this->notifikasiBatches($batches, 'Mendekati Kedaluwarsa');
     }
 
-    /**
-     * Notifikasi "Kedaluwarsa" untuk batch yang melewati tanggal kedaluwarsa.
-     */
     private function notifikasiKedaluwarsa(): int
     {
         $batches = BatchStok::query()
@@ -68,13 +48,6 @@ final class ExpiryMonitoringService
         return $this->notifikasiBatches($batches, 'Kedaluwarsa');
     }
 
-    /**
-     * Pembaruan status semua batch aktif dari tanggal kedaluwarsa (FR-20, BR-03):
-     * - tanggal < hari ini  -> Kedaluwarsa
-     * - tanggal <= hari ini + ambang -> Mendekati Kedaluwarsa
-     * - selain itu -> Aman
-     * Batch berstatus Ditangani mengikuti aturan penanganan (FR-26).
-     */
     private function segarkanStatus(): void
     {
         $ambang = Pengaturan::ambangPeringatanHari();
@@ -91,12 +64,6 @@ final class ExpiryMonitoringService
         SQL, ['ambang' => $ambang]);
     }
 
-    /**
-     * Anti-duplikat FR-23 dijelaskan oleh UNIQUE (jenis, barang, batch, tanggal WIB):
-     * baris lama tidak dibuat kembali ketika monitor dijalankan berulang.
-     *
-     * @param  iterable<BatchStok>  $batches
-     */
     private function notifikasiBatches(iterable $batches, string $jenis): int
     {
         $jumlahBaru = 0;
@@ -123,17 +90,13 @@ final class ExpiryMonitoringService
         return $jumlahBaru;
     }
 
-    /**
-     * Buat notifikasi "Stok Menipis" untuk barang yang berstatus menipis hari ini
-     * (dedupe per hari karena UNIQUE index tabel notifikasi).
-     */
     public static function notifikasiStokMenipisSekarang(): int
     {
         $rows = DB::table('v_stok_tersedia')->where('status_stok', 'Stok Menipis')->get();
         $jumlahBaru = 0;
 
         foreach ($rows as $row) {
-            // stok_minimum 0 berarti barang tidak berlangganan peringatan minimum
+
             if ((int) $row->stok_minimum <= 0) {
                 continue;
             }

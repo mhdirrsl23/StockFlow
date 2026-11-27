@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * lampiran — FR-17, FR-26; Q-05.
-     * Bukti foto pada batch: JPG/PNG maks 2 MB (diperiksa di aplikasi & server).
-     * path = path relatif folder penyimpanan Laravel, bukan URL publik.
-     */
     public function up(): void
     {
         Schema::create('lampiran', function (Blueprint $table) {

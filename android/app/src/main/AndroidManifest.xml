@@ -16,7 +16,7 @@
         android:theme="@style/Theme.StockFlow"
         android:usesCleartextTraffic="true">
 
-        <!-- FR-16: bagikan berkas ekspor laporan (xlsx) lewat FileProvider -->
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"

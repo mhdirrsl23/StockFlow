@@ -79,8 +79,6 @@ class AuthTest extends TestCase
             ->assertOk()
             ->assertJsonPath('success', true);
 
-        // Lepas cache guard Sanctum (RequestGuard meng-cache user antar-request
-        // dalam satu proses test) agar pencabutan token benar-benar diuji.
         Auth::forgetGuards();
 
         $this->withToken($token)->getJson('/api/me')->assertUnauthorized();

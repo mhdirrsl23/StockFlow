@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Palet edisi database — diambil dari token db-src/style-base.css (:root)
-  Sumber tampilan: draft.html (StockFlow — Edisi Database, dari stockflow_database.sql)
--->
+
+
+
+
 <resources>
 
-    <!-- Brand emerald -->
+
     <color name="sf_brand">#0B6B4F</color>
     <color name="sf_brand_2">#12875D</color>
     <color name="sf_brand_deep">#053B2A</color>
     <color name="sf_brand_ink">#06261B</color>
     <color name="sf_on_brand">#FFFFFF</color>
 
-    <!-- Permukaan -->
+
     <color name="sf_bg">#F4F7F3</color>
     <color name="sf_bg_2">#E8EFE9</color>
     <color name="sf_card">#FFFFFF</color>
     <color name="sf_mint">#DFF2E7</color>
     <color name="sf_mint_2">#EEF8F1</color>
 
-    <!-- Teks -->
+
     <color name="sf_ink">#0C2018</color>
     <color name="sf_text">#2C4037</color>
     <color name="sf_muted">#74867D</color>
     <color name="sf_muted_2">#94A49C</color>
     <color name="sf_on_card_muted">#9AA8A0</color>
 
-    <!-- Garis -->
+
     <color name="sf_line">#E4EBE5</color>
     <color name="sf_line_strong">#D5E0D8</color>
 
-    <!-- Status -->
+
     <color name="sf_safe">#167552</color>
     <color name="sf_safe_bg">#E9F6EF</color>
     <color name="sf_safe_line">#CFEADC</color>
@@ -46,7 +46,7 @@
     <color name="sf_violet">#6B5A9E</color>
     <color name="sf_violet_bg">#F0EDF8</color>
 
-    <!-- Tambahan komponen -->
+
     <color name="sf_ghost_text">#345247</color>
     <color name="sf_brand_dark">#084B36</color>
     <color name="sf_icon_gray">#526A5E</color>
@@ -64,7 +64,7 @@
     <color name="sf_hero_label">#B8DDCB</color>
     <color name="sf_hero_eyebrow">#9FE3C2</color>
 
-    <!-- Login (gelap) -->
+
     <color name="sf_auth_top">#073F2C</color>
     <color name="sf_auth_mid">#052B1E</color>
     <color name="sf_auth_bottom">#031B13</color>

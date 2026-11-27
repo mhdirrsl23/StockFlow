@@ -1,107 +1,45 @@
-# StokAman (StockFlow)
+# Panduan Instalasi dan Penggunaan StockFlow
 
-Aplikasi manajemen stok barang dengan pemantauan kedaluwarsa berbasis **FEFO** (*First Expired First Out*). Repositori ini terdiri dari dua komponen:
+StockFlow adalah aplikasi Android untuk mengelola data barang dan batch stok. Aplikasi Android terhubung ke REST API Laravel dan database MySQL.
 
-- **`laravel-api-tugas/`** — REST API Laravel + Sanctum + MySQL 8 (kontrak PRD 9.4).
-- **`android/`** — aplikasi Android native (Kotlin) yang mengonsumsi API tersebut.
+Panduan ini ditujukan kepada penerima source code proyek. Alamat API aplikasi diatur langsung pada `RetrofitClient.kt`, sehingga penerima dapat mengarahkannya ke server Laravel miliknya sendiri. Source code saat ini masih berisi alamat tunnel ngrok milik pembuat sebagai konfigurasi awal.
 
-> Proyek akademik: implementasi PRD 9.4 "Sistem Pemantauan Stok Kedaluwarsa".
+## 1. Persyaratan
 
-## Fitur
+Untuk memakai aplikasi:
 
-### Autentikasi & akun
-- Login token (Laravel Sanctum), sesi tunggal per akun (login baru mencabut token lama), throttle 5 percobaan login/menit.
-- Manajemen pengguna (khusus pemilik): tambah, ubah, aktif/nonaktif, hapus.
-- Profil, ganti kata sandi (`GET /me`).
+- Perangkat Android atau emulator.
+- Server API Laravel yang aktif, baik di komputer sendiri maupun server pembuat.
 
-### Barang & batch
-- CRUD barang + pencarian dan filter kategori.
-- Batch per barang: nomor batch, tanggal kedaluwarsa, jumlah awal dan sisa.
-- Urutan FEFO otomatis (kedaluwarsa terdekat lebih dulu).
-- Penanganan kedaluwarsa (dimusnahkan / dikembalikan ke pemasok / lainnya) sesuai BR-01.
-- Lampiran foto bukti per batch.
+Untuk menyiapkan environment dan membangun APK dari source code:
 
-### Transaksi stok
-- Stok masuk (menambah batch baru).
-- Stok keluar memotong batch secara FEFO.
-- Penyesuaian stok — alasan wajib diisi.
+- PHP 8.3 atau lebih baru dan Composer.
+- MySQL 8.
+- JDK 17 atau lebih baru.
+- Android Studio dan Android SDK yang diperlukan proyek.
+- ngrok hanya diperlukan jika API perlu diakses melalui internet dari luar jaringan lokal.
 
-### Notifikasi & dashboard
-- Dashboard ringkasan: barang/batch aktif, stok menipis, batch mendekati kedaluwarsa, notifikasi belum dibaca.
-- Notifikasi: Mendekati Kedaluwarsa, Kedaluwarsa, Stok Menipis; tandai dibaca per item maupun semua sekaligus.
+## 2. Menyiapkan Environment Backend
 
-### Laporan, impor, audit
-- Laporan stok, mutasi/transaksi, kedaluwarsa, dan fast-moving.
-- Ekspor laporan **xlsx/pdf** (khusus pemilik).
-- Impor produk via xlsx: `preview` → `commit` (tersedia di API; jalur desktop/web).
-- Riwayat aktivitas pengguna.
-
-### Pengaturan (khusus pemilik)
-- Ambang peringatan kedaluwarsa (hari), ukuran maksimum lampiran (MB), maksimum baris impor.
-
-## Arsitektur
-
-```text
-┌───────────────────────┐    HTTP/JSON (Retrofit + OkHttp)   ┌─────────────────────────┐
-│  Aplikasi Android     │ ─────────────────────────────────► │  REST API Laravel 13    │
-│  Kotlin · Material    │ ◄───────────────────────────────── │  Sanctum · validasi     │
-└───────────────────────┘   {success, message, data|errors}  └───────────┬─────────────┘
-                                                                         │ Eloquent
-                                                                         ▼
-                                                              ┌────────────────────┐
-                                                              │  MySQL 8 (Laragon) │
-                                                              └────────────────────┘
-```
-
-## Struktur repositori
-
-```text
-StockFlow/
-├── android/                      # aplikasi Android (Kotlin, Gradle 9.6)
-│   └── app/src/main/
-│       ├── java/com/example/stockflow/   # activity, fragment, adapter, API client
-│       └── res/                          # layout, drawable, values
-├── laravel-api-tugas/            # REST API (Laravel)
-│   ├── app/Http/Controllers/     # logika endpoint
-│   ├── routes/api.php            # kontrak API (acuan)
-│   └── tests/                    # pengujian backend
-└── README.md
-```
-
-## Prasyarat
-
-| Komponen | Versi |
-|---|---|
-| PHP + Composer | PHP ≥ 8.3 |
-| MySQL | 8.0 via **Laragon** (disarankan; Docker opsional) |
-| JDK | 17+ |
-| Android SDK | compileSdk 37, minSdk 24 (Android 7.0+) |
-| Gradle | 9.6 (via wrapper, tidak perlu instal manual) |
-
-## Menjalankan backend (Laragon)
-
-Panduan ini memakai **Laragon Full** (PHP + MySQL dalam satu paket). XAMPP secara prinsip mirip, tetapi proyek ini diuji dengan Laragon.
-
-> **Alur cepat untuk anggota tim:** `git pull` → `composer install` → buat database → `php artisan migrate --seed` → `php artisan serve --host=0.0.0.0 --port=8010` → sesuaikan `BASE_URL` di aplikasi Android.
-
-1. **Siapkan Laragon** — pastikan tersedia **PHP ≥ 8.3** dan **MySQL 8** (pilih versi lewat menu Laragon → PHP/MySQL bila perlu; hindari MariaDB agar sama dengan lingkungan pengujian), lalu klik **Start All** (Apache/Nginx dan MySQL menyala).
-
-2. **Pasang dependensi**:
+1. Masuk ke folder backend:
 
    ```bash
    cd laravel-api-tugas
+   ```
+
+2. Pasang dependensi Composer:
+
+   ```bash
    composer install
-   cp .env.example .env        # Windows cmd: copy .env.example .env
    ```
 
-3. **Buat database** lewat tombol **Database** di Laragon (HeidiSQL) atau terminal:
+3. Buat file `.env` dari contoh yang tersedia. Di PowerShell:
 
-   ```sql
-   CREATE DATABASE stockflow CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-   CREATE DATABASE stockflow_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; -- dipakai php artisan test
+   ```powershell
+   Copy-Item .env.example .env
    ```
 
-4. **Sesuaikan `.env`** (bawaan Laragon: pengguna `root` tanpa kata sandi):
+   Buka `.env` dan atur koneksi database MySQL. `.env.example` menggunakan SQLite secara default, sedangkan migrasi proyek ini membutuhkan MySQL 8. Gunakan konfigurasi seperti berikut:
 
    ```env
    DB_CONNECTION=mysql
@@ -112,144 +50,93 @@ Panduan ini memakai **Laragon Full** (PHP + MySQL dalam satu paket). XAMPP secar
    DB_PASSWORD=
    ```
 
-5. **Bangun skema dan data demo**:
+4. Buat database `stockflow` di MySQL jika belum tersedia:
+
+   ```sql
+   CREATE DATABASE stockflow CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+   ```
+
+5. Siapkan application key, skema, dan data demo:
 
    ```bash
    php artisan key:generate
    php artisan migrate --seed
    ```
 
-   > **Tidak perlu mengimpor berkas `.sql` apa pun.** Seluruh struktur tabel dan data demo (akun `pemilik`/`staf`, barang, batch, notifikasi) dibangun oleh migrasi + seeder. Berkas `stockflow_database.sql` dari 28 Oktober hanyalah rancangan awal, bukan yang dipakai aplikasi.
+   `key:generate` mengisi `APP_KEY` pada `.env`. `migrate` membuat tabel database, sedangkan `--seed` mengisi akun demo beserta data awal. Jalankan perintah ini pada database kosong untuk setup pertama kali.
 
-6. **Jalankan server**:
+6. Jalankan server Laravel:
 
    ```bash
    php artisan serve --host=0.0.0.0 --port=8010
    ```
 
-   > Port **8010** dipakai karena port 8000 pada mesin pengembangan sering sudah terpakai layanan lain (mis. HPLIP printer). Port bebas diganti — yang penting konsisten dengan `BASE_URL` di aplikasi Android.
+   Biarkan terminal ini tetap berjalan selama aplikasi menggunakan API.
 
-7. **Verifikasi**:
+## 3. Mengatur Alamat API Android
 
-   ```bash
-   php artisan test        # semua pengujian harus hijau
-   ```
+Buka `android/app/src/main/java/com/example/stockflow/RetrofitClient.kt` dan ubah nilai `BASE_URL` agar mengarah ke server Laravel yang disiapkan. URL harus diakhiri `/api/`.
 
-   > Opsional: set `default-time-zone = '+07:00'` di `my.ini` MySQL Laragon lalu restart MySQL, agar `CURDATE()` pada view konsisten dengan WIB.
-
-### Alternatif Docker (opsional)
-
-Bila familiar dengan Docker, jalankan MySQL 8 lewat container di port **3307**:
-
-```bash
-docker run -d --name stockflow-mysql -p 3307:3306 \
-  -e MYSQL_ROOT_PASSWORD=<root_password> \
-  -e MYSQL_DATABASE=stockflow \
-  -e MYSQL_USER=stockflow_app \
-  -e MYSQL_PASSWORD=<password_app> \
-  mysql:8.0
+```kotlin
+private const val BASE_URL = "http://192.168.1.10:8010/api/"
 ```
 
-Lalu sesuaikan `DB_PORT=3307` dan kredensialnya di `.env`; langkah lainnya sama.
+Pilih alamat sesuai cara menjalankan aplikasi:
 
-## Membangun aplikasi Android
+- Emulator Android: gunakan `http://10.0.2.2:8010/api/`.
+- Perangkat Android di jaringan Wi-Fi yang sama: gunakan `http://<IP-komputer-server>:8010/api/`. Jalankan Laravel dengan `--host=0.0.0.0` dan pastikan firewall mengizinkan port `8010`.
+- Akses melalui internet/ngrok: jalankan tunnel ke port Laravel dengan perintah berikut, lalu gunakan alamat HTTPS yang diberikan ngrok dan tambahkan `/api/`.
 
-1. **Buat `android/local.properties`** (tidak di-commit ke git):
-
-   ```properties
-   sdk.dir=/path/ke/Android/Sdk
+   ```bash
+   ngrok http 8010
    ```
 
-2. **Atur alamat API** di `android/app/src/main/java/com/example/stockflow/RetrofitClient.kt`:
+> Ngrok hanya meneruskan koneksi ke server Laravel; ngrok tidak menjalankan Laravel atau database. Jika memakai server dan ngrok milik pembuat, keduanya harus aktif agar APK yang masih memakai URL tersebut dapat terhubung. Untuk menjalankan proyek secara mandiri, gunakan server sendiri dan ubah `BASE_URL` seperti di atas.
 
-   ```kotlin
-   private const val BASE_URL = "http://10.0.2.2:8010/api/"   // emulator
-   // HP fisik: "http://<IP-LAN-PC>:8010/api/" — HP dan PC harus satu jaringan WiFi
-   ```
+## 4. Membangun dan Memasang APK
 
-   Nilai `10.0.2.2` adalah alias localhost komputer *host* khusus emulator Android.
-
-3. **Build APK debug**:
+1. Buka proyek `android` melalui Android Studio dan sinkronkan Gradle, atau jalankan build dari terminal:
 
    ```bash
    cd android
-   ./gradlew :app:assembleDebug
+   .\gradlew.bat :app:assembleDebug
    ```
 
-   Hasil: `android/app/build/outputs/apk/debug/app-debug.apk`
+   Pada macOS/Linux, jalankan `./gradlew :app:assembleDebug`.
+2. APK hasil build tersedia di `android/app/build/outputs/apk/debug/app-debug.apk`. Pasang APK tersebut pada perangkat Android.
 
-4. **Pasang ke perangkat**:
-   - Salin APK ke HP → izinkan "instal dari sumber tidak dikenal" → install; atau
-   - Via USB dengan *USB debugging* aktif: `adb install -r app-debug.apk`.
+Pastikan `BASE_URL` sudah menunjuk ke API yang aktif sebelum membangun APK. Setiap kali alamat API berubah, ubah nilai tersebut lalu build dan pasang ulang APK.
 
-   > **Catatan tanda tangan**: build debug ditandatangani keystore debug masing-masing komputer. APK dari komputer berbeda (paket sama, tanda tangan beda) **tidak dapat saling menimpa** — uninstall aplikasi lama terlebih dahulu bila berganti sumber APK.
+## 5. Login
 
-## Akun demo (hasil seeder)
+Seeder menyediakan akun demo berikut:
 
-| Username | Kata sandi | Peran |
+| Peran | Username | Kata sandi |
 |---|---|---|
-| `pemilik` | `password` | Pemilik gudang — akses penuh (laporan, pengaturan, manajemen akun) |
-| `staf` | `password` | Staf gudang — operasional harian (barang, batch, transaksi) |
+| Pemilik | `pemilik` | `password` |
+| Staf | `staf` | `password` |
 
-> Sesi tunggal: login akun yang sama di perangkat lain akan mengakhiri sesi sebelumnya (FR-05).
+Masukkan username dan kata sandi pada halaman login. Akun demo hanya tersedia jika database telah diisi menggunakan `php artisan migrate --seed`.
 
-## API (ringkas)
+## 6. Penggunaan CRUD
 
-Base URL: `http://<host>:8010/api` · Autentikasi: header `Authorization: Bearer <token>` (dari `POST /login`).
+### Barang
 
-Format respons seragam (PRD 9.5):
+- **Create:** buka menu **Barang**, pilih tombol tambah, isi SKU, nama, kategori, satuan, dan stok minimum, lalu simpan.
+- **Read:** pilih menu **Barang** untuk melihat daftar. Ketuk salah satu barang untuk melihat detailnya dan batch yang terkait.
+- **Update:** antarmuka Android saat ini tidak menyediakan aksi ubah data barang.
+- **Delete:** buka detail barang, pilih aksi hapus, lalu konfirmasikan. Penghapusan mengikuti aturan aplikasi dan dapat ditolak jika masih ada batch aktif.
 
-```jsonc
-// sukses
-{ "success": true, "message": "…", "data": { } }
-// gagal validasi (422)
-{ "success": false, "message": "Data tidak valid", "errors": { "kolom": ["…"] } }
-```
+### Batch stok
 
-| Kelompok | Endpoint |
-|---|---|
-| Auth | `POST login` · `POST logout` · `GET me` · `GET tokens` · `DELETE tokens/{id}` · `DELETE tokens/others` |
-| Dashboard | `GET dashboard` |
-| Barang | `GET/POST products` · `GET/PUT/DELETE products/{id}` · `POST products/bulk-delete` · `GET products/{id}/fefo` · `GET/POST products/{id}/batches` |
-| Batch | `GET/PUT/DELETE batches/{id}` · `POST batches/bulk-delete` · `POST batches/{id}/attachments` · `GET attachments/{id}/file` · `DELETE attachments/{id}` |
-| Stok | `POST stock-transactions` · `GET stock-transactions` |
-| Kedaluwarsa | `GET expiry-monitoring` · `GET expiry-monitoring/perlu-ditangani` · `POST expiry-actions` |
-| Notifikasi | `GET notifications` · `PATCH notifications/{id}/read` · `POST notifications/read-all` |
-| Impor (FR-15) | `POST imports/products/preview` · `POST imports/products/commit` · `GET imports` · `GET imports/{id}` |
-| Laporan (pemilik) | `GET reports/stock` · `GET reports/transactions` · `GET reports/expiry` · `GET reports/fast-moving` · `GET reports/export?jenis=&format=` |
-| Pengaturan (pemilik) | `GET/PUT pengaturan` |
-| Pengguna (pemilik) | `GET/POST users` · `PUT users/{id}` · `PATCH users/{id}/aktif` · `DELETE users/{id}` |
-| Audit | `GET riwayat-aktivitas` |
+- **Create:** dari detail barang pilih tambah batch; atau gunakan tombol tambah batch dan pilih barang. Isi nomor batch, jumlah awal, dan tanggal kedaluwarsa, lalu simpan.
+- **Read:** buka detail barang untuk melihat daftar batch, lalu ketuk batch untuk melihat detail.
+- **Update:** pada detail batch buka menu aksi (ikon tiga titik), pilih ubah karakteristik, ubah nomor batch dan/atau tanggal kedaluwarsa, lalu simpan. Jumlah stok tidak diubah dari formulir ini.
+- **Delete:** pada detail batch buka menu aksi, pilih hapus batch, lalu konfirmasikan.
 
-Detail parameter dan contoh lengkap: lihat [`laravel-api-tugas/README.md`](laravel-api-tugas/README.md).
+## 7. Pemecahan Masalah Koneksi
 
-## Pengujian
-
-**Backend** — `php artisan test`: 43 pengujian / 175 assertion, mencakup autentikasi, validasi, FEFO, BR-01, laporan, impor, pengaturan, dan pengguna.
-
-**Android** — smoke test end-to-end di emulator dengan backend live:
-
-1. Login → beranda terisi data nyata (dashboard).
-2. Daftar barang → detail barang → daftar batch FEFO → detail batch.
-3. Simpan pengaturan → `PUT` 200, nilai terverifikasi di database.
-4. Notifikasi: daftar, filter, tandai semua dibaca (badge → 0).
-5. Laporan 4 tab; ekspor xlsx → berkas tersimpan + share sheet sistem.
-6. Logout → token dicabut, kembali ke layar login.
-7. Penanganan error: 401 → kembali ke login, 422 → pesan validasi per kolom, 429 → throttle.
-
-## Pemecahan masalah
-
-| Gejala | Penyebab umum | Solusi |
-|---|---|---|
-| "Gagal terhubung ke server" | HP & PC beda jaringan, backend mati, atau `BASE_URL` salah | Pastikan satu WiFi, jalankan `php artisan serve --host=0.0.0.0 --port=8010`, cocokkan IP LAN di `BASE_URL` |
-| `Unknown database 'stockflow'` atau `Access denied` | Database belum dibuat atau kredensial `.env` salah | Buat database (langkah 3 panduan backend), lalu cocokkan `DB_USERNAME`/`DB_PASSWORD` — Laragon bawaan memakai `root` tanpa sandi |
-| Koneksi database ditolak | `DB_PORT` tidak cocok dengan MySQL yang dipakai | Laragon memakai **3306**, Docker memakai **3307** — samakan dengan `DB_PORT` di `.env` |
-| "App not installed" saat update APK | APK berasal dari komputer lain (tanda tangan berbeda) | Uninstall aplikasi lama, lalu install APK baru |
-| Login langsung ditolak / sesi berakhir | Akun yang sama dipakai di perangkat lain (sesi tunggal) | Gunakan akun berbeda atau login ulang |
-| "Terlalu banyak percobaan" | Throttle 5 login/menit | Tunggu ± 1 menit |
-| Backend jalan tetapi HP tidak bisa mengakses | Firewall PC menutup port | `sudo ufw allow 8010/tcp` (Linux) atau izinkan port tersebut di firewall |
-| Build Gradle lambat / gagal karena memori | Daemon Gradle menumpuk | `./gradlew --stop`, tutup proses berat lain |
-
----
-
-Proyek akademik — *Sistem Pemantauan Stok Kedaluwarsa* (PRD 9.4).
+- Jika login atau pemuatan data gagal, pastikan MySQL dan server Laravel aktif, lalu periksa `BASE_URL` di `RetrofitClient.kt`.
+- Jika menggunakan ngrok, pastikan tunnel mengarah ke port Laravel yang benar. Jika alamat tunnel berubah, perbarui `BASE_URL` dan build ulang APK.
+- Untuk jaringan pribadi, periksa IP komputer, koneksi Wi-Fi, firewall, port Laravel, dan `BASE_URL`. Jangan gunakan `localhost` atau `127.0.0.1` untuk mengakses komputer server dari perangkat Android fisik.
+- Untuk masalah kredensial, pastikan akun demo tersedia melalui proses seeding dan username/kata sandi dimasukkan dengan benar.

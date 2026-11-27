@@ -14,11 +14,6 @@ class ExpiryMonitoringTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * Tiga batch pada satu barang: mendekati ambang, kedaluwarsa, dan aman.
-     *
-     * @return array{0: User, 1: Barang, 2: BatchStok, 3: BatchStok, 4: BatchStok}
-     */
     private function siapkanBatch(): array
     {
         $pemilik = User::factory()->pemilik()->create();

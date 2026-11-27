@@ -1,15 +1,14 @@
 <?php
 
 use App\Http\Middleware\RoleMiddleware;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -21,7 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // Alias role untuk pembatasan peran di endpoint (Bagian 2 PRD).
+
         $middleware->alias([
             'role' => RoleMiddleware::class,
         ]);
@@ -31,7 +30,6 @@ return Application::configure(basePath: dirname(__DIR__))
             fn (Request $request) => $request->is('api/*') || $request->expectsJson(),
         );
 
-        // Seluruh respons kegagalan API membentuk {success, message, ...} (PRD 9.5)
         $exceptions->render(function (AuthenticationException $e, Request $request) {
             if ($request->is('api/*') || $request->expectsJson()) {
                 return response()->json([
@@ -72,8 +70,6 @@ return Application::configure(basePath: dirname(__DIR__))
             if ($request->is('api/*') || $request->expectsJson()) {
                 $pesan = $e->getMessage();
 
-                // Jangan bocorkan kelas model dari pesan binding (NFR-01);
-                // hanya pesan kustom abort() yang boleh lewat.
                 $bolehMuncul = ! str_contains($pesan, '\\') && ! str_starts_with($pesan, 'No query results');
 
                 return response()->json([

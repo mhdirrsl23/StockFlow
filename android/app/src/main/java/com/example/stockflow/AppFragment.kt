@@ -84,12 +84,12 @@ private fun Fragment.go(destName: String, args: Bundle? = null) {
     }
 }
 
-/**
- * Pasang aksi klik pada tombol kontainer. Beberapa tombol ikon dibungkus
- * FrameLayout ber-id dengan anak ImageView berclickable (style SF.IconBtn) —
- * tanpa listener di anak, tap ditelan anak dan tombol terasa mati.
- * Pasang listener yang sama di anak clickable agar keduanya merespons.
- */
+
+
+
+
+
+
 private fun View.pasangKlik(blok: (View) -> Unit) {
     setOnClickListener(blok)
     isClickable = true
@@ -112,10 +112,10 @@ private fun Fragment.runApi(block: suspend (ApiService) -> Unit) {
     }
 }
 
-/**
- * Urai pesan gagal dari respons API: untuk status non-2xx (mis. 422 validasi)
- * isi JSON ada di errorBody — ambil message + rincian errors per kolom (PRD 9.5).
- */
+
+
+
+
 private fun Fragment.uraikanGagal(res: retrofit2.Response<*>, bawaan: String): String {
     val teks = res.errorBody()?.string()
     if (teks != null) {
@@ -156,14 +156,14 @@ open class BaseBerandaFragment(private val layoutId: Int, private val fallbackNa
             "btn_lihat_semua_barang" to "nav_barang",
             "btn_lihat_laporan" to "nav_laporan",
             "btn_lihat_riwayat" to "nav_riwayat",
-            // Kartu alert & stat beranda
+
             "card_alert_kedaluwarsa" to "perluDitanganiFragment",
             "card_alert_menipis" to "nav_barang",
             "card_stat_kedaluwarsa" to "perluDitanganiFragment",
             "card_stat_mendekati" to "perluDitanganiFragment",
             "card_hero_perlu_ditangani" to "perluDitanganiFragment",
             "card_stat_menipis" to "nav_barang",
-            // Aksi beranda staf
+
             "btn_stok_masuk" to "formBatchFragment",
             "btn_tangani" to "perluDitanganiFragment",
             "btn_barang_menipis" to "nav_barang",
@@ -180,7 +180,7 @@ open class BaseBerandaFragment(private val layoutId: Int, private val fallbackNa
             view.opt<TextView>("tv_kedaluwarsa")?.text = d.ringkasan.batch_kedaluwarsa.toString()
             view.opt<TextView>("tv_perlu_ditangani")?.text = d.ringkasan.batch_kedaluwarsa.toString()
 
-            // Angka & kalimat khusus beranda staf (id tidak ada di beranda pemilik → no-op)
+
             view.opt<TextView>("tv_notif_baru")?.text = d.ringkasan.notifikasi_belum_dibaca.toString()
             view.opt<TextView>("tv_kedaluwarsa_2")?.text = d.ringkasan.batch_kedaluwarsa.toString()
             view.opt<TextView>("tv_mendekati_kedaluwarsa_2")?.text = d.ringkasan.batch_mendekati_kedaluwarsa.toString()
@@ -189,10 +189,10 @@ open class BaseBerandaFragment(private val layoutId: Int, private val fallbackNa
         }
     }
 
-    /**
-     * Mengikat bagian beranda yang sebelumnya masih berisi teks demo statis:
-     * tanggal, alert, prioritas FEFO, stok menipis, dan aktivitas terbaru.
-     */
+
+
+
+
     private fun bindDashboardLanjutan(view: View, d: DashboardData) {
         val tanggal = SimpleDateFormat("EEE, d MMM", Locale("id", "ID")).format(Date())
         view.opt<TextView>("tv_tanggal_1")?.text = tanggal
@@ -227,7 +227,7 @@ open class BaseBerandaFragment(private val layoutId: Int, private val fallbackNa
         view.opt<View>("card_stat_mendekati")?.pasangKlik { go("perluDitanganiFragment") }
         view.opt<View>("card_hero_perlu_ditangani")?.pasangKlik { go("perluDitanganiFragment") }
         if (layoutId == R.layout.fragment_beranda_staff) {
-            // Di beranda staf, kartu alert memakai id tombol yang sudah ada.
+
             view.opt<View>("btn_perlu_ditangani")?.visibility =
                 if (jumlahKedaluwarsa > 0) View.VISIBLE else View.GONE
         }
@@ -245,7 +245,7 @@ open class BaseBerandaFragment(private val layoutId: Int, private val fallbackNa
         view.opt<View>("btn_barang_menipis")?.pasangKlik { go("nav_barang") }
         view.opt<View>("card_stat_menipis")?.pasangKlik { go("nav_barang") }
         if (layoutId == R.layout.fragment_beranda_staff) {
-            // Di beranda staf, kartu alert memakai id tombol yang sudah ada.
+
             view.opt<View>("btn_barang_menipis")?.visibility =
                 if (jumlahMenipis > 0) View.VISIBLE else View.GONE
         }
@@ -330,7 +330,7 @@ open class BaseBerandaFragment(private val layoutId: Int, private val fallbackNa
         }
     }
 
-    /** Menyesuaikan warna pill status FEFO agar "Aman" tidak tampil merah. */
+
     private fun hiasPillStatus(pill: TextView, status: String) {
         val (latar, warna, ikon) = when (status) {
             "Aman" -> Triple(R.drawable.bg_pill_safe, R.color.sf_safe, 0)
@@ -438,7 +438,7 @@ open class BaseBarangFragment(layoutId: Int) : Fragment(layoutId) {
             },
         )
 
-        // Lonceng notifikasi: id berbeda per varian layout (pemilik / staf) — opt() no-op bila tidak ada.
+
         view.opt<View>("btn_notifikasi")?.pasangKlik { go("notifikasiFragment") }
         view.opt<View>("btn_notifikasi_staff")?.pasangKlik { go("notifikasiFragment") }
         view.bindList("rv_barang", adapter)
@@ -721,7 +721,7 @@ class LaporanFragment : Fragment(R.layout.fragment_laporan) {
         super.onViewCreated(view, savedInstanceState)
         view.opt<View>("btn_notifikasi_laporan")?.pasangKlik { go("notifikasiFragment") }
 
-        // Tab kategori laporan (FR-16)
+
         val tabMap = mapOf(
             "tab_laporan_stok" to "stok",
             "tab_laporan_mutasi" to "mutasi",
@@ -747,7 +747,7 @@ class LaporanFragment : Fragment(R.layout.fragment_laporan) {
             }
         }
 
-        // Ekspor berkas xlsx dari tab aktif (khusus pemilik, BR-08)
+
         view.opt<View>("btn_export_csv")?.setOnClickListener { unduhLaporan(jenisEkspor) }
 
         muatLaporan("stok")
@@ -762,7 +762,7 @@ class LaporanFragment : Fragment(R.layout.fragment_laporan) {
                 "stok" -> {
                     val res = api.getLaporanStok()
                     val rows = res.body()?.data?.rows ?: emptyList()
-                    // baris: [kode_sku, nama, kategori, satuan, minimum, tersedia, status]
+
                     val adapter = SimpleCardAdapter(rows, mapper = { row ->
                         val status = (row.getOrNull(6) ?: "-").toString()
                         val warna = if (status == "Stok Menipis") R.color.sf_danger else R.color.sf_safe
@@ -791,7 +791,7 @@ class LaporanFragment : Fragment(R.layout.fragment_laporan) {
                 "kedaluwarsa" -> {
                     val res = api.getLaporanKedaluwarsa()
                     val rows = res.body()?.data?.rows ?: emptyList()
-                    // baris: [kode_sku, nama, satuan, nomor_batch, sisa, tanggal, status, penanganan]
+
                     val adapter = SimpleCardAdapter(rows, mapper = { row ->
                         val status = (row.getOrNull(6) ?: "-").toString()
                         val warna = when (status) {
@@ -832,8 +832,8 @@ class LaporanFragment : Fragment(R.layout.fragment_laporan) {
     }
 
     private fun unduhLaporan(jenis: String) {
-        // Kontrak backend ReportRequest: jenis ∈ {stok, transaksi, kedaluwarsa, laris}.
-        // Tab UI memakai nama sendiri → petakan; tab aktivitas (audit) tidak punya ekspor di kontrak.
+
+
         val jenisEkspor = when (jenis) {
             "mutasi" -> "transaksi"
             "aktivitas" -> ""
@@ -897,7 +897,7 @@ class ProfilFragment : Fragment(R.layout.fragment_profil) {
         view.opt<TextView>("tv_profil_username")?.text = "@${session.getUsername()}"
         view.opt<TextView>("tv_profil_peran")?.text = if (isOwner) "Pemilik Gudang" else "Staf Gudang"
 
-        // Segarkan profil dari server (GET /me — FR-02) supaya data terkini.
+
         runApi { api ->
             val res = api.getMe()
             val u = res.body()?.data ?: return@runApi
@@ -1043,20 +1043,74 @@ class DetailBatchFragment : Fragment(R.layout.fragment_detail_batch) {
         currentBatch = b
         view.opt<TextView>("tv_nomor_batch")?.text = b.nomor_batch
         view.opt<TextView>("tv_nama_barang")?.text = b.nama_barang ?: "Barang #${b.barang_id}"
+        view.opt<TextView>("tv_detail_sku")?.text =
+            b.kode_sku?.takeIf { it.isNotBlank() }?.let { " · $it" } ?: ""
+        val satuan = b.satuan?.takeIf { it.isNotBlank() }?.let { " $it" } ?: ""
         view.opt<TextView>("tv_jumlah_sisa")?.text = "${b.jumlah_sisa} / ${b.jumlah_awal}"
         val persentaseStok = if (b.jumlah_awal > 0) {
             ((b.jumlah_sisa.toDouble() / b.jumlah_awal) * 100).toInt().coerceIn(0, 100)
         } else {
             0
         }
-        view.opt<ProgressBar>("progress_jumlah_sisa")?.progress = persentaseStok
-        view.opt<TextView>("tv_tanggal_kedaluwarsa")?.text = b.tanggal_kedaluwarsa
-        view.opt<TextView>("tv_status_batch")?.text = b.status
+        view.opt<ProgressBar>("progress_jumlah_sisa")?.apply {
+            progress = persentaseStok
+            progressDrawable = ContextCompat.getDrawable(context, when (b.status) {
+                "Aman" -> R.drawable.progress_safe
+                "Mendekati Kedaluwarsa" -> R.drawable.progress_warn
+                "Kedaluwarsa" -> R.drawable.progress_danger
+                "Ditangani" -> R.drawable.progress_muted
+                else -> R.drawable.progress_muted
+            })
+        }
+        val tanggalKedaluwarsa = formatTanggalIndonesia(b.tanggal_kedaluwarsa)
+        view.opt<TextView>("tv_tanggal_kedaluwarsa")?.text = tanggalKedaluwarsa
+        view.opt<TextView>("tv_detail_tanggal_kedaluwarsa")?.text = tanggalKedaluwarsa
+        view.opt<TextView>("tv_status_batch")?.let { pill ->
+            pill.text = b.status
+            hiasStatusBatch(pill, b.status)
+        }
+        view.opt<TextView>("tv_detail_status")?.let { pill ->
+            pill.text = b.status
+            hiasStatusBatch(pill, b.status)
+        }
         view.opt<TextView>("tv_label_sisa_rel")?.text = labelRelatif(b.tanggal_kedaluwarsa)
         view.opt<View>("alert_batch_kedaluwarsa")?.visibility =
             if (b.status == "Kedaluwarsa" && b.jumlah_sisa > 0) View.VISIBLE else View.GONE
         view.opt<TextView>("tv_ringkasan_jumlah_sisa")?.text = b.jumlah_sisa.toString()
         view.opt<TextView>("tv_ringkasan_jumlah_awal")?.text = b.jumlah_awal.toString()
+        val selisih = selisihHari(b.tanggal_kedaluwarsa)
+        view.opt<TextView>("tv_ringkasan_hari")?.apply {
+            text = when {
+                selisih == null -> "—"
+                selisih < 0 -> kotlin.math.abs(selisih).toString()
+                else -> selisih.toString()
+            }
+            setTextColor(ContextCompat.getColor(context, when (b.status) {
+                "Aman" -> R.color.sf_safe
+                "Mendekati Kedaluwarsa" -> R.color.sf_warn
+                "Kedaluwarsa" -> R.color.sf_danger
+                "Ditangani" -> R.color.sf_muted
+                else -> R.color.sf_muted
+            }))
+        }
+        view.opt<TextView>("tv_ringkasan_label_hari")?.text = when {
+            selisih == null -> "status tanggal"
+            selisih < 0 -> "hari lewat"
+            selisih == 0L -> "hari ini"
+            else -> "hari lagi"
+        }
+        view.opt<TextView>("tv_detail_id")?.text = "#${b.id}"
+        view.opt<TextView>("tv_detail_nomor_batch")?.text = b.nomor_batch
+        view.opt<TextView>("tv_detail_nama_barang")?.text = b.nama_barang ?: "Barang #${b.barang_id}"
+        view.opt<TextView>("tv_detail_jumlah_awal")?.text = "${b.jumlah_awal}$satuan"
+        view.opt<TextView>("tv_detail_jumlah_sisa")?.text = "${b.jumlah_sisa}$satuan"
+        view.opt<TextView>("tv_detail_status_penanganan")?.text = b.status_penanganan ?: "—"
+        view.opt<TextView>("tv_detail_catatan_penanganan")?.text = b.catatan_penanganan ?: "—"
+        view.opt<TextView>("tv_detail_created_at")?.text = formatTanggalWaktuIndonesia(b.created_at)
+        view.opt<TextView>("tv_detail_deleted_at")?.text =
+            if (b.deleted_at.isNullOrBlank()) "— (aktif)" else formatTanggalWaktuIndonesia(b.deleted_at)
+        view.opt<View>("btn_tangani_batch")?.visibility =
+            if (b.status == "Kedaluwarsa" && b.jumlah_sisa > 0) View.VISIBLE else View.GONE
 
         val mutasi = b.mutasi_terbaru.firstOrNull()
         view.opt<TextView>("tv_mutasi_aksi")?.text = mutasi?.let {
@@ -1076,6 +1130,9 @@ class DetailBatchFragment : Fragment(R.layout.fragment_detail_batch) {
         } ?: "—"
         view.opt<TextView>("tv_mutasi_waktu")?.text =
             mutasi?.waktu?.substringAfter(' ')?.take(5) ?: "—"
+        view.opt<TextView>("tv_mutasi_count")?.text =
+            if (b.mutasi_terbaru.size == 1) "1 entri terbaru"
+            else "${b.mutasi_terbaru.size} entri terbaru"
         view.opt<TextView>("tv_batch_pembuat")?.text = b.nama_pembuat ?: "Tidak diketahui"
         tampilkanLampiran(api, view, b.lampiran)
     }
@@ -1162,7 +1219,7 @@ class DetailBatchFragment : Fragment(R.layout.fragment_detail_batch) {
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.size, opsi)
     }
 
-    // ── Menu aksi tambahan (ikon ⋮ di topbar) ─────────────────────────────
+
     private fun tampilkanMenuAksi(batchId: Int) {
         val b = currentBatch
         val opsi = arrayOf("Tambah stok ke batch (masuk)", "Ubah karakteristik batch (BR-01)", "Hapus batch")
@@ -1215,7 +1272,7 @@ class DetailBatchFragment : Fragment(R.layout.fragment_detail_batch) {
             .show()
     }
 
-    // BR-01: hanya nomor_batch & tanggal_kedaluwarsa yang boleh diubah.
+
     private fun dialogUbahKarakteristik(b: BatchStokItem?) {
         if (b == null) return
         var tanggalBaru = b.tanggal_kedaluwarsa ?: ""
@@ -1293,7 +1350,7 @@ class DetailBatchFragment : Fragment(R.layout.fragment_detail_batch) {
             .show()
     }
 
-    // FR-14: unggah foto bukti batch (JPG/PNG).
+
     private fun unggahFoto(uri: Uri, batchId: Int) {
         runApi { api ->
             val stream = requireContext().contentResolver.openInputStream(uri) ?: return@runApi
@@ -1318,6 +1375,48 @@ class DetailBatchFragment : Fragment(R.layout.fragment_detail_batch) {
             selisih == 0L -> "Kedaluwarsa hari ini"
             else -> "$selisih hr lagi"
         }
+    }
+
+    private fun formatTanggalIndonesia(tanggal: String?): String {
+        if (tanggal.isNullOrBlank()) return "-"
+        return runCatching {
+            val parser = SimpleDateFormat("yyyy-MM-dd", Locale.US).apply { isLenient = false }
+            val formatter = SimpleDateFormat("d MMMM yyyy", Locale("id", "ID"))
+            val parsed = parser.parse(tanggal.take(10)) ?: error("format tanggal")
+            formatter.format(parsed)
+        }.getOrElse { tanggal.take(10) }
+    }
+
+    private fun formatTanggalWaktuIndonesia(tanggal: String?): String {
+        if (tanggal.isNullOrBlank()) return "-"
+        return runCatching {
+            val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US).apply {
+                isLenient = false
+                timeZone = TimeZone.getTimeZone("Asia/Jakarta")
+            }
+            val formatter = SimpleDateFormat("d MMM yyyy · HH.mm 'WIB'", Locale("id", "ID")).apply {
+                timeZone = TimeZone.getTimeZone("Asia/Jakarta")
+            }
+            val parsed = parser.parse(tanggal.take(19))
+                ?: SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US).parse(tanggal.take(19))
+                ?: error("format waktu")
+            formatter.format(parsed)
+        }.getOrElse { tanggal }
+    }
+
+    private fun hiasStatusBatch(pill: TextView, status: String) {
+        val (latar, warna, ikon) = when (status) {
+            "Aman" -> Triple(R.drawable.bg_pill_safe, R.color.sf_safe, 0)
+            "Mendekati Kedaluwarsa" -> Triple(R.drawable.bg_pill_warn, R.color.sf_warn, R.drawable.ic12_alert_triangle)
+            "Kedaluwarsa" -> Triple(R.drawable.bg_pill_danger, R.color.sf_danger, R.drawable.ic12_alert_triangle)
+            "Ditangani" -> Triple(R.drawable.bg_pill_muted, R.color.sf_muted, 0)
+            else -> Triple(R.drawable.bg_pill_muted, R.color.sf_muted, 0)
+        }
+        val warnaTeks = ContextCompat.getColor(pill.context, warna)
+        pill.setBackgroundResource(latar)
+        pill.setTextColor(warnaTeks)
+        pill.compoundDrawableTintList = ColorStateList.valueOf(warnaTeks)
+        pill.setCompoundDrawablesRelativeWithIntrinsicBounds(ikon, 0, 0, 0)
     }
 
     private fun selisihHari(tanggal: String?): Long? = runCatching {

@@ -9,10 +9,6 @@ use Illuminate\Http\Request;
 
 final class NotifikasiController extends Controller
 {
-    /**
-     * FR-13 / FR-24: daftar notifikasi (dibaca WorkManager tiap 12 jam),
-     * dengan filter jenis dan flag belum ditampilkan.
-     */
     public function index(Request $request): JsonResponse
     {
         $query = Notifikasi::query()
@@ -38,9 +34,6 @@ final class NotifikasiController extends Controller
         ], 'Daftar notifikasi ditemukan');
     }
 
-    /**
-     * FR-24: menandai notifikasi sudah tampil di ponsel.
-     */
     public function tandaiDibaca(Request $request, Notifikasi $notifikasi): JsonResponse
     {
         if ($notifikasi->ditampilkan_pada === null) {
@@ -53,9 +46,6 @@ final class NotifikasiController extends Controller
         ], 'Notifikasi ditandai sebagai telah dibaca');
     }
 
-    /**
-     * Tandai semua notifikasi telah ditampilkan (FR-24).
-     */
     public function tandaiSemuaDibaca(Request $request): JsonResponse
     {
         $jumlah = Notifikasi::query()->whereNull('ditampilkan_pada')->update(['ditampilkan_pada' => now()]);

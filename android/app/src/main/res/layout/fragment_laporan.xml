@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:ignore="HardcodedText,ContentDescription,UseCompatTextViewDrawableXml">
 
-    <!-- Topbar tab utama -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
                 android:text="Stok, mutasi &amp; audit" />
         </LinearLayout>
 
-        <!-- Notifikasi + badge -->
+
         <FrameLayout
             android:id="@+id/btn_notifikasi_laporan"
             android:layout_width="36dp"
@@ -80,7 +80,7 @@
             android:paddingEnd="18dp"
             android:paddingBottom="26dp">
 
-            <!-- Tab laporan -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -157,7 +157,7 @@
                     android:textSize="11sp" />
             </LinearLayout>
 
-            <!-- Ringkasan 3 metrik -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -231,7 +231,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Header + CSV -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -266,7 +266,7 @@
                     android:textSize="11sp" />
             </LinearLayout>
 
-            <!-- RecyclerView untuk Daftar Stok Laporan -->
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_laporan"
                 android:layout_width="match_parent"
@@ -276,7 +276,7 @@
                 tools:itemCount="3"
                 tools:listitem="@layout/item_barang" />
 
-            <!-- csv-note -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

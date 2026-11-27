@@ -11,10 +11,6 @@ class LoginRequest extends FormRequest
         return true;
     }
 
-    /**
-     * FR-02: login dengan username + password; kredensial salah selalu
-     * menghasilkan pesan yang sama agar tidak membocorkan keberadaan akun.
-     */
     public function rules(): array
     {
         return [

@@ -12,7 +12,7 @@ class SplashActivity : AppCompatActivity() {
 
     private val handler = Handler(Looper.getMainLooper())
     private val navigateRunnable = Runnable {
-        // Sudah login → langsung beranda sesuai peran; belum → form login.
+
         val sesi = SessionManager(this)
         val intent = if (sesi.isLoggedIn()) {
             Intent(this, MainActivity::class.java).putExtra("USER_ROLE", sesi.getPeran())

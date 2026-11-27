@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Skala jarak & tipografi edisi database.
-  Mockup 390px dipetakan ke skala dp Android standar (struktur & hierarki dipertahankan).
--->
+
+
+
+
 <resources>
 
-    <!-- Spacing -->
+
     <dimen name="sf_space_xs">4dp</dimen>
     <dimen name="sf_space_sm">8dp</dimen>
     <dimen name="sf_space_md">12dp</dimen>
@@ -13,12 +13,12 @@
     <dimen name="sf_space_xl">20dp</dimen>
     <dimen name="sf_screen_pad">18dp</dimen>
 
-    <!-- Radius -->
+
     <dimen name="sf_radius_card">18dp</dimen>
     <dimen name="sf_radius_sm">12dp</dimen>
     <dimen name="sf_radius_pill">999dp</dimen>
 
-    <!-- Komponen -->
+
     <dimen name="sf_topbar_h">56dp</dimen>
     <dimen name="sf_icon_btn">36dp</dimen>
     <dimen name="sf_icon_circle">36dp</dimen>
@@ -27,7 +27,7 @@
     <dimen name="sf_btn_h">44dp</dimen>
     <dimen name="sf_nav_h">64dp</dimen>
 
-    <!-- Tipografi -->
+
     <dimen name="sf_text_hero">30sp</dimen>
     <dimen name="sf_text_count">26sp</dimen>
     <dimen name="sf_text_title">18sp</dimen>

@@ -13,12 +13,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-    // Emulator Android: 10.0.2.2 = loopback komputer host.
-    // Backend dijalankan: php artisan serve --host=0.0.0.0 --port=8010
-    // (port 8000 dipakai layanan printer sistem). Di perangkat fisik, ganti ke IP LAN PC.
+
     private const val BASE_URL = "https://colony-reorder-prepay.ngrok-free.dev/api/"
 
-    // Cegah redirect berulang saat beberapa permintaan 401 balik bersamaan.
+
     private val redirect401Berjalan = AtomicBoolean(false)
 
     fun resetRedirectFlag() {
@@ -35,9 +33,9 @@ object RetrofitClient {
                 session.getToken()?.takeIf { it.isNotEmpty() }?.let { req.header("Authorization", "Bearer $it") }
                 val res = chain.proceed(req.build())
 
-                // Sesi dicabut/kedaluwarsa (401) → sesi dibersihkan dan kembali ke
-                // LoginActivity (FR-02). Permintaan login sendiri tidak memicu redirect
-                // (401 = kredensial salah, token memang belum ada).
+
+
+
                 val jalur = res.request.url.encodedPath
                 if (res.code == 401 &&
                     !jalur.endsWith("/login") &&

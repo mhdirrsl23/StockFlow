@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Data &amp; skema — draft.html dataPage(). Statis, tanpa tabbar.
--->
+
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,7 +11,7 @@
     android:orientation="vertical"
     tools:ignore="HardcodedText,ContentDescription,UseCompatTextViewDrawableXml">
 
-    <!-- Topbar sub-halaman -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
             android:paddingEnd="18dp"
             android:paddingBottom="26dp">
 
-            <!-- Hero -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Ringkasan skema -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -165,7 +165,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Alert info -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -230,7 +230,7 @@
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
-                <!-- users -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -379,7 +379,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <!-- barang -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -528,7 +528,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <!-- batch_stok -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -677,7 +677,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <!-- mutasi_stok -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -807,7 +807,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <!-- lampiran -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -931,7 +931,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <!-- riwayat_aktivitas -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -1061,7 +1061,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <!-- notifikasi -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -1197,7 +1197,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <!-- pengaturan -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -1296,7 +1296,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <!-- personal_access_tokens -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -1451,7 +1451,7 @@
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
-                <!-- v_stok_tersedia -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -1569,7 +1569,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <!-- v_perlu_ditangani -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -1919,7 +1919,7 @@
                     </LinearLayout>
             </LinearLayout>
 
-            <!-- Aksi -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

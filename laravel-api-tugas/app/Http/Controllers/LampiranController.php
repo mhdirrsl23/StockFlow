@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BatchStok;
 use App\Models\Lampiran;
+use App\Models\Pengaturan;
 use App\Support\Aktivitas;
 use App\Support\ApiResponse;
 use Illuminate\Http\JsonResponse;
@@ -14,9 +15,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class LampiranController extends Controller
 {
-    /**
-     * FR-14: unggah foto bukti batch/penanganan (JPG/PNG; batas via pengaturan).
-     */
     public function store(Request $request, BatchStok $batch): JsonResponse
     {
         $data = $request->validate([
@@ -33,7 +31,6 @@ final class LampiranController extends Controller
 
         Storage::disk('local')->put($path, file_get_contents($berkas->getRealPath()));
 
-        // Nama asli tidak pernah dipercaya (NFR-01) — berkas di server memakai UUID.
         $lampiran = Lampiran::create([
             'batch_id' => $batch->id,
             'jenis' => $data['jenis'],
@@ -45,9 +42,6 @@ final class LampiranController extends Controller
         return ApiResponse::created($lampiran->toArray(), 'Lampiran berhasil diunggah (FR-14)');
     }
 
-    /**
-     * FR-14: file hanya dilayani endpoint terotorisasi, bukan jalur publik.
-     */
     public function file(Lampiran $lampiran): Response
     {
         $penuh = Storage::disk('local')->path($lampiran->path);
@@ -61,9 +55,6 @@ final class LampiranController extends Controller
         ]);
     }
 
-    /**
-     * FR-14: menghapus foto bukti — pemilik, atau staf pembuat batch.
-     */
     public function destroy(Request $request, Lampiran $lampiran): JsonResponse
     {
         $user = $request->user();
@@ -85,6 +76,6 @@ final class LampiranController extends Controller
 
     private function batasKb(): int
     {
-        return (max(1, (int) \App\Models\Pengaturan::nilai('maks_ukuran_lampiran_mb', '2')) * 1024) - 1;
+        return (max(1, (int) Pengaturan::nilai('maks_ukuran_lampiran_mb', '2')) * 1024) - 1;
     }
 }

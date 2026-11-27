@@ -4,10 +4,6 @@ namespace App\Support;
 
 use Illuminate\Http\JsonResponse;
 
-/**
- * Format respons seragam sesuai PRD 9.5: {success, message, data} /
- * {success, message, errors}.
- */
 final class ApiResponse
 {
     public static function ok(mixed $data = null, string $pesan = 'Berhasil', int $status = 200): JsonResponse

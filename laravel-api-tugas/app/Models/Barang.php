@@ -30,13 +30,6 @@ class Barang extends Model
         return $this->hasMany(BatchStok::class, 'barang_id');
     }
 
-    /**
-     * Batch aktif (belum soft delete) — digunakan untuk otorisasi hapus (BR-07)
-     * dan penghitungan stok (AB-01).
-     */
-    /**
-     * Pencarian kode SKU atau nama (FR-17).
-     */
     public function scopeCari(Builder $query, ?string $istilah): Builder
     {
         return $istilah

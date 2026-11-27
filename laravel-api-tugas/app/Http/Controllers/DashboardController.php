@@ -11,10 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 final class DashboardController extends Controller
 {
-    /**
-     * FR-03: ringkasan sesuai peran: jumlah barang/batch, stok menipis,
-     * keperluan kedaluwarsa, transaksi terbaru, rekomendasi FEFO.
-     */
     public function index(): mixed
     {
         $stokMenipis = DB::table('v_stok_tersedia')

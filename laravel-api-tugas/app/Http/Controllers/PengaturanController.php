@@ -10,9 +10,6 @@ use Illuminate\Http\JsonResponse;
 
 final class PengaturanController extends Controller
 {
-    /**
-     * FR-25: daftar seluruh pengaturan (BR-08: khusus pemilik di route).
-     */
     public function index(): JsonResponse
     {
         return ApiResponse::ok(
@@ -21,9 +18,6 @@ final class PengaturanController extends Controller
         );
     }
 
-    /**
-     * FR-25: ubah ambang & pengaturan lain; setiap perubahan tercatat (BR-05).
-     */
     public function update(PengaturanRequest $request): JsonResponse
     {
         $valid = array_filter($request->validated(), fn ($nilai) => $nilai !== null);

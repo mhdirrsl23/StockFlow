@@ -6,14 +6,8 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * Memvalidasi peran parameter route-middleware: role:pemilik|staf (Bagian 2 PRD).
- */
 final class RoleMiddleware
 {
-    /**
-     * @param  string  $peranIzin  pemisah `|`, mis. "pemilik|staf"
-     */
     public function handle(Request $request, Closure $next, string $peranIzin = 'pemilik,staf'): Response
     {
         $izin = preg_split('/[|,]/', $peranIzin) ?: [];

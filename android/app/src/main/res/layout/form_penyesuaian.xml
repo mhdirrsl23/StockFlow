@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Form penyesuaian stok — draft.html adjustPage().
-  Contoh: batch SUN-2412A (Sunlight 755ml), sisa 5 pcs, jumlah awal 24 -> rentang akhir 0 – 24 pcs.
--->
+
+
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,7 +12,7 @@
     android:orientation="vertical"
     tools:ignore="HardcodedText,ContentDescription,UseCompatTextViewDrawableXml,Autofill,LabelFor">
 
-    <!-- Topbar sub-halaman -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
             android:paddingEnd="18dp"
             android:paddingBottom="26dp">
 
-            <!-- Form intro -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
                     android:textSize="12sp" />
             </LinearLayout>
 
-            <!-- Kartu ringkas batch -->
+
             <LinearLayout
                 style="@style/SF.Card"
                 android:layout_marginTop="16dp"
@@ -131,7 +131,7 @@
                     android:text="Aman" />
             </LinearLayout>
 
-            <!-- Section: Selisih -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -176,7 +176,7 @@
                     android:layout_marginTop="11dp"
                     android:layout_marginBottom="12dp" />
 
-                <!-- Selisih jumlah -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -208,7 +208,7 @@
                     android:lineSpacingMultiplier="1.2"
                     android:text="Rentang akhir: 0 – 24 pcs." />
 
-                <!-- Status preview -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -231,7 +231,7 @@
                         android:text="5 pcs" />
                 </LinearLayout>
 
-                <!-- Alasan -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -263,7 +263,7 @@
                     android:minHeight="76dp" />
             </LinearLayout>
 
-            <!-- Form note -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -295,7 +295,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Actionbar -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

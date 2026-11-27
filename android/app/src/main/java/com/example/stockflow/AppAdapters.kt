@@ -400,7 +400,7 @@ class BatchCardAdapter(
         val progress = if (item.jumlah_awal > 0) ((item.jumlah_sisa * 100) / item.jumlah_awal).coerceIn(0, 100) else 0
         holder.pbBatch.progress = progress
 
-        // Kontrak baru: item batch tidak membawa data barang (kategori) — gunakan ikon generik.
+
         holder.bgIcon.setBackgroundResource(R.drawable.bg_product_other)
         holder.ivIcon.setImageResource(R.drawable.ic_package)
         holder.ivIcon.setColorFilter(0xFF66756C.toInt())

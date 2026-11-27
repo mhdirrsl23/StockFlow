@@ -6,10 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * pengaturan — FR-25; Q-05.
-     * Penyimpanan key-value; kunci utama: ambang_peringatan_hari.
-     */
     public function up(): void
     {
         Schema::create('pengaturan', function (Blueprint $table) {

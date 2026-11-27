@@ -12,9 +12,6 @@ class ReportRequest extends FormRequest
         return true;
     }
 
-    /**
-     * FR-16 / FR-17: rentang filter dipakai laporan maupun hasil ekspor.
-     */
     public function rules(): array
     {
         return [
@@ -38,9 +35,6 @@ class ReportRequest extends FormRequest
         ];
     }
 
-    /**
-     * Awal rentang laporan (WIB); null berarti bawaan layanan laporan.
-     */
     public function dari(): ?Carbon
     {
         return $this->filled('dari')
@@ -48,9 +42,6 @@ class ReportRequest extends FormRequest
             : null;
     }
 
-    /**
-     * Akhir rentang laporan (WIB); null berarti bawaan layanan laporan.
-     */
     public function sampai(): ?Carbon
     {
         return $this->filled('sampai')
@@ -58,17 +49,11 @@ class ReportRequest extends FormRequest
             : null;
     }
 
-    /**
-     * Filter kategori barang (FR-17).
-     */
     public function kategori(): ?string
     {
         return $this->filled('kategori') ? (string) $this->input('kategori') : null;
     }
 
-    /**
-     * Filter status batch (FR-20).
-     */
     public function status(): ?string
     {
         return $this->filled('status') ? (string) $this->input('status') : null;

@@ -11,10 +11,6 @@ class ImporPreviewRequest extends FormRequest
         return true;
     }
 
-    /**
-     * FR-15 / BR-06: berkas .xlsx/.xls, ukuran dibatasi di layanan impor
-     * sesuai pengaturan (maks_ukuran_impor_mb).
-     */
     public function rules(): array
     {
         return [

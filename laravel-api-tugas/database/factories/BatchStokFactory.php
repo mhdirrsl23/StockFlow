@@ -3,20 +3,11 @@
 namespace Database\Factories;
 
 use App\Models\Barang;
-use App\Models\BatchStok;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
-/**
- * @extends Factory<BatchStok>
- */
 class BatchStokFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         $jumlah = fake()->numberBetween(20, 200);

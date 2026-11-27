@@ -5,15 +5,9 @@ use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
-    /**
-     * VIEW pendukung — AB-01, AB-04, FR-26 (PORTING SQL).
-     * Server berjalan dengan zona waktu WIB (APP_TIMEZONE=Asia/Jakarta, MySQL system tz WIB)
-     * sehingga CURDATE() sama dengan hari Jakarta.
-     */
     public function up(): void
     {
-        // Stok tersedia barang = jumlah_sisa seluruh batch yang belum kedaluwarsa
-        // (tanggal >= hari ini) dan belum Ditangani, dari barang aktif (AB-01, AB-05).
+
         DB::statement(<<<'SQL'
             CREATE OR REPLACE VIEW `v_stok_tersedia` AS
             SELECT
@@ -38,7 +32,6 @@ return new class extends Migration
             GROUP BY b.id, b.kode_sku, b.nama, b.kategori, b.satuan, b.stok_minimum
         SQL);
 
-        // Daftar Perlu Ditangani: batch kedaluwarsa aktif yang belum Ditangani (FR-26).
         DB::statement(<<<'SQL'
             CREATE OR REPLACE VIEW `v_perlu_ditangani` AS
             SELECT

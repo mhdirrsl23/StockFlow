@@ -7,6 +7,7 @@ use App\Models\Barang;
 use App\Models\BatchStok;
 use App\Models\MutasiStok;
 use App\Models\Notifikasi;
+use App\Services\StockTransactionService;
 use App\Support\Aktivitas;
 use App\Support\ApiResponse;
 use Illuminate\Http\Request;
@@ -15,10 +16,6 @@ use Illuminate\Support\Facades\DB;
 
 final class BatchStockController extends Controller
 {
-    /**
-     * FR-12 halaman batch: daftar batch global dengan filter barang & status;
-     * urutan bawaan FEFO (AB-02).
-     */
     public function index(Request $request): mixed
     {
         $query = BatchStok::query()
@@ -70,9 +67,6 @@ final class BatchStockController extends Controller
         ], 'Daftar batch ditemukan');
     }
 
-    /**
-     * FR-12: batch milik barang (urutan FEFO), mencakup rekomendasi layak jual.
-     */
     public function untukBarang(Barang $barang): mixed
     {
         $batches = $barang->batches()->fefo()->get();
@@ -97,12 +91,9 @@ final class BatchStockController extends Controller
         ], 'Daftar batch barang ditemukan');
     }
 
-    /**
-     * FR-05: store batch baru = mutasi masuk stok awal (BR-01, 4.2 alur).
-     */
     public function store(BatchRequest $request, Barang $barang): mixed
     {
-        $hasil = app(\App\Services\StockTransactionService::class)->masuk($request->user(), [
+        $hasil = app(StockTransactionService::class)->masuk($request->user(), [
             'barang_id' => $barang->id,
             'jumlah' => (int) $request->input('jumlah_awal'),
             'nomor_batch' => $request->input('nomor_batch'),
@@ -114,10 +105,6 @@ final class BatchStockController extends Controller
         return ApiResponse::created($hasil['batch'], 'Batch berhasil dibuat dan stok awal tercatat sebagai transaksi masuk (FR-05)');
     }
 
-    /**
-     * FR-05: ubah karakteristik batch yang boleh diubah; tidak ada jalur
-     * pengubahan stok langsung — jumlah hanya berubah lewat transaksi (BR-01).
-     */
     public function update(Request $request, BatchStok $batch): mixed
     {
         $data = $request->validate([
@@ -155,10 +142,6 @@ final class BatchStockController extends Controller
         });
     }
 
-    /**
-     * AB-08 + BR-07: batch dengan riwayat mutasi dilindungi hapus permanen,
-     * gunakan soft delete dengan otorisasi staf-milik-sendiri.
-     */
     public function destroy(Request $request, BatchStok $batch): mixed
     {
         $user = $request->user();
@@ -187,9 +170,6 @@ final class BatchStockController extends Controller
         });
     }
 
-    /**
-     * FR-18: hapus massal batch; hasil per item.
-     */
     public function bulkDelete(Request $request): mixed
     {
         $ids = $request->input('ids', []);
@@ -211,6 +191,7 @@ final class BatchStockController extends Controller
 
                 if ($batch === null) {
                     $hasil[] = ['id' => $id, 'berhasil' => false, 'pesan' => 'Batch tidak ditemukan'];
+
                     continue;
                 }
 
@@ -220,6 +201,7 @@ final class BatchStockController extends Controller
                         'berhasil' => false,
                         'pesan' => 'Akses ditolak: staf hanya menghapus batch miliknya sendiri (AB-08)',
                     ];
+
                     continue;
                 }
 
@@ -244,9 +226,6 @@ final class BatchStockController extends Controller
         });
     }
 
-    /**
-     * Detail batch (FR-12) dengan mutasi terbaru dan lampirannya (Q-05).
-     */
     public function show(BatchStok $batch): mixed
     {
         $batch->load(['barang:id,kode_sku,nama,satuan', 'lampiran', 'pembuat:id,nama']);
@@ -275,6 +254,7 @@ final class BatchStockController extends Controller
             'barang_id' => $batch->barang_id,
             'kode_sku' => $batch->barang->kode_sku ?? null,
             'nama_barang' => $batch->barang->nama ?? null,
+            'satuan' => $batch->barang->satuan ?? null,
             'nomor_batch' => $batch->nomor_batch,
             'jumlah_awal' => $batch->jumlah_awal,
             'jumlah_sisa' => $batch->jumlah_sisa,
@@ -284,6 +264,7 @@ final class BatchStockController extends Controller
             'catatan_penanganan' => $batch->catatan_penanganan,
             'created_at' => $batch->created_at?->toDateTimeString(),
             'updated_at' => $batch->updated_at?->toDateTimeString(),
+            'deleted_at' => $batch->deleted_at?->toDateTimeString(),
         ];
     }
 }

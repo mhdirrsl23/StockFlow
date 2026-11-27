@@ -14,11 +14,6 @@ class ImporBarangTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * Buat berkas xlsx riil berisi baris barang.
-     *
-     * @param  array<int, array<int, string|int>>  $baris
-     */
     private function berkasXlsx(array $baris): UploadedFile
     {
         $spreadsheet = new Spreadsheet;
@@ -107,7 +102,7 @@ class ImporBarangTest extends TestCase
         $pemilik = User::factory()->pemilik()->create();
 
         $baris = $this->barisImpor();
-        $baris[2][0] = $baris[1][0]; // baris 3 memakai SKU baris 2
+        $baris[2][0] = $baris[1][0];
 
         $res = $this->actingAs($pemilik)->post('/api/imports/products/preview', [
             'berkas' => $this->berkasXlsx($baris),

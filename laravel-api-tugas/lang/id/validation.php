@@ -2,16 +2,6 @@
 
 return [
 
-    /*
-    |--------------------------------------------------------------------------
-    | Baris Bahasa Validasi
-    |--------------------------------------------------------------------------
-    |
-    | Satu baris per pesan, dipakai validator Laravel dengan bahasa `id`
-    | (APP_LOCALE=id). Pesan konsisten berbahasa Indonesia (Bagian 3.4 PRD).
-    |
-    */
-
     'accepted' => 'Kolom :attribute harus disetujui.',
     'accepted_if' => 'Kolom :attribute harus disetujui ketika :other bernilai :value.',
     'active_url' => 'Kolom :attribute bukan URL yang valid.',
@@ -168,12 +158,6 @@ return [
     'url' => 'Format :attribute tidak valid.',
     'uuid' => 'Kolom :attribute harus UUID yang valid.',
 
-    /*
-    |--------------------------------------------------------------------------
-    | Alias Atribut
-    |--------------------------------------------------------------------------
-    */
-
     'custom' => [
         'username' => [
             'exists' => 'Username atau password salah (FR-02).',
@@ -277,12 +261,6 @@ return [
             'integer' => 'Ambang peringatan hari harus bilangan bulat.',
         ],
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Alias Atribut
-    |--------------------------------------------------------------------------
-    */
 
     'attributes' => [
         'nama' => 'nama',

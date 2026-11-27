@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:ignore="HardcodedText,ContentDescription,UseCompatTextViewDrawableXml">
 
-    <!-- Topbar sub-halaman -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
             android:paddingEnd="18dp"
             android:paddingBottom="26dp">
 
-            <!-- Hero -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -137,7 +137,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Peringatan -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -178,7 +178,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- RecyclerView untuk Daftar Batch Perlu Ditangani -->
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_perlu_ditangani"
                 android:layout_width="match_parent"
@@ -188,7 +188,7 @@
                 tools:itemCount="2"
                 tools:listitem="@layout/item_batch_card" />
 
-            <!-- State kosong jika tidak ada yang perlu ditangani -->
+
             <LinearLayout
                 android:id="@+id/empty_state_perlu_ditangani"
                 android:layout_width="match_parent"

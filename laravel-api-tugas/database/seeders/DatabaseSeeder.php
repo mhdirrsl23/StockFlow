@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\BatchStok;
 use App\Models\Barang;
+use App\Models\BatchStok;
 use App\Models\MutasiStok;
 use App\Models\Notifikasi;
 use App\Models\Pengaturan;
@@ -12,10 +12,6 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 
-/**
- * Data demo sehari-hari toko, diporting dari skema SQL dengan tanggal
- * relatif terhadap hari WIB (scenario FR-20 / BR-02 / FR-25).
- */
 class DatabaseSeeder extends Seeder
 {
     public function run(): void

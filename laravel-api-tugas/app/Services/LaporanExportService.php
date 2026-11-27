@@ -2,24 +2,13 @@
 
 namespace App\Services;
 
-use App\Models\Barang;
 use App\Models\MutasiStok;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Enumerable;
 use Illuminate\Support\Facades\DB;
 
-/**
- * Himpunan data laporan (FR-16, BR-08):
- * setiap metode mengembalikan bentuk seragam untuk JSON maupun ekspor:
- * {judul, judul_tabel, header, rows, nama_berkas}.
- */
 final class LaporanExportService
 {
-    /**
-     * Laporan stok per barang saat ini (AB-01), membaca view v_stok_tersedia.
-     *
-     * @return array{judul: string, judul_tabel: string, header: list<string>,
-     *               rows: list<list<string|int>>, nama_berkas: string}
-     */
     public function dataStok(?string $kategori = null): array
     {
         $kueri = DB::table('v_stok_tersedia')->orderBy('nama');
@@ -48,12 +37,6 @@ final class LaporanExportService
         ], $baris, 'laporan-stok');
     }
 
-    /**
-     * Riwayat stok masuk/keluar per periode (FR-16).
-     *
-     * @return array{judul: string, judul_tabel: string, header: list<string>,
-     *               rows: list<list<string|int>>, nama_berkas: string}
-     */
     public function dataTransaksi(?Carbon $dari = null, ?Carbon $sampai = null, ?string $kategori = null): array
     {
         $dari ??= Carbon::today(config('app.timezone'))->subDays(30)->startOfDay();
@@ -92,12 +75,6 @@ final class LaporanExportService
         ], $baris, 'laporan-transaksi');
     }
 
-    /**
-     * Laporan kedaluwarsa per rentang tanggal kedaluwarsa dan status (FR-16, FR-20).
-     *
-     * @return array{judul: string, judul_tabel: string, header: list<string>,
-     *               rows: list<list<string|int>>, nama_berkas: string}
-     */
     public function dataKedaluwarsa(?Carbon $dari = null, ?Carbon $sampai = null, ?string $status = null): array
     {
         $kueri = DB::table('batch_stok')
@@ -148,12 +125,6 @@ final class LaporanExportService
         ], $baris, 'laporan-kedaluwarsa');
     }
 
-    /**
-     * Produk paling banyak keluar (FR-16, BR-05) — akumulasi mutasi keluar.
-     *
-     * @return array{judul: string, judul_tabel: string, header: list<string>,
-     *               rows: list<list<string|int>>, nama_berkas: string}
-     */
     public function dataLaris(?Carbon $dari = null, ?Carbon $sampai = null): array
     {
         $dari ??= Carbon::today(config('app.timezone'))->subDays(30)->startOfDay();
@@ -189,13 +160,6 @@ final class LaporanExportService
         ], $baris, 'laporan-terlaris');
     }
 
-    /**
-     * Bentuk seragam seluruh jenis laporan + stempel waktu nama berkas.
-     *
-     * @param  iterable<int, list<string|int>>  $baris
-     * @return array{judul: string, judul_tabel: string, header: list<string>,
-     *               rows: list<list<string|int>>, nama_berkas: string}
-     */
     private function bentuk(string $judul, array $header, iterable $baris, string $dasarNama): array
     {
         return [
@@ -203,7 +167,7 @@ final class LaporanExportService
             'judul_tabel' => $judul,
             'dibuat_pada' => now()->toDateTimeString(),
             'header' => $header,
-            'rows' => $baris instanceof \Illuminate\Support\Enumerable ? $baris->all() : iterator_to_array($baris),
+            'rows' => $baris instanceof Enumerable ? $baris->all() : iterator_to_array($baris),
             'nama_berkas' => $dasarNama.'-'.now()->format('Ymd-His'),
         ];
     }

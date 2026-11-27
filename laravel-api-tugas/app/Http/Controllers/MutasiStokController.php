@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\StokException;
 use App\Http\Requests\MutasiStokRequest;
 use App\Models\MutasiStok;
 use App\Services\StockTransactionService;
 use App\Support\ApiResponse;
-use App\Exceptions\StokException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -14,14 +14,8 @@ use Illuminate\Validation\ValidationException;
 
 final class MutasiStokController extends Controller
 {
-    public function __construct(private readonly StockTransactionService $stockService)
-    {
-    }
+    public function __construct(private readonly StockTransactionService $stockService) {}
 
-    /**
-     * FR-08 / FR-35: riwayat seluruh mutasi dengan filter jenis, barang,
-     * batch, dan rentang tanggal. Staf hanya melihat transaksinya sendiri (FR-31).
-     */
     public function index(Request $request): JsonResponse
     {
         $user = $request->user();
@@ -65,9 +59,6 @@ final class MutasiStokController extends Controller
         ], 'Daftar transaksi stok ditemukan');
     }
 
-    /**
-     * FR-06 / FR-07 / FR-13: catat transaksi masuk, keluar FEFO, penyesuaian.
-     */
     public function store(MutasiStokRequest $request): JsonResponse
     {
         $params = $request->validated();

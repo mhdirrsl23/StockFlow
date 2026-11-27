@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:ignore="HardcodedText,ContentDescription,UseCompatTextViewDrawableXml">
 
-    <!-- Topbar tab utama -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,13 +39,13 @@
                 android:text="Master barang &amp; batch stok" />
         </LinearLayout>
 
-        <!-- Tambah barang -->
+
         <ImageView
             android:id="@+id/btn_tambah_barang_staff"
             style="@style/SF.IconBtn.Boxed"
             android:src="@drawable/ic_plus" />
 
-        <!-- Notifikasi + badge -->
+
         <FrameLayout
             android:id="@+id/btn_notifikasi_staff"
             android:layout_width="36dp"
@@ -87,7 +87,7 @@
             android:paddingEnd="18dp"
             android:paddingBottom="26dp">
 
-            <!-- Segmented Barang / Batch -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -195,7 +195,7 @@
                     android:visibility="gone" />
             </LinearLayout>
 
-            <!-- Pencarian -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
@@ -236,7 +236,7 @@
                     android:text="0 barang" />
             </LinearLayout>
 
-            <!-- Chip kategori -->
+
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -314,7 +314,7 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
-            <!-- Peringatan stok menipis -->
+
             <LinearLayout
                 android:id="@+id/banner_stok_menipis_staff"
                 android:layout_width="match_parent"
@@ -365,7 +365,7 @@
                     app:tint="@color/sf_warn_ink" />
             </LinearLayout>
 
-            <!-- Header daftar -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -387,7 +387,7 @@
                     android:text="0 barang" />
             </LinearLayout>
 
-            <!-- RecyclerView untuk Daftar Barang Staff -->
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_barang_staff"
                 android:layout_width="match_parent"
@@ -397,7 +397,7 @@
                 tools:itemCount="3"
                 tools:listitem="@layout/item_barang" />
 
-            <!-- State kosong hasil pencarian -->
+
             <LinearLayout
                 android:id="@+id/empty_state_barang_staff"
                 android:layout_width="match_parent"

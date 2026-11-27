@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Form catat stok keluar (FEFO) — draft.html stockOutPage().
-  Contoh pratinjau: Indomie Goreng, jumlah 120 -> MGN-2411B 50 pcs lalu MGN-2411A 70 pcs.
--->
+
+
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,7 +12,7 @@
     android:orientation="vertical"
     tools:ignore="HardcodedText,ContentDescription,UseCompatTextViewDrawableXml,Autofill,LabelFor">
 
-    <!-- Topbar sub-halaman -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
             android:paddingEnd="18dp"
             android:paddingBottom="26dp">
 
-            <!-- Form intro -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
                     android:textSize="12sp" />
             </LinearLayout>
 
-            <!-- Section: Pengeluaran -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
                     android:layout_marginTop="11dp"
                     android:layout_marginBottom="12dp" />
 
-                <!-- Barang -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -172,7 +172,7 @@
                         app:tint="#799085" />
                 </LinearLayout>
 
-                <!-- Jumlah keluar -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -238,7 +238,7 @@
                         app:tint="#486458" />
                 </LinearLayout>
 
-                <!-- Catatan -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -271,7 +271,7 @@
                     android:text="Penjualan harian" />
             </LinearLayout>
 
-            <!-- Section: Pratinjau alokasi FEFO -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -316,7 +316,7 @@
                     android:layout_marginTop="11dp"
                     android:layout_marginBottom="12dp" />
 
-                <!-- Tersedia + pill -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -345,7 +345,7 @@
                         android:text="Cukup" />
                 </LinearLayout>
 
-                <!-- Alloc list -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -415,7 +415,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <!-- Field hint -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -440,7 +440,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Form note -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -472,7 +472,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Actionbar -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

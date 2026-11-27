@@ -17,9 +17,6 @@ final class LaporanController extends Controller
 {
     public function __construct(private readonly LaporanExportService $laporan) {}
 
-    /**
-     * FR-16: laporan stok saat ini (BR-08: khusus pemilik di route).
-     */
     public function stok(ReportRequest $request): JsonResponse
     {
         $laporan = $this->laporan->dataStok($request->kategori());
@@ -27,9 +24,6 @@ final class LaporanController extends Controller
         return ApiResponse::ok($laporan, 'Laporan stok ditemukan');
     }
 
-    /**
-     * FR-16: laporan riwayat stok masuk/keluar per periode.
-     */
     public function transaksi(ReportRequest $request): JsonResponse
     {
         $laporan = $this->laporan->dataTransaksi($request->dari(), $request->sampai(), $request->kategori());
@@ -37,9 +31,6 @@ final class LaporanController extends Controller
         return ApiResponse::ok($laporan, 'Laporan transaksi ditemukan');
     }
 
-    /**
-     * FR-10/FR-16: laporan kedaluwarsa dengan filter status/moment.
-     */
     public function kedaluwarsa(ReportRequest $request): JsonResponse
     {
         $laporan = $this->laporan->dataKedaluwarsa($request->dari(), $request->sampai(), $request->status());
@@ -47,9 +38,6 @@ final class LaporanController extends Controller
         return ApiResponse::ok($laporan, 'Laporan kedaluwarsa ditemukan');
     }
 
-    /**
-     * FR-16: produk paling banyak keluar (BR-05).
-     */
     public function laris(ReportRequest $request): JsonResponse
     {
         $laporan = $this->laporan->dataLaris($request->dari(), $request->sampai());
@@ -57,9 +45,6 @@ final class LaporanController extends Controller
         return ApiResponse::ok($laporan, 'Laporan produk terlaris ditemukan');
     }
 
-    /**
-     * FR-16: ekspor Excel/PDF untuk jenis laporan yang dipilih.
-     */
     public function ekspor(ReportRequest $request): Response
     {
         $format = strtolower((string) $request->input('format', 'xlsx'));
@@ -79,9 +64,6 @@ final class LaporanController extends Controller
             : $this->unduhXlsx($laporan);
     }
 
-    /**
-     * Ekspor Excel via PhpSpreadsheet.
-     */
     private function unduhXlsx(array $laporan): Response
     {
         $spreadsheet = new Spreadsheet;
@@ -90,7 +72,6 @@ final class LaporanController extends Controller
         $worksheet->fromArray($laporan['header'], null, 'A1');
         $worksheet->fromArray($laporan['rows'], null, 'A2');
 
-        // Header tebal seluruh kolom judul tabel (FR-16)
         $dipilih = 'A1:'.chr(64 + count($laporan['header'])).'1';
         $worksheet->getStyle($dipilih)->getFont()->setBold(true);
 
@@ -108,9 +89,6 @@ final class LaporanController extends Controller
         ]);
     }
 
-    /**
-     * Ekspor PDF dompdf dari tampilan blade laporan (FR-16).
-     */
     private function unduhPdf(array $laporan): Response
     {
         return Pdf::loadHTML(view('laporan.generik', [

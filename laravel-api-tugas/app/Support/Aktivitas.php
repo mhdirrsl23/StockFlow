@@ -5,9 +5,6 @@ namespace App\Support;
 use App\Models\RiwayatAktivitas;
 use App\Models\User;
 
-/**
- * Pencatatan riwayat aktivitas terpadu (FR-31 / AB-10).
- */
 final class Aktivitas
 {
     public static function catat(
