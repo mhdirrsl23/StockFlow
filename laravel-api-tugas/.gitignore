@@ -6,7 +6,7 @@
 .env.testing
 .phpactor.json
 .phpunit.result.cache
-/.claude
+/.claude\skills
 /.codex
 /.cursor/
 /.idea
