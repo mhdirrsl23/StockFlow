@@ -73,6 +73,41 @@ Untuk menyiapkan environment dan membangun APK dari source code:
 
    Biarkan terminal ini tetap berjalan selama aplikasi menggunakan API.
 
+### Alternatif: Menjalankan Backend dengan Laragon (Windows)
+
+Laragon menyediakan PHP, Composer, dan MySQL untuk menjalankan backend di Windows. Panduan ini menggunakan `php artisan serve`, jadi Apache Laragon tidak diperlukan.
+
+1. Jalankan Laragon, lalu aktifkan MySQL. Pastikan PHP yang dipilih Laragon versi 8.3 atau lebih baru dan MySQL versi 8.
+2. Buka **Terminal** Laragon, lalu masuk ke folder backend. Sesuaikan lokasinya dengan tempat Anda menyimpan repository:
+   ```powershell
+   cd "C:\laragon\www\StockFlow\laravel-api-tugas"
+   ```
+3. Pasang dependency dan buat file environment:
+   ```powershell
+   composer install
+   Copy-Item .env.example .env
+   ```
+4. Buat database bernama `stockflow` melalui tool database Laragon, lalu atur koneksi pada `.env`:
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=stockflow
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
+   Sesuaikan username dan password jika konfigurasi MySQL Laragon Anda berbeda.
+5. Siapkan application key, tabel, dan data demo:
+   ```powershell
+   php artisan key:generate
+   php artisan migrate --seed
+   ```
+6. Jalankan API pada port `8010`:
+   ```powershell
+   php artisan serve --host=0.0.0.0 --port=8010
+   ```
+   Biarkan terminal tetap berjalan. Atur `BASE_URL` Android sesuai petunjuk di bagian berikutnya. Untuk menggunakan ngrok, jalankan `ngrok http 8010` di terminal lain.
+
 ## 3. Mengatur Alamat API Android
 
 Buka `android/app/src/main/java/com/example/stockflow/RetrofitClient.kt` dan ubah nilai `BASE_URL` agar mengarah ke server Laravel yang disiapkan. URL harus diakhiri `/api/`.
